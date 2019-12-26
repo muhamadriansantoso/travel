@@ -4,8 +4,6 @@
         <input type="hidden" [(ngModel)]="model.flightChooseTab" formControlName="flightChooseTab">
         <input type="hidden" [(ngModel)]="model.originplace" formControlName="originplace">
         <input type="hidden" [(ngModel)]="model.destinationplace" formControlName="destinationplace">
-        <input type="hidden" [(ngModel)]="model.outboundpartialdate" formControlName="outboundpartialdate">
-        <input type="hidden" [(ngModel)]="model.inboundpartialdate" formControlName="inboundpartialdate">
         <div class="tabbable">
             <ul class="nav nav-pills nav-sm nav-no-br mb10" id="flightChooseTab">
                 <li [ngClass]="model.flightChooseTab == 0 ? 'active' : ''" style="cursor: pointer">
@@ -23,6 +21,9 @@
                                     class="fa fa-map-marker input-icon"></i>
                                 <label>From</label>
                                 <input [(ngModel)]="model.originplaceInput" formControlName="originplaceInput" class="typeahead form-control" placeholder="City, Airport" type="text" (input)="getListPlaceFrom($event.target.value)"/>
+                                <div class="invalid-feedback" *ngIf="isControlHasError('originplace','required')">
+                                    Original Place is required.
+                                </div>
                                 <span *ngIf="listPlaceFromWrite" class="tt-dropdown-menu"
                                       style="position: absolute; top: 100%; left: 0px; z-index: 100; border:unset; right: auto;">
                                     <div class="tt-dataset-1" style="border-bottom: 1px solid #ed8323; margin-top: 10px; margin-left: 10px; cursor: pointer;" *ngFor="let lpf of listPlaceFrom" (click)="clickPlaceFrom(lpf.placeid, lpf.placename)">
@@ -38,6 +39,9 @@
                                     class="fa fa-map-marker input-icon"></i>
                                 <label>To</label>
                                 <input [(ngModel)]="model.destinationplaceInput" formControlName="destinationplaceInput" class="typeahead form-control" placeholder="City, Airport" type="text" (input)="getListPlaceTo($event.target.value)"/>
+                                <div class="invalid-feedback" *ngIf="isControlHasError('destinationplace','required')">
+                                    Destination Place is required.
+                                </div>
                                 <span *ngIf="listPlaceToWrite" class="tt-dropdown-menu"
                                       style="position: absolute; top: 100%; left: 0px; z-index: 100; border:unset; right: auto;">
                                     <div class="tt-dataset-1" style="border-bottom: 1px solid #ed8323; margin-top: 10px; margin-left: 10px; cursor: pointer;" *ngFor="let lpt of listPlaceTo" (click)="clickPlaceTo(lpt.placeid, lpt.placename)">
@@ -57,6 +61,9 @@
                                     <label>Departing</label>
                                     <input class="form-control" type="text" [(ngModel)]="model.minDate" formControlName="outboundpartialdate" [min]="minDate" [matDatepicker]="outboundpartialdate" (click)="outboundpartialdate.open()" (focus)="outboundpartialdate.open()" maxlength="0">
                                     <mat-datepicker #outboundpartialdate></mat-datepicker>
+                                    <div class="invalid-feedback" *ngIf="isControlHasError('outboundpartialdate','required')">
+                                        Departing is required.
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-3" *ngIf="model.flightChooseTab == 0">
@@ -65,6 +72,9 @@
                                     <label>Returning</label>
                                         <input class="form-control" type="text" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
                                         <mat-datepicker #inboundpartialdate></mat-datepicker>
+                                        <div class="invalid-feedback" *ngIf="isControlHasError('inboundpartialdate','required')">
+                                            Returning is required.
+                                        </div>
                                     </div>
                                 </div>
                             </div>

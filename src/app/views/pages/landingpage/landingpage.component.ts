@@ -145,6 +145,13 @@ export class LandingpageComponent implements OnInit {
         this.loading = true;
         const controls1 = this.landingPageFormGroups.controls;
 
+        if (this.landingPageFormGroups.invalid) {
+            Object.keys(controls1).forEach(controlName =>
+                controls1[controlName].markAsTouched()
+            );
+            return;
+        }
+
         var outboundpartialdate = dateFormat(controls1['outboundpartialdate'].value, 'yyyy-mm-dd');
         var inboundpartialdate = dateFormat(controls1['inboundpartialdate'].value, 'yyyy-mm-dd');
 
@@ -181,6 +188,16 @@ export class LandingpageComponent implements OnInit {
             });
         }
 
+    }
+
+    isControlHasError(controlName: string, validationType: string): boolean {
+        const control = this.landingPageFormGroups.controls[controlName];
+        if (!control) {
+            return false;
+        }
+
+        const result = control.hasError(validationType) && (control.dirty || control.touched);
+        return result;
     }
 
 }
