@@ -35,6 +35,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     minDate: any;
 
+    public submitClicked = false;
     private unsubscribe: Subject<any>;
     private subscriptions: Subscription[] = [];
 
@@ -63,12 +64,10 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
         this.minDate = dateFormat(new Date(), 'yyyy-mm-dd', 'en');
         this.model.minDate = this.minDate.toString();
-        this.model.defaultDatePlusSevenDay = dateFormat(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7), 'yyyy-mm-dd');
+        this.model.defaultDatePlusSevenDay = dateFormat(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7), '');
 
-        this.api.APIBrowseDates().subscribe((data:any)=>{
-            this.browseDatesQuotes = data.Quotes;
-            this.browseDatesCarriers = data.Carriers;
-            this.browseDatesPlaces = data.Places;
+        this.landingPageFormGroups.valueChanges.subscribe(value => {
+            this.submitClicked = false;
         });
 
         this.cdr.detectChanges();
@@ -140,6 +139,14 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     flightChooseTabFunc(value){
         this.model.flightChooseTab = value;
+
+        if (this.model.flightChooseTab == 0) {
+            this.landingPageFormGroups.get('inboundpartialdate').setValidators(Validators.required);
+            this.landingPageFormGroups.get('inboundpartialdate').updateValueAndValidity();
+        } else if (this.model.flightChooseTab == 1) {
+            this.landingPageFormGroups.get('inboundpartialdate').setValidators([]);
+            this.landingPageFormGroups.get('inboundpartialdate').updateValueAndValidity();
+        }
     }
 
     onSubmit(){
@@ -152,6 +159,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             return;
         }
 
+        this.submitClicked = true;
         this.loading = true;
 
         var outboundpartialdate = dateFormat(controls1['outboundpartialdate'].value, 'yyyy-mm-dd');
@@ -181,15 +189,111 @@ export class LandingpageComponent implements OnInit, OnDestroy {
                         this.cdr.markForCheck();
                     })
                 )
-                .subscribe();
+                .subscribe(
+                    () => {},
+                    (error:any) => {
+                        if(error.status == '400'){
+
+                        }
+                    }
+                );
         } else if (authData.flightChooseTab == 1){
-            this.api.APIBrowseDates().subscribe((data:any)=>{
-                this.browseDatesQuotes = data.Quotes;
-                this.browseDatesCarriers = data.Carriers;
-                this.browseDatesPlaces = data.Places;
-            });
+            this.api.APIBrowseDates(authData.originplace, authData.destinationplace, authData.outboundpartialdate)
+                .pipe(
+                    tap((data: any) => {
+                        this.browseDatesQuotes = data.Quotes;
+                        this.browseDatesCarriers = data.Carriers;
+                        this.browseDatesPlaces = data.Places;
+                    }),
+                    takeUntil(this.unsubscribe),
+                    finalize(() => {
+                        this.loading = false;
+                        this.cdr.markForCheck();
+                    })
+                )
+                .subscribe(
+                    () => {},
+                    (error:any) => {
+                        if(error.status == '400'){
+
+                        }
+                    }
+                );
         }
 
+    }
+
+    showDepartureTimeFlight(){
+        const controls1 = this.landingPageFormGroups.controls;
+
+        if (this.landingPageFormGroups.invalid) {
+            Object.keys(controls1).forEach(controlName =>
+                controls1[controlName].markAsTouched()
+            );
+            return;
+        }
+
+        this.submitClicked = true;
+        this.loading = true;
+
+        var outboundpartialdate = dateFormat(controls1['outboundpartialdate'].value, 'yyyy-mm-dd');
+        var inboundpartialdate = dateFormat(controls1['inboundpartialdate'].value, 'yyyy-mm-dd');
+
+        const authData = {
+            flightChooseTab: controls1['flightChooseTab'].value,
+            originplace: controls1['originplace'].value,
+            originplaceInput: controls1['originplaceInput'].value,
+            destinationplace: controls1['destinationplace'].value,
+            destinationplaceInput: controls1['destinationplaceInput'].value,
+            outboundpartialdate: outboundpartialdate,
+            inboundpartialdate: inboundpartialdate,
+        };
+
+        if(authData.flightChooseTab == 0){
+            this.api.APIBrowseQuotesInboound(authData.originplace, authData.destinationplace, authData.outboundpartialdate, authData.inboundpartialdate)
+                .pipe(
+                    tap((data: any) => {
+                        this.browseDatesQuotes = data.Quotes;
+                        this.browseDatesCarriers = data.Carriers;
+                        this.browseDatesPlaces = data.Places;
+                    }),
+                    takeUntil(this.unsubscribe),
+                    finalize(() => {
+                        this.loading = false;
+                        this.cdr.markForCheck();
+                    })
+                )
+                .subscribe(
+                    () => {},
+                    (error:any) => {
+                        if(error.status == '400'){
+
+                        }
+                    }
+                );
+        } else if (authData.flightChooseTab == 1){
+            this.api.APIBrowseDates(authData.originplace, authData.destinationplace, authData.outboundpartialdate)
+                .pipe(
+                    tap((data: any) => {
+                        this.browseDatesQuotes = data.Quotes;
+                        this.browseDatesCarriers = data.Carriers;
+                        this.browseDatesPlaces = data.Places;
+                    }),
+                    takeUntil(this.unsubscribe),
+                    finalize(() => {
+                        this.loading = false;
+                        this.cdr.markForCheck();
+                    })
+                )
+                .subscribe(
+                    () => {},
+                    (error:any) => {
+                        if(error.status == '400'){
+
+                        }
+                    }
+                );
+        }
     }
 
     isControlHasError(controlName: string, validationType: string): boolean {

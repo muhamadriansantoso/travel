@@ -20,14 +20,14 @@ export class APIService {
         return this.http.get('https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/ID/IDR/en-GB/', httpOptions);
     }
 
-    APIBrowseDates() {
+    APIBrowseDates(originplace: string, destinationplace: string, outboundpartialdate:string) {
         const httpOptions = {
             headers: {
                 'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
                 'x-rapidapi-key': 'f436a302cfmsh25e5e69bca11548p13862ejsna36226254c59'
             }
         };
-        return this.http.get('https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/ID/IDR/en-GB/CGK-sky/DPS-sky/2019-12-27?inboundpartialdate=2019-12-26', httpOptions);
+        return this.http.get('https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/ID/IDR/en-GB/' +originplace+ '/' +destinationplace+ '/' +outboundpartialdate, httpOptions);
     }
 
     APIBrowseDatesInboound(originplace: string, destinationplace: string, outboundpartialdate:string, inboundpartialdate:string) {
@@ -38,5 +38,25 @@ export class APIService {
             }
         };
         return this.http.get('https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/ID/IDR/en-GB/' +originplace+ '/' +destinationplace+ '/' +outboundpartialdate+ '/' +inboundpartialdate, httpOptions);
+    }
+
+    APIBrowseRoutes(originplace: string, destinationplace: string, outboundpartialdate:string) {
+        const httpOptions = {
+            headers: {
+                'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
+                'x-rapidapi-key': 'f436a302cfmsh25e5e69bca11548p13862ejsna36226254c59'
+            }
+        };
+        return this.http.get('https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/ID/IDR/en-GB/' +originplace+ '/' +destinationplace+ '/' +outboundpartialdate, httpOptions);
+    }
+
+    APIBrowseQuotesInboound(originplace: string, destinationplace: string, outboundpartialdate:string, inboundpartialdate:string) {
+        const httpOptions = {
+            headers: {
+                'x-rapidapi-host': 'skyscanner-skyscanner-flight-search-v1.p.rapidapi.com',
+                'x-rapidapi-key': 'f436a302cfmsh25e5e69bca11548p13862ejsna36226254c59'
+            }
+        };
+        return this.http.get('https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/ID/IDR/en-GB/' +originplace+ '/' +destinationplace+ '/' +outboundpartialdate+ '/' +inboundpartialdate, httpOptions);
     }
 }

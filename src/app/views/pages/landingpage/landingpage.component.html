@@ -59,7 +59,7 @@
                                 <div class="form-group form-group-lg form-group-icon-left"><i
                                         class="fa fa-calendar input-icon input-icon-highlight"></i>
                                     <label>Departing</label>
-                                    <input class="form-control" type="text" [(ngModel)]="model.minDate" formControlName="outboundpartialdate" [min]="minDate" [matDatepicker]="outboundpartialdate" (click)="outboundpartialdate.open()" (focus)="outboundpartialdate.open()" maxlength="0">
+                                    <input class="form-control" type="text" placeholder="Depart Time" formControlName="outboundpartialdate" [min]="minDate" [matDatepicker]="outboundpartialdate" (click)="outboundpartialdate.open()" (focus)="outboundpartialdate.open()" maxlength="0">
                                     <mat-datepicker #outboundpartialdate></mat-datepicker>
                                     <div class="invalid-feedback" *ngIf="isControlHasError('outboundpartialdate','required')">
                                         Departing is required.
@@ -70,7 +70,7 @@
                                 <div class="form-group form-group-lg form-group-icon-left"><i
                                         class="fa fa-calendar input-icon input-icon-highlight"></i>
                                     <label>Returning</label>
-                                        <input class="form-control" type="text" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
+                                        <input class="form-control" type="text" placeholder="Return Time" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
                                         <mat-datepicker #inboundpartialdate></mat-datepicker>
                                         <div class="invalid-feedback" *ngIf="isControlHasError('inboundpartialdate','required')">
                                             Returning is required.
@@ -86,8 +86,8 @@
         </form>
     </div>
 
-    <div class="col-md-12" style="padding: 2%;">
-        <div class="col-md-12">
+    <div class="col-md-12" style="padding: 2%;" *ngIf="submitClicked == true && loading == false">
+        <div class="col-md-12" *ngIf="browseDatesQuotes.length>0; else noData">
             <ul class="booking-list">
                 <li *ngFor="let bdq of browseDatesQuotes">
                     <div class="booking-item-container">
@@ -141,5 +141,10 @@
                 </li>
             </ul>
         </div>
+        <ng-template #noData>
+            <div style="display: flex;height: 100px;align-items: center;justify-content: center;transform: translate3d(0%, 0px, 0px); background-color: #02122c" #wrap>
+                No Record Found.
+            </div>
+        </ng-template>
     </div>
 </div>
