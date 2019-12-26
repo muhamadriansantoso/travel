@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {APIService} from '../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -7,7 +7,7 @@ import * as dateFormat from 'dateformat';
 import localeId from '@angular/common/locales/id';
 import {registerLocaleData} from '@angular/common';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 
 registerLocaleData(localeId, 'id');
 
@@ -16,7 +16,7 @@ registerLocaleData(localeId, 'id');
     templateUrl: './landingpage.component.html',
     styleUrls: ['./landingpage.component.scss']
 })
-export class LandingpageComponent implements OnInit {
+export class LandingpageComponent implements OnInit, OnDestroy {
 
     model: any;
 
@@ -36,6 +36,7 @@ export class LandingpageComponent implements OnInit {
     minDate: any;
 
     private unsubscribe: Subject<any>;
+    private subscriptions: Subscription[] = [];
 
     constructor(
         private http: HttpClient,
@@ -142,7 +143,6 @@ export class LandingpageComponent implements OnInit {
     }
 
     onSubmit(){
-        this.loading = true;
         const controls1 = this.landingPageFormGroups.controls;
 
         if (this.landingPageFormGroups.invalid) {
@@ -151,6 +151,8 @@ export class LandingpageComponent implements OnInit {
             );
             return;
         }
+
+        this.loading = true;
 
         var outboundpartialdate = dateFormat(controls1['outboundpartialdate'].value, 'yyyy-mm-dd');
         var inboundpartialdate = dateFormat(controls1['inboundpartialdate'].value, 'yyyy-mm-dd');
@@ -180,7 +182,7 @@ export class LandingpageComponent implements OnInit {
                     })
                 )
                 .subscribe();
-        } else if(authData.flightChooseTab == 1){
+        } else if (authData.flightChooseTab == 1){
             this.api.APIBrowseDates().subscribe((data:any)=>{
                 this.browseDatesQuotes = data.Quotes;
                 this.browseDatesCarriers = data.Carriers;
@@ -198,6 +200,13 @@ export class LandingpageComponent implements OnInit {
 
         const result = control.hasError(validationType) && (control.dirty || control.touched);
         return result;
+    }
+
+    ngOnDestroy(): void {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
+        this.loading = false;
+        this.subscriptions.forEach(sb => sb.unsubscribe());
     }
 
 }
