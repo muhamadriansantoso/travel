@@ -94,48 +94,36 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-3">
                                     <div class="booking-item-flight-details">
-                                        <div class="booking-item-departure"><i class="fa fa-plane"></i>
-                                            <h5>10:25 PM</h5>
+                                        <div class="booking-item-departure">
                                             <div *ngIf="bdq.OutboundLeg as bdqo">
-                                                <p class="booking-item-date">{{bdqo.DepartureDate}}</p>
-                                                <p class="booking-item-date">Sat, Mar 23</p>
-                                            </div>
-                                            <div *ngIf="bdq.OutboundLeg as bdqo">
-                                                <div *ngIf="bdqo.OriginId">
-                                                    <div *ngFor="let bdp of browseDatesPlaces">
-                                                        <div *ngIf="bdqo.OriginId == bdp.PlaceId">
-                                                            <p class="booking-item-destination">{{bdp.Name}}, {{bdp.SkyscannerCode}}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="booking-item-arrival"><i class="fa fa-plane fa-flip-vertical"></i>
-                                            <h5>12:25 PM</h5>
-                                            <div *ngIf="bdq.OutboundLeg as bdqo">
-                                                <p class="booking-item-date">{{bdqo.DepartureDate}}</p>
-                                                <p class="booking-item-date">Sat, Mar 23</p>
-                                            </div>
-                                            <div *ngIf="bdq.OutboundLeg as bdqo">
-                                                <div *ngIf="bdqo.DestinationId">
-                                                    <div *ngFor="let bdp of browseDatesPlaces">
-                                                        <div *ngIf="bdqo.DestinationId == bdp.PlaceId">
-                                                            <p class="booking-item-destination">{{bdp.Name}}, {{bdp.SkyscannerCode}}</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <i class="fa fa-plane"></i>
+                                                <h5>{{bdqo.DepartureDate | date:'EEEE, MMMM dd'}}</h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
-                                    <h5>22h 50m</h5>
-                                    <p>1 stop</p>
+                                    <div *ngIf="bdq.OutboundLeg as bdqo">
+                                        <div *ngIf="bdqo.OriginId">
+                                            <div *ngFor="let bdp of browseDatesPlaces">
+                                                <div *ngIf="bdqo.OriginId == bdp.PlaceId">
+                                                    From : {{bdp.Name}}, {{bdp.SkyscannerCode}}
+                                                </div>
+                                                <ul *ngIf="bdqo.OriginId == bdp.PlaceId" style="" class="LegInfo_stopLine__3_s15"></ul>
+                                                <div *ngIf="bdqo.DestinationId == bdp.PlaceId">
+                                                    To : {{bdp.Name}}, {{bdp.SkyscannerCode}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-3"><span class="booking-item-price">{{bdq.MinPrice | currency:'IDR':'Rp ':'3.0':'id'}},00</span><span>/person</span>
-                                    <p class="booking-item-flight-class">Direct: {{bdq.Direct}}</p>
+                                <div class="col-md-3">
+                                    <span class="booking-item-price">{{bdq.MinPrice | currency:'IDR':'Rp ':'3.0':'id'}},00</span><span>/person</span>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>Direct: {{bdq.Direct}}</h5>
                                 </div>
                             </div>
                         </div>

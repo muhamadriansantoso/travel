@@ -6668,12 +6668,12 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 }
 .booking-item-flight-details .booking-item-departure,
 .booking-item-flight-details .booking-item-arrival {
-  float: left;
-  width: 47%;
+  text-align: center;
+  width: 100%
 }
 .booking-item-flight-details .booking-item-departure .fa-plane,
 .booking-item-flight-details .booking-item-arrival .fa-plane {
-  float: left;
+  text-align: center;
   display: block;
   font-size: 30px;
   margin-right: 5px;
