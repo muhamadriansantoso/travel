@@ -24,6 +24,8 @@ export class LandingpageComponent implements OnInit {
     listPlaceToWrite: boolean = false;
 
     browseRoutesQuotes: any;
+    browseRoutesCarriers: any;
+    browseRoutesPlaces: any;
 
     landingPageFormGroups: FormGroup;
 
@@ -56,6 +58,8 @@ export class LandingpageComponent implements OnInit {
 
         this.api.APIBrowseRoutes().subscribe((data:any)=>{
             this.browseRoutesQuotes = data.Quotes;
+            this.browseRoutesCarriers = data.Carriers;
+            this.browseRoutesPlaces = data.Places;
         });
 
         this.cdr.detectChanges();

@@ -75,8 +75,14 @@
                         <div class="booking-item">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <div class="booking-item-airline-logo">
-                                        <p>Lufthansa</p>
+                                    <div class="booking-item-airline-logo" *ngIf="bdq.OutboundLeg as bdqo">
+                                        <div *ngIf="bdqo.CarrierIds">
+                                            <div *ngFor="let brc of browseRoutesCarriers">
+                                                <div *ngIf="bdqo.CarrierIds == brc.CarrierId">
+                                                    <p>{{brc.Name}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-5">
@@ -84,12 +90,28 @@
                                         <div class="booking-item-departure"><i class="fa fa-plane"></i>
                                             <h5>10:25 PM</h5>
                                             <p class="booking-item-date">Sun, Mar 22</p>
-                                            <p class="booking-item-destination">London, England, United Kingdom (LHR)</p>
+                                            <div *ngIf="bdq.OutboundLeg as bdqo">
+                                                <div *ngIf="bdqo.OriginId">
+                                                    <div *ngFor="let brp of browseRoutesPlaces">
+                                                        <div *ngIf="bdqo.OriginId == brp.PlaceId">
+                                                            <p class="booking-item-destination">{{brp.Name}}, {{brp.SkyscannerCode}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="booking-item-arrival"><i class="fa fa-plane fa-flip-vertical"></i>
                                             <h5>12:25 PM</h5>
                                             <p class="booking-item-date">Sat, Mar 23</p>
-                                            <p class="booking-item-destination">New York, NY, United States (JFK)</p>
+                                            <div *ngIf="bdq.OutboundLeg as bdqo">
+                                                <div *ngIf="bdqo.DestinationId">
+                                                    <div *ngFor="let brp of browseRoutesPlaces">
+                                                        <div *ngIf="bdqo.DestinationId == brp.PlaceId">
+                                                            <p class="booking-item-destination">{{brp.Name}}, {{brp.SkyscannerCode}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -98,7 +120,7 @@
                                     <p>1 stop</p>
                                 </div>
                                 <div class="col-md-3"><span class="booking-item-price">{{bdq.MinPrice | currency:'IDR':'Rp ':'3.0':'id'}},00</span><span>/person</span>
-                                    <p class="booking-item-flight-class">Class: Economy</p>
+                                    <p class="booking-item-flight-class">Direct: {{bdq.Direct}}</p>
                                 </div>
                             </div>
                         </div>
