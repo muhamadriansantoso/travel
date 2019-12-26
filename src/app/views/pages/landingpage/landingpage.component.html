@@ -6,6 +6,12 @@
         <input type="hidden" [(ngModel)]="model.outboundpartialdate" formControlName="outboundpartialdate">
         <input type="hidden" [(ngModel)]="model.inboundpartialdate" formControlName="inboundpartialdate">
         <div class="tabbable">
+            <ul class="nav nav-pills nav-sm nav-no-br mb10" id="flightChooseTab">
+                <li class="active"><a href="#flight-search-1" data-toggle="tab">Round Trip</a>
+                </li>
+                <li><a href="#flight-search-2" data-toggle="tab">One Way</a>
+                </li>
+            </ul>
             <div class="tab-content">
                 <div class="tab-pane fade in active" id="flight-search-1">
                     <div class="row">
@@ -70,16 +76,16 @@
     <div class="col-md-12" style="padding: 2%;">
         <div class="col-md-12">
             <ul class="booking-list">
-                <li *ngFor="let bdq of browseRoutesQuotes">
+                <li *ngFor="let bdq of browseDatesQuotes">
                     <div class="booking-item-container">
                         <div class="booking-item">
                             <div class="row">
                                 <div class="col-md-2">
                                     <div class="booking-item-airline-logo" *ngIf="bdq.OutboundLeg as bdqo">
                                         <div *ngIf="bdqo.CarrierIds">
-                                            <div *ngFor="let brc of browseRoutesCarriers">
-                                                <div *ngIf="bdqo.CarrierIds == brc.CarrierId">
-                                                    <p>{{brc.Name}}</p>
+                                            <div *ngFor="let bdc of browseDatesCarriers">
+                                                <div *ngIf="bdqo.CarrierIds == bdc.CarrierId">
+                                                    <p>{{bdc.Name}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,12 +95,15 @@
                                     <div class="booking-item-flight-details">
                                         <div class="booking-item-departure"><i class="fa fa-plane"></i>
                                             <h5>10:25 PM</h5>
-                                            <p class="booking-item-date">Sun, Mar 22</p>
+                                            <div *ngIf="bdq.OutboundLeg as bdqo">
+                                                <p class="booking-item-date">{{bdqo.DepartureDate}}</p>
+                                                <p class="booking-item-date">Sat, Mar 23</p>
+                                            </div>
                                             <div *ngIf="bdq.OutboundLeg as bdqo">
                                                 <div *ngIf="bdqo.OriginId">
-                                                    <div *ngFor="let brp of browseRoutesPlaces">
-                                                        <div *ngIf="bdqo.OriginId == brp.PlaceId">
-                                                            <p class="booking-item-destination">{{brp.Name}}, {{brp.SkyscannerCode}}</p>
+                                                    <div *ngFor="let bdp of browseDatesPlaces">
+                                                        <div *ngIf="bdqo.OriginId == bdp.PlaceId">
+                                                            <p class="booking-item-destination">{{bdp.Name}}, {{bdp.SkyscannerCode}}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -102,12 +111,15 @@
                                         </div>
                                         <div class="booking-item-arrival"><i class="fa fa-plane fa-flip-vertical"></i>
                                             <h5>12:25 PM</h5>
-                                            <p class="booking-item-date">Sat, Mar 23</p>
+                                            <div *ngIf="bdq.OutboundLeg as bdqo">
+                                                <p class="booking-item-date">{{bdqo.DepartureDate}}</p>
+                                                <p class="booking-item-date">Sat, Mar 23</p>
+                                            </div>
                                             <div *ngIf="bdq.OutboundLeg as bdqo">
                                                 <div *ngIf="bdqo.DestinationId">
-                                                    <div *ngFor="let brp of browseRoutesPlaces">
-                                                        <div *ngIf="bdqo.DestinationId == brp.PlaceId">
-                                                            <p class="booking-item-destination">{{brp.Name}}, {{brp.SkyscannerCode}}</p>
+                                                    <div *ngFor="let bdp of browseDatesPlaces">
+                                                        <div *ngIf="bdqo.DestinationId == bdp.PlaceId">
+                                                            <p class="booking-item-destination">{{bdp.Name}}, {{bdp.SkyscannerCode}}</p>
                                                         </div>
                                                     </div>
                                                 </div>

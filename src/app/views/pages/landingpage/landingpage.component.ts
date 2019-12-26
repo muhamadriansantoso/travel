@@ -23,9 +23,9 @@ export class LandingpageComponent implements OnInit {
     listPlaceTo: any;
     listPlaceToWrite: boolean = false;
 
-    browseRoutesQuotes: any;
-    browseRoutesCarriers: any;
-    browseRoutesPlaces: any;
+    browseDatesQuotes: any;
+    browseDatesCarriers: any;
+    browseDatesPlaces: any;
 
     landingPageFormGroups: FormGroup;
 
@@ -56,10 +56,10 @@ export class LandingpageComponent implements OnInit {
         this.model.minDate = this.minDate.toString();
         this.model.defaultDatePlusSevenDay = dateFormat(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7), 'yyyy-mm-dd');
 
-        this.api.APIBrowseRoutes().subscribe((data:any)=>{
-            this.browseRoutesQuotes = data.Quotes;
-            this.browseRoutesCarriers = data.Carriers;
-            this.browseRoutesPlaces = data.Places;
+        this.api.APIBrowseDates().subscribe((data:any)=>{
+            this.browseDatesQuotes = data.Quotes;
+            this.browseDatesCarriers = data.Carriers;
+            this.browseDatesPlaces = data.Places;
         });
 
         this.cdr.detectChanges();
