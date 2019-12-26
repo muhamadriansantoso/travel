@@ -1,15 +1,18 @@
 <div class="row">
 <div class="col-md-12" style="padding: 5%; background: #02122c">
     <form [formGroup]="landingPageFormGroups">
+        <input type="hidden" [(ngModel)]="model.flightChooseTab" formControlName="flightChooseTab">
         <input type="hidden" [(ngModel)]="model.originplace" formControlName="originplace">
         <input type="hidden" [(ngModel)]="model.destinationplace" formControlName="destinationplace">
         <input type="hidden" [(ngModel)]="model.outboundpartialdate" formControlName="outboundpartialdate">
         <input type="hidden" [(ngModel)]="model.inboundpartialdate" formControlName="inboundpartialdate">
         <div class="tabbable">
             <ul class="nav nav-pills nav-sm nav-no-br mb10" id="flightChooseTab">
-                <li class="active"><a href="#flight-search-1" data-toggle="tab">Round Trip</a>
+                <li [ngClass]="model.flightChooseTab == 0 ? 'active' : ''" style="cursor: pointer">
+                    <a (click)="flightChooseTabFunc(0)">Return</a>
                 </li>
-                <li><a href="#flight-search-2" data-toggle="tab">One Way</a>
+                <li [ngClass]="model.flightChooseTab == 1 ? 'active' : ''" style="cursor: pointer">
+                    <a (click)="flightChooseTabFunc(1)">One Way</a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -56,7 +59,7 @@
                                     <mat-datepicker #outboundpartialdate></mat-datepicker>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" *ngIf="model.flightChooseTab == 0">
                                 <div class="form-group form-group-lg form-group-icon-left"><i
                                         class="fa fa-calendar input-icon input-icon-highlight"></i>
                                     <label>Returning</label>
@@ -69,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary btn-lg" type="submit">Search for Flights</button>
+            <button class="btn btn-primary btn-lg" type="submit" (click)="onSubmit()">Search for Flights</button>
         </form>
     </div>
 

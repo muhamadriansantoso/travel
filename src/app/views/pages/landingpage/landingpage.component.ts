@@ -6,6 +6,8 @@ import * as $ from 'jquery';
 import * as dateFormat from 'dateformat';
 import localeId from '@angular/common/locales/id';
 import {registerLocaleData} from '@angular/common';
+import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 registerLocaleData(localeId, 'id');
 
@@ -17,6 +19,8 @@ registerLocaleData(localeId, 'id');
 export class LandingpageComponent implements OnInit {
 
     model: any;
+
+    loading: boolean = false;
 
     listPlaceFrom: any;
     listPlaceFromWrite: boolean = false;
@@ -31,18 +35,22 @@ export class LandingpageComponent implements OnInit {
 
     minDate: any;
 
+    private unsubscribe: Subject<any>;
+
     constructor(
         private http: HttpClient,
         private api: APIService,
         private fb: FormBuilder,
         private cdr: ChangeDetectorRef
     ) {
+        this.unsubscribe = new Subject();
     }
 
     ngOnInit() {
         this.initLandingPageForm();
         const date = new Date();
         this.model = {
+            flightChooseTab: '0',
             originplace: '',
             originplaceInput: '',
             destinationplace: '',
@@ -67,6 +75,7 @@ export class LandingpageComponent implements OnInit {
 
     initLandingPageForm() {
         this.landingPageFormGroups = this.fb.group({
+            flightChooseTab: ['', Validators.compose([Validators.required])],
             originplace: ['', Validators.compose([Validators.required])],
             originplaceInput: ['', Validators.compose([Validators.required])],
             destinationplace: ['', Validators.compose([Validators.required])],
@@ -126,6 +135,43 @@ export class LandingpageComponent implements OnInit {
         this.listPlaceToWrite = false;
         this.model.destinationplace = placeid;
         this.model.destinationplaceInput = placename;
+    }
+
+    flightChooseTabFunc(value){
+        this.model.flightChooseTab = value;
+    }
+
+    onSubmit(){
+        this.loading = true;
+        const controls1 = this.landingPageFormGroups.controls;
+
+        var outboundpartialdate = dateFormat(controls1['outboundpartialdate'].value, 'yyyy-mm-dd');
+        var inboundpartialdate = dateFormat(controls1['inboundpartialdate'].value, 'yyyy-mm-dd');
+
+        const authData = {
+            flightChooseTab: controls1['flightChooseTab'].value,
+            originplace: controls1['originplace'].value,
+            originplaceInput: controls1['originplaceInput'].value,
+            destinationplace: controls1['destinationplace'].value,
+            destinationplaceInput: controls1['destinationplaceInput'].value,
+            outboundpartialdate: outboundpartialdate,
+            inboundpartialdate: inboundpartialdate,
+        };
+
+        this.api.APIBrowseDatesInboound(authData.originplace, authData.destinationplace, authData.outboundpartialdate, authData.inboundpartialdate)
+            .pipe(
+                tap((data: any) => {
+                    this.browseDatesQuotes = data.Quotes;
+                    this.browseDatesCarriers = data.Carriers;
+                    this.browseDatesPlaces = data.Places;
+                }),
+                takeUntil(this.unsubscribe),
+                finalize(() => {
+                    this.loading = false;
+                    this.cdr.markForCheck();
+                })
+            )
+            .subscribe();
     }
 
 }
