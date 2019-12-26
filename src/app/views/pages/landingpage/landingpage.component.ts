@@ -158,20 +158,29 @@ export class LandingpageComponent implements OnInit {
             inboundpartialdate: inboundpartialdate,
         };
 
-        this.api.APIBrowseDatesInboound(authData.originplace, authData.destinationplace, authData.outboundpartialdate, authData.inboundpartialdate)
-            .pipe(
-                tap((data: any) => {
-                    this.browseDatesQuotes = data.Quotes;
-                    this.browseDatesCarriers = data.Carriers;
-                    this.browseDatesPlaces = data.Places;
-                }),
-                takeUntil(this.unsubscribe),
-                finalize(() => {
-                    this.loading = false;
-                    this.cdr.markForCheck();
-                })
-            )
-            .subscribe();
+        if(authData.flightChooseTab == 0){
+            this.api.APIBrowseDatesInboound(authData.originplace, authData.destinationplace, authData.outboundpartialdate, authData.inboundpartialdate)
+                .pipe(
+                    tap((data: any) => {
+                        this.browseDatesQuotes = data.Quotes;
+                        this.browseDatesCarriers = data.Carriers;
+                        this.browseDatesPlaces = data.Places;
+                    }),
+                    takeUntil(this.unsubscribe),
+                    finalize(() => {
+                        this.loading = false;
+                        this.cdr.markForCheck();
+                    })
+                )
+                .subscribe();
+        } else if(authData.flightChooseTab == 1){
+            this.api.APIBrowseDates().subscribe((data:any)=>{
+                this.browseDatesQuotes = data.Quotes;
+                this.browseDatesCarriers = data.Carriers;
+                this.browseDatesPlaces = data.Places;
+            });
+        }
+
     }
 
 }
