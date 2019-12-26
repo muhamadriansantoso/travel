@@ -37,7 +37,7 @@
             ],
             "scripts": [
               "src/assets/js/jquery.js",
-              "src/assets/js/bootstrap.js",
+              "src/assets/js/bootstrap.js"
             ]
           },
           "configurations": {

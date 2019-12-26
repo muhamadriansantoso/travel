@@ -45,14 +45,16 @@
                                 <div class="form-group form-group-lg form-group-icon-left"><i
                                         class="fa fa-calendar input-icon input-icon-highlight"></i>
                                     <label>Departing</label>
-                                    <input class="form-control" name="start" type="text"/>
+                                    <input class="form-control" type="text" [(ngModel)]="model.minDate" formControlName="outboundpartialdate" [min]="minDate" [matDatepicker]="outboundpartialdate" (click)="outboundpartialdate.open()" (focus)="outboundpartialdate.open()" maxlength="0">
+                                    <mat-datepicker #outboundpartialdate></mat-datepicker>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group form-group-lg form-group-icon-left"><i
                                         class="fa fa-calendar input-icon input-icon-highlight"></i>
                                     <label>Returning</label>
-                                    <input class="form-control" name="end" placeholder="Optional" type="text"/>
+                                    <input class="form-control" type="text" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
+                                    <mat-datepicker #inboundpartialdate></mat-datepicker>
                                 </div>
                             </div>
                         </div>
