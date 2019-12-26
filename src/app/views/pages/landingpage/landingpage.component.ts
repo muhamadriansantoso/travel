@@ -4,6 +4,10 @@ import {APIService} from '../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as $ from 'jquery';
 import * as dateFormat from 'dateformat';
+import localeId from '@angular/common/locales/id';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localeId, 'id');
 
 @Component({
     selector: 'app-landingpage',
@@ -18,6 +22,8 @@ export class LandingpageComponent implements OnInit {
     listPlaceFromWrite: boolean = false;
     listPlaceTo: any;
     listPlaceToWrite: boolean = false;
+
+    browseRoutesQuotes: any;
 
     landingPageFormGroups: FormGroup;
 
@@ -47,6 +53,10 @@ export class LandingpageComponent implements OnInit {
         this.minDate = dateFormat(new Date(), 'yyyy-mm-dd', 'en');
         this.model.minDate = this.minDate.toString();
         this.model.defaultDatePlusSevenDay = dateFormat(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7), 'yyyy-mm-dd');
+
+        this.api.APIBrowseRoutes().subscribe((data:any)=>{
+            this.browseRoutesQuotes = data.Quotes;
+        });
 
         this.cdr.detectChanges();
     }

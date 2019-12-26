@@ -1,3 +1,4 @@
+<div class="row">
 <div class="col-md-12" style="padding: 5%; background: #02122c">
     <form [formGroup]="landingPageFormGroups">
         <input type="hidden" [(ngModel)]="model.originplace" formControlName="originplace">
@@ -53,15 +54,57 @@
                                 <div class="form-group form-group-lg form-group-icon-left"><i
                                         class="fa fa-calendar input-icon input-icon-highlight"></i>
                                     <label>Returning</label>
-                                    <input class="form-control" type="text" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
-                                    <mat-datepicker #inboundpartialdate></mat-datepicker>
+                                        <input class="form-control" type="text" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
+                                        <mat-datepicker #inboundpartialdate></mat-datepicker>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <button class="btn btn-primary btn-lg" type="submit">Search for Flights</button>
+        </form>
+    </div>
+
+    <div class="col-md-12" style="padding: 2%;">
+        <div class="col-md-12">
+            <ul class="booking-list">
+                <li *ngFor="let bdq of browseRoutesQuotes">
+                    <div class="booking-item-container">
+                        <div class="booking-item">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="booking-item-airline-logo">
+                                        <p>Lufthansa</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="booking-item-flight-details">
+                                        <div class="booking-item-departure"><i class="fa fa-plane"></i>
+                                            <h5>10:25 PM</h5>
+                                            <p class="booking-item-date">Sun, Mar 22</p>
+                                            <p class="booking-item-destination">London, England, United Kingdom (LHR)</p>
+                                        </div>
+                                        <div class="booking-item-arrival"><i class="fa fa-plane fa-flip-vertical"></i>
+                                            <h5>12:25 PM</h5>
+                                            <p class="booking-item-date">Sat, Mar 23</p>
+                                            <p class="booking-item-destination">New York, NY, United States (JFK)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>22h 50m</h5>
+                                    <p>1 stop</p>
+                                </div>
+                                <div class="col-md-3"><span class="booking-item-price">{{bdq.MinPrice | currency:'IDR':'Rp ':'3.0':'id'}},00</span><span>/person</span>
+                                    <p class="booking-item-flight-class">Class: Economy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <button class="btn btn-primary btn-lg" type="submit">Search for Flights</button>
-    </form>
+    </div>
 </div>
