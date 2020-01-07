@@ -30,14 +30,10 @@
             "styles": [
               "src/styles.scss",
               "src/assets/css/bootstrap.css",
-              "src/assets/css/font-awesome.css",
-              "src/assets/css/icomoon.css",
-              "src/assets/css/styles.css",
-              "src/assets/css/mystyles.css"
+              "src/assets/css/custom.css",
+              "src/assets/css/responsive.css"
             ],
             "scripts": [
-              "src/assets/js/jquery.js",
-              "src/assets/js/bootstrap.js"
             ]
           },
           "configurations": {

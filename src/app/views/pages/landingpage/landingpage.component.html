@@ -1,150 +1,463 @@
-<div class="row">
-<div class="col-md-12" style="padding: 5%; background: #02122c">
-    <form [formGroup]="landingPageFormGroups">
-        <input type="hidden" [(ngModel)]="model.flightChooseTab" formControlName="flightChooseTab">
-        <input type="hidden" [(ngModel)]="model.originplace" formControlName="originplace">
-        <input type="hidden" [(ngModel)]="model.destinationplace" formControlName="destinationplace">
-        <div class="tabbable">
-            <ul class="nav nav-pills nav-sm nav-no-br mb10" id="flightChooseTab">
-                <li [ngClass]="model.flightChooseTab == 0 ? 'active' : ''" style="cursor: pointer">
-                    <a (click)="flightChooseTabFunc(0)">Return</a>
-                </li>
-                <li [ngClass]="model.flightChooseTab == 1 ? 'active' : ''" style="cursor: pointer">
-                    <a (click)="flightChooseTabFunc(1)">One Way</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="flight-search-1">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group form-group-lg form-group-icon-left"><i
-                                    class="fa fa-map-marker input-icon"></i>
-                                <label>From</label>
-                                <input [(ngModel)]="model.originplaceInput" formControlName="originplaceInput" class="typeahead form-control" placeholder="City, Airport" type="text" (input)="getListPlaceFrom($event.target.value)"/>
-                                <div class="invalid-feedback" *ngIf="isControlHasError('originplace','required')">
-                                    Original Place is required.
-                                </div>
-                                <span *ngIf="listPlaceFromWrite" class="tt-dropdown-menu"
-                                      style="position: absolute; top: 100%; left: 0px; z-index: 100; border:unset; right: auto;">
-                                    <div class="tt-dataset-1" style="border-bottom: 1px solid #ed8323; margin-top: 10px; margin-left: 10px; cursor: pointer;" *ngFor="let lpf of listPlaceFrom" (click)="clickPlaceFrom(lpf.placeid, lpf.placename)">
-                                        <ul style="list-style: none; padding: 0">
-                                            <li>{{lpf.placename}}</li>
-                                        </ul>
-                                    </div>
-                                </span>
+<section id="content">
+    <div class="container">
+        <div id="main">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <h4 class="search-results-title"><i class="soap-icon-search"></i><b>1,984</b> results found.</h4>
+                    <div class="toggle-container filters-container">
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>
+                            </h4>
+                            <div id="price-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <div id="price-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 10%; width: 70%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 10%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div>
+                                    <br>
+                                    <span class="min-price-label pull-left">$100</span>
+                                    <span class="max-price-label pull-right">$800</span>
+                                    <div class="clearer"></div>
+                                </div><!-- end content -->
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-lg form-group-icon-left"><i
-                                    class="fa fa-map-marker input-icon"></i>
-                                <label>To</label>
-                                <input [(ngModel)]="model.destinationplaceInput" formControlName="destinationplaceInput" class="typeahead form-control" placeholder="City, Airport" type="text" (input)="getListPlaceTo($event.target.value)"/>
-                                <div class="invalid-feedback" *ngIf="isControlHasError('destinationplace','required')">
-                                    Destination Place is required.
-                                </div>
-                                <span *ngIf="listPlaceToWrite" class="tt-dropdown-menu"
-                                      style="position: absolute; top: 100%; left: 0px; z-index: 100; border:unset; right: auto;">
-                                    <div class="tt-dataset-1" style="border-bottom: 1px solid #ed8323; margin-top: 10px; margin-left: 10px; cursor: pointer;" *ngFor="let lpt of listPlaceTo" (click)="clickPlaceTo(lpt.placeid, lpt.placename)">
-                                        <ul style="list-style: none; padding: 0">
-                                            <li>{{lpt.placename}}</li>
-                                        </ul>
-                                    </div>
-                                </span>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#flight-times-filter" class="collapsed">Flight Times</a>
+                            </h4>
+                            <div id="flight-times-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <div id="flight-times" class="slider-color-yellow ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 25.0174%; width: 58.3739%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 25.0174%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 83.3912%;"></a></div>
+                                    <br>
+                                    <span class="start-time-label pull-left">06:00 AM</span>
+                                    <span class="end-time-label pull-right">08:00 PM</span>
+                                    <div class="clearer"></div>
+                                </div><!-- end content -->
                             </div>
                         </div>
-                    </div>
-                    <div class="input-daterange" data-date-format="M d, D">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group form-group-lg form-group-icon-left"><i
-                                        class="fa fa-calendar input-icon input-icon-highlight"></i>
-                                    <label>Departing</label>
-                                    <input class="form-control" type="text" placeholder="Depart Time" formControlName="outboundpartialdate" [min]="minDate" [matDatepicker]="outboundpartialdate" (click)="outboundpartialdate.open()" (focus)="outboundpartialdate.open()" maxlength="0">
-                                    <mat-datepicker #outboundpartialdate></mat-datepicker>
-                                    <div class="invalid-feedback" *ngIf="isControlHasError('outboundpartialdate','required')">
-                                        Departing is required.
-                                    </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#flight-stops-filter" class="collapsed">Flight Stops</a>
+                            </h4>
+                            <div id="flight-stops-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <ul class="check-square filters-option">
+                                        <li><a href="#">1 Stop</a></li>
+                                        <li><a href="#">2 Stops</a></li>
+                                        <li class="active"><a href="#">3 Stops</a></li>
+                                        <li><a href="#">MultiStops</a></li>
+                                    </ul>
+                                    <a class="button btn-mini">MORE</a>
                                 </div>
                             </div>
-                            <div class="col-md-3" *ngIf="model.flightChooseTab == 0">
-                                <div class="form-group form-group-lg form-group-icon-left"><i
-                                        class="fa fa-calendar input-icon input-icon-highlight"></i>
-                                    <label>Returning</label>
-                                        <input class="form-control" type="text" placeholder="Return Time" [(ngModel)]="model.defaultDatePlusSevenDay" formControlName="inboundpartialdate" [min]="minDate" [matDatepicker]="inboundpartialdate" (click)="inboundpartialdate.open()" (focus)="inboundpartialdate.open()" maxlength="0">
-                                        <mat-datepicker #inboundpartialdate></mat-datepicker>
-                                        <div class="invalid-feedback" *ngIf="isControlHasError('inboundpartialdate','required')">
-                                            Returning is required.
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#airlines-filter" class="collapsed">Airlines</a>
+                            </h4>
+                            <div id="airlines-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <ul class="check-square filters-option">
+                                        <li><a href="#">Major Airline<small>($620)</small></a></li>
+                                        <li><a href="#">United Airlines<small>($982)</small></a></li>
+                                        <li class="active"><a href="#">delta airlines<small>($1,127)</small></a></li>
+                                        <li><a href="#">Alitalia<small>($2,322)</small></a></li>
+                                        <li><a href="#">US airways<small>($3,158)</small></a></li>
+                                        <li><a href="#">Air France<small>($4,239)</small></a></li>
+                                        <li><a href="#">Air tahiti nui<small>($5,872)</small></a></li>
+                                    </ul>
+                                    <a class="button btn-mini">MORE</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#flight-type-filter" class="collapsed">Flight Type</a>
+                            </h4>
+                            <div id="flight-type-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <ul class="check-square filters-option">
+                                        <li><a href="#">Business</a></li>
+                                        <li><a href="#">First class</a></li>
+                                        <li class="active"><a href="#">Economy</a></li>
+                                        <li><a href="#">Premium Economy</a></li>
+                                    </ul>
+                                    <a class="button btn-mini">MORE</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#inflight-experience-filter" class="collapsed">Inflight Experience</a>
+                            </h4>
+                            <div id="inflight-experience-filter" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <ul class="check-square filters-option">
+                                        <li><a href="#">Inflight Dining</a></li>
+                                        <li><a href="#">Music</a></li>
+                                        <li class="active"><a href="#">Sky Shopping</a></li>
+                                        <li><a href="#">Wi-fi</a></li>
+                                        <li><a href="#">Seats &amp; Cabin</a></li>
+                                    </ul>
+                                    <a class="button btn-mini">MORE</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel style1 arrow-right">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#modify-search-panel" class="collapsed">Modify Search</a>
+                            </h4>
+                            <div id="modify-search-panel" class="panel-collapse collapse">
+                                <div class="panel-content">
+                                    <form method="post">
+                                        <div class="form-group">
+                                            <label>Leaving from</label>
+                                            <input type="text" class="input-text full-width" placeholder="" value="city, district, or specific airpot">
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label>Departure on</label>
+                                            <div class="datepicker-wrap">
+                                                <input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578366245210"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Arriving On</label>
+                                            <div class="datepicker-wrap">
+                                                <input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578366245211"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <button class="btn-medium icon-check uppercase full-width">search again</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <button class="btn btn-primary btn-lg" type="submit" [disabled]="loading" [ngClass]="{'kt-spinner kt-spinner--right kt-spinner--md kt-spinner--light': loading}" (click)="onSubmit()">Search for Flights</button>
-        </form>
-    </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="sort-by-section clearfix box">
+                        <h4 class="sort-by-title block-sm">Sort results by:</h4>
+                        <ul class="sort-bar clearfix block-sm">
+                            <li class="sort-by-name"><a class="sort-by-container" href="#"><span>name</span></a></li>
+                            <li class="sort-by-price"><a class="sort-by-container" href="#"><span>price</span></a></li>
+                            <li class="sort-by-rating active"><a class="sort-by-container" href="#"><span>duration</span></a></li>
+                        </ul>
 
-    <div class="col-md-12" style="padding: 2%;" *ngIf="submitClicked == true && loading == false">
-        <div class="col-md-12" *ngIf="browseDatesQuotes.length>0; else noData">
-            <ul class="booking-list">
-                <li *ngFor="let bdq of browseDatesQuotes">
-                    <div class="booking-item-container">
-                        <div class="booking-item">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="booking-item-airline-logo" *ngIf="bdq.OutboundLeg as bdqo">
-                                        <div *ngIf="bdqo.CarrierIds">
-                                            <div *ngFor="let bdc of browseDatesCarriers">
-                                                <div *ngIf="bdqo.CarrierIds == bdc.CarrierId">
-                                                    <p>{{bdc.Name}}</p>
+                        <ul class="swap-tiles clearfix block-sm">
+                            <li class="swap-list active">
+                                <a href="flight-list-view.html"><i class="soap-icon-list"></i></a>
+                            </li>
+                            <li class="swap-grid">
+                                <a href="flight-grid-view.html"><i class="soap-icon-grid"></i></a>
+                            </li>
+                            <li class="swap-block">
+                                <a href="flight-block-view.html"><i class="soap-icon-block"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flight-list listing-style3 flight">
+                        <article class="box">
+                            <figure class="col-xs-3 col-sm-2">
+                                <span><img width="94" height="90" alt="" src="images/shortcodes/listings/style02/flight/2.png"></span>
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">Indianapolis to Paris<small>Oneway flight</small></h4>
+                                            <a class="button btn-mini stop">1 STOP</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>AVG/PERSON</small>$620</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">total time</span><br>13 Hour, 40 minutes
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="booking-item-flight-details">
-                                        <div class="booking-item-departure">
-                                            <div *ngIf="bdq.OutboundLeg as bdqo">
-                                                <i class="fa fa-plane"></i>
-                                                <h5>{{bdqo.DepartureDate | date:'EEEE, MMMM dd'}}</h5>
-                                            </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div *ngIf="bdq.OutboundLeg as bdqo">
-                                        <div *ngIf="bdqo.OriginId">
-                                            <div *ngFor="let bdp of browseDatesPlaces">
-                                                <div *ngIf="bdqo.OriginId == bdp.PlaceId">
-                                                    From : {{bdp.Name}}, {{bdp.SkyscannerCode}}
-                                                </div>
-                                                <ul *ngIf="bdqo.OriginId == bdp.PlaceId" style="" class="LegInfo_stopLine__3_s15"></ul>
-                                                <div *ngIf="bdqo.DestinationId == bdp.PlaceId">
-                                                    To : {{bdp.Name}}, {{bdp.SkyscannerCode}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <span class="booking-item-price">{{bdq.MinPrice | currency:'IDR':'Rp ':'3.0':'id'}},00</span><span>/person</span>
-                                </div>
-                                <div class="col-md-2">
-                                    <h5>Direct: {{bdq.Direct}}</h5>
                                 </div>
                             </div>
-                        </div>
+                        </article>
+                        <article class="box">
+                            <figure class="col-xs-3 col-sm-2">
+                                <span><img width="94" height="90" alt="" src="images/shortcodes/listings/style02/flight/3.png"></span>
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">Indianapolis to Paris<small>Oneway flight</small></h4>
+                                            <a class="button btn-mini stop">1 STOP</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>AVG/PERSON</small>$170</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">total time</span><br>13 Hour, 40 minutes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="box">
+                            <figure class="col-xs-3 col-sm-2">
+                                <span><img width="94" height="90" alt="" src="images/shortcodes/listings/style02/flight/4.png"></span>
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">Indianapolis to Paris<small>Oneway flight</small></h4>
+                                            <a class="button btn-mini stop">1 STOP</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>AVG/PERSON</small>$320</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">total time</span><br>13 Hour, 40 minutes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="box">
+                            <figure class="col-xs-3 col-sm-2">
+                                <span><img width="94" height="90" alt="" src="images/shortcodes/listings/style02/flight/2.png"></span>
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">Indianapolis to Paris<small>Oneway flight</small></h4>
+                                            <a class="button btn-mini stop">1 STOP</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>AVG/PERSON</small>$620</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">total time</span><br>13 Hour, 40 minutes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="box">
+                            <figure class="col-xs-3 col-sm-2">
+                                <span><img width="94" height="90" alt="" src="images/shortcodes/listings/style02/flight/3.png"></span>
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">Indianapolis to Paris<small>Oneway flight</small></h4>
+                                            <a class="button btn-mini stop">1 STOP</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>AVG/PERSON</small>$170</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">total time</span><br>13 Hour, 40 minutes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="box">
+                            <figure class="col-xs-3 col-sm-2">
+                                <span><img width="94" height="90" alt="" src="images/shortcodes/listings/style02/flight/4.png"></span>
+                            </figure>
+                            <div class="details col-xs-9 col-sm-10">
+                                <div class="details-wrapper">
+                                    <div class="first-row">
+                                        <div>
+                                            <h4 class="box-title">Indianapolis to Paris<small>Oneway flight</small></h4>
+                                            <a class="button btn-mini stop">1 STOP</a>
+                                            <div class="amenities">
+                                                <i class="soap-icon-wifi circle"></i>
+                                                <i class="soap-icon-entertainment circle"></i>
+                                                <i class="soap-icon-fork circle"></i>
+                                                <i class="soap-icon-suitcase circle"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="price"><small>AVG/PERSON</small>$320</span>
+                                        </div>
+                                    </div>
+                                    <div class="second-row">
+                                        <div class="time">
+                                            <div class="take-off col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                </div>
+                                            </div>
+                                            <div class="landing col-sm-4">
+                                                <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                </div>
+                                            </div>
+                                            <div class="total-time col-sm-4">
+                                                <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                <div>
+                                                    <span class="skin-color">total time</span><br>13 Hour, 40 minutes
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="action">
+                                            <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                     </div>
-                </li>
-            </ul>
-        </div>
-        <ng-template #noData>
-            <div style="display: flex;height: 100px;align-items: center;justify-content: center;transform: translate3d(0%, 0px, 0px); background-color: #02122c" #wrap>
-                No Record Found.
+                    <a class="button uppercase full-width btn-large">load more listings</a>
+                </div>
             </div>
-        </ng-template>
+        </div>
     </div>
-</div>
+</section>

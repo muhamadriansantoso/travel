@@ -8,6 +8,8 @@ import localeId from '@angular/common/locales/id';
 import {registerLocaleData} from '@angular/common';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
+import { NgxSoapService, Client, ISoapMethodResponse } from 'ngx-soap';
+
 
 registerLocaleData(localeId, 'id');
 
@@ -35,6 +37,15 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     minDate: any;
 
+    intA: number;
+    intB: number;
+    showDiagnostic: boolean;
+    message: string;
+    xmlResponse: string;
+    jsonResponse: string;
+    resultLabel: string;
+    client: Client;
+
     public submitClicked = false;
     private unsubscribe: Subject<any>;
     private subscriptions: Subscription[] = [];
@@ -43,9 +54,31 @@ export class LandingpageComponent implements OnInit, OnDestroy {
         private http: HttpClient,
         private api: APIService,
         private fb: FormBuilder,
-        private cdr: ChangeDetectorRef
+        private cdr: ChangeDetectorRef,
+        private soap: NgxSoapService
     ) {
         this.unsubscribe = new Subject();
+        let headers = new HttpHeaders();
+        headers.append('Access-Control-Allow-Origin', '*');
+        this.soap.createClient('https://www.w3schools.com/xml/tempconvert.asmx?WSDL', {headers: headers})
+            .then(client => {
+                console.log('Client', client);
+                this.client = client;
+            })
+            .catch(err => console.log('Error', err));
+    }
+
+    celsiusToFahrenheit() {
+        this.loading = true;
+        const body = {
+            intA: this.intA,
+        };
+
+        this.client.call('CelsiusToFahrenheit', body).subscribe(res => {
+            this.xmlResponse = res.responseBody;
+            this.message = res.result.AddResult;
+            this.loading = false;
+        }, err => console.log(err));
     }
 
     ngOnInit() {

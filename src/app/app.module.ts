@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker';
+import {NgxSoapModule} from 'ngx-soap';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker'
         NgbModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        NgxSoapModule
     ],
     providers: [
         {
