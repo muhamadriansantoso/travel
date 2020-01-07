@@ -12,13 +12,14 @@ import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/mater
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker';
 import {NgxSoapModule} from 'ngx-soap';
+import {LandingpageModule} from './views/pages/landingpage/landingpage.module';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        LandingpageComponent
+        AppComponent
     ],
     imports: [
+        LandingpageModule.forRoot(),
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
