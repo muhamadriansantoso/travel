@@ -5,13 +5,26 @@
                 <div class="search-box-wrapper style1">
                     <div class="search-box">
                         <ul class="search-tabs clearfix">
-                            <li class="active"><a href="#hotels-tab" data-toggle="tab" aria-expanded="true"><i class="soap-icon-hotel"></i>HOTELS</a></li>
-                            <li class=""><a href="#flights-tab" data-toggle="tab" aria-expanded="false"><i class="soap-icon-plane-right takeoff-effect"></i>FLIGHTS</a></li>
-                            <li><a href="#flight-and-hotel-tab" data-toggle="tab"><i class="soap-icon-flight-hotel"></i>FLIGHT &amp; HOTELS</a></li>
-                            <li><a href="#cars-tab" data-toggle="tab"><i class="soap-icon-car"></i>CARS</a></li>
-                            <li><a href="#cruises-tab" data-toggle="tab"><i class="soap-icon-cruise"></i>CRUISES</a></li>
-                            <li><a href="#flight-status-tab" data-toggle="tab"><i class="soap-icon-status"></i>FLIGHT STATUS</a></li>
-                            <li><a href="#online-checkin-tab" data-toggle="tab"><i class="soap-icon-stories"></i>ONLINE CHECK IN</a></li>
+                            <li class="active">
+                                <a href="javascript:;">
+                                    <i class="soap-icon-plane-right takeoff-effect"></i>FLIGHTS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="soap-icon-flight-hotel"></i>FLIGHT &amp; HOTELS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="soap-icon-hotel"></i>HOTELS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="soap-icon-car"></i>CARS
+                                </a>
+                            </li>
                         </ul>
                         <div class="visible-mobile">
                             <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
@@ -26,76 +39,7 @@
                         </div>
 
                         <div class="search-tab-content">
-                            <div class="tab-pane fade active in" id="hotels-tab">
-                                <form action="hotel-list-view.html" method="post">
-                                    <div class="title-container">
-                                        <h2 class="search-title">Search and Book Hotels</h2>
-                                        <p>We're bringing you a new level of comfort.</p>
-                                        <i class="soap-icon-hotel"></i>
-                                    </div>
-                                    <div class="search-content">
-                                        <h5 class="title">Where</h5>
-                                        <label>Your Destination</label>
-                                        <input type="text" class="input-text full-width" placeholder="enter a destination or hotel name">
-                                        <hr>
-                                        <h5 class="title">When</h5>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Check In</label>
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400661"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Check Out</label>
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400662"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">Who</h5>
-                                        <div class="row">
-                                            <div class="col-xs-4">
-                                                <label>ROOMS</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <label>ADULTS</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <label>KIDS</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <button type="submit" class="full-width uppercase">Proceed To Result</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="flights-tab">
+                            <div class="tab-pane fade active in" id="flights-tab">
                                 <form action="flight-list-view.html" method="post">
                                     <div class="title-container">
                                         <h2 class="search-title">Search and Book Flights</h2>
@@ -227,6 +171,75 @@
                                         </div>
                                         <hr>
                                         <button type="submit" class="full-width btn-medium">PROCEED TO RESULT</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="tab-pane fade" id="hotels-tab">
+                                <form action="hotel-list-view.html" method="post">
+                                    <div class="title-container">
+                                        <h2 class="search-title">Search and Book Hotels</h2>
+                                        <p>We're bringing you a new level of comfort.</p>
+                                        <i class="soap-icon-hotel"></i>
+                                    </div>
+                                    <div class="search-content">
+                                        <h5 class="title">Where</h5>
+                                        <label>Your Destination</label>
+                                        <input type="text" class="input-text full-width" placeholder="enter a destination or hotel name">
+                                        <hr>
+                                        <h5 class="title">When</h5>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label>Check In</label>
+                                                <div class="datepicker-wrap">
+                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400661"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label>Check Out</label>
+                                                <div class="datepicker-wrap">
+                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400662"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <h5 class="title">Who</h5>
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <label>ROOMS</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="1">01</option>
+                                                        <option value="2">02</option>
+                                                        <option value="3">03</option>
+                                                        <option value="4">04</option>
+                                                    </select><span class="custom-select full-width">01</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label>ADULTS</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="1">01</option>
+                                                        <option value="2">02</option>
+                                                        <option value="3">03</option>
+                                                        <option value="4">04</option>
+                                                    </select><span class="custom-select full-width">01</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <label>KIDS</label>
+                                                <div class="selector">
+                                                    <select class="full-width">
+                                                        <option value="1">01</option>
+                                                        <option value="2">02</option>
+                                                        <option value="3">03</option>
+                                                        <option value="4">04</option>
+                                                    </select><span class="custom-select full-width">01</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <button type="submit" class="full-width uppercase">Proceed To Result</button>
                                     </div>
                                 </form>
                             </div>

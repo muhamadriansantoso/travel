@@ -131,7 +131,7 @@
 /* font */
 @font-face {
   font-family: 'NexaBlack';
-  src: url('assets/fonts/NexaBlack.eot?') format('eot'),
+  src: url('assets/fonts/NexaBlack.eot') format('eot'),
   url('assets/fonts/NexaBlack.otf') format('opentype'),
   url('assets/fonts/NexaBlack.woff') format('woff'),
   url('assets/fonts/NexaBlack.ttf') format('truetype'),
@@ -13250,7 +13250,7 @@ img.aligncenter,
 
 section#content {
   min-height: 400px;
-  padding-top: 40px;
+  padding-top: 5%;
   text-align: left;
   background: #f5f5f5;
 }
