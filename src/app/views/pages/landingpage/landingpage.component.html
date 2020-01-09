@@ -518,63 +518,68 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <ng-container *ngIf="selectDepartureExpandCollapse">
+                                    <ng-container *ngFor="let AirSegment of AirSegmentList">
                                         <ng-container *ngIf="AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option.length > 0; else FlightOptionNoArrayLoop">
-                                            <div class="second-row" *ngFor="let FlightOption of AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option">
-                                                <div class="time">
-                                                    <div class="take-off col-sm-4">
-                                                        <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                        <div>
-                                                            <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                            <div class="second-row" *ngFor="let FlightOption of AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option; let i = index">
+                                                <ng-container *ngIf="FlightOption.BookingInfo.SegmentRef == AirSegment.Key">
+                                                    <div class="time">
+                                                        <div class="take-off col-sm-4">
+                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                            <div>
+                                                                <span class="skin-color">Take off</span><br>{{AirSegment.DepartureTime | date: 'EEE MMM dd, yyyy h:mm a'}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="landing col-sm-4">
+                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                            <div>
+                                                                <span class="skin-color">landing</span><br>{{AirSegment.ArrivalTime | date: 'EEE MMM dd, yyyy h:mm a'}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="total-time col-sm-4">
+                                                            <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                            <div>
+                                                                <span class="skin-color">total time</span><br>{{AirSegment.FlightTime | minuteToHour}}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="landing col-sm-4">
-                                                        <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                        <div>
-                                                            <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
-                                                        </div>
+                                                    <div class="action">
+                                                        <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
                                                     </div>
-                                                    <div class="total-time col-sm-4">
-                                                        <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
-                                                        <div>
-                                                            <span class="skin-color">total time</span><br>13 Hour, 40 minutes
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="action">
-                                                    <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
-                                                </div>
+                                                </ng-container>
                                             </div>
                                         </ng-container>
 
                                         <ng-template #FlightOptionNoArrayLoop>
                                             <div class="second-row">
-                                                <div class="time">
-                                                    <div class="take-off col-sm-4">
-                                                        <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                        <div>
-                                                            <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                <ng-container *ngIf="AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option.BookingInfo.SegmentRef == AirSegment.Key">
+                                                    <div class="time">
+                                                        <div class="take-off col-sm-4">
+                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                            <div>
+                                                                <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
+                                                            </div>
+                                                        </div>
+                                                        <div class="landing col-sm-4">
+                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
+                                                            <div>
+                                                                <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
+                                                            </div>
+                                                        </div>
+                                                        <div class="total-time col-sm-4">
+                                                            <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
+                                                            <div>
+                                                                <span class="skin-color">total time</span><br>13 Hour, 40 minutes
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="landing col-sm-4">
-                                                        <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                        <div>
-                                                            <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
-                                                        </div>
+                                                    <div class="action">
+                                                        <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
                                                     </div>
-                                                    <div class="total-time col-sm-4">
-                                                        <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
-                                                        <div>
-                                                            <span class="skin-color">total time</span><br>13 Hour, 40 minutes
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="action">
-                                                    <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
-                                                </div>
+                                                </ng-container>
                                             </div>
                                         </ng-template>
                                     </ng-container>
+
                                 </div>
                             </div>
                         </article>

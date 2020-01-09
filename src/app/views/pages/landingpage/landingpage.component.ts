@@ -35,6 +35,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     //API Variable
     AirPricePointList: any;
+    AirSegmentList: any;
 
     landingPageFormGroups: FormGroup;
 
@@ -81,7 +82,9 @@ export class LandingpageComponent implements OnInit, OnDestroy {
         this.api.AirLowFareSearchPort().subscribe((data: any) => {
             console.log(data);
             this.AirPricePointList = data.AirPricePointList.AirPricePoint;
+            this.AirSegmentList = data.AirSegmentList.AirSegment;
             console.log(this.AirPricePointList);
+            console.log(this.AirSegmentList);
             this.cdr.detectChanges();
         });
     }
