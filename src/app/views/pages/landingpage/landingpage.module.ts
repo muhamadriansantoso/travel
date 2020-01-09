@@ -5,6 +5,7 @@ import {LandingpageComponent} from './landingpage.component';
 import {FlightComponent} from './flight/flight.component';
 import { HotelsComponent } from './hotels/hotels.component';
 import { FlightAndHotelComponent } from './flight-and-hotel/flight-and-hotel.component';
+import {PriceNumber} from '../pricenumber.pipe';
 
 const routes: Routes = [
     {
@@ -37,6 +38,7 @@ const routes: Routes = [
         FlightComponent,
         HotelsComponent,
         FlightAndHotelComponent,
+        PriceNumber
     ],
     imports: [
         CommonModule,

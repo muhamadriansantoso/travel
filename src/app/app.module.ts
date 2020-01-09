@@ -13,6 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker';
 import {NgxSoapModule} from 'ngx-soap';
 import {LandingpageModule} from './views/pages/landingpage/landingpage.module';
+import {PriceNumber} from './views/pages/pricenumber.pipe';
 
 @NgModule({
     declarations: [

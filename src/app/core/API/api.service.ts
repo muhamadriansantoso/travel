@@ -9,6 +9,15 @@ export class APIService {
     constructor(private http: HttpClient) {
     }
 
+    AirLowFareSearchPort() {
+        const httpOptions = {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        };
+        return this.http.get('http://localhost/apitravel/public/AirLowFareSearchPort', httpOptions);
+    }
+
     APIListPlace(value: string) {
         const httpOptions = {
             headers: {
