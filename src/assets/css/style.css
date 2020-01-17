@@ -10271,7 +10271,90 @@ a:hover, a:focus {
     filter: alpha(opacity=65);
   }
 
-/*End Style Ticket*/
+  .flight-details-schedule-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 30px;
+    position: relative;
+  }
+
+  .flight-details-feature-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0px;
+    position: relative;
+  }
+
+  .flight-details-schedule-list:before {
+    content: '';
+    width: 2px;
+    height: 100%;
+    background-color: #d9d9d9;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+
+  .flight-details-schedule-icon{
+    color: rgba(255,153,0,0.9) !important;
+    position: absolute;
+    top: 16px;
+    left: -12px;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background-color: #fff;
+    -webkit-box-shadow: 0 0 0 1px #d9d9d9;
+    box-shadow: 0 0 0 1px #d9d9d9;
+    border-radius: 50%;
+    display: block;
+    font-size: 12px;
+  }
+
+  .flight-details-schedule-dots {
+    position: absolute;
+    top: 29px;
+    left: 0;
+    width: 100%;
+    border-top: 2px dotted #000;
+    opacity: 0.1;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=10)";
+    filter: alpha(opacity=10);
+  }
+
+  .flight-details-schedule-date {
+    font-size: 10px;
+    margin-bottom: 7px;
+    opacity: 0.65;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+    filter: alpha(opacity=65);
+  }
+
+  .flight-details-schedule-destination {
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .flight-details-schedule-destination-city{
+    font-size: 10px;
+    opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    margin-bottom: 0;
+  }
+
+  .flight-details-schedule-features {
+    font-size: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+  }
+
+    /*End Style Ticket*/
 .icon_color_contact_us{
     color: #157b87;
   }
