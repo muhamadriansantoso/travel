@@ -7546,8 +7546,8 @@ a.text-dark:hover, a.text-dark:focus {
 body {
   font-family: "Poppins", Arial, sans-serif;
   background: #fff;
-  font-size: 16px;
-  line-height: 1.8;
+  font-size: 14px;
+  line-height: 1.5;
   font-weight: 300;
   color: #666666; }
   body.menu-show {
@@ -10078,7 +10078,7 @@ a:hover, a:focus {
   .card-ticket {
     box-shadow:0 1px 3px 0 rgba(27,27,27,.1);
     margin-bottom: 10px;
-    padding: 20px 20px 0 20px !important
+    padding: 20px !important
   }
 
   .card-ticket:hover{
@@ -10092,8 +10092,22 @@ a:hover, a:focus {
     margin-bottom: 0;
     display: block;
     line-height: 15px;
-    margin-top: 13px;
     font-weight: bold;
+  }
+
+  .card-ticket .destination-title{
+    font-size: 13px;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+    filter: alpha(opacity=65);
+    margin-bottom: 2px;
+  }
+
+  .card-ticket .destination-date{
+    font-size: 10px;
+    opacity: 0.65;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+    filter: alpha(opacity=65);
+    margin-bottom: 0;
   }
 
   .card-body .nav-tabs {
@@ -10122,6 +10136,8 @@ a:hover, a:focus {
   .card-ticket .title-maskapai {
     display: block;
     line-height: 1;
+    text-align: left;
+    font-weight: 500;
   }
 
   .image-logo-maskapai{
@@ -10152,6 +10168,107 @@ a:hover, a:focus {
     color: #fff;
     text-align: center;
     vertical-align: center;
+  }
+
+  .airline-logo{
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    -o-transform: translate3d(-50%, -50%, 0);
+    -ms-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  .flight-section-airline-logo-wrap{
+    position: relative;
+    height: 100%;
+  }
+
+  .flight-section-path{
+    position: relative;
+    height: 60px;
+    margin: 0 5px;
+  }
+
+  .flight-section-fly-time{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .flight-section-path-line{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #dedede;
+  }
+
+  .flight-section-path-line-start{
+    position: absolute;
+    left: -15px;
+    text-align: center;
+    width: 30px;
+  }
+
+  .flight-section-path-line-middle{
+    position: absolute;
+    left: 50%;
+    text-align: center;
+    width: 30px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+
+  .flight-section-path-line-middle .flight-section-path-icon{
+    visibility: hidden;
+  }
+
+  .flight-section-path-line-end{
+    position: absolute;
+    right: -15px;
+    left: auto;
+    text-align: center;
+    width: 30px;
+  }
+
+  .flight-section-path-icon{
+    opacity: 0.5;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    margin-bottom: 9px;
+  }
+
+  .flight-section-path-line-dot{
+    background-color: rgba(255,153,0,0.9) !important;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    box-shadow: 0 0 0 2px #fff;
+  }
+
+  .flight-section-path-line-title{
+    font-size: 9px;
+    opacity: 0.65;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)";
+    filter: alpha(opacity=65);
   }
 
 /*End Style Ticket*/
