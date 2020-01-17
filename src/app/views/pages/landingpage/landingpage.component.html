@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-md-10 text-center">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-2 mb-3">
                                     <div class="flight-section-airline-logo-wrap">
                                         <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" class="img-fluid img-circle airline-logo">
                                     </div>
@@ -100,7 +100,7 @@
                                             <div class="col-md-6 text-center">
                                                 <div class="flight-section-path">
                                                     <div class="flight-section-fly-time">
-                                                        <p>{{(dataflight.transData[0].flightTime + dataflight.transData[1].flightTime) | minuteToHour}} ({{(dataflight.stop) - 1}} Transit)</p>
+                                                        <p>{{(dataflight.transData[0].flightTime + dataflight.transData[1].flightTime) | minuteToHour}}, {{(dataflight.stop) - 1}} Transit</p>
                                                     </div>
                                                     <div class="flight-section-path-line"></div>
                                                     <div>

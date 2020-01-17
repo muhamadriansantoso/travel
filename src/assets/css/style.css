@@ -10176,7 +10176,7 @@ a:hover, a:focus {
     max-height: 100%;
     top: 50%;
     left: 50%;
-    position: absolute;
+    position: relative;
     -webkit-transform: translate3d(-50%, -50%, 0);
     -moz-transform: translate3d(-50%, -50%, 0);
     -o-transform: translate3d(-50%, -50%, 0);
