@@ -15,7 +15,7 @@ export class APIService {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         };
-        return this.http.get('http://localhost/apitravel/public/AirLowFareSearchPort', httpOptions);
+        return this.http.get('http://localhost/apitravel/public/api/v1/flight/search', httpOptions);
     }
 
     APIListPlace(value: string) {

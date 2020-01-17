@@ -34,9 +34,11 @@
             "styles": [
               "src/styles.scss",
               "src/assets/css/animate.css",
-              "src/assets/css/bootstrap.css",
-              "src/assets/css/custom.css",
-              "src/assets/css/responsive.css"
+              "src/assets/css/magnific-popup.css",
+              "src/assets/css/aos.css",
+              "src/assets/css/flaticon.css",
+              "src/assets/css/icomoon.css",
+              "src/assets/css/style.css"
             ],
             "scripts": [
             ]

@@ -1,590 +1,103 @@
-<section id="content" class="image-bg1">
+<section class="ftco-section" style="padding: 0;">
     <div class="container">
+        <h4 class="col-sm-3  menu-filter-pc" align="center">Filter</h4>
         <div class="row">
-            <div id="main" class="col-sm-8 col-md-9">
-                <div class="search-box-wrapper style1">
-                    <div class="search-box">
-                        <ul class="search-tabs clearfix">
-                            <li class="active" [routerLinkActive]="['active']">
-                                <a href="javascript:;" [routerLink]="['/flight']">
-                                    <i class="soap-icon-plane-right takeoff-effect"></i>FLIGHTS
-                                </a>
-                            </li>
-                            <!--<li [routerLinkActive]="['active']">-->
-                                <!--<a href="javascript:;" routerLink="/flight-and-hotel">-->
-                                    <!--<i class="soap-icon-flight-hotel"></i>FLIGHT &amp; HOTELS-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li [routerLinkActive]="['active']">-->
-                                <!--<a href="javascript:;" routerLink="/hotel">-->
-                                    <!--<i class="soap-icon-hotel"></i>HOTELS-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li [routerLinkActive]="['active']">-->
-                                <!--<a href="javascript:;">-->
-                                    <!--<i class="soap-icon-car"></i>CARS-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        </ul>
-                        <div class="visible-mobile">
-                            <div class="bx-wrapper" style="max-width: 100%; margin: 0px auto;"><div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 0px;"><ul id="mobile-search-tabs" class="search-tabs clearfix" style="width: auto; position: relative;">
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 50; display: block;"><a href="#hotels-tab">HOTELS</a></li>
-                                <li class="active" style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"><a href="#flights-tab">FLIGHTS</a></li>
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"><a href="#flight-and-hotel-tab">FLIGHT &amp; HOTELS</a></li>
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"><a href="#cars-tab">CARS</a></li>
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"><a href="#cruises-tab">CRUISES</a></li>
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"><a href="#flight-status-tab">FLIGHT STATUS</a></li>
-                                <li style="float: none; list-style: none; position: absolute; width: 100px; z-index: 0; display: none;"><a href="#online-checkin-tab">ONLINE CHECK IN</a></li>
-                            </ul></div><div class="bx-controls bx-has-controls-direction"><div class="bx-controls-direction"><a class="bx-prev disabled" href="">Prev</a><a class="bx-next" href="">Next</a></div></div></div>
-                        </div>
+            <div class="col-sm-3 col-md-3  menu-filter-pc">
+                <div class="card">
+                    <h4 class="mb-4" align="center" style="margin-top: 30px;margin-bottom: 10px;">Airlines</h4>
+                    <ul style="list-style:none;float: left;">
+                        <li><input type="checkbox" style="background:#09f;"> Garuda Airlines</li>
+                        <li><input type="checkbox"> Batik Air</li>
+                        <li><input type="checkbox"> Qatar Airways</li>
+                        <li><input type="checkbox"> Lion Air</li>
+                        <li><input type="checkbox"> AirAsia</li>
+                    </ul>
+                </div><br>
 
-                        <div class="search-tab-content">
-                            <div>
-                                <router-outlet></router-outlet>
-                            </div>
-                            <div class="tab-pane fade" id="cars-tab">
-                                <form action="car-list-view.html" method="post">
-                                    <div class="title-container">
-                                        <h2 class="search-title">Search Cars</h2>
-                                        <p>We're bringing you a new level of comfort.</p>
-                                        <i class="soap-icon-car"></i>
-                                    </div>
-                                    <div class="search-content">
-                                        <div class="row">
-                                            <h5 class="title">Where</h5>
-                                            <div class="col-xs-6">
-                                                <label>Pick Up</label>
-                                                <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot">
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Drop Off</label>
-                                                <input type="text" class="input-text full-width" placeholder="city, distirct or specific airpot">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">When</h5>
-                                        <label>Pick-Up Date / Time</label>
-                                        <div class="form-group row">
-                                            <div class="col-xs-6">
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400667"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">anytime</option>
-                                                        <option value="2">morning</option>
-                                                    </select><span class="custom-select full-width">anytime</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <label>Drop-Off Date / Time</label>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400668"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">anytime</option>
-                                                        <option value="2">morning</option>
-                                                    </select><span class="custom-select full-width">anytime</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">Who</h5>
-                                        <div class="row">
-                                            <div class="col-xs-3">
-                                                <label>Adults</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-3">
-                                                <label>Kids</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="1">01</option>
-                                                        <option value="2">02</option>
-                                                        <option value="3">03</option>
-                                                        <option value="4">04</option>
-                                                    </select><span class="custom-select full-width">01</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Promo Code</label>
-                                                <input type="text" class="input-text full-width" placeholder="type here">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Car Type</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="">select a car type</option>
-                                                        <option value="economy">Economy</option>
-                                                        <option value="compact">Compact</option>
-                                                    </select><span class="custom-select full-width">select a car type</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="form-group">
-                                            <button type="submit" class="full-width">PROCEED TO RESULT</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="cruises-tab">
-                                <form action="cruise-list-view.html" method="post">
-                                    <div class="title-container">
-                                        <h2 class="search-title">Search and Book Cruises</h2>
-                                        <p>We're bringing you a new level of comfort.</p>
-                                        <i class="soap-icon-cruise"></i>
-                                    </div>
-                                    <div class="search-content">
-                                        <h5 class="title">Where</h5>
-                                        <div class="form-group">
-                                            <label>Your Destination</label>
-                                            <input type="text" class="input-text full-width" placeholder="enter a destination or hotel name">
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">When</h5>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Departure Date</label>
-                                                <div class="datepicker-wrap">
-                                                    <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400669"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Cruise Length</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="">select length</option>
-                                                        <option value="1">1-2 Nights</option>
-                                                        <option value="2">3-4 Nights</option>
-                                                    </select><span class="custom-select full-width">select length</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">Who</h5>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Cruise Line</label>
-                                                <div class="selector">
-                                                    <select class="full-width">
-                                                        <option value="">select cruise line</option>
-                                                        <option>Azamara Club Cruises</option>
-                                                        <option>Carnival Cruise Lines</option>
-                                                        <option>Celebrity Cruises</option>
-                                                        <option>Costa Cruise Lines</option>
-                                                        <option>Cruise &amp; Maritime Voyages</option>
-                                                        <option>Crystal Cruises</option>
-                                                        <option>Cunard Line Ltd.</option>
-                                                        <option>Disney Cruise Line</option>
-                                                        <option>Holland America Line</option>
-                                                        <option>Hurtigruten Cruise Line</option>
-                                                        <option>MSC Cruises</option>
-                                                        <option>Norwegian Cruise Line</option>
-                                                        <option>Oceania Cruises</option>
-                                                        <option>Orion Expedition Cruises</option>
-                                                        <option>P&amp;O Cruises</option>
-                                                        <option>Paul Gauguin Cruises</option>
-                                                        <option>Peter Deilmann Cruises</option>
-                                                        <option>Princess Cruises</option>
-                                                        <option>Regent Seven Seas Cruises</option>
-                                                        <option>Royal Caribbean International</option>
-                                                        <option>Seabourn Cruise Line</option>
-                                                        <option>Silversea Cruises</option>
-                                                        <option>Star Clippers</option>
-                                                        <option>Swan Hellenic Cruises</option>
-                                                        <option>Thomson Cruises</option>
-                                                        <option>Viking River Cruises</option>
-                                                        <option>Windstar Cruises</option>
-                                                    </select><span class="custom-select full-width">select cruise line</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <div class="form-group">
-                                            <button type="submit" class="full-width">PROCEED TO RESULT</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="flight-status-tab">
-                                <form action="flight-list-view.html" method="post">
-                                    <div class="title-container">
-                                        <h2 class="search-title">Flight Status</h2>
-                                        <p>We're bringing you a new level of comfort.</p>
-                                        <i class="soap-icon-status"></i>
-                                    </div>
-                                    <div class="search-content">
-                                        <h5 class="title">Where</h5>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Leaving From</label>
-                                                <input type="text" class="input-text full-width" placeholder="enter a city or place name">
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Going To</label>
-                                                <input type="text" class="input-text full-width" placeholder="enter a city or place name">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">When</h5>
-                                        <label>Departure Date</label>
-                                        <div class="datepicker-wrap">
-                                            <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400670"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">Who</h5>
-                                        <label>Flight Number</label>
-                                        <input type="text" class="input-text full-width" placeholder="enter flight number">
-                                        <hr>
-                                        <button type="submit" class="full-width">PROCEED TO RESULT</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="tab-pane fade" id="online-checkin-tab">
-                                <form>
-                                    <div class="title-container">
-                                        <h2 class="search-title">Online Check-In</h2>
-                                        <p>We're bringing you a new level of comfort.</p>
-                                        <i class="soap-icon-stories"></i>
-                                    </div>
-                                    <div class="search-content">
-                                        <h5 class="title">Where</h5>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label>Leaving From</label>
-                                                <input type="text" class="input-text full-width" placeholder="enter a city or place name">
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label>Going To</label>
-                                                <input type="text" class="input-text full-width" placeholder="enter a city or place name">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">When</h5>
-                                        <label>Departure Date</label>
-                                        <div class="datepicker-wrap">
-                                            <input type="text" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578368400671"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                                        </div>
-                                        <hr>
-                                        <h5 class="title">Who</h5>
-                                        <label>Full Name</label>
-                                        <input type="text" class="input-text full-width" placeholder="enter your full name">
-                                        <hr>
-                                        <button type="submit" class="full-width">SEARCH NOW</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar col-sm-4 col-md-3">
-                <div class="travelo-box contact-box">
-                    <h4>Need Travelo Help?</h4>
-                    <p>We would be more than happy to help you. Our team advisor are 24/7 at your service to help you.</p>
-                    <address class="contact-details">
-                        <span class="contact-phone"><i class="soap-icon-phone"></i> 1-800-123-HELLO</span>
-                        <br>
-                        <a class="contact-email" href="#">help@travelo.com</a>
-                    </address>
-                </div>
-                <div class="travelo-box book-with-us-box">
-                    <h4>Why Book with us?</h4>
-                    <ul>
-                        <li>
-                            <i class="soap-icon-hotel-1 circle"></i>
-                            <h5 class="title"><a href="#">135,00+ Hotels</a></h5>
-                            <p>Nunc cursus libero pur congue arut nimspnty.</p>
-                        </li>
-                        <li>
-                            <i class="soap-icon-savings circle"></i>
-                            <h5 class="title"><a href="#">Low Rates &amp; Savings</a></h5>
-                            <p>Nunc cursus libero pur congue arut nimspnty.</p>
-                        </li>
-                        <li>
-                            <i class="soap-icon-support circle"></i>
-                            <h5 class="title"><a href="#">Excellent Support</a></h5>
-                            <p>Nunc cursus libero pur congue arut nimspnty.</p>
-                        </li>
+                <div class="card">
+                    <h4 class="mb-4" align="center" style="margin-top: 30px;margin-bottom: 10px;">Transit</h4>
+                    <ul style="list-style:none;">
+                        <li><input type="checkbox" name="num_stop">  Langsung</li>
+                        <li><input type="checkbox" name="num_stop">  1 Transit</li>
+                        <li><input type="checkbox" name="num_stop">  2+ Transit</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="content">
-    <div class="container">
-        <div id="main">
-            <div class="row">
-                <!--<div class="col-sm-4 col-md-3">-->
-                    <!--<h4 class="search-results-title"><i class="soap-icon-search"></i><b>1,984</b> results found.</h4>-->
-                    <!--<div class="toggle-container filters-container">-->
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#price-filter" class="collapsed">Price</a>-->
-                            <!--</h4>-->
-                            <!--<div id="price-filter" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<div id="price-range" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 10%; width: 70%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 10%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 80%;"></a></div>-->
-                                    <!--<br>-->
-                                    <!--<span class="min-price-label pull-left">$100</span>-->
-                                    <!--<span class="max-price-label pull-right">$800</span>-->
-                                    <!--<div class="clearer"></div>-->
-                                <!--</div>&lt;!&ndash; end content &ndash;&gt;-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#flight-times-filter" class="collapsed">Flight Times</a>-->
-                            <!--</h4>-->
-                            <!--<div id="flight-times-filter" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<div id="flight-times" class="slider-color-yellow ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 25.0174%; width: 58.3739%;"></div><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 25.0174%;"></a><a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 83.3912%;"></a></div>-->
-                                    <!--<br>-->
-                                    <!--<span class="start-time-label pull-left">06:00 AM</span>-->
-                                    <!--<span class="end-time-label pull-right">08:00 PM</span>-->
-                                    <!--<div class="clearer"></div>-->
-                                <!--</div>&lt;!&ndash; end content &ndash;&gt;-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#flight-stops-filter" class="collapsed">Flight Stops</a>-->
-                            <!--</h4>-->
-                            <!--<div id="flight-stops-filter" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<ul class="check-square filters-option">-->
-                                        <!--<li><a href="#">1 Stop</a></li>-->
-                                        <!--<li><a href="#">2 Stops</a></li>-->
-                                        <!--<li class="active"><a href="#">3 Stops</a></li>-->
-                                        <!--<li><a href="#">MultiStops</a></li>-->
-                                    <!--</ul>-->
-                                    <!--<a class="button btn-mini">MORE</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#airlines-filter" class="collapsed">Airlines</a>-->
-                            <!--</h4>-->
-                            <!--<div id="airlines-filter" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<ul class="check-square filters-option">-->
-                                        <!--<li><a href="#">Major Airline<small>($620)</small></a></li>-->
-                                        <!--<li><a href="#">United Airlines<small>($982)</small></a></li>-->
-                                        <!--<li class="active"><a href="#">delta airlines<small>($1,127)</small></a></li>-->
-                                        <!--<li><a href="#">Alitalia<small>($2,322)</small></a></li>-->
-                                        <!--<li><a href="#">US airways<small>($3,158)</small></a></li>-->
-                                        <!--<li><a href="#">Air France<small>($4,239)</small></a></li>-->
-                                        <!--<li><a href="#">Air tahiti nui<small>($5,872)</small></a></li>-->
-                                    <!--</ul>-->
-                                    <!--<a class="button btn-mini">MORE</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#flight-type-filter" class="collapsed">Flight Type</a>-->
-                            <!--</h4>-->
-                            <!--<div id="flight-type-filter" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<ul class="check-square filters-option">-->
-                                        <!--<li><a href="#">Business</a></li>-->
-                                        <!--<li><a href="#">First class</a></li>-->
-                                        <!--<li class="active"><a href="#">Economy</a></li>-->
-                                        <!--<li><a href="#">Premium Economy</a></li>-->
-                                    <!--</ul>-->
-                                    <!--<a class="button btn-mini">MORE</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#inflight-experience-filter" class="collapsed">Inflight Experience</a>-->
-                            <!--</h4>-->
-                            <!--<div id="inflight-experience-filter" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<ul class="check-square filters-option">-->
-                                        <!--<li><a href="#">Inflight Dining</a></li>-->
-                                        <!--<li><a href="#">Music</a></li>-->
-                                        <!--<li class="active"><a href="#">Sky Shopping</a></li>-->
-                                        <!--<li><a href="#">Wi-fi</a></li>-->
-                                        <!--<li><a href="#">Seats &amp; Cabin</a></li>-->
-                                    <!--</ul>-->
-                                    <!--<a class="button btn-mini">MORE</a>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="panel style1 arrow-right">-->
-                            <!--<h4 class="panel-title">-->
-                                <!--<a data-toggle="collapse" href="#modify-search-panel" class="collapsed">Modify Search</a>-->
-                            <!--</h4>-->
-                            <!--<div id="modify-search-panel" class="panel-collapse collapse">-->
-                                <!--<div class="panel-content">-->
-                                    <!--<form method="post">-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Leaving from</label>-->
-                                            <!--<input type="text" class="input-text full-width" placeholder="" value="city, district, or specific airpot">-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Departure on</label>-->
-                                            <!--<div class="datepicker-wrap">-->
-                                                <!--<input type="text" name="date_from" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578366245210"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div class="form-group">-->
-                                            <!--<label>Arriving On</label>-->
-                                            <!--<div class="datepicker-wrap">-->
-                                                <!--<input type="text" name="date_to" class="input-text full-width hasDatepicker" placeholder="mm/dd/yy" id="dp1578366245211"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<br>-->
-                                        <!--<button class="btn-medium icon-check uppercase full-width">search again</button>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <div class="col-sm-8 col-md-9">
-                    <div class="sort-by-section clearfix box">
-                        <h4 class="sort-by-title block-sm">Sort results by:</h4>
-                        <ul class="sort-bar clearfix block-sm">
-                            <li class="sort-by-name"><a class="sort-by-container" href="#"><span>name</span></a></li>
-                            <li class="sort-by-price"><a class="sort-by-container" href="#"><span>price</span></a></li>
-                            <li class="sort-by-rating active"><a class="sort-by-container" href="#"><span>duration</span></a></li>
-                        </ul>
-
-                        <!--<ul class="swap-tiles clearfix block-sm">-->
-                            <!--<li class="swap-list active">-->
-                                <!--<a href="flight-list-view.html"><i class="soap-icon-list"></i></a>-->
-                            <!--</li>-->
-                            <!--<li class="swap-grid">-->
-                                <!--<a href="flight-grid-view.html"><i class="soap-icon-grid"></i></a>-->
-                            <!--</li>-->
-                            <!--<li class="swap-block">-->
-                                <!--<a href="flight-block-view.html"><i class="soap-icon-block"></i></a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    </div>
-                    <div class="flight-list listing-style3 flight">
-                        <article class="box" *ngFor="let appl of AirPricePointList; let i = index">
-                            <div class="details col-xs-12 col-sm-12">
-                                <div class="details-wrapper">
-                                    <div class="first-row">
-                                        <div>
-                                            <h4 class="box-title"><span style="margin-right: 10px"><img width="25" height="25" src="https://s3-us-west-2.amazonaws.com/tpconnects-property/airline/{{AirPricePointList[i].AirPricingInfo.PlatingCarrier}}.png"></span>Indianapolis to Paris<small>Oneway flight</small></h4>
-                                            <a class="button btn-mini stop">1 STOP</a>
-                                            <div class="amenities">
-                                                <i class="soap-icon-wifi circle"></i>
-                                                <i class="soap-icon-entertainment circle"></i>
-                                                <i class="soap-icon-fork circle"></i>
-                                                <i class="soap-icon-suitcase circle"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="price"><small style="margin-bottom: 10px">Total Price</small>{{(appl.TotalPrice | priceNumber) | currency:'IDR':'symbol':'3.0'}}.00</span>
-                                        </div>
-                                    </div>
-                                    <div class="second-row">
-                                        <div class="col-md-12">
-                                            <div class="action">
-                                                <button (click)="selectDeparture();" class="button btn-medium yellow full-width">SELECT DEPARTURE <span *ngIf="AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option.length > 0">({{AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option.length}} Options)</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <ng-container *ngFor="let AirSegment of AirSegmentList">
-                                        <ng-container *ngIf="AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option.length > 0; else FlightOptionNoArrayLoop">
-                                            <div class="second-row" *ngFor="let FlightOption of AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option; let i = index">
-                                                <ng-container *ngIf="FlightOption.BookingInfo.SegmentRef == AirSegment.Key">
-                                                    <div class="time">
-                                                        <div class="take-off col-sm-4">
-                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                            <div>
-                                                                <span class="skin-color">Take off</span><br>{{AirSegment.DepartureTime | date: 'EEE MMM dd, yyyy h:mm a'}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="landing col-sm-4">
-                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                            <div>
-                                                                <span class="skin-color">landing</span><br>{{AirSegment.ArrivalTime | date: 'EEE MMM dd, yyyy h:mm a'}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="total-time col-sm-4">
-                                                            <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
-                                                            <div>
-                                                                <span class="skin-color">total time</span><br>{{AirSegment.FlightTime | minuteToHour}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="action">
-                                                        <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
-                                                    </div>
-                                                </ng-container>
-                                            </div>
-                                        </ng-container>
-
-                                        <ng-template #FlightOptionNoArrayLoop>
-                                            <div class="second-row">
-                                                <ng-container *ngIf="AirPricePointList[i].AirPricingInfo.FlightOptionsList.FlightOption.Option.BookingInfo.SegmentRef == AirSegment.Key">
-                                                    <div class="time">
-                                                        <div class="take-off col-sm-4">
-                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                            <div>
-                                                                <span class="skin-color">Take off</span><br>Wed Nov 13, 2013 7:50 Am
-                                                            </div>
-                                                        </div>
-                                                        <div class="landing col-sm-4">
-                                                            <div class="icon"><i class="soap-icon-plane-right yellow-color"></i></div>
-                                                            <div>
-                                                                <span class="skin-color">landing</span><br>Wed Nov 13, 2013 9:20 am
-                                                            </div>
-                                                        </div>
-                                                        <div class="total-time col-sm-4">
-                                                            <div class="icon"><i class="soap-icon-clock yellow-color"></i></div>
-                                                            <div>
-                                                                <span class="skin-color">total time</span><br>13 Hour, 40 minutes
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="action">
-                                                        <a href="flight-detailed.html" class="button btn-small full-width">SELECT NOW</a>
-                                                    </div>
-                                                </ng-container>
-                                            </div>
-                                        </ng-template>
-                                    </ng-container>
-
+                <div class="card" style="margin-top: 30px;margin-bottom: 10px;">
+                    <h4 class="mb-4" align="center" style="margin-top: 30px;margin-bottom: 10px;">Fasilitas</h4>
+                    <ul style="list-style: none;">
+                        <li><input type="checkbox" name="">&nbsp;&nbsp;&nbsp;<i class="fa fa-suitcase"></i> Bagasi</li>
+                        <li><input type="checkbox" name="">&nbsp;&nbsp;&nbsp;<i class="fa fa-utensils"></i> Makanan</li>
+                    </ul>
+                </div>
+            </div><br>
+            <div class="col-sm-9 col-md-9">
+                <div class="card card-ticket" *ngFor="let dataflight of dataFlightSearch">
+                    <div class="card-ticket-hover">
+                        <ng-container *ngIf="dataflight.transData.length > 1; else noRepeat">
+                            <div class="row mobile-font no-gutters" *ngFor="let transData of dataflight.transData">
+                                <div class="col-sm-4 col-12" style="text-align: center;">
+                                    <img src="https://s1.travix.com/global/assets/airlineLogos/{{transData.platingCarrier}}.png" class="img-fluid img-circle">
+                                    <label class="title-maskapai">{{transData.platingCarrierName}}</label>
+                                </div>
+                                <div class="col-sm-4 col-6 col-xs">
+                                    <b class="title-ticket">{{transData.departureTime | date: 'EEE MMM dd, yyyy h:mm a'}}</b>
+                                    <label class="destination-title" style="line-height: 20px">{{transData.origin_city_name}}</label><br>
+                                </div>
+                                <div class="col-sm-4 col-6 col-xs">
+                                    <b class="title-ticket">{{transData.arrivalTime | date: 'EEE MMM dd, yyyy h:mm a'}}</b>
+                                    <label class="destination-title" style="line-height: 20px">{{transData.destination_city_name}}</label>
                                 </div>
                             </div>
-                        </article>
+                        </ng-container>
+
+                        <ng-template #noRepeat>
+                            <div class="row mobile-font no-gutters" *ngIf="dataflight.transData[0] as transData">
+                                <div class="col-sm-4 col-12" style="text-align: center;">
+                                    <img src="https://s1.travix.com/global/assets/airlineLogos/{{transData.platingCarrier}}.png" class="img-fluid img-circle">
+                                    <label class="title-maskapai">{{transData.platingCarrierName}}</label>
+                                </div>
+                                <div class="col-sm-4 col-6 col-xs">
+                                    <b class="title-ticket">{{transData.departureTime | date: 'EEE MMM dd, yyyy h:mm a'}}</b>
+                                    <label class="destination-title" style="line-height: 20px">{{transData.origin_city_name}}</label><br>
+                                </div>
+                                <div class="col-sm-4 col-6 col-xs">
+                                    <b class="title-ticket">{{transData.arrivalTime | date: 'EEE MMM dd, yyyy h:mm a'}}</b>
+                                    <label class="destination-title" style="line-height: 20px">{{transData.destination_city_name}}</label>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <div class="collapse" id="collapseExample-0">
+                            <div class="card card-body" style="margin: 10px;border: 0px;">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab-0" role="tablist">
+                                        <a class="nav-item nav-link active label-detail-ticket" id="nav-home-tab" data-toggle="tab" href="#nav-home-0" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fa fa-flight"></i>Detail Penerbangan</a>
+                                        <a class="nav-item nav-link label-detail-ticket" id="nav-profile-tab" data-toggle="tab" href="#nav-profile-0" role="tab" aria-controls="nav-profile" aria-selected="false">Detail Harga</a>
+
+                                    </div>
+                                </nav>
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home-0" role="tabpanel" aria-labelledby="nav-home-tab">
+                                        <div class="content-detail-ticket">
+                                            Detail Penerbangan
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile-0" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                        <div class="content-detail-ticket">
+                                            Detail Harga
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!--<a class="button uppercase full-width btn-large">load more listings</a>-->
+                    <div class="row">
+                        <div class="col-sm-10 col-12 col-xs">
+                            <b class="price-ticket">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</b>
+                        </div>
+                        <div class="col-sm-2 col-12 col-xs">
+                            <a href="../detail-ticket.php"><button class="btn btn-warning  button-search-flight-ticket"><i class="fa fa-search"></i> Pesan</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
