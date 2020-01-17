@@ -64,7 +64,7 @@
 
                                                         <div class="flight-section-path-line-middle">
                                                             <i class="fa fa-plane flight-section-path-icon"></i>
-                                                            <div class="flight-section-path-line-dot"></div>
+                                                            <div class="flight-section-path-line-dot" style="visibility: hidden"></div>
                                                             <div class="flight-section-path-line-title">Direct</div>
                                                         </div>
 
@@ -100,7 +100,7 @@
                                             <div class="col-md-6 text-center">
                                                 <div class="flight-section-path">
                                                     <div class="flight-section-fly-time">
-                                                        <p>{{(dataflight.transData[0].flightTime + dataflight.transData[1].flightTime) | minuteToHour}}</p>
+                                                        <p>{{(dataflight.transData[0].flightTime + dataflight.transData[1].flightTime) | minuteToHour}} ({{(dataflight.stop) - 1}} Transit)</p>
                                                     </div>
                                                     <div class="flight-section-path-line"></div>
                                                     <div>
