@@ -99,12 +99,28 @@ export class LandingpageComponent implements OnInit, OnDestroy {
         });
     }
 
-    flightDetailsAllCollapsed(){
-        this.flightDetailsCollapsed = [false];
+    flightDetailsAllCollapsed(value){
+        if (!this.flightDetailsCollapsed[value]){
+            this.flightDetailsCollapsed = [false];
+            this.priceDetailsCollapsed = [false];
+            this.flightDetailsCollapsed[value] = false;
+        } else {
+            this.flightDetailsCollapsed = [false];
+            this.priceDetailsCollapsed = [false];
+            this.flightDetailsCollapsed[value] = true;
+        }
     }
 
-    priceDetailsAllCollapsed(){
-        this.priceDetailsCollapsed = [false];
+    priceDetailsAllCollapsed(value){
+        if (!this.priceDetailsCollapsed[value]){
+            this.priceDetailsCollapsed = [false];
+            this.flightDetailsCollapsed = [false];
+            this.priceDetailsCollapsed[value] = false;
+        } else {
+            this.priceDetailsCollapsed = [false];
+            this.flightDetailsCollapsed = [false];
+            this.priceDetailsCollapsed[value] = true;
+        }
     }
 
     selectDeparture(){
