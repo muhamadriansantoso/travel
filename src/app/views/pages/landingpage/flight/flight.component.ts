@@ -13,12 +13,18 @@ export class FlightComponent implements OnInit {
     adultPassenger: number;
     childPassenger: number;
     infantPassenger: number;
+    roundType: string;
     public passengersCollapsed: boolean = false;
 
     ngOnInit() {
         this.adultPassenger = 1;
         this.childPassenger = 0;
         this.infantPassenger = 0;
+        this.roundType = 'oneway';
+    }
+
+    typeRound(value){
+        this.roundType = value;
     }
 
     adultPassengerMinus() {

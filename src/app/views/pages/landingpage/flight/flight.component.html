@@ -11,13 +11,13 @@
 
                 <div class="box-title col-sm-7 col-12">
                     <ul class="nav nav-tabs tab_trip">
-                        <li class="">
-                            <a class="btn active size_category_flight">
+                        <li (click)="typeRound('oneway')">
+                            <a class="btn size_category_flight" [ngClass]="{'active': roundType=='oneway'}">
                                 <i class="fa fa-arrow-right"></i> One Way
                             </a>
                         </li>
-                        <li class="">
-                            <a class="btn size_category_flight">
+                        <li class="" (click)="typeRound('roundtrip')">
+                            <a class="btn size_category_flight" [ngClass]="{'active': roundType=='roundtrip'}">
                                 <i class="fa fa-arrows-alt-h"></i> Round Trip
                             </a>
                         </li>
@@ -29,9 +29,7 @@
                     <div class="search-destination-separator"></div>
                 </div>
                 <div style="clear: both;"></div>
-                <!-- Tab Content Booking Type Perjalanan Pesawat-->
 
-                <!--One Way Ticket-->
                 <div class="tab-content">
                     <div class="tab-pane fade show active">
                         <div class="container">
@@ -45,7 +43,7 @@
                                             </label>
                                             <input name="fromcity" type="hidden">
                                             <input type="text" class="form-control origin-typeahead" name="origin"
-                                                   type="text" id="from" placeholder="Dari">
+                                                   type="text" id="from" placeholder="Dari" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-6 pull-right">
@@ -56,7 +54,7 @@
                                             </label>
                                             <input type="hidden" name="fromcity">
                                             <input type="text" id="where" class="form-control origin-typeahead"
-                                                   name="origin" placeholder="Tujuan">
+                                                   name="origin" placeholder="Tujuan" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-12">
@@ -171,8 +169,16 @@
                                                 <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
                                                 Berangkat
                                             </label>
-                                            <input type="text" placeholder="Berangkat" class="form-control checkin_date"
-                                                   id="checkin_date" name="" style="background: #fff;">
+                                            <input type="text" placeholder="Berangkat" class="form-control checkin_date" name="" style="background: #fff;" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-6" *ngIf="roundType == 'roundtrip'">
+                                        <div class="form-group">
+                                            <label>
+                                                <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
+                                                Pulang
+                                            </label>
+                                            <input type="text" placeholder="Pulang" class="form-control checkin_date" name="" style="background: #fff;" autocomplete="off">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
@@ -188,16 +194,6 @@
                             </form>
                         </div>
                     </div>
-
-                    <!--End One Way Ticket-->
-
-                    <!--Round Trip Ticket -->
-                    <div class="tab-pane fade">
-                        <div class="container">
-                            //
-                        </div>
-                    </div>
-                    <!--End Roundtrip Ticket -->
                 </div>
                 <!--End Tutup Tab Content Booking Type Perjalanan Pesawat -->
             </div>
