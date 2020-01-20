@@ -1,3 +1,197 @@
+<section>
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-md-11 tab-wrap col-centered content-booking-ticket">
+                <div class="row">
+                    <div class="col-sm-3 nav-link-wrap">
+                        <div class="nav nav-pills justify-content-center menu-travel">
+                            <a class="nav-link nav-link-categori">
+                                <img src="./assets/images/ICONS/icon_pesawat.png" style="width: 30px;height: 30px;"> Pesawat
+                            </a>
+
+                            <a class="nav-link nav-link-categori">
+                                <img src="./assets/images/ICONS/icon_hotel.png" style="width: 30px;height: 30px;"> Hotel
+                            </a>
+
+                            <!--<a class="nav-link nav-link-categori">-->
+                                <!--<img src="./assets/images/ICONS/icon_kereta.png" style="width: 30px;height: 30px;"> Kereta-->
+                            <!--</a>-->
+                        </div>
+                    </div>
+
+                    <div class="col-sm-9">
+                        <div class="card pull-right menu-travel">
+                            <div class="tab-content">
+                                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card pull-right" style="border:0;">
+                                                <div class="row">
+                                                    <div class="box-title col-sm-5 col-12">
+                                                        <h2>
+                                                            <img src="./assets/images/ICONS/icon_pesawat.png" class="icon_medium"> Booking Tiket Pesawat
+                                                        </h2>
+                                                        <p>Temukan penerbangan favorit dengan harga yang bersaing</p>
+                                                    </div>
+
+                                                    <div class="box-title col-sm-7 col-12">
+                                                        <ul class="nav nav-tabs tab_trip">
+                                                            <li class="">
+                                                                <a class="btn active size_category_flight">
+                                                                    <i class="fa fa-arrow-right"></i> One Way
+                                                                </a>
+                                                            </li>
+                                                            <li class="">
+                                                                <a class="btn size_category_flight">
+                                                                    <i class="fa fa-arrows-alt-h"></i> Round Trip
+                                                                </a>
+                                                            </li>
+                                                            <!--<li>-->
+                                                                <!--<a data-toggle="tab" class="btn size_category_flight">-->
+                                                                    <!--<i class="fa fa-angle-double-right"></i> Multiple Trip-->
+                                                                <!--</a>-->
+                                                            <!--</li>-->
+                                                        </ul>
+                                                    </div>
+
+                                                    <div style="clear: both;"></div>
+                                                    <div class="col-sm-12">
+                                                        <div class="search-destination-separator"></div>
+                                                    </div>
+                                                    <div style="clear: both;"></div>
+                                                    <!-- Tab Content Booking Type Perjalanan Pesawat-->
+
+                                                    <!--One Way Ticket-->
+                                                    <div class="tab-content">
+                                                        <div id="one-way" class="tab-pane fade show active">
+                                                            <div class="container">
+                                                                //
+                                                            </div>
+                                                        </div>
+
+                                                        <!--End One Way Ticket-->
+
+                                                        <!--Round Trip Ticket -->
+                                                        <div id="round-trip" class="tab-pane fade">
+                                                            <div class="container">
+                                                                //
+                                                            </div>
+                                                        </div>
+                                                        <!--End Roundtrip Ticket -->
+                                                        <!--Multipletrip Ticket-->
+                                                        <div id="multiple-trip" class="tab-pane fade">
+                                                            <div class="container">
+                                                                //
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Multipletrip -->
+                                                    </div>
+                                                    <!--End Tutup Tab Content Booking Type Perjalanan Pesawat -->
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-2" role="tabpanel">
+                                    //
+                                </div>
+
+
+                                <div class="tab-pane fade" id="v-pills-3" role="tabpanel">
+                                    <form action="#" class="search-destination" method="post">
+                                        <div class="row">
+
+                                            <div class="box-title col-sm-6 col-6">
+                                                <h2><img src="images/ICONS/icon_kereta.png" class="icon_medium"> Booking
+                                                    Tiket Kereta</h2>
+                                                <p>Beli kereta favorit dengan harga yang bersaing hanya di Jameka</p>
+                                            </div>
+
+                                            <div class="box-title col-sm-6 col-6">
+
+                                            </div>
+
+                                            <div style="clear: both;"></div>
+                                            <div class="col-sm-12">
+                                                <div class="search-destination-separator"></div>
+                                            </div>
+                                            <div style="clear: both;"></div>
+
+                                            <div class="form-group col-sm-6">
+                                                <label><img src="images/ICONS/icon_kereta.png" class="icon_small">
+                                                    Stasiun Asal</label>
+                                                <select name="" class="form-control">
+                                                    <option selected="selected" value="">Stasiun Asal</option>
+                                                    <?php include('tambahan/data-stasiun.php'); ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-6">
+                                                <label><img src="images/ICONS/icon_destination.png" class="icon_small">
+                                                    Stasiun Tujuan</label>
+                                                <select name="" class="form-control">
+                                                    <option selected="selected" value="">Stasiun Tujuan</option>
+                                                    <?php include('tambahan/data-stasiun.php'); ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label><img src="images/ICONS/icon_calendar.png" class="icon_small">
+                                                    Berangkat</label>
+                                                <input type="text" class="form-control checkin_date" id="checkin_date"
+                                                       placeholder="Tanggal Berangkat">
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <label class="customcheck"><input type="checkbox" name=""
+                                                                                  id="check_pulang_kereta"
+                                                                                  onclick="check_pulang_kereta_function()"
+                                                                                  checked="checked">
+                                                    <span class="checkmark"></span>
+                                                    Pulang</label>
+                                                <input type="text" class="form-control checkin_date" id="pulang_kereta"
+                                                       placeholder="Tanggal Pulang" name="">
+                                            </div>
+                                            <div class="form-group col-sm-3 col-6">
+                                                <label><img src="images/ICONS/icon_adult.png" class="icon_small"> Dewasa</label>
+                                                <select name="Penumpang" class="form-control">
+                                                    <option selected="selected" value="">Dewasa</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-sm-3 col-6">
+                                                <label><img src="images/ICONS/icon_child.png" class="icon_small"> Infant</label>
+                                                <select name="Penumpang" class="form-control">
+                                                    <option selected="selected" value="">Infant</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <button type="submit" name="cari-kereta"
+                                                            class="btn button-search-train col-sm-4"><img
+                                                            src="images/ICONS/icon_kereta.png" class="icon_medium"> Cari
+                                                        Kereta
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="ftco-section" style="padding: 0;">
     <div class="container">
         <h4 class="col-sm-3  menu-filter-pc" align="center">Filter</h4>
@@ -12,14 +206,15 @@
                         <li><input type="checkbox"> Lion Air</li>
                         <li><input type="checkbox"> AirAsia</li>
                     </ul>
-                </div><br>
+                </div>
+                <br>
 
                 <div class="card">
                     <h4 class="mb-4" align="center" style="margin-top: 30px;margin-bottom: 10px;">Transit</h4>
                     <ul style="list-style:none;">
-                        <li><input type="checkbox" name="num_stop">  Langsung</li>
-                        <li><input type="checkbox" name="num_stop">  1 Transit</li>
-                        <li><input type="checkbox" name="num_stop">  2+ Transit</li>
+                        <li><input type="checkbox" name="num_stop"> Langsung</li>
+                        <li><input type="checkbox" name="num_stop"> 1 Transit</li>
+                        <li><input type="checkbox" name="num_stop"> 2+ Transit</li>
                     </ul>
                 </div>
                 <div class="card" style="margin-top: 30px;margin-bottom: 10px;">
@@ -29,24 +224,31 @@
                         <li><input type="checkbox" name="">&nbsp;&nbsp;&nbsp;<i class="fa fa-utensils"></i> Makanan</li>
                     </ul>
                 </div>
-            </div><br>
+            </div>
+            <br>
             <div class="col-sm-9 col-md-9">
-                <div class="card card-ticket" *ngFor="let dataflight of dataFlightSearch; let i = index" >
-                    <div class="row" (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]" [attr.aria-expanded]="!flightDetailsCollapsed">
+                <div class="card card-ticket" *ngFor="let dataflight of dataFlightSearch; let i = index">
+                    <div class="row"
+                         (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                         [attr.aria-expanded]="!flightDetailsCollapsed">
                         <div class="col-md-10 text-center">
                             <div class="row">
                                 <div class="col-md-2 mb-3">
                                     <div class="flight-section-airline-logo-wrap">
-                                        <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" class="img-fluid img-circle airline-logo">
+                                        <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png"
+                                             class="img-fluid img-circle airline-logo">
                                     </div>
                                 </div>
                                 <ng-container *ngIf="dataflight.stop == 1">
                                     <div class="col-md-10">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <p class="title-ticket">{{dataflight.transData[0].departureTime | date: 'hh:mm'}}</p>
-                                                <p class="destination-title">{{dataflight.transData[0].origin_city_name}}</p>
-                                                <p class="destination-date">{{dataflight.transData[0].departureTime | date: 'MMM dd, yyyy'}}</p>
+                                                <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
+                                                    'hh:mm'}}</p>
+                                                <p class="destination-title">
+                                                    {{dataflight.transData[0].origin_city_name}}</p>
+                                                <p class="destination-date">{{dataflight.transData[0].departureTime |
+                                                    date: 'MMM dd, yyyy'}}</p>
                                             </div>
 
                                             <div class="col-md-6 text-center">
@@ -59,12 +261,15 @@
                                                         <div class="flight-section-path-line-start">
                                                             <i class="fa fa-plane flight-section-path-icon"></i>
                                                             <div class="flight-section-path-line-dot"></div>
-                                                            <div class="flight-section-path-line-title">{{dataflight.transData[0].origin}}</div>
+                                                            <div class="flight-section-path-line-title">
+                                                                {{dataflight.transData[0].origin}}
+                                                            </div>
                                                         </div>
 
                                                         <div class="flight-section-path-line-middle">
                                                             <i class="fa fa-plane flight-section-path-icon"></i>
-                                                            <div class="flight-section-path-line-dot" style="visibility: hidden"></div>
+                                                            <div class="flight-section-path-line-dot"
+                                                                 style="visibility: hidden"></div>
                                                             <div class="flight-section-path-line-title">Direct</div>
                                                         </div>
 
@@ -72,7 +277,9 @@
                                                             <div class="flight-section-path-line-end">
                                                                 <i class="fa fa-plane flight-section-path-icon"></i>
                                                                 <div class="flight-section-path-line-dot"></div>
-                                                                <div class="flight-section-path-line-title">{{dataflight.transData[0].destination}}</div>
+                                                                <div class="flight-section-path-line-title">
+                                                                    {{dataflight.transData[0].destination}}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -80,9 +287,12 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date: 'hh:mm'}}</p>
-                                                <p class="destination-title">{{dataflight.transData[0].destination_city_name}}</p>
-                                                <p class="destination-date">{{dataflight.transData[0].arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                                                <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
+                                                    'hh:mm'}}</p>
+                                                <p class="destination-title">
+                                                    {{dataflight.transData[0].destination_city_name}}</p>
+                                                <p class="destination-date">{{dataflight.transData[0].arrivalTime |
+                                                    date: 'MMM dd, yyyy'}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -92,35 +302,46 @@
                                     <div class="col-md-10">
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <p class="title-ticket">{{dataflight.transData[0].departureTime | date: 'hh:mm'}}</p>
-                                                <p class="destination-title">{{dataflight.transData[0].origin_city_name}}</p>
-                                                <p class="destination-date">{{dataflight.transData[0].departureTime | date: 'MMM dd, yyyy'}}</p>
+                                                <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
+                                                    'hh:mm'}}</p>
+                                                <p class="destination-title">
+                                                    {{dataflight.transData[0].origin_city_name}}</p>
+                                                <p class="destination-date">{{dataflight.transData[0].departureTime |
+                                                    date: 'MMM dd, yyyy'}}</p>
                                             </div>
 
                                             <div class="col-md-6 text-center">
                                                 <div class="flight-section-path">
                                                     <div class="flight-section-fly-time">
-                                                        <p>{{(dataflight.transData[0].flightTime + dataflight.transData[1].flightTime) | minuteToHour}}, {{(dataflight.stop) - 1}} Transit</p>
+                                                        <p>{{(dataflight.transData[0].flightTime +
+                                                            dataflight.transData[1].flightTime) | minuteToHour}},
+                                                            {{(dataflight.stop) - 1}} Transit</p>
                                                     </div>
                                                     <div class="flight-section-path-line"></div>
                                                     <div>
                                                         <div class="flight-section-path-line-start">
                                                             <i class="fa fa-plane flight-section-path-icon"></i>
                                                             <div class="flight-section-path-line-dot"></div>
-                                                            <div class="flight-section-path-line-title">{{dataflight.transData[0].origin}}</div>
+                                                            <div class="flight-section-path-line-title">
+                                                                {{dataflight.transData[0].origin}}
+                                                            </div>
                                                         </div>
 
                                                         <div class="flight-section-path-line-middle">
                                                             <i class="fa fa-plane flight-section-path-icon"></i>
                                                             <div class="flight-section-path-line-dot"></div>
-                                                            <div class="flight-section-path-line-title">{{dataflight.transData[0].destination}}</div>
+                                                            <div class="flight-section-path-line-title">
+                                                                {{dataflight.transData[0].destination}}
+                                                            </div>
                                                         </div>
 
                                                         <div>
                                                             <div class="flight-section-path-line-end">
                                                                 <i class="fa fa-plane flight-section-path-icon"></i>
                                                                 <div class="flight-section-path-line-dot"></div>
-                                                                <div class="flight-section-path-line-title">{{dataflight.transData[1].destination}}</div>
+                                                                <div class="flight-section-path-line-title">
+                                                                    {{dataflight.transData[1].destination}}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -128,9 +349,12 @@
                                             </div>
 
                                             <div class="col-md-3">
-                                                <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date: 'hh:mm'}}</p>
-                                                <p class="destination-title">{{dataflight.transData[1].destination_city_name}}</p>
-                                                <p class="destination-date">{{dataflight.transData[1].arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                                                <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
+                                                    'hh:mm'}}</p>
+                                                <p class="destination-title">
+                                                    {{dataflight.transData[1].destination_city_name}}</p>
+                                                <p class="destination-date">{{dataflight.transData[1].arrivalTime |
+                                                    date: 'MMM dd, yyyy'}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -147,27 +371,34 @@
                             </div>
                         </div>
                         <div class="col-md-2 text-center">
-                            <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</strong></p>
+                            <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
+                                currency:'IDR ':'symbol':'3.0'}}</strong></p>
 
                             <button class="btn btn-warning  button-search-flight-ticket">Book flight</button>
                         </div>
                     </div>
 
                     <div class="row mt-3" style="text-align: left">
-                        <div class="col-md-2 col-sm-2 col-xs-2" (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]" [attr.aria-expanded]="!flightDetailsCollapsed">
+                        <div class="col-md-2 col-sm-2 col-xs-2"
+                             (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                             [attr.aria-expanded]="!flightDetailsCollapsed">
                             Flight Details
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2" (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]" [attr.aria-expanded]="!priceDetailsCollapsed">
+                        <div class="col-md-2 col-sm-2 col-xs-2"
+                             (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
+                             [attr.aria-expanded]="!priceDetailsCollapsed">
                             Price Details
                         </div>
                     </div>
 
                     <div class="card mt-2" [ngbCollapse]="!flightDetailsCollapsed[i]">
                         <div class="col-md-12">
-                            <div class="row mb-3" style="margin-top: 25px" *ngFor="let dataflightTrans of dataflight.transData">
+                            <div class="row mb-3" style="margin-top: 25px"
+                                 *ngFor="let dataflightTrans of dataflight.transData">
                                 <div class="col-md-2 mb-3">
                                     <div class="flight-section-airline-logo-wrap">
-                                        <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png" class="img-fluid img-circle airline-logo">
+                                        <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png"
+                                             class="img-fluid img-circle airline-logo">
                                     </div>
                                 </div>
                                 <div class="col-md-10">
@@ -176,16 +407,20 @@
                                             <ul class="flight-details-schedule-list">
                                                 <li>
                                                     <i class="fa fa-plane flight-details-schedule-icon"></i>
-                                                    <p class="flight-details-schedule-date">{{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                                                    <p class="flight-details-schedule-date">
+                                                        {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
                                                     <div class="flight-details-schedule-time">
-                                                        {{dataflightTrans.departureTime | date: 'hh:mm'}} - {{dataflightTrans.arrivalTime | date: 'hh:mm'}} ({{dataflightTrans.flightTime | minuteToHour}})
+                                                        {{dataflightTrans.departureTime | date: 'hh:mm'}} -
+                                                        {{dataflightTrans.arrivalTime | date: 'hh:mm'}}
+                                                        ({{dataflightTrans.flightTime | minuteToHour}})
                                                     </div>
                                                     <div class="flight-details-schedule-destination">
                                                         <div style="float: left; max-width: 40%">
                                                             <p style="font-weight: bold; margin-bottom: 0">
                                                                 {{dataflightTrans.origin}}
                                                             </p>
-                                                            <p class="flight-details-schedule-destination-city">{{dataflightTrans.origin_city_name}}</p>
+                                                            <p class="flight-details-schedule-destination-city">
+                                                                {{dataflightTrans.origin_city_name}}</p>
                                                         </div>
                                                         <div style="float: left; margin: 0 10px">
                                                             <span>→</span>
@@ -194,7 +429,8 @@
                                                             <p style="font-weight: bold; margin-bottom: 0">
                                                                 {{dataflightTrans.destination}}
                                                             </p>
-                                                            <p class="flight-details-schedule-destination-city">{{dataflightTrans.destination_city_name}}</p>
+                                                            <p class="flight-details-schedule-destination-city">
+                                                                {{dataflightTrans.destination_city_name}}</p>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -237,7 +473,8 @@
                                             <div class="col-md-7">
                                                 <div>
                                                     <div *ngFor="let dataflightTrans of dataflight.transData">
-                                                        Base price {{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                                                        Base price {{dataflightTrans.platingCarrierName}}
+                                                        {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
                                                         <span style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                                                     </div>
 
