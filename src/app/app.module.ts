@@ -30,7 +30,7 @@ import {PriceNumber} from './views/pages/pricenumber.pipe';
         MatDatepickerModule,
         MatNativeDateModule,
         BrowserAnimationsModule,
-        NgxSoapModule
+        NgxSoapModule,
     ],
     providers: [
         {

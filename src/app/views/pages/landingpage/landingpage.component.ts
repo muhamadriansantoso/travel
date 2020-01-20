@@ -44,6 +44,8 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     client: Client;
 
     public submitClicked = false;
+    public flightDetailsCollapsed: boolean[] = [];
+    public priceDetailsCollapsed: boolean[] = [];
     private unsubscribe: Subject<any>;
     private subscriptions: Subscription[] = [];
 
@@ -95,6 +97,14 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             outboundpartialdate: ['', Validators.compose([Validators.required])],
             inboundpartialdate: [''],
         });
+    }
+
+    flightDetailsAllCollapsed(){
+        this.flightDetailsCollapsed = [false];
+    }
+
+    priceDetailsAllCollapsed(){
+        this.priceDetailsCollapsed = [false];
     }
 
     selectDeparture(){

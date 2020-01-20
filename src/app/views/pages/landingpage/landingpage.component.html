@@ -31,7 +31,7 @@
                 </div>
             </div><br>
             <div class="col-sm-9 col-md-9">
-                <div class="card card-ticket" *ngFor="let dataflight of dataFlightSearch">
+                <div class="card card-ticket" *ngFor="let dataflight of dataFlightSearch; let i = index">
                     <div class="row">
                         <div class="col-md-10 text-center">
                             <div class="row">
@@ -154,16 +154,24 @@
                     </div>
 
                     <div class="row mt-3" style="text-align: left">
-                        <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="col-md-2 col-sm-2 col-xs-2" (click)="priceDetailsAllCollapsed(); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]" [attr.aria-expanded]="!flightDetailsCollapsed">
                             Flight Details
                         </div>
-                        <div class="col-md-2 col-sm-2 col-xs-2">
+                        <div class="col-md-2 col-sm-2 col-xs-2" (click)="flightDetailsAllCollapsed(); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]" [attr.aria-expanded]="!priceDetailsCollapsed">
                             Price Details
                         </div>
                     </div>
 
-                    <div class="col-md-12" style="margin-top: 25px">
-                        <div class="row mb-3" *ngFor="let dataflightTrans of dataflight.transData">
+                    <div [ngbCollapse]="!priceDetailsCollapsed[i]">
+                        <div class="card">
+                            <div class="card-body">
+                                You can collapse this card by clicking Toggle
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row mb-3" style="margin-top: 25px" *ngFor="let dataflightTrans of dataflight.transData" [ngbCollapse]="!flightDetailsCollapsed[i]">
                             <div class="col-md-2 mb-3">
                                 <div class="flight-section-airline-logo-wrap">
                                     <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png" class="img-fluid img-circle airline-logo">
