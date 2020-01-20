@@ -163,7 +163,7 @@
                     </div>
 
                     <div class="col-md-12" style="margin-top: 25px">
-                        <div class="row" *ngFor="let dataflightTrans of dataflight.transData">
+                        <div class="row mb-3" *ngFor="let dataflightTrans of dataflight.transData">
                             <div class="col-md-2 mb-3">
                                 <div class="flight-section-airline-logo-wrap">
                                     <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png" class="img-fluid img-circle airline-logo">
@@ -175,7 +175,7 @@
                                         <ul class="flight-details-schedule-list">
                                             <li>
                                                 <i class="fa fa-plane flight-details-schedule-icon"></i>
-                                                <p class="flight-details-schedule-date">Sat, Feb 01</p>
+                                                <p class="flight-details-schedule-date">{{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
                                                 <div class="flight-details-schedule-time">
                                                     {{dataflightTrans.departureTime | date: 'hh:mm'}} - {{dataflightTrans.arrivalTime | date: 'hh:mm'}} ({{dataflightTrans.flightTime | minuteToHour}})
                                                 </div>
