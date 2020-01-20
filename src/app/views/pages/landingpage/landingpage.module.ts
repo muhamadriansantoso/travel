@@ -8,6 +8,7 @@ import { FlightAndHotelComponent } from './flight-and-hotel/flight-and-hotel.com
 import {PriceNumber} from '../pricenumber.pipe';
 import {MinuteToHour} from '../minutetohour.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule} from '@angular/forms';
 
 const routes: Routes = [
     {
@@ -41,11 +42,12 @@ const routes: Routes = [
         HotelsComponent,
         FlightAndHotelComponent,
         PriceNumber,
-        MinuteToHour
+        MinuteToHour,
     ],
     imports: [
         CommonModule,
         NgbModule,
+        FormsModule,
         RouterModule.forChild(routes),
     ]
 })

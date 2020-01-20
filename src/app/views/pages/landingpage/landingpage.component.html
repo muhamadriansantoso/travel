@@ -1,4 +1,4 @@
-<section>
+<section style="position: absolute; top: 20%; left: 20%;">
     <div class="container">
         <div class="row no-gutters">
             <div class="col-md-11 tab-wrap col-centered content-booking-ticket">
@@ -24,96 +24,6 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active">
                                     <router-outlet></router-outlet>
-                                </div>
-
-                                <div class="tab-pane fade" id="v-pills-2" role="tabpanel">
-                                    //
-                                </div>
-
-
-                                <div class="tab-pane fade" id="v-pills-3" role="tabpanel">
-                                    <form action="#" class="search-destination" method="post">
-                                        <div class="row">
-
-                                            <div class="box-title col-sm-6 col-6">
-                                                <h2><img src="images/ICONS/icon_kereta.png" class="icon_medium"> Booking
-                                                    Tiket Kereta</h2>
-                                                <p>Beli kereta favorit dengan harga yang bersaing hanya di Jameka</p>
-                                            </div>
-
-                                            <div class="box-title col-sm-6 col-6">
-
-                                            </div>
-
-                                            <div style="clear: both;"></div>
-                                            <div class="col-sm-12">
-                                                <div class="search-destination-separator"></div>
-                                            </div>
-                                            <div style="clear: both;"></div>
-
-                                            <div class="form-group col-sm-6">
-                                                <label><img src="images/ICONS/icon_kereta.png" class="icon_small">
-                                                    Stasiun Asal</label>
-                                                <select name="" class="form-control">
-                                                    <option selected="selected" value="">Stasiun Asal</option>
-                                                    <?php include('tambahan/data-stasiun.php'); ?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-sm-6">
-                                                <label><img src="images/ICONS/icon_destination.png" class="icon_small">
-                                                    Stasiun Tujuan</label>
-                                                <select name="" class="form-control">
-                                                    <option selected="selected" value="">Stasiun Tujuan</option>
-                                                    <?php include('tambahan/data-stasiun.php'); ?>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <label><img src="images/ICONS/icon_calendar.png" class="icon_small">
-                                                    Berangkat</label>
-                                                <input type="text" class="form-control checkin_date" id="checkin_date"
-                                                       placeholder="Tanggal Berangkat">
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <label class="customcheck"><input type="checkbox" name=""
-                                                                                  id="check_pulang_kereta"
-                                                                                  onclick="check_pulang_kereta_function()"
-                                                                                  checked="checked">
-                                                    <span class="checkmark"></span>
-                                                    Pulang</label>
-                                                <input type="text" class="form-control checkin_date" id="pulang_kereta"
-                                                       placeholder="Tanggal Pulang" name="">
-                                            </div>
-                                            <div class="form-group col-sm-3 col-6">
-                                                <label><img src="images/ICONS/icon_adult.png" class="icon_small"> Dewasa</label>
-                                                <select name="Penumpang" class="form-control">
-                                                    <option selected="selected" value="">Dewasa</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-sm-3 col-6">
-                                                <label><img src="images/ICONS/icon_child.png" class="icon_small"> Infant</label>
-                                                <select name="Penumpang" class="form-control">
-                                                    <option selected="selected" value="">Infant</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="form-group">
-                                                    <button type="submit" name="cari-kereta"
-                                                            class="btn button-search-train col-sm-4"><img
-                                                            src="images/ICONS/icon_kereta.png" class="icon_medium"> Cari
-                                                        Kereta
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

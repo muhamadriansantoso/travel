@@ -40,74 +40,98 @@
                                     <div class="col-sm-6 col-6">
                                         <div class="form-group">
                                             <label class="mobile-font">
-                                                <img src="./assets/images/ICONS/icon_departure.png" class="icon_small"> Dari
+                                                <img src="./assets/images/ICONS/icon_departure.png" class="icon_small">
+                                                Dari
                                             </label>
                                             <input name="fromcity" type="hidden">
-                                            <input type="text" class="form-control origin-typeahead" name="origin" type="text" id="from" placeholder="Dari">
+                                            <input type="text" class="form-control origin-typeahead" name="origin"
+                                                   type="text" id="from" placeholder="Dari">
                                         </div>
                                     </div>
                                     <div class="col-sm-6 col-6 pull-right">
                                         <div class="form-group">
                                             <label>
-                                                <img src="./assets/images/ICONS/icon_arrival.png" class="icon_small"> Tujuan
+                                                <img src="./assets/images/ICONS/icon_arrival.png" class="icon_small">
+                                                Tujuan
                                             </label>
                                             <input type="hidden" name="fromcity">
-                                            <input type="text" id="where" class="form-control origin-typeahead" name="origin" placeholder="Tujuan">
+                                            <input type="text" id="where" class="form-control origin-typeahead"
+                                                   name="origin" placeholder="Tujuan">
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-12">
+                                    <div class="col-sm-6 col-12">
                                         <div class="form-group">
                                             <label for="cabin" class="control-label">
                                                 <img src="./assets/images/ICONS/icon_case.png" class="icon_small"> Kelas
                                             </label>
                                             <select class="form-control" id="cabin" name="cabin">
                                                 <option value="Economy">Ekonomi</option>
+                                                <option value="Premoum_Economy">Premium Ekonomi</option>
                                                 <option value="Business">Bisnis</option>
                                                 <option value="First Class">First Class</option>
                                             </select>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-4 align-items-end col-12">
+                                    <div class="col-sm-6 align-items-end col-12">
                                         <div class="form-group">
                                             <label for="#">
-                                                <img src="./assets/images/ICONS/icon_passengers.png" class="icon_small"> Penumpang
+                                                <img src="./assets/images/ICONS/icon_passengers.png" class="icon_small">
+                                                Penumpang
                                             </label>
                                             <div class="form-field">
-                                                <input type="text" name="passengers_and_seat_class" class="form-control" value="1 Adult, 0 Child, 0 Infant, Economy">
+                                                <input (click)="passengersCollapsed = !passengersCollapsed"
+                                                       [attr.aria-expanded]="!passengersCollapsed" type="text"
+                                                       name="passengers_and_seat_class" class="form-control" autocomplete="off"
+                                                       value="{{adultPassenger}} Adult, {{childPassenger}} Child, {{infantPassenger}} Infant">
                                             </div>
-                                            <div class="collapse collapse-passenger-and-seat-class collapse-pasenggers-position">
+                                            <div class="collapse collapse-passenger-and-seat-class collapse-pasenggers-position show"
+                                                 [ngbCollapse]="!passengersCollapsed" style="z-index: 99">
                                                 <div class="card card-body">
                                                     <div class="row mb-3">
                                                         <div class="col-md-4">
-                                                            <label for="adult" class="control-label" style="display:block;margin-bottom:0px;line-height:1">Adults</label>
+                                                            <label for="adult" class="control-label"
+                                                                   style="display:block;margin-bottom:0px;line-height:1">Adults</label>
                                                             <small>12+ years</small>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <button type="button" class="btn btn-default btn-minus"><i class="fa fa-minus"></i></button>
+                                                                    <button (click)="adultPassengerMinus()" type="button"
+                                                                            class="btn btn-default btn-minus"><i
+                                                                            class="fa fa-minus"></i></button>
                                                                 </div>
-                                                                <input class="form-control col-sm-4 text-center border" style="color: #000;padding: 0;" name="adult" type="text" value="1" id="adult" readonly>
+                                                                <input class="form-control col-sm-4 text-center border"
+                                                                       style="color: #000;padding: 0;" name="adult"
+                                                                       type="text" [(ngModel)]="adultPassenger" id="adult" readonly>
                                                                 <div class="input-group-append">
-                                                                    <button type="button" class="btn btn-default btn-plus"><i class="fa fa-plus"></i></button>
+                                                                    <button (click)="adultPassengerPlus()" type="button"
+                                                                            class="btn btn-default btn-plus"><i
+                                                                            class="fa fa-plus"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row mb-3">
                                                         <div class="col-md-4">
-                                                            <label for="adult" class="control-label" style="display:block;margin-bottom:0px;line-height:1">Children</label>
+                                                            <label for="child" class="control-label"
+                                                                   style="display:block;margin-bottom:0px;line-height:1">Children</label>
                                                             <small>2 - 11 years</small>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <button type="button" class="btn btn-default btn-minus"><i class="fa fa-minus"></i></button>
+                                                                    <button (click)="childPassengerMinus()" type="button"
+                                                                            class="btn btn-default btn-minus"><i
+                                                                            class="fa fa-minus"></i></button>
                                                                 </div>
-                                                                <input class="form-control col-sm-4 text-center border" style="color: #000;padding: 0;" name="child" type="text" value="1" id="child" readonly>
+                                                                <input class="form-control col-sm-4 text-center border"
+                                                                       style="color: #000;padding: 0;" name="child"
+                                                                       type="text" [(ngModel)]="childPassenger" id="child" readonly>
                                                                 <div class="input-group-append">
-                                                                    <button type="button" class="btn btn-default btn-plus"><i class="fa fa-plus"></i></button>
+                                                                    <button (click)="childPassengerPlus()" type="button"
+                                                                            class="btn btn-default btn-plus"><i
+                                                                            class="fa fa-plus"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -115,17 +139,24 @@
 
                                                     <div class="row mb-3">
                                                         <div class="col-md-4">
-                                                            <label for="adult" class="control-label" style="display:block;margin-bottom:0px;line-height:1">Infants</label>
+                                                            <label for="infant" class="control-label"
+                                                                   style="display:block;margin-bottom:0px;line-height:1">Infants</label>
                                                             <small>0 - 2 years</small>
                                                         </div>
                                                         <div class="col-md-8">
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <button type="button" class="btn btn-default btn-minus"><i class="fa fa-minus"></i></button>
+                                                                    <button (click)="infantPassengerMinus()" type="button"
+                                                                            class="btn btn-default btn-minus"><i
+                                                                            class="fa fa-minus"></i></button>
                                                                 </div>
-                                                                <input class="form-control col-sm-4 text-center border" style="color: #000;padding: 0;" name="infant" type="text" value="1" id="infant" readonly>
+                                                                <input class="form-control col-sm-4 text-center border"
+                                                                       style="color: #000;padding: 0;" name="infant"
+                                                                       type="text" [(ngModel)]="infantPassenger" id="infant" readonly>
                                                                 <div class="input-group-append">
-                                                                    <button type="button" class="btn btn-default btn-plus"><i class="fa fa-plus"></i></button>
+                                                                    <button (click)="infantPassengerPlus()" type="button"
+                                                                            class="btn btn-default btn-plus"><i
+                                                                            class="fa fa-plus"></i></button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -134,18 +165,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4 col-6">
+                                    <div class="col-sm-6 col-6">
                                         <div class="form-group">
                                             <label>
-                                                <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small"> Berangkat
+                                                <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
+                                                Berangkat
                                             </label>
-                                            <input type="text" placeholder="Berangkat" class="form-control checkin_date" id="checkin_date" name="" style="background: #fff;">
+                                            <input type="text" placeholder="Berangkat" class="form-control checkin_date"
+                                                   id="checkin_date" name="" style="background: #fff;">
                                         </div>
                                     </div>
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <button type="submit" name="cari" class="btn btn-danger button-search-flight-ticket">
-                                                <img src="./assets/images/ICONS/icon_pesawat.png" class="icon_medium"> Cari Pesawat
+                                            <button type="submit" name="cari"
+                                                    class="btn btn-danger button-search-flight-ticket">
+                                                <img src="./assets/images/ICONS/icon_pesawat.png" class="icon_medium">
+                                                Cari Pesawat
                                             </button>
                                         </div>
                                     </div>
