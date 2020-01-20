@@ -22,7 +22,8 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     model: any;
     loading: boolean = false;
-    selectDepartureExpandCollapse: boolean = false
+    searchClicked: boolean = false;
+    selectDepartureExpandCollapse: boolean = false;
 
     listPlaceFrom: any;
     listPlaceFromWrite: boolean = false;
@@ -85,6 +86,14 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             this.dataFlightSearch = data.data;
             this.cdr.detectChanges();
         });
+    }
+
+    searchClickedEvent(){
+        this.searchClicked = true;
+    }
+
+    searchClickedEventOut(){
+        this.searchClicked = false;
     }
 
     initLandingPageForm() {
