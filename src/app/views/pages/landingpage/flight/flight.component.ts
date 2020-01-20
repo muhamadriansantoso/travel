@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 
 @Component({
     selector: 'app-flight',
@@ -21,6 +21,14 @@ export class FlightComponent implements OnInit {
         this.childPassenger = 0;
         this.infantPassenger = 0;
         this.roundType = 'oneway';
+    }
+
+    showPassengerIn(){
+        this.passengersCollapsed = !this.passengersCollapsed;
+    }
+
+    showPassengerOut(e: Event){
+        this.passengersCollapsed = false;
     }
 
     typeRound(value){

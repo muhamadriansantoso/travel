@@ -34,6 +34,7 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "ng-click-outside": "^5.3.0",
     "ngx-soap": "^0.6.0",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",

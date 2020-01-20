@@ -9,6 +9,7 @@ import {PriceNumber} from '../pricenumber.pipe';
 import {MinuteToHour} from '../minutetohour.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 const routes: Routes = [
     {
@@ -48,6 +49,7 @@ const routes: Routes = [
         CommonModule,
         NgbModule,
         FormsModule,
+        ClickOutsideModule,
         RouterModule.forChild(routes),
     ]
 })

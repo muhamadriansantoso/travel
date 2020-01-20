@@ -14,6 +14,7 @@ import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker'
 import {NgxSoapModule} from 'ngx-soap';
 import {LandingpageModule} from './views/pages/landingpage/landingpage.module';
 import {PriceNumber} from './views/pages/pricenumber.pipe';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import {PriceNumber} from './views/pages/pricenumber.pipe';
         MatNativeDateModule,
         BrowserAnimationsModule,
         NgxSoapModule,
+        ClickOutsideModule
     ],
     providers: [
         {
