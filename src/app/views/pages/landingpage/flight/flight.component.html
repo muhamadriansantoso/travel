@@ -1,133 +1,170 @@
-<form>
-    <div class="title-container">
-        <h2 class="search-title">Search and Book Flights</h2>
-        <p>We're bringing you a new level of comfort.</p>
-        <i class="soap-icon-plane-right takeoff-effect"></i>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card pull-right" style="border:0;">
+            <div class="row">
+                <div class="box-title col-sm-5 col-12">
+                    <h2>
+                        <img src="./assets/images/ICONS/icon_pesawat.png" class="icon_medium"> Booking Tiket Pesawat
+                    </h2>
+                    <p>Temukan penerbangan favorit dengan harga yang bersaing</p>
+                </div>
+
+                <div class="box-title col-sm-7 col-12">
+                    <ul class="nav nav-tabs tab_trip">
+                        <li class="">
+                            <a class="btn active size_category_flight">
+                                <i class="fa fa-arrow-right"></i> One Way
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="btn size_category_flight">
+                                <i class="fa fa-arrows-alt-h"></i> Round Trip
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="clear: both;"></div>
+                <div class="col-sm-12">
+                    <div class="search-destination-separator"></div>
+                </div>
+                <div style="clear: both;"></div>
+                <!-- Tab Content Booking Type Perjalanan Pesawat-->
+
+                <!--One Way Ticket-->
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="container">
+                            <form class="search-destination" method="post">
+                                <div class="row">
+                                    <div class="col-sm-6 col-6">
+                                        <div class="form-group">
+                                            <label class="mobile-font">
+                                                <img src="./assets/images/ICONS/icon_departure.png" class="icon_small"> Dari
+                                            </label>
+                                            <input name="fromcity" type="hidden">
+                                            <input type="text" class="form-control origin-typeahead" name="origin" type="text" id="from" placeholder="Dari">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-6 pull-right">
+                                        <div class="form-group">
+                                            <label>
+                                                <img src="./assets/images/ICONS/icon_arrival.png" class="icon_small"> Tujuan
+                                            </label>
+                                            <input type="hidden" name="fromcity">
+                                            <input type="text" id="where" class="form-control origin-typeahead" name="origin" placeholder="Tujuan">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-12">
+                                        <div class="form-group">
+                                            <label for="cabin" class="control-label">
+                                                <img src="./assets/images/ICONS/icon_case.png" class="icon_small"> Kelas
+                                            </label>
+                                            <select class="form-control" id="cabin" name="cabin">
+                                                <option value="Economy">Ekonomi</option>
+                                                <option value="Business">Bisnis</option>
+                                                <option value="First Class">First Class</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4 align-items-end col-12">
+                                        <div class="form-group">
+                                            <label for="#">
+                                                <img src="./assets/images/ICONS/icon_passengers.png" class="icon_small"> Penumpang
+                                            </label>
+                                            <div class="form-field">
+                                                <input type="text" name="passengers_and_seat_class" class="form-control" value="1 Adult, 0 Child, 0 Infant, Economy">
+                                            </div>
+                                            <div class="collapse collapse-passenger-and-seat-class collapse-pasenggers-position">
+                                                <div class="card card-body">
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="adult" class="control-label" style="display:block;margin-bottom:0px;line-height:1">Adults</label>
+                                                            <small>12+ years</small>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <button type="button" class="btn btn-default btn-minus"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                                <input class="form-control col-sm-4 text-center border" style="color: #000;padding: 0;" name="adult" type="text" value="1" id="adult" readonly>
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-default btn-plus"><i class="fa fa-plus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="adult" class="control-label" style="display:block;margin-bottom:0px;line-height:1">Children</label>
+                                                            <small>2 - 11 years</small>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <button type="button" class="btn btn-default btn-minus"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                                <input class="form-control col-sm-4 text-center border" style="color: #000;padding: 0;" name="child" type="text" value="1" id="child" readonly>
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-default btn-plus"><i class="fa fa-plus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row mb-3">
+                                                        <div class="col-md-4">
+                                                            <label for="adult" class="control-label" style="display:block;margin-bottom:0px;line-height:1">Infants</label>
+                                                            <small>0 - 2 years</small>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend">
+                                                                    <button type="button" class="btn btn-default btn-minus"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                                <input class="form-control col-sm-4 text-center border" style="color: #000;padding: 0;" name="infant" type="text" value="1" id="infant" readonly>
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="btn btn-default btn-plus"><i class="fa fa-plus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-6">
+                                        <div class="form-group">
+                                            <label>
+                                                <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small"> Berangkat
+                                            </label>
+                                            <input type="text" placeholder="Berangkat" class="form-control checkin_date" id="checkin_date" name="" style="background: #fff;">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <button type="submit" name="cari" class="btn btn-danger button-search-flight-ticket"><img src="./assets/images/ICONS/icon_pesawat.png" class="icon_medium"> Cari Pesawat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--End One Way Ticket-->
+
+                    <!--Round Trip Ticket -->
+                    <div class="tab-pane fade">
+                        <div class="container">
+                            //
+                        </div>
+                    </div>
+                    <!--End Roundtrip Ticket -->
+                </div>
+                <!--End Tutup Tab Content Booking Type Perjalanan Pesawat -->
+            </div>
+        </div>
+
     </div>
-    <div class="search-content">
-        <!--<div class="row choose-travel">
-            <div class="col-xs-4">
-                <label class="radio radio-inline">
-                    <input type="radio" name="choose-travel" value="1">Oneway
-                </label>
-            </div>
-            <div class="col-xs-4">
-                <label class="radio radio-inline">
-                    <input type="radio" name="choose-travel" value="2">Round Trip
-                </label>
-            </div>
-            <div class="col-xs-4">
-                <label class="radio radio-inline">
-                    <input type="radio" name="choose-travel" value="3">Multi-city
-                </label>
-            </div>
-        </div>
-        <hr>-->
-        <h5 class="title">Where</h5>
-        <div class="row">
-            <div class="col-xs-6">
-                <label>Leaving From</label>
-                <input type="text" class="input-text full-width" placeholder="enter your location">
-            </div>
-            <div class="col-xs-6">
-                <label>Going To</label>
-                <input type="text" class="input-text full-width" placeholder="enter a destination">
-            </div>
-        </div>
-        <hr>
-        <h5 class="title">When</h5>
-        <label>Departing On</label>
-        <div class="row">
-            <div class="col-xs-6 col-md-5">
-                <div class="datepicker-wrap">
-                    <input type="text" class="input-text full-width hasDatepicker" placeholder="select date" id="dp1578368400663"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-5">
-                <div class="selector">
-                    <select>
-                        <option value="">select date</option>
-                        <option value="1">anytime</option>
-                        <option value="2">morning</option>
-                    </select><span class="custom-select">select date</span>
-                </div>
-            </div>
-        </div>
-        <label>Arriving On</label>
-        <div class="row">
-            <div class="col-xs-6 col-md-5">
-                <div class="datepicker-wrap">
-                    <input type="text" class="input-text full-width hasDatepicker" placeholder="select date" id="dp1578368400664"><img class="ui-datepicker-trigger" src="images/icon/blank.png" alt="" title="">
-                </div>
-            </div>
-            <div class="col-xs-6 col-md-5">
-                <div class="selector">
-                    <select>
-                        <option value="">select date</option>
-                        <option value="1">anytime</option>
-                        <option value="2">morning</option>
-                    </select><span class="custom-select">select date</span>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <h5 class="title">Who</h5>
-        <div class="row">
-            <div class="col-xs-4 col-md-3">
-                <label>Adults</label>
-                <div class="selector">
-                    <select>
-                        <option value="1">01</option>
-                        <option value="2">02</option>
-                        <option value="3">03</option>
-                        <option value="4">04</option>
-                    </select><span class="custom-select">01</span>
-                </div>
-            </div>
-            <div class="col-xs-4 col-md-3">
-                <label>Kids</label>
-                <div class="selector">
-                    <select>
-                        <option value="1">01</option>
-                        <option value="2">02</option>
-                        <option value="3">03</option>
-                        <option value="4">04</option>
-                    </select><span class="custom-select">01</span>
-                </div>
-            </div>
-            <div class="col-xs-4 col-md-3">
-                <label>Infants</label>
-                <div class="selector">
-                    <select>
-                        <option value="1">01</option>
-                        <option value="2">02</option>
-                        <option value="3">03</option>
-                        <option value="4">04</option>
-                    </select><span class="custom-select">01</span>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <h5 class="title">Class <small>(Optional)</small></h5>
-        <div class="row">
-            <div class="col-xs-6">
-                <label>Class of travel</label>
-                <div class="selector">
-                    <select>
-                        <option value="">Economy</option>
-                    </select><span class="custom-select">Economy</span>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <label>Preferred Airline</label>
-                <div class="selector">
-                    <select>
-                        <option value="">select name</option>
-                    </select><span class="custom-select">select name</span>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <button type="submit" class="full-width btn-medium">PROCEED TO RESULT</button>
-    </div>
-</form>
+</div>
