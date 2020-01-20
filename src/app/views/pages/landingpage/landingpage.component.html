@@ -163,10 +163,10 @@
                     </div>
 
                     <div class="col-md-12" style="margin-top: 25px">
-                        <div class="row">
+                        <div class="row" *ngFor="let dataflightTrans of dataflight.transData">
                             <div class="col-md-2 mb-3">
                                 <div class="flight-section-airline-logo-wrap">
-                                    <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" class="img-fluid img-circle airline-logo">
+                                    <img src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png" class="img-fluid img-circle airline-logo">
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -177,23 +177,23 @@
                                                 <i class="fa fa-plane flight-details-schedule-icon"></i>
                                                 <p class="flight-details-schedule-date">Sat, Feb 01</p>
                                                 <div class="flight-details-schedule-time">
-                                                    16:50 - 19:40 (1H 50M)
+                                                    {{dataflightTrans.departureTime | date: 'hh:mm'}} - {{dataflightTrans.arrivalTime | date: 'hh:mm'}} ({{dataflightTrans.flightTime | minuteToHour}})
                                                 </div>
                                                 <div class="flight-details-schedule-destination">
-                                                    <div style="float: left">
+                                                    <div style="float: left; max-width: 40%">
                                                         <p style="font-weight: bold; margin-bottom: 0">
-                                                            CGK
+                                                            {{dataflightTrans.origin}}
                                                         </p>
-                                                        <p class="flight-details-schedule-destination-city">Soekarno Hatta Intl</p>
+                                                        <p class="flight-details-schedule-destination-city">{{dataflightTrans.origin_city_name}}</p>
                                                     </div>
                                                     <div style="float: left; margin: 0 10px">
                                                         <span>→</span>
                                                     </div>
-                                                    <div style="float: left">
+                                                    <div style="float: left; max-width: 40%">
                                                         <p style="font-weight: bold; margin-bottom: 0">
-                                                            DPS
+                                                            {{dataflightTrans.destination}}
                                                         </p>
-                                                        <p class="flight-details-schedule-destination-city">Bali Ngurah Rai</p>
+                                                        <p class="flight-details-schedule-destination-city">{{dataflightTrans.destination_city_name}}</p>
                                                     </div>
                                                 </div>
                                             </li>
@@ -202,7 +202,7 @@
                                     <div class="col-md-6">
                                         <ul class="flight-details-feature-list">
                                             <li>
-                                                <span>Aircraft</span> : <span>Malindo Airways 9108</span>
+                                                <span>Aircraft</span> : <span>{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
                                             </li>
                                             <li>
                                                 <span>Seat layout</span> : <span>3-3</span>
