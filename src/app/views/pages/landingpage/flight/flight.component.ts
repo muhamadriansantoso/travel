@@ -58,11 +58,9 @@ export class FlightComponent implements OnInit {
       this.fromCity = '';
       this.formCityValue = '';
     } else {
-      this.fromCity = data.city + " (" + data.iata + ")";
+      this.fromCity = data.city;
       this.formCityValue = data.iata;
     }
-
-    console.log(data);
   }
 
   showPassengerIn() {
