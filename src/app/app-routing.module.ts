@@ -10,7 +10,7 @@ const routes: Routes = [
     component: LandingpageComponent
   },
   {
-    path: 'flight-search',
+    path: 'search-flight',
     component: SearchFlightResultComponent
   },
 ];
