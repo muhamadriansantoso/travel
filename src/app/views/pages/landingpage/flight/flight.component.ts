@@ -41,7 +41,13 @@ export class FlightComponent implements OnInit {
     }
 
     autocompleListFormatter = (data: any) : SafeHtml => {
-        let html = `<div class="listbox"><div class=""><div style="margin-bottom: 4px;"><span class="">${data.city}, ${data.country}</span></div><div><span class="">${data.iata} - ${data.name}</span></div></div></div> `;
+        let html = `
+        <div style="margin-bottom: 4px;">
+            <span style="font-size: 14px; line-height: 20px; font-weight: 500" class="">${data.city}, ${data.country}</span>
+        </div>
+        <div>
+            <span style="color: #8f8f8f; font-size: 12px; line-height: 16px; white-space: normal; font-weight: 400">${data.iata} - ${data.name}</span>
+        </div>`;
         return this._sanitizer.bypassSecurityTrustHtml(html);
     };
 
@@ -92,18 +98,4 @@ export class FlightComponent implements OnInit {
     infantPassengerPlus() {
         this.infantPassenger = this.infantPassenger + 1;
     }
-
-    selectEvent(item) {
-        // do something with selected item
-    }
-
-    onChangeSearch(search: string) {
-        // fetch remote data from here
-        // And reassign the 'data' which is binded to 'data' property.
-    }
-
-    onFocused(e) {
-        // do something
-    }
-
 }
