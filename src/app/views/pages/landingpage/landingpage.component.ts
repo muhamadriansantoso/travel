@@ -1,14 +1,13 @@
 import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {APIService} from '../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import * as $ from 'jquery';
 import * as dateFormat from 'dateformat';
 import localeId from '@angular/common/locales/id';
 import {registerLocaleData} from '@angular/common';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {Subject, Subscription} from 'rxjs';
-import { NgxSoapService, Client } from 'ngx-soap';
+import {Client} from 'ngx-soap';
 
 
 registerLocaleData(localeId, 'id');
@@ -34,9 +33,6 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     browseDatesCarriers: any;
     browseDatesPlaces: any;
 
-    //API Variable
-    dataFlightSearch: any;
-
     landingPageFormGroups: FormGroup;
 
     minDate: any;
@@ -60,18 +56,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.initLandingPageForm();
         const date = new Date();
-        this.model = {
-            flightChooseTab: '0',
-            originplace: '',
-            originplaceInput: '',
-            destinationplace: '',
-            outboundpartialdate: '',
-            inboundpartialdate: '',
-            minDate: '',
-            defaultDatePlusSevenDay: '',
-        };
 
         this.minDate = dateFormat(new Date(), 'yyyy-mm-dd', 'en');
         this.model.minDate = this.minDate.toString();
@@ -80,12 +65,6 @@ export class LandingpageComponent implements OnInit, OnDestroy {
         this.landingPageFormGroups.valueChanges.subscribe(value => {
             this.submitClicked = false;
         });
-
-
-        // this.api.AirLowFareSearchPort().subscribe((data: any) => {
-        //     this.dataFlightSearch = data.data;
-        //     this.cdr.detectChanges();
-        // });
     }
 
     searchClickedEvent(){
@@ -94,18 +73,6 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     searchClickedEventOut(){
         this.searchClicked = false;
-    }
-
-    initLandingPageForm() {
-        this.landingPageFormGroups = this.fb.group({
-            flightChooseTab: ['', Validators.compose([Validators.required])],
-            originplace: ['', Validators.compose([Validators.required])],
-            originplaceInput: ['', Validators.compose([Validators.required])],
-            destinationplace: ['', Validators.compose([Validators.required])],
-            destinationplaceInput: ['', Validators.compose([Validators.required])],
-            outboundpartialdate: ['', Validators.compose([Validators.required])],
-            inboundpartialdate: [''],
-        });
     }
 
     flightDetailsAllCollapsed(value){

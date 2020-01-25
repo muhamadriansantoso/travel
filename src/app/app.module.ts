@@ -15,11 +15,13 @@ import {LandingpageModule} from './views/pages/landingpage/landingpage.module';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {SearchFlightResultComponent} from './views/pages/search-flight-result/search-flight-result.component';
+import {MinuteToHour} from './views/pages/minutetohour.pipe';
 
 @NgModule({
     declarations: [
       AppComponent,
-      SearchFlightResultComponent
+      SearchFlightResultComponent,
+      MinuteToHour,
     ],
     imports: [
         LandingpageModule.forRoot(),

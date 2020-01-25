@@ -6,7 +6,6 @@ import {FlightComponent} from './flight/flight.component';
 import {HotelsComponent} from './hotels/hotels.component';
 import {FlightAndHotelComponent} from './flight-and-hotel/flight-and-hotel.component';
 import {PriceNumber} from '../pricenumber.pipe';
-import {MinuteToHour} from '../minutetohour.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ClickOutsideModule} from 'ng-click-outside';
@@ -44,8 +43,7 @@ const routes: Routes = [
     FlightComponent,
     HotelsComponent,
     FlightAndHotelComponent,
-    PriceNumber,
-    MinuteToHour,
+    PriceNumber
   ],
   imports: [
     CommonModule,

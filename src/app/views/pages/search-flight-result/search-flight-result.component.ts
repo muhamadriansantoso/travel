@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {APIService} from '../../../core/API';
 
 @Component({
   selector: 'app-search-flight-result',
@@ -7,10 +8,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SearchFlightResultComponent implements OnInit {
 
-  constructor() {
+  dataFlightSearch: any;
+
+  constructor(
+    private api: APIService,
+    private cdr: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit() {
+    this.api.AirLowFareSearchPort().subscribe((data: any) => {
+      this.dataFlightSearch = data.data;
+      this.cdr.detectChanges();
+    });
   }
 
 }
