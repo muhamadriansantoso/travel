@@ -81,8 +81,8 @@ export class LandingpageComponent implements OnInit, OnDestroy {
             this.submitClicked = false;
         });
 
+
         this.api.AirLowFareSearchPort().subscribe((data: any) => {
-            console.log(data);
             this.dataFlightSearch = data.data;
             this.cdr.detectChanges();
         });

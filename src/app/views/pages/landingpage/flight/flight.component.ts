@@ -1,4 +1,8 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {APIService} from '../../../../core/API';
+import {FormBuilder} from '@angular/forms';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-flight',
@@ -7,7 +11,15 @@ import {Component, HostListener, OnInit} from '@angular/core';
 })
 export class FlightComponent implements OnInit {
 
-    constructor() {
+    airportList: any;
+
+    constructor(
+        private http: HttpClient,
+        private api: APIService,
+        private fb: FormBuilder,
+        private cdr: ChangeDetectorRef,
+        private _sanitizer: DomSanitizer
+    ) {
     }
 
     adultPassenger: number;
@@ -21,7 +33,17 @@ export class FlightComponent implements OnInit {
         this.childPassenger = 0;
         this.infantPassenger = 0;
         this.roundType = 'oneway';
+
+        this.api.airportList().subscribe((data: any) => {
+            this.airportList = data;
+            this.cdr.detectChanges();
+        });
     }
+
+    autocompleListFormatter = (data: any) : SafeHtml => {
+        let html = `<div class="listbox"><div class=""><div style="margin-bottom: 4px;"><span class="">${data.city}, ${data.country}</span></div><div><span class="">${data.iata} - ${data.name}</span></div></div></div> `;
+        return this._sanitizer.bypassSecurityTrustHtml(html);
+    };
 
     showPassengerIn(){
         this.passengersCollapsed = !this.passengersCollapsed;
@@ -69,6 +91,19 @@ export class FlightComponent implements OnInit {
 
     infantPassengerPlus() {
         this.infantPassenger = this.infantPassenger + 1;
+    }
+
+    selectEvent(item) {
+        // do something with selected item
+    }
+
+    onChangeSearch(search: string) {
+        // fetch remote data from here
+        // And reassign the 'data' which is binded to 'data' property.
+    }
+
+    onFocused(e) {
+        // do something
     }
 
 }

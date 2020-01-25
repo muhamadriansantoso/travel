@@ -15,6 +15,7 @@ import {NgxSoapModule} from 'ngx-soap';
 import {LandingpageModule} from './views/pages/landingpage/landingpage.module';
 import {PriceNumber} from './views/pages/pricenumber.pipe';
 import {ClickOutsideModule} from 'ng-click-outside';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import {ClickOutsideModule} from 'ng-click-outside';
         MatNativeDateModule,
         BrowserAnimationsModule,
         NgxSoapModule,
-        ClickOutsideModule
+        ClickOutsideModule,
+        AutocompleteLibModule
     ],
     providers: [
         {

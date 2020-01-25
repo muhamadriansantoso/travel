@@ -10,6 +10,8 @@ import {MinuteToHour} from '../minutetohour.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {ClickOutsideModule} from 'ng-click-outside';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 
 const routes: Routes = [
     {
@@ -50,6 +52,8 @@ const routes: Routes = [
         NgbModule,
         FormsModule,
         ClickOutsideModule,
+        AutocompleteLibModule,
+        NguiAutoCompleteModule,
         RouterModule.forChild(routes),
     ]
 })
