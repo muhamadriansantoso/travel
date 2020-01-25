@@ -54,8 +54,15 @@ export class FlightComponent implements OnInit {
   };
 
   formCityAutoComplete(data) {
-    this.fromCity = data.city + " (" + data.iata + ")";
-    console.log(this.fromCity);
+    if (data == undefined) {
+      this.fromCity = '';
+      this.formCityValue = '';
+    } else {
+      this.fromCity = data.city + " (" + data.iata + ")";
+      this.formCityValue = data.iata;
+    }
+
+    console.log(data);
   }
 
   showPassengerIn() {
