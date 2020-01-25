@@ -33,7 +33,7 @@
         <div class="tab-content">
           <div class="tab-pane fade show active">
             <div class="container">
-              <form class="search-destination" method="post">
+              <form class="search-destination" [formGroup]="searchFlightForm" autocomplete="off">
                 <div class="row">
                   <div class="col-sm-6 col-6">
                     <div class="form-group">
@@ -41,13 +41,10 @@
                         <img src="./assets/images/ICONS/icon_departure.png" class="icon_small">
                         Dari
                       </label>
-                      <input name="fromcity" type="hidden">
-                      <!--<input type="text" class="form-control origin-typeahead" name="origin"-->
-                      <!--type="text" id="from" placeholder="Dari" autocomplete="off">-->
                       <input class="form-control origin-typeahead" placeholder="Dari" auto-complete
                              [source]="airportList" [list-formatter]="autocompleListFormatter" [min-chars]="2"
-                             [max-num-list]="10" (valueChanged)="formCityAutoComplete($event)"  [(ngModel)]="fromCity"
-                             formControlName="origin" />
+                             [max-num-list]="5" (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
+                             formControlName="origin"/>
                     </div>
                   </div>
                   <div class="col-sm-6 col-6 pull-right">
@@ -56,9 +53,10 @@
                         <img src="./assets/images/ICONS/icon_arrival.png" class="icon_small">
                         Tujuan
                       </label>
-                      <input type="hidden" name="fromcity">
-                      <input type="text" id="where" class="form-control origin-typeahead"
-                             name="origin" placeholder="Tujuan" autocomplete="off">
+                      <input class="form-control origin-typeahead" placeholder="Tujuan" auto-complete
+                             [source]="airportList" [list-formatter]="autocompleListFormatter" [min-chars]="2"
+                             [max-num-list]="5" (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
+                             formControlName="destination"/>
                     </div>
                   </div>
                   <div class="col-sm-6 col-12">
@@ -66,7 +64,7 @@
                       <label for="cabin" class="control-label">
                         <img src="./assets/images/ICONS/icon_case.png" class="icon_small"> Kelas
                       </label>
-                      <select class="form-control" id="cabin" name="cabin">
+                      <select class="form-control" id="cabin" formControlName="cabin">
                         <option value="Economy">Ekonomi</option>
                         <option value="Premoum_Economy">Premium Ekonomi</option>
                         <option value="Business">Bisnis</option>

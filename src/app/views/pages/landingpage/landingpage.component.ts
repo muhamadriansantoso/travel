@@ -82,10 +82,10 @@ export class LandingpageComponent implements OnInit, OnDestroy {
         });
 
 
-        this.api.AirLowFareSearchPort().subscribe((data: any) => {
-            this.dataFlightSearch = data.data;
-            this.cdr.detectChanges();
-        });
+        // this.api.AirLowFareSearchPort().subscribe((data: any) => {
+        //     this.dataFlightSearch = data.data;
+        //     this.cdr.detectChanges();
+        // });
     }
 
     searchClickedEvent(){

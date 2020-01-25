@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {APIService} from '../../../../core/API';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 
 @Component({
@@ -11,9 +11,12 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 })
 export class FlightComponent implements OnInit {
 
+  searchFlightForm: FormGroup;
   airportList: any;
   fromCity: string;
   formCityValue: string;
+  toCity: string;
+  toCityValue: string;
 
   constructor(
     private http: HttpClient,
@@ -40,28 +43,48 @@ export class FlightComponent implements OnInit {
       this.airportList = data;
       this.cdr.detectChanges();
     });
+
+    this.initSearchFlightForm();
+  }
+
+  initSearchFlightForm() {
+    this.searchFlightForm = this.fb.group({
+      origin: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      destination: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      cabin: ['Economy', Validators.compose([
+        Validators.required,
+      ])
+      ]
+    });
   }
 
   autocompleListFormatter = (data: any): SafeHtml => {
     let html = `
-        <div style="margin-bottom: 4px;">
-            <span style="font-size: 14px; line-height: 20px; font-weight: 500" class="">${data.city}, ${data.country}</span>
-        </div>
-        <div>
-            <span style="color: #8f8f8f; font-size: 12px; line-height: 16px; white-space: normal; font-weight: 400">${data.iata} - ${data.name}</span>
-        </div>`;
+<div style="margin-bottom: 4px;">
+<span style="font-size: 14px; line-height: 20px; font-weight: 500" class="">${data.city}, ${data.country}</span>
+</div>
+<div>
+<span style="color: #8f8f8f; font-size: 12px; line-height: 16px; white-space: normal; font-weight: 400">${data.iata} - ${data.name}</span>
+</div>`;
     return this._sanitizer.bypassSecurityTrustHtml(html);
   };
 
-  formCityAutoComplete(data) {
-    if (data == undefined) {
-      this.fromCity = '';
-      this.formCityValue = '';
-    } else {
-      this.fromCity = data.city;
+  cityAutoComplete(data, formorto) {
+    if (formorto == 'from') {
+      this.fromCity = data.city + ', ' + data.iata;
       this.formCityValue = data.iata;
+    } else if (formorto == 'to') {
+      this.toCity = data.city + ', ' + data.iata;
+      this.toCityValue = data.iata;
     }
   }
+
 
   showPassengerIn() {
     this.passengersCollapsed = !this.passengersCollapsed;
