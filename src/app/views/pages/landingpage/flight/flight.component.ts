@@ -60,7 +60,18 @@ export class FlightComponent implements OnInit {
       cabin: ['Economy', Validators.compose([
         Validators.required,
       ])
-      ]
+      ],
+      adult: ['1', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      child: ['0'],
+      infant: ['0'],
+      departure: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      return: ['']
     });
   }
 

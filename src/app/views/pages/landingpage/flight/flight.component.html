@@ -102,7 +102,7 @@
                                     class="fa fa-minus"></i></button>
                                 </div>
                                 <input class="form-control col-sm-4 text-center border"
-                                       style="color: #000;padding: 0;" name="adult"
+                                       style="color: #000;padding: 0;" formControlName="adult"
                                        type="text" [(ngModel)]="adultPassenger" id="adult" readonly>
                                 <div class="input-group-append">
                                   <button (click)="adultPassengerPlus()" type="button"
@@ -126,7 +126,7 @@
                                     class="fa fa-minus"></i></button>
                                 </div>
                                 <input class="form-control col-sm-4 text-center border"
-                                       style="color: #000;padding: 0;" name="child"
+                                       style="color: #000;padding: 0;" formControlName="child"
                                        type="text" [(ngModel)]="childPassenger" id="child" readonly>
                                 <div class="input-group-append">
                                   <button (click)="childPassengerPlus()" type="button"
@@ -151,7 +151,7 @@
                                     class="fa fa-minus"></i></button>
                                 </div>
                                 <input class="form-control col-sm-4 text-center border"
-                                       style="color: #000;padding: 0;" name="infant"
+                                       style="color: #000;padding: 0;" formControlName="infant"
                                        type="text" [(ngModel)]="infantPassenger" id="infant" readonly>
                                 <div class="input-group-append">
                                   <button (click)="infantPassengerPlus()" type="button"
@@ -171,7 +171,7 @@
                         <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
                         Berangkat
                       </label>
-                      <input type="text" placeholder="Berangkat" class="form-control checkin_date" name=""
+                      <input type="text" placeholder="Berangkat" class="form-control checkin_date" formControlName="departure"
                              style="background: #fff;" autocomplete="off">
                     </div>
                   </div>
@@ -181,7 +181,7 @@
                         <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
                         Pulang
                       </label>
-                      <input type="text" placeholder="Pulang" class="form-control checkin_date" name=""
+                      <input type="text" placeholder="Pulang" class="form-control checkin_date" formControlName="return"
                              style="background: #fff;" autocomplete="off">
                     </div>
                   </div>
