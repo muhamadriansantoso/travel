@@ -83,7 +83,7 @@
                         <input (click)="showPassengerIn()"
                                type="text"
                                name="passengers_and_seat_class" class="form-control" autocomplete="off"
-                               value="{{adultPassenger}} Adult, {{childPassenger}} Child, {{infantPassenger}} Infant">
+                               value="{{adultPassenger}} Dewasa, {{childPassenger}} Anak-anak, {{infantPassenger}} Bayi">
                       </div>
                       <div class="collapse collapse-passenger-and-seat-class collapse-pasenggers-position show"
                            *ngIf="passengersCollapsed" style="z-index: 99">
@@ -91,7 +91,7 @@
                           <div class="row mb-3">
                             <div class="col-md-4">
                               <label for="adult" class="control-label"
-                                     style="display:block;margin-bottom:0px;line-height:1">Adults</label>
+                                     style="display:block;margin-bottom:0px;line-height:1">Dewasa</label>
                               <small>12+ years</small>
                             </div>
                             <div class="col-md-8">
@@ -115,7 +115,7 @@
                           <div class="row mb-3">
                             <div class="col-md-4">
                               <label for="child" class="control-label"
-                                     style="display:block;margin-bottom:0px;line-height:1">Children</label>
+                                     style="display:block;margin-bottom:0px;line-height:1">Anak-anak</label>
                               <small>2 - 11 years</small>
                             </div>
                             <div class="col-md-8">
@@ -140,7 +140,7 @@
                           <div class="row mb-3">
                             <div class="col-md-4">
                               <label for="infant" class="control-label"
-                                     style="display:block;margin-bottom:0px;line-height:1">Infants</label>
+                                     style="display:block;margin-bottom:0px;line-height:1">Bayi</label>
                               <small>0 - 2 years</small>
                             </div>
                             <div class="col-md-8">
