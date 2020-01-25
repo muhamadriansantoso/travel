@@ -5,21 +5,21 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {LandingpageComponent} from './views/pages/landingpage/landingpage.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker';
 import {NgxSoapModule} from 'ngx-soap';
 import {LandingpageModule} from './views/pages/landingpage/landingpage.module';
-import {PriceNumber} from './views/pages/pricenumber.pipe';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+import {SearchFlightResultComponent} from './views/pages/search-flight-result/search-flight-result.component';
 
 @NgModule({
     declarations: [
-        AppComponent
+      AppComponent,
+      SearchFlightResultComponent
     ],
     imports: [
         LandingpageModule.forRoot(),

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {APIService} from '../../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -17,6 +17,11 @@ export class FlightComponent implements OnInit {
   formCityValue: string;
   toCity: string;
   toCityValue: string;
+  adultPassenger: number;
+  childPassenger: number;
+  infantPassenger: number;
+  roundType: string;
+  public passengersCollapsed: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -26,12 +31,6 @@ export class FlightComponent implements OnInit {
     private _sanitizer: DomSanitizer
   ) {
   }
-
-  adultPassenger: number;
-  childPassenger: number;
-  infantPassenger: number;
-  roundType: string;
-  public passengersCollapsed: boolean = false;
 
   ngOnInit() {
     this.adultPassenger = 1;
@@ -143,5 +142,8 @@ export class FlightComponent implements OnInit {
 
   infantPassengerPlus() {
     this.infantPassenger = this.infantPassenger + 1;
+  }
+
+  searchFlight() {
   }
 }
