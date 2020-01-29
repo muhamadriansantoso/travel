@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -18,11 +18,22 @@ export class APIService {
         return this.http.get('http://localhost/apitravel/api/v1/airportlist', httpOptions);
     }
 
-    AirLowFareSearchPort() {
+  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
         const httpOptions = {
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
+          params: {
+            'departure': d,
+            'arrival': a,
+            'departure_date': date,
+            'return_date': r_date,
+            'adult': adult,
+            'child': child,
+            'infant': infant,
+            'cabin': cabin,
+            'type': type,
+          }
         };
         return this.http.get('http://localhost/apitravel/api/v1/flight/search', httpOptions);
     }

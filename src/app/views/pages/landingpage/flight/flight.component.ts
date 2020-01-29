@@ -154,10 +154,10 @@ export class FlightComponent implements OnInit {
           a: 'DPS',
           date: '2020-03-01',
           r_date: '2020-03-08',
-          adult: '1',
-          child: '0',
-          infant: '0',
-          class: 'Economy',
+          adult: 1,
+          child: 0,
+          infant: 0,
+          cabin: 'Economy',
           type: 'one-way'
         },
     });

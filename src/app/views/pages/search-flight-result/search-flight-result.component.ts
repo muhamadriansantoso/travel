@@ -1,5 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {APIService} from '../../../core/API';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-search-flight-result',
@@ -15,14 +16,18 @@ export class SearchFlightResultComponent implements OnInit {
 
   constructor(
     private api: APIService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
   ) {
   }
 
   ngOnInit() {
-    this.api.AirLowFareSearchPort().subscribe((data: any) => {
-      this.dataFlightSearch = data.data;
-      this.cdr.detectChanges();
+    this.route.queryParams.subscribe(params => {
+      // Defaults to 0 if no query param provided.
+      this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type).subscribe((data: any) => {
+        this.dataFlightSearch = data.data;
+        this.cdr.detectChanges();
+      });
     });
   }
 
