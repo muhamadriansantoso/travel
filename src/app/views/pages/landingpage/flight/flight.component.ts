@@ -161,6 +161,5 @@ export class FlightComponent implements OnInit {
           type: 'one-way'
         },
     });
-    console.log('abc');
   }
 }
