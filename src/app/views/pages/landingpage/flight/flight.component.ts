@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {APIService} from '../../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-flight',
@@ -28,7 +29,8 @@ export class FlightComponent implements OnInit {
     private api: APIService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private router: Router
   ) {
   }
 
@@ -145,5 +147,20 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlight() {
+    this.router.navigate(['/search-flight'], {
+      queryParams:
+        {
+          d: 'CGK',
+          a: 'DPS',
+          date: '2020-03-01',
+          r_date: '2020-03-08',
+          adult: '1',
+          child: '0',
+          infant: '0',
+          class: 'Economy',
+          type: 'one-way'
+        },
+    });
+    console.log('abc');
   }
 }

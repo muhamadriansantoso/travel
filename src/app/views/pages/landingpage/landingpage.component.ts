@@ -35,8 +35,6 @@ export class LandingpageComponent implements OnInit, OnDestroy {
 
     landingPageFormGroups: FormGroup;
 
-    minDate: any;
-
     message: string;
     client: Client;
 
@@ -56,15 +54,7 @@ export class LandingpageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        const date = new Date();
 
-        this.minDate = dateFormat(new Date(), 'yyyy-mm-dd', 'en');
-        this.model.minDate = this.minDate.toString();
-        this.model.defaultDatePlusSevenDay = dateFormat(new Date(date.getFullYear(), date.getMonth(), date.getDate() + 7), '');
-
-        this.landingPageFormGroups.valueChanges.subscribe(value => {
-            this.submitClicked = false;
-        });
     }
 
     searchClickedEvent(){
