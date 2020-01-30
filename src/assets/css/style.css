@@ -13962,6 +13962,38 @@ a:hover, a:focus {
   visibility: hidden;
 }
 
+.flight-section-path-line-middle-1 {
+  position: absolute;
+  left: 33%;
+  text-align: center;
+  width: 30px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.flight-section-path-line-middle-1 .flight-section-path-icon {
+  visibility: hidden;
+}
+
+.flight-section-path-line-middle-2 {
+  position: absolute;
+  left: 66%;
+  text-align: center;
+  width: 30px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.flight-section-path-line-middle-2 .flight-section-path-icon {
+  visibility: hidden;
+}
+
 .flight-section-path-line-end {
   position: absolute;
   right: -15px;
