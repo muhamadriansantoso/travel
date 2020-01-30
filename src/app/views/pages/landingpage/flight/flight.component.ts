@@ -170,8 +170,8 @@ export class FlightComponent implements OnInit {
         {
             d: this.formCityValue,
             a: this.toCityValue,
-          date: '2020-03-01',
-          r_date: '2020-03-08',
+            date: '2020-03-01',
+            r_date: '2020-03-08',
             adult: authData.adult,
             child: authData.child,
             infant: authData.infant,
