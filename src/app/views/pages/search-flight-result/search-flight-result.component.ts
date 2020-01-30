@@ -1,6 +1,8 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {APIService} from '../../../core/API';
 import {ActivatedRoute, Router} from '@angular/router';
+import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-search-flight-result',
@@ -10,9 +12,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class SearchFlightResultComponent implements OnInit {
 
   dataFlightSearch: any;
+    loadingPage: boolean;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
+    private unsubscribe: Subject<any>;
 
   constructor(
     private api: APIService,
@@ -20,14 +24,24 @@ export class SearchFlightResultComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) {
+      this.unsubscribe = new Subject();
   }
 
   ngOnInit() {
+      this.loadingPage = true;
     this.route.queryParams.subscribe(params => {
-      this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type).subscribe((data: any) => {
-        this.dataFlightSearch = data.data;
-        this.cdr.detectChanges();
-      });
+        this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
+            .pipe(
+                tap((data: any) => {
+                    this.dataFlightSearch = data.data;
+                }),
+                takeUntil(this.unsubscribe),
+                finalize(() => {
+                    this.loadingPage = false;
+                    this.cdr.markForCheck();
+                })
+            )
+            .subscribe();
     });
   }
 
