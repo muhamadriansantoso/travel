@@ -43,7 +43,7 @@
                       </label>
                       <input class="form-control origin-typeahead" placeholder="Dari" auto-complete
                              [source]="airportList" [list-formatter]="autocompleListFormatter" [min-chars]="2"
-                             [max-num-list]="5" (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
+                             [max-num-list]="8" (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
                              formControlName="origin"/>
                     </div>
                   </div>
@@ -55,7 +55,7 @@
                       </label>
                       <input class="form-control origin-typeahead" placeholder="Tujuan" auto-complete
                              [source]="airportList" [list-formatter]="autocompleListFormatter" [min-chars]="2"
-                             [max-num-list]="5" (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
+                             [max-num-list]="8" (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
                              formControlName="destination"/>
                     </div>
                   </div>

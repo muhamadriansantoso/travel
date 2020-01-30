@@ -88,12 +88,23 @@ export class FlightComponent implements OnInit {
   };
 
   cityAutoComplete(data, formorto) {
-    if (formorto == 'from') {
-      this.fromCity = data.city + ', ' + data.iata;
-      this.formCityValue = data.iata;
-    } else if (formorto == 'to') {
-      this.toCity = data.city + ', ' + data.iata;
-      this.toCityValue = data.iata;
+      const dataType = typeof data;
+      if (dataType == 'object') {
+          if (formorto == 'from') {
+              this.fromCity = data.city + ', ' + data.iata;
+              this.formCityValue = data.iata;
+          } else if (formorto == 'to') {
+              this.toCity = data.city + ', ' + data.iata;
+              this.toCityValue = data.iata;
+          }
+      } else {
+          if (formorto == 'from') {
+              this.fromCity = '';
+              this.formCityValue = '';
+          } else if (formorto == 'to') {
+              this.toCity = '';
+              this.toCityValue = '';
+          }
     }
   }
 
@@ -147,17 +158,24 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlight() {
+      const controls = this.searchFlightForm.controls;
+      const authData = {
+          cabin: controls['cabin'].value,
+          adult: controls['adult'].value,
+          child: controls['child'].value,
+          infant: controls['infant'].value,
+      };
     this.router.navigate(['/search-flight'], {
       queryParams:
         {
-          d: 'CGK',
-          a: 'DPS',
+            d: this.formCityValue,
+            a: this.toCityValue,
           date: '2020-03-01',
           r_date: '2020-03-08',
-          adult: 1,
-          child: 0,
-          infant: 0,
-          cabin: 'Economy',
+            adult: authData.adult,
+            child: authData.child,
+            infant: authData.infant,
+            cabin: authData.cabin,
           type: 'one-way'
         },
     });
