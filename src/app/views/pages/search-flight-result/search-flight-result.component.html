@@ -1,4 +1,13 @@
-<section class="ftco-section" style="padding: 0;">
+<section class="loadingSearchFlight centered-loader text-center" *ngIf="loadingPage">
+    <div class="centered-loader">
+        <img src="https://booking.fixtrips.com/theme/CoreThemeV2/img/loader/layout_1.gif">
+        <div class="theme-loading-body">
+            <h2 class="theme-loading-title">Just a moment</h2>
+            <p class="theme-loading-subtitle">We are looking for flights </p>
+        </div>
+    </div>
+</section>
+<section class="ftco-section" style="padding: 0;" *ngIf="!loadingPage">
   <div class="container">
     <h4 align="center" class="col-sm-3  menu-filter-pc">Filter</h4>
     <div class="row">
