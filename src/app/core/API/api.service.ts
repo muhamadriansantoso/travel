@@ -15,7 +15,7 @@ export class APIService {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
         };
-        return this.http.get('http://gohateka.com/apitravel/api/v1/airportlist', httpOptions);
+      return this.http.get('http://localhost/apitravel/api/v1/airportlist', httpOptions);
     }
 
   AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
@@ -35,7 +35,7 @@ export class APIService {
             'type': type,
           }
         };
-      return this.http.get('http://gohateka.com/apitravel/api/v1/flight/search', httpOptions);
+    return this.http.get('http://localhost/apitravel/api/v1/flight/search', httpOptions);
     }
 
     APIListPlace(value: string) {

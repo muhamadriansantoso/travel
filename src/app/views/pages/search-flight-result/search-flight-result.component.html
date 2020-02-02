@@ -43,10 +43,10 @@
       <br>
       <div class="col-sm-9 col-md-9">
         <div *ngFor="let dataflight of dataFlightSearch; let i = index" class="card card-ticket">
-          <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-               [attr.aria-expanded]="!flightDetailsCollapsed"
-               class="row">
-            <div class="col-md-10 text-center">
+          <div class="row">
+            <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                 [attr.aria-expanded]="!flightDetailsCollapsed"
+                 class="col-md-10 text-center">
               <div class="row">
                 <div class="col-md-2 mb-3">
                   <div class="flight-section-airline-logo-wrap">
