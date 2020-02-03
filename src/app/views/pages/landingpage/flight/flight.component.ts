@@ -50,8 +50,6 @@ export class FlightComponent implements OnInit {
       'day': parseInt(moment(today).format('DD'), 0)
     };
 
-    console.log(this.minDate);
-
     this.api.airportList().subscribe((data: any) => {
       this.airportList = data;
       this.cdr.detectChanges();
