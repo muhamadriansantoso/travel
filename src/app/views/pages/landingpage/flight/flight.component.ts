@@ -24,6 +24,7 @@ export class FlightComponent implements OnInit {
   infantPassenger: number;
   roundType: string;
   departureDate: string;
+  minDate: any;
   public passengersCollapsed: boolean = false;
 
   constructor(
@@ -41,6 +42,15 @@ export class FlightComponent implements OnInit {
     this.childPassenger = 0;
     this.infantPassenger = 0;
     this.roundType = 'oneway';
+
+    var today = new Date();
+    this.minDate = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0)
+    };
+
+    console.log(this.minDate);
 
     this.api.airportList().subscribe((data: any) => {
       this.airportList = data;

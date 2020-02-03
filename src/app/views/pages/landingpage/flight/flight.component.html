@@ -171,16 +171,9 @@
                         <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
                         Berangkat
                       </label>
-                      <!--                      <input type="text"-->
-                      <!--                             ngxDaterangepickerMd-->
-                      <!--                             [(ngModel)]="departureDate"-->
-                      <!--                             [locale]="{format: 'DD MMMM YYYY'}"-->
-                      <!--                             (change)="datePickerFrom($event)"-->
-                      <!--                             formControlName="departure"-->
-                      <!--                             placeholder="Pilih tanggal keberangkatan"-->
-                      <!--                             class="form-control"/>-->
                       <input #d="ngbDatepicker"
                              (click)="d.toggle()"
+                             [minDate]="minDate"
                              class="form-control"
                              formControlName="departure" ngbDatepicker
                              placeholder="Pilih tanggal keberangkatan"
