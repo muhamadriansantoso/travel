@@ -171,8 +171,20 @@
                         <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
                         Berangkat
                       </label>
-                      <input type="text" placeholder="Berangkat" class="form-control checkin_date" formControlName="departure"
-                             style="background: #fff;" autocomplete="off">
+                      <!--                      <input type="text"-->
+                      <!--                             ngxDaterangepickerMd-->
+                      <!--                             [(ngModel)]="departureDate"-->
+                      <!--                             [locale]="{format: 'DD MMMM YYYY'}"-->
+                      <!--                             (change)="datePickerFrom($event)"-->
+                      <!--                             formControlName="departure"-->
+                      <!--                             placeholder="Pilih tanggal keberangkatan"-->
+                      <!--                             class="form-control"/>-->
+                      <input #d="ngbDatepicker"
+                             (click)="d.toggle()"
+                             class="form-control"
+                             formControlName="departure" ngbDatepicker
+                             placeholder="Pilih tanggal keberangkatan"
+                      >
                     </div>
                   </div>
                   <div class="col-sm-6 col-6" *ngIf="roundType == 'roundtrip'">
@@ -181,7 +193,8 @@
                         <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
                         Pulang
                       </label>
-                      <input type="text" placeholder="Pulang" class="form-control checkin_date" formControlName="return"
+                      <input class="form-control checkin_date" formControlName="return"
+                             placeholder="Pilih tanggal kembali" type="text"
                              style="background: #fff;" autocomplete="off">
                     </div>
                   </div>

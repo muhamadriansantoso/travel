@@ -4,6 +4,7 @@ import {APIService} from '../../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Router} from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-flight',
@@ -22,6 +23,7 @@ export class FlightComponent implements OnInit {
   childPassenger: number;
   infantPassenger: number;
   roundType: string;
+  departureDate: string;
   public passengersCollapsed: boolean = false;
 
   constructor(
@@ -88,23 +90,23 @@ export class FlightComponent implements OnInit {
   };
 
   cityAutoComplete(data, formorto) {
-      const dataType = typeof data;
-      if (dataType == 'object') {
-          if (formorto == 'from') {
-              this.fromCity = data.city + ', ' + data.iata;
-              this.formCityValue = data.iata;
-          } else if (formorto == 'to') {
-              this.toCity = data.city + ', ' + data.iata;
-              this.toCityValue = data.iata;
-          }
-      } else {
-          if (formorto == 'from') {
-              this.fromCity = '';
-              this.formCityValue = '';
-          } else if (formorto == 'to') {
-              this.toCity = '';
-              this.toCityValue = '';
-          }
+    const dataType = typeof data;
+    if (dataType == 'object') {
+      if (formorto == 'from') {
+        this.fromCity = data.city + ', ' + data.iata;
+        this.formCityValue = data.iata;
+      } else if (formorto == 'to') {
+        this.toCity = data.city + ', ' + data.iata;
+        this.toCityValue = data.iata;
+      }
+    } else {
+      if (formorto == 'from') {
+        this.fromCity = '';
+        this.formCityValue = '';
+      } else if (formorto == 'to') {
+        this.toCity = '';
+        this.toCityValue = '';
+      }
     }
   }
 
@@ -158,24 +160,28 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlight() {
-      const controls = this.searchFlightForm.controls;
-      const authData = {
-          cabin: controls['cabin'].value,
-          adult: controls['adult'].value,
-          child: controls['child'].value,
-          infant: controls['infant'].value,
-      };
+    const controls = this.searchFlightForm.controls;
+    const authData = {
+      cabin: controls['cabin'].value,
+      adult: controls['adult'].value,
+      child: controls['child'].value,
+      infant: controls['infant'].value,
+      departure: controls['departure'].value,
+    };
+
+    this.departureDate = moment(authData.departure.year + '-' + authData.departure.month + '-' + authData.departure.day).format('YYYY-MM-DD');
+
     this.router.navigate(['/search-flight'], {
       queryParams:
         {
-            d: this.formCityValue,
-            a: this.toCityValue,
-            date: '2020-03-01',
-            r_date: '2020-03-08',
-            adult: authData.adult,
-            child: authData.child,
-            infant: authData.infant,
-            cabin: authData.cabin,
+          d: this.formCityValue,
+          a: this.toCityValue,
+          date: this.departureDate,
+          r_date: '2020-03-08',
+          adult: authData.adult,
+          child: authData.child,
+          infant: authData.infant,
+          cabin: authData.cabin,
           type: 'one-way'
         },
     });
