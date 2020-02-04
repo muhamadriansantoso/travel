@@ -401,7 +401,7 @@
                             </ng-container>
 
                             <ng-container *ngIf="dataflightTrans.numPassenger?.length == undefined">
-                              <ng-container *ngIf="dataflightTrans.numPassenger.passengerCode == 'ADT'">
+                              <ng-container *ngIf="dataflightTrans.numPassenger?.passengerCode == 'ADT'">
                                 {{dataflightTrans.numPassenger.numPassenger}}X Adult Basic price
                                 {{dataflightTrans.platingCarrierName}}
                                 {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
@@ -409,14 +409,14 @@
                                   style="float: right; font-weight: bold">{{dataflightTrans.numPassenger.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                               </ng-container>
                               <ng-container
-                                *ngIf="dataflightTrans.numPassenger.passengerCode == 'CHD' || dataflightTrans.numPassenger.passengerCode == 'CNN'">
+                                *ngIf="dataflightTrans.numPassenger?.passengerCode == 'CHD' || dataflightTrans.numPassenger?.passengerCode == 'CNN'">
                                 {{dataflightTrans.numPassenger.numPassenger}}X Child Basic price
                                 {{dataflightTrans.platingCarrierName}}
                                 {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
                                 <span
                                   style="float: right; font-weight: bold">{{dataflightTrans.numPassenger.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                               </ng-container>
-                              <ng-container *ngIf="dataflightTrans.numPassenger.passengerCode == 'INF'">
+                              <ng-container *ngIf="dataflightTrans.numPassenger?.passengerCode == 'INF'">
                                 {{dataflightTrans.numPassenger.numPassenger}}X Infant Basic price
                                 {{dataflightTrans.platingCarrierName}}
                                 {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
