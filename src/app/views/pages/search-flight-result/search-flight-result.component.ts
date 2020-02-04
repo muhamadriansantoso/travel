@@ -34,7 +34,6 @@ export class SearchFlightResultComponent implements OnInit {
                 .pipe(
                     tap((data: any) => {
                         this.dataFlightSearch = data.data;
-                      console.log(this.dataFlightSearch);
                     }),
                     takeUntil(this.unsubscribe),
                     finalize(() => {
