@@ -5,68 +5,72 @@ import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 
 @Component({
-    selector: 'app-search-flight-result',
-    templateUrl: './search-flight-result.component.html',
-    styleUrls: ['./search-flight-result.component.scss']
+  selector: 'app-search-flight-result',
+  templateUrl: './search-flight-result.component.html',
+  styleUrls: ['./search-flight-result.component.scss']
 })
 export class SearchFlightResultComponent implements OnInit {
 
-    dataFlightSearch: any;
-    loadingPage: boolean;
+  dataFlightSearch: any;
+  loadingPage: boolean;
 
-    public flightDetailsCollapsed: boolean[] = [];
-    public priceDetailsCollapsed: boolean[] = [];
-    private unsubscribe: Subject<any>;
+  public flightDetailsCollapsed: boolean[] = [];
+  public priceDetailsCollapsed: boolean[] = [];
+  private unsubscribe: Subject<any>;
 
-    constructor(
-        private api: APIService,
-        private cdr: ChangeDetectorRef,
-        private route: ActivatedRoute,
-        private router: Router,
-    ) {
-        this.unsubscribe = new Subject();
+  constructor(
+    private api: APIService,
+    private cdr: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.unsubscribe = new Subject();
+  }
+
+  ngOnInit() {
+    this.loadingPage = true;
+    this.route.queryParams.subscribe(params => {
+      this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
+        .pipe(
+          tap((data: any) => {
+            this.dataFlightSearch = data.data;
+          }),
+          takeUntil(this.unsubscribe),
+          finalize(() => {
+            this.loadingPage = false;
+            this.cdr.markForCheck();
+          })
+        )
+        .subscribe();
+    });
+  }
+
+  flightDetailsAllCollapsed(value) {
+    if (!this.flightDetailsCollapsed[value]) {
+      this.flightDetailsCollapsed = [false];
+      this.priceDetailsCollapsed = [false];
+      this.flightDetailsCollapsed[value] = false;
+    } else {
+      this.flightDetailsCollapsed = [false];
+      this.priceDetailsCollapsed = [false];
+      this.flightDetailsCollapsed[value] = true;
     }
+  }
 
-    ngOnInit() {
-        this.loadingPage = true;
-        this.route.queryParams.subscribe(params => {
-            this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
-                .pipe(
-                    tap((data: any) => {
-                        this.dataFlightSearch = data.data;
-                    }),
-                    takeUntil(this.unsubscribe),
-                    finalize(() => {
-                        this.loadingPage = false;
-                        this.cdr.markForCheck();
-                    })
-                )
-                .subscribe();
-        });
+  priceDetailsAllCollapsed(value) {
+    if (!this.priceDetailsCollapsed[value]) {
+      this.priceDetailsCollapsed = [false];
+      this.flightDetailsCollapsed = [false];
+      this.priceDetailsCollapsed[value] = false;
+    } else {
+      this.priceDetailsCollapsed = [false];
+      this.flightDetailsCollapsed = [false];
+      this.priceDetailsCollapsed[value] = true;
     }
+  }
 
-    flightDetailsAllCollapsed(value) {
-        if (!this.flightDetailsCollapsed[value]) {
-            this.flightDetailsCollapsed = [false];
-            this.priceDetailsCollapsed = [false];
-            this.flightDetailsCollapsed[value] = false;
-        } else {
-            this.flightDetailsCollapsed = [false];
-            this.priceDetailsCollapsed = [false];
-            this.flightDetailsCollapsed[value] = true;
-        }
-    }
-
-    priceDetailsAllCollapsed(value) {
-        if (!this.priceDetailsCollapsed[value]) {
-            this.priceDetailsCollapsed = [false];
-            this.flightDetailsCollapsed = [false];
-            this.priceDetailsCollapsed[value] = false;
-        } else {
-            this.priceDetailsCollapsed = [false];
-            this.flightDetailsCollapsed = [false];
-            this.priceDetailsCollapsed[value] = true;
-        }
-    }
+  navigateToBooking() {
+    this.router.navigate(['/prebooking']);
+  }
 
 }

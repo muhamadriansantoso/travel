@@ -16,12 +16,14 @@ import {ClickOutsideModule} from 'ng-click-outside';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {SearchFlightResultComponent} from './views/pages/search-flight-result/search-flight-result.component';
 import {MinuteToHour} from './views/pages/minutetohour.pipe';
+import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
 
 @NgModule({
     declarations: [
       AppComponent,
       SearchFlightResultComponent,
       MinuteToHour,
+      PrebookingComponent,
     ],
     imports: [
         LandingpageModule.forRoot(),

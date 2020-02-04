@@ -1,0 +1,171 @@
+<div class="col-md-12">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form method="POST">
+          <input name="_method" type="hidden" value="PATCH"><input name="_token" type="hidden"
+                                                                   value="Dj1cTpFIBvtTnh0pIAowiohmzJLg2kJglNknOrT6">
+          <input name="departdate" type="hidden" value="07-Mar-2020">
+          <input name="index" type="hidden" value="01AMP1">
+          <input name="type" type="hidden" value="one-way">
+          <input name="cabin" type="hidden" value="Economy">
+          <input name="adult" type="hidden" value="1">
+          <input name="child" type="hidden" value="0">
+          <input name="infant" type="hidden" value="0">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card mb-3">
+                <div class="card-header">
+                  <div class="float-left">
+                    <h5 class="box-title">Contact details - Booker</h5>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="title">Title</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" id="title" name="title" required="">
+                        <option value="Mr">Mr</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Miss">Miss</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="firstname">Given + middle name</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="firstname" name="firstname" required="" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="lastname">Surname / Family name</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="lastname" name="lastname" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
+                    <div class="col-sm-8">
+                      <input class="form-control datepicker-other" id="dob" name="dob" placeholder="dd/mm/yyyy"
+                             required="" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="email">E-mail address</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="email" name="email" required="" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="phone">Mobile phone</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="phone" name="phone" required="" type="text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4 class="mb-3">Passenger details</h4>
+              <div class="alert alert-warning">
+                <h5>Double check your personal details</h5>
+                <p class="mb-0">If the details are not correct, the passenger might be denied boarding. Often you will
+                  then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
+                    class="text-danger">pay extra</span> to make changes.</p>
+              </div>
+              <div class="card mb-2">
+                <div class="card-header">
+                  <div class="float-left">
+                    <h5 class="box-title">Adult 1</h5>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][title]">Title</label>
+                    <div class="col-sm-8">
+                      <select class="form-control" id="passenger[adult][1][title]" name="passenger[adult][1][title]"
+                              required="">
+                        <option value="Mr">Mr</option>
+                        <option value="Ms">Ms</option>
+                        <option value="Miss">Miss</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][firstname]">Given + middle
+                      name</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="passenger[adult][1][firstname]"
+                             name="passenger[adult][1][firstname]" required="" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][lastname]">Surname / Family
+                      name</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="passenger[adult][1][lastname]"
+                             name="passenger[adult][1][lastname]" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][dob]">Date of birth</label>
+                    <div class="col-sm-8">
+                      <input class="form-control datepicker-other" id="passenger[adult][1][dob]"
+                             name="passenger[adult][1][dob]" placeholder="dd/mm/yyyy" required="" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport]">Passport Number</label>
+                    <div class="col-sm-8">
+                      <input class="form-control" id="passenger[adult][1][passport]"
+                             name="passenger[adult][1][passport]" required="" type="text">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport_expiry]">Passport Expiry
+                      Date</label>
+                    <div class="col-sm-8">
+                      <input class="form-control datepicker-other" id="passenger[adult][1][passport_expiry]"
+                             name="passenger[adult][1][passport_expiry]" placeholder="dd/mm/yyyy" required=""
+                             type="text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="text-right">
+            <button class="btn btn-success btn-lg" type="submit">Next <i class="fas fa-long-arrow-alt-right"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="box-title">Detail Price</h5>
+          </div>
+          <div class="card-body pt-2 pb-3">
+            <div class="mt-1">
+              <div class="float-left">Adult x1</div>
+              <div class="float-right">IDR <strong>1.158.250</strong></div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="mt-1">
+              <div class="float-left">Tax And Fees</div>
+              <div class="float-right">IDR <strong>207.355</strong></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="float-left">Total</div>
+            <div class="float-right">IDR <strong>1.365.605</strong></div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
