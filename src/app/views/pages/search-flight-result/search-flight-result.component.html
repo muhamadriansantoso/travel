@@ -372,12 +372,12 @@
                               </div>
                             </ng-container>
 
-                            <ng-container *ngIf="dataflightTrans.numPassenger.length == 1">
+                            <ng-container *ngIf="dataflightTrans.numPassenger.length == undefined">
                               Base price
                               {{dataflightTrans.platingCarrierName}}
                               {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
-                              ({{dataflightTrans.numPassenger.passengerCode}}
-                              ) {{dataflightTrans.numPassenger.numPassenger}}X
+                              ({{dataflightTrans.numPassenger.passengerCode}})
+                              {{dataflightTrans.numPassenger.numPassenger}}X
                               <span
                                 style="float: right; font-weight: bold">{{dataflightTrans.numPassenger.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                             </ng-container>
