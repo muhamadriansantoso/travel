@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
 
 @Component({
@@ -11,13 +11,19 @@ export class PrebookingComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private api: APIService
   ) {
   }
 
   ngOnInit() {
-    this.api.AirPricePort().subscribe((data: any) => {
-      console.log(data);
+    this.route.params.subscribe(sessionID => {
+      this.api.AirBookingGetDataDB(sessionID.sessionID).subscribe((data: any) => {
+        console.log(data.data);
+        this.api.AirPricePort(JSON.stringify(data.data)).subscribe((data: any) => {
+          console.log(data);
+        });
+      });
     });
   }
 

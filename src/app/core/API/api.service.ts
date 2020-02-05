@@ -38,11 +38,33 @@ export class APIService {
     return this.http.get('http://localhost/apitravel/api/v1/flight/search', httpOptions);
   }
 
-  AirPricePort() {
-    var departureTime = encodeURIComponent('2020-12-31T08:25:00.000+07:00');
-    var arrivalTime = encodeURIComponent('2020-12-31T11:50:00.000+08:00');
-    var userData = 'supplier=' + 'travelport1g' + '&origin=' + 'CGK' + '&destination=' + 'KUL' + '&carrier=' + 'GA' + '&departureTime=' + departureTime + '&arrivalTime=' + arrivalTime + '&flightNumber=' + '820';
+  AirBookingInsertDB(sessionID: string, data: any) {
+    var userData = 'sessionID=' + sessionID + '&data=' + data;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post('http://localhost/apitravel/api/v1/flight/prebooking', userData, {headers: urlHeader});
+    return this.http.post('http://localhost/apitravel/api/internal/flight/insertSelectedBooking', userData, {headers: urlHeader});
   }
+
+  AirBookingGetDataDB(sessionID: string) {
+    var userData = 'sessionID=' + sessionID;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post('http://localhost/apitravel/api/internal/flight/getSelectedBooking', userData, {headers: urlHeader});
+  }
+
+  AirPricePort(data: any) {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params: {
+        'data': data
+      }
+    };
+    return this.http.get('http://localhost/apitravel/api/v1/flight/prebooking', httpOptions);
+  }
+
+  // AirPricePort(data:any) {
+  //   var userData = 'data=' + data;
+  //   var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+  //   return this.http.post('http://localhost/apitravel/api/v1/flight/prebooking', userData, {headers: urlHeader});
+  // }
 }

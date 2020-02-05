@@ -15,7 +15,7 @@ const routes: Routes = [
     component: SearchFlightResultComponent
   },
   {
-    path: 'prebooking',
+    path: 'prebooking/:sessionID',
     component: PrebookingComponent
   },
 ];

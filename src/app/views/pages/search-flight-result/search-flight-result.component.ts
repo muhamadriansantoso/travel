@@ -12,6 +12,8 @@ import {Subject} from 'rxjs';
 export class SearchFlightResultComponent implements OnInit {
 
   dataFlightSearch: any;
+  sessionID: string;
+  loadingButton: boolean;
   loadingPage: boolean;
 
   public flightDetailsCollapsed: boolean[] = [];
@@ -34,6 +36,7 @@ export class SearchFlightResultComponent implements OnInit {
         .pipe(
           tap((data: any) => {
             this.dataFlightSearch = data.data;
+            this.sessionID = data.sessionID;
           }),
           takeUntil(this.unsubscribe),
           finalize(() => {
@@ -69,8 +72,24 @@ export class SearchFlightResultComponent implements OnInit {
     }
   }
 
-  navigateToBooking() {
-    this.router.navigate(['prebooking']);
+  navigateToBooking(sessionID, data) {
+    this.loadingButton = true;
+    this.api.AirBookingInsertDB(sessionID, JSON.stringify(data))
+      .pipe(
+        tap((data: any) => {
+          if (data.status == 1) {
+            this.router.navigate(['prebooking', data.sessionID]);
+          } else if (data.status == 0) {
+            window.location.reload();
+          }
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loadingButton = false;
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe();
   }
 
 }
