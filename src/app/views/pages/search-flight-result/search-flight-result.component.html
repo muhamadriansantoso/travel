@@ -259,7 +259,8 @@
             <div class="col-md-2 text-center">
               <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                   currency:'IDR ':'symbol':'3.0'}}</strong></p>
-              <button (click)="navigateToBooking()" class="btn btn-warning  button-search-flight-ticket">Book flight
+              <button (click)="navigateToBooking(dataflight.supplier)"
+                      class="btn btn-warning  button-search-flight-ticket">Book flight
               </button>
             </div>
           </div>

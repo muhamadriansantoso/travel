@@ -70,7 +70,7 @@ export class SearchFlightResultComponent implements OnInit {
   }
 
   navigateToBooking() {
-    this.router.navigate(['/prebooking']);
+    this.router.navigate(['prebooking']);
   }
 
 }
