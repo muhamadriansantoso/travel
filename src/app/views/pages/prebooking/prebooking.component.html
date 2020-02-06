@@ -1,6 +1,6 @@
-<div class="col-md-12">
+<div *ngIf="airPricePort as app" class="col-md-12">
   <div class="container">
-    <div *ngIf="airPricePort as app" class="row">
+    <div class="row">
       <div class="col-md-8">
         <div class="row mb-3">
           <div class="col-md-12">
@@ -106,15 +106,6 @@
     <div class="row">
       <div class="col-md-12">
         <form method="POST">
-          <input name="_method" type="hidden" value="PATCH"><input name="_token" type="hidden"
-                                                                   value="Dj1cTpFIBvtTnh0pIAowiohmzJLg2kJglNknOrT6">
-          <input name="departdate" type="hidden" value="07-Mar-2020">
-          <input name="index" type="hidden" value="01AMP1">
-          <input name="type" type="hidden" value="one-way">
-          <input name="cabin" type="hidden" value="Economy">
-          <input name="adult" type="hidden" value="1">
-          <input name="child" type="hidden" value="0">
-          <input name="infant" type="hidden" value="0">
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-3">
@@ -135,13 +126,13 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="firstname">Given + middle name</label>
+                    <label class="col-sm-4 col-form-label" for="firstname">First Name</label>
                     <div class="col-sm-8">
-                      <input class="form-control" id="firstname" name="firstname" required="" type="text">
+                      <input class="form-control" id="firstname" name="firstname" type="text">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="lastname">Surname / Family name</label>
+                    <label class="col-sm-4 col-form-label" for="lastname">Last Name</label>
                     <div class="col-sm-8">
                       <input class="form-control" id="lastname" name="lastname" type="text">
                     </div>
@@ -149,12 +140,11 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
                     <div class="col-sm-8">
-                      <input class="form-control datepicker-other" id="dob" name="dob" placeholder="dd/mm/yyyy"
-                             required="" type="text">
+                      <input autocomplete="off" class="form-control datepicker-other" id="dob" name="dob" type="text">
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="email">E-mail address</label>
+                    <label class="col-sm-4 col-form-label" for="email">Email address</label>
                     <div class="col-sm-8">
                       <input class="form-control" id="email" name="email" required="" type="text">
                     </div>
@@ -178,10 +168,10 @@
                   then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
                     class="text-danger">pay extra</span> to make changes.</p>
               </div>
-              <div class="card mb-2">
+              <div *ngFor="let ticket of bookingForm.controls; let i = index" class="card mb-2">
                 <div class="card-header">
                   <div class="float-left">
-                    <h5 class="box-title">Adult 1</h5>
+                    <h5 class="box-title">Adult {{i + 1}}</h5>
                   </div>
                 </div>
                 <div class="card-body">
