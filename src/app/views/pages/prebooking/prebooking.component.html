@@ -5,13 +5,33 @@
         <div class="row mb-3">
           <div class="col-md-12">
             <div class="card mb-2">
-              <div class="card-header">
-                <h5 class="box-title">
-                  Jakarta (CGK)
-                  <i class="fas fa-long-arrow-alt-right"></i>
-                  Denpasar (DPS)
-                </h5>
-              </div>
+              <ng-container *ngIf="app.airSegment?.length == 1">
+                <div class="card-header">
+                  <h5 class="box-title">
+                    {{app.airSegment[0].Origin_city_name}} ({{app.airSegment[0].Origin}})
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    {{app.airSegment[0].Destination_city_name}} ({{app.airSegment[0].Destination}})
+                  </h5>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="app.airSegment?.length == 2">
+                <div class="card-header">
+                  <h6 class="box-title">
+                    {{app.airSegment[0].Origin_city_name}} ({{app.airSegment[0].Origin}})
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    {{app.airSegment[1].Destination_city_name}} ({{app.airSegment[1].Destination}})
+                  </h6>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="app.airSegment?.length == 3">
+                <div class="card-header">
+                  <h5 class="box-title">
+                    {{app.airSegment[0].Origin_city_name}} ({{app.airSegment[0].Origin}})
+                    <i class="fas fa-long-arrow-alt-right"></i>
+                    {{app.airSegment[2].Destination_city_name}} ({{app.airSegment[2].Destination}})
+                  </h5>
+                </div>
+              </ng-container>
               <table class="table table-striped mb-0">
                 <thead>
                 <tr>
