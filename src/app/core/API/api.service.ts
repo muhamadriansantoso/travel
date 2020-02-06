@@ -56,7 +56,7 @@ export class APIService {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       params: {
-        'data': data
+        'data': JSON.stringify(data)
       }
     };
     return this.http.get('http://localhost/apitravel/api/v1/flight/prebooking', httpOptions);

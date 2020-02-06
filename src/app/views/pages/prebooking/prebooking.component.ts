@@ -18,10 +18,8 @@ export class PrebookingComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(sessionID => {
-      this.api.AirBookingGetDataDB(sessionID.sessionID).subscribe((data: any) => {
-        console.log(data.data);
-        this.api.AirPricePort(JSON.stringify(data.data)).subscribe((data: any) => {
-          console.log(data);
+      this.api.AirBookingGetDataDB(sessionID.sessionID).subscribe((AirBookingGetDataDB: any) => {
+        this.api.AirPricePort(AirBookingGetDataDB.data).subscribe((AirPricePort: any) => {
         });
       });
     });
