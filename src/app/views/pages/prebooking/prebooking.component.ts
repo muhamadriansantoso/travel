@@ -111,16 +111,20 @@ export class PrebookingComponent implements OnInit {
 
   submitBook() {
     this.submitted = true;
-    if (this.bookingInfoForm.invalid) {
-      const controls = this.bookingInfoForm.controls;
-      Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
-      );
+    this.bookingForm.forEach((data: any) => {
+        console.log(data);
+        if (this.bookingInfoForm.invalid || data.invalid) {
+          const controls = this.bookingInfoForm.controls;
+          Object.keys(controls).forEach(controlName =>
+            controls[controlName].markAsTouched()
+          );
 
-      alert('Data Belum Lengkap');
-    } else {
-      alert('Submit');
-    }
+          alert('Data Belum Lengkap');
+
+          return false;
+        }
+      }
+    );
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
