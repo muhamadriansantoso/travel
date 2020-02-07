@@ -168,65 +168,84 @@
                   then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
                     class="text-danger">pay extra</span> to make changes.</p>
               </div>
-              <div *ngFor="let ticket of bookingForm.controls; let i = index" class="card mb-2">
-                <div class="card-header">
-                  <div class="float-left">
-                    <h5 class="box-title">Adult {{i + 1}}</h5>
+              <ng-container *ngFor="let ticket of passengerType; let i = index">
+                <div *ngFor="let bf of bookingForm[i].controls; let j = index" class="card mb-2">
+                  <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
+                    <div class="card-header">
+                      <div class="float-left">
+                        <h5 class="box-title">Adult {{j + 1}}</h5>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-container
+                    *ngIf="bookingForm[i].value[j].passengerType == 'CHD' || bookingForm[i].value[j].passengerType == 'CNN'">
+                    <div class="card-header">
+                      <div class="float-left">
+                        <h5 class="box-title">Child {{j + 1}}</h5>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'INF'">
+                    <div class="card-header">
+                      <div class="float-left">
+                        <h5 class="box-title">Infant {{j + 1}}</h5>
+                      </div>
+                    </div>
+                  </ng-container>
+                  <div class="card-body">
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][title]">Title</label>
+                      <div class="col-sm-8">
+                        <select class="form-control" id="passenger[adult][1][title]" name="passenger[adult][1][title]"
+                                required="">
+                          <option value="Mr">Mr</option>
+                          <option value="Ms">Ms</option>
+                          <option value="Miss">Miss</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][firstname]">Given + middle
+                        name</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" id="passenger[adult][1][firstname]"
+                               name="passenger[adult][1][firstname]" required="" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][lastname]">Surname / Family
+                        name</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" id="passenger[adult][1][lastname]"
+                               name="passenger[adult][1][lastname]" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][dob]">Date of birth</label>
+                      <div class="col-sm-8">
+                        <input class="form-control datepicker-other" id="passenger[adult][1][dob]"
+                               name="passenger[adult][1][dob]" placeholder="dd/mm/yyyy" required="" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport]">Passport Number</label>
+                      <div class="col-sm-8">
+                        <input class="form-control" id="passenger[adult][1][passport]"
+                               name="passenger[adult][1][passport]" required="" type="text">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport_expiry]">Passport Expiry
+                        Date</label>
+                      <div class="col-sm-8">
+                        <input class="form-control datepicker-other" id="passenger[adult][1][passport_expiry]"
+                               name="passenger[adult][1][passport_expiry]" placeholder="dd/mm/yyyy" required=""
+                               type="text">
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="card-body">
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][title]">Title</label>
-                    <div class="col-sm-8">
-                      <select class="form-control" id="passenger[adult][1][title]" name="passenger[adult][1][title]"
-                              required="">
-                        <option value="Mr">Mr</option>
-                        <option value="Ms">Ms</option>
-                        <option value="Miss">Miss</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][firstname]">Given + middle
-                      name</label>
-                    <div class="col-sm-8">
-                      <input class="form-control" id="passenger[adult][1][firstname]"
-                             name="passenger[adult][1][firstname]" required="" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][lastname]">Surname / Family
-                      name</label>
-                    <div class="col-sm-8">
-                      <input class="form-control" id="passenger[adult][1][lastname]"
-                             name="passenger[adult][1][lastname]" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][dob]">Date of birth</label>
-                    <div class="col-sm-8">
-                      <input class="form-control datepicker-other" id="passenger[adult][1][dob]"
-                             name="passenger[adult][1][dob]" placeholder="dd/mm/yyyy" required="" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport]">Passport Number</label>
-                    <div class="col-sm-8">
-                      <input class="form-control" id="passenger[adult][1][passport]"
-                             name="passenger[adult][1][passport]" required="" type="text">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport_expiry]">Passport Expiry
-                      Date</label>
-                    <div class="col-sm-8">
-                      <input class="form-control datepicker-other" id="passenger[adult][1][passport_expiry]"
-                             name="passenger[adult][1][passport_expiry]" placeholder="dd/mm/yyyy" required=""
-                             type="text">
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </ng-container>
             </div>
           </div>
           <div class="text-right">

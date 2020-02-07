@@ -11,8 +11,9 @@ import {FormArray, FormBuilder, Validators} from '@angular/forms';
 export class PrebookingComponent implements OnInit {
 
   airPricePort: any;
-  airPricePortPassengerNum: any;
-  bookingForm: any;
+  passengerType: any;
+  bookingForm: any = [];
+  passengerLength: any;
 
   constructor(
     private router: Router,
@@ -27,15 +28,19 @@ export class PrebookingComponent implements OnInit {
       this.api.AirBookingGetDataDB(sessionID.sessionID).subscribe((AirBookingGetDataDB: any) => {
         this.api.AirPricePort(AirBookingGetDataDB.data).subscribe((AirPricePort: any) => {
           this.airPricePort = AirPricePort.data[0];
-          this.airPricePortPassengerNum = AirPricePort.data[0].passengerType.length;
+          this.passengerType = AirPricePort.data[0].passengerType;
+          this.passengerLength = AirPricePort.data[0].passengerType.length;
 
-          this.bookingForm = new FormArray([]);
 
-          for (let i = 0; i < this.airPricePortPassengerNum; i++) {
-            this.bookingForm.push(this.formBuilder.group({
-              name: ['', Validators.required],
-              email: ['', [Validators.required, Validators.email]]
-            }));
+          for (var passengerTypeLength = 0; passengerTypeLength < this.passengerLength; passengerTypeLength++) {
+            this.bookingForm[passengerTypeLength] = new FormArray([]);
+            for (var passengerNumLength = 0; passengerNumLength < AirPricePort.data[0].passengerType[passengerTypeLength].numPassenger; passengerNumLength++) {
+              this.bookingForm[passengerTypeLength].push(this.formBuilder.group({
+                name: ['', Validators.required],
+                email: ['', [Validators.required, Validators.email]],
+                passengerType: AirPricePort.data[0].passengerType[passengerTypeLength].code
+              }));
+            }
           }
         });
       });
