@@ -111,20 +111,16 @@ export class PrebookingComponent implements OnInit {
 
   submitBook() {
     this.submitted = true;
-    this.bookingForm.forEach((data: any) => {
-        console.log(data);
-        if (this.bookingInfoForm.invalid || data.invalid) {
-          const controls = this.bookingInfoForm.controls;
-          Object.keys(controls).forEach(controlName =>
-            controls[controlName].markAsTouched()
-          );
+    if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid || this.bookingForm[1].invalid || this.bookingForm[1].invalid) {
+      const controls = this.bookingInfoForm.controls;
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
 
-          alert('Data Belum Lengkap');
-
-          return false;
-        }
-      }
-    );
+      alert('Data Belum Lengkap');
+    } else {
+      alert('Submit');
+    }
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
