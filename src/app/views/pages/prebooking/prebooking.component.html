@@ -118,7 +118,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="title">Title</label>
                     <div class="col-sm-8">
-                      <select [ngClass]="{ 'is-invalid': submitted || isControlHasError('title','required') }"
+                      <select [ngClass]="{ 'is-invalid': isControlHasError('title','required') }"
                               class="form-control" formControlName="title" id="title">
                         <option value="Mr">Mr</option>
                         <option value="Ms">Ms</option>
@@ -133,7 +133,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="firstname">First Name</label>
                     <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': submitted || isControlHasError('firstname','required') }"
+                      <input [ngClass]="{ 'is-invalid': isControlHasError('firstname','required') }"
                              class="form-control" formControlName="firstname" id="firstname" type="text">
                       <div *ngIf="isControlHasError('firstname','required')" class="invalid-feedback"
                            style="display: block">
@@ -144,7 +144,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="lastname">Last Name</label>
                     <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': submitted || isControlHasError('lastname','required') }"
+                      <input [ngClass]="{ 'is-invalid': isControlHasError('lastname','required') }"
                              class="form-control" formControlName="lastname" id="lastname" type="text">
                       <div *ngIf="isControlHasError('lastname','required')" class="invalid-feedback"
                            style="display: block">
@@ -155,7 +155,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
                     <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': submitted || isControlHasError('dob','required') }"
+                      <input [ngClass]="{ 'is-invalid': isControlHasError('dob','required') }"
                              autocomplete="off" class="form-control datepicker-other" formControlName="dob" id="dob"
                              type="text">
                       <div *ngIf="isControlHasError('dob','required')" class="invalid-feedback"
@@ -168,7 +168,7 @@
                     <label class="col-sm-4 col-form-label" for="email">Email address</label>
                     <div class="col-sm-8">
                       <input
-                        [ngClass]="{ 'is-invalid': submitted || isControlHasError('email','required') ||  isControlHasError('email','email')}"
+                        [ngClass]="{ 'is-invalid': isControlHasError('email','required') ||  isControlHasError('email','email')}"
                         class="form-control" formControlName="email" id="email" type="text">
                       <div *ngIf="isControlHasError('email','required')" class="invalid-feedback"
                            style="display: block">
@@ -183,7 +183,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="phone">Mobile phone</label>
                     <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': submitted || isControlHasError('phone','required') }"
+                      <input [ngClass]="{ 'is-invalid': isControlHasError('phone','required') }"
                              class="form-control" formControlName="phone" id="phone" type="text">
                       <div *ngIf="isControlHasError('phone','required')" class="invalid-feedback"
                            style="display: block">
@@ -237,6 +237,10 @@
                           <option value="Ms">Ms</option>
                           <option value="Miss">Miss</option>
                         </select>
+                        <div *ngIf="isControlHasError('passenger_title','required')" class="invalid-feedback"
+                             style="display: block">
+                          Passenger Title is required
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -244,6 +248,10 @@
                       <div class="col-sm-8">
                         <input class="form-control" formControlName="passenger_firstname" id="passenger_firstname"
                                type="text">
+                        <div *ngIf="isControlHasError('passenger_firstname','required')" class="invalid-feedback"
+                             style="display: block">
+                          Passenger First Name is required
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -251,6 +259,10 @@
                       <div class="col-sm-8">
                         <input class="form-control" formControlName="passenger_lastname" id="passenger_lastname"
                                type="text">
+                        <div *ngIf="isControlHasError('passenger_lastname','required')" class="invalid-feedback"
+                             style="display: block">
+                          Passenger Last Name is required
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -281,7 +293,7 @@
             </div>
           </div>
           <div class="text-right">
-            <button (click)="submitBook();" class="btn btn-success btn-lg" type="submit">Book <i
+            <button (click)="submitBook();" class="btn btn-success btn-lg" type="submit">Book<i
               class="fas fa-long-arrow-alt-right"></i>
             </button>
           </div>

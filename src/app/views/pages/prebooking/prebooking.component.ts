@@ -111,7 +111,8 @@ export class PrebookingComponent implements OnInit {
 
   submitBook() {
     this.submitted = true;
-    if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid || this.bookingForm[1].invalid || this.bookingForm[1].invalid) {
+    console.log(this.bookingForm[1]);
+    if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid || this.bookingForm[1].invalid || this.bookingForm[2].invalid) {
       const controls = this.bookingInfoForm.controls;
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
