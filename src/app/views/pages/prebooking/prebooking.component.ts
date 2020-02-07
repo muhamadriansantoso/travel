@@ -16,6 +16,8 @@ export class PrebookingComponent implements OnInit {
   bookingForm: any = [];
   passengerLength: any;
 
+  submitted = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -105,6 +107,30 @@ export class PrebookingComponent implements OnInit {
         });
       });
     });
+  }
+
+  submitBook() {
+    this.submitted = true;
+    if (this.bookingInfoForm.invalid) {
+      const controls = this.bookingInfoForm.controls;
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+
+      alert('Data Belum Lengkap');
+    } else {
+      alert('Submit');
+    }
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.bookingInfoForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 
 }
