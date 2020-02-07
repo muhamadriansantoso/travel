@@ -105,7 +105,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <form method="POST">
+        <form [formGroup]="bookingInfoForm">
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-3">
@@ -118,7 +118,7 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="title">Title</label>
                     <div class="col-sm-8">
-                      <select class="form-control" id="title" name="title" required="">
+                      <select class="form-control" formControlName="title" id="title">
                         <option value="Mr">Mr</option>
                         <option value="Ms">Ms</option>
                         <option value="Miss">Miss</option>
@@ -128,31 +128,32 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="firstname">First Name</label>
                     <div class="col-sm-8">
-                      <input class="form-control" id="firstname" name="firstname" type="text">
+                      <input class="form-control" formControlName="firstname" id="firstname" type="text">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="lastname">Last Name</label>
                     <div class="col-sm-8">
-                      <input class="form-control" id="lastname" name="lastname" type="text">
+                      <input class="form-control" formControlName="lastname" id="lastname" type="text">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
                     <div class="col-sm-8">
-                      <input autocomplete="off" class="form-control datepicker-other" id="dob" name="dob" type="text">
+                      <input autocomplete="off" class="form-control datepicker-other" formControlName="dob" id="dob"
+                             type="text">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="email">Email address</label>
                     <div class="col-sm-8">
-                      <input class="form-control" id="email" name="email" required="" type="text">
+                      <input class="form-control" formControlName="email" id="email" type="text">
                     </div>
                   </div>
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="phone">Mobile phone</label>
                     <div class="col-sm-8">
-                      <input class="form-control" id="phone" name="phone" required="" type="text">
+                      <input class="form-control" formControlName="phone" id="phone" type="text">
                     </div>
                   </div>
                 </div>
@@ -168,8 +169,8 @@
                   then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
                     class="text-danger">pay extra</span> to make changes.</p>
               </div>
-              <ng-container *ngFor="let ticket of passengerType; let i = index">
-                <div *ngFor="let bf of bookingForm[i].controls; let j = index" class="card mb-2">
+              <ng-container *ngFor="let pt of passengerType; let i = index">
+                <div *ngFor="let bf of bookingForm[i].controls; let j = index" [formGroup]="bf" class="card mb-2">
                   <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
                     <div class="card-header">
                       <div class="float-left">
@@ -194,10 +195,9 @@
                   </ng-container>
                   <div class="card-body">
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][title]">Title</label>
+                      <label class="col-sm-4 col-form-label" for="passenger_title">Title</label>
                       <div class="col-sm-8">
-                        <select class="form-control" id="passenger[adult][1][title]" name="passenger[adult][1][title]"
-                                required="">
+                        <select class="form-control" formControlName="passenger_title" id="passenger_title">
                           <option value="Mr">Mr</option>
                           <option value="Ms">Ms</option>
                           <option value="Miss">Miss</option>
@@ -205,42 +205,39 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][firstname]">Given + middle
-                        name</label>
+                      <label class="col-sm-4 col-form-label" for="passenger_firstname">First Name</label>
                       <div class="col-sm-8">
-                        <input class="form-control" id="passenger[adult][1][firstname]"
-                               name="passenger[adult][1][firstname]" required="" type="text">
+                        <input class="form-control" formControlName="passenger_firstname" id="passenger_firstname"
+                               type="text">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][lastname]">Surname / Family
-                        name</label>
+                      <label class="col-sm-4 col-form-label" for="passenger_lastname">Last Name</label>
                       <div class="col-sm-8">
-                        <input class="form-control" id="passenger[adult][1][lastname]"
-                               name="passenger[adult][1][lastname]" type="text">
+                        <input class="form-control" formControlName="passenger_lastname" id="passenger_lastname"
+                               type="text">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][dob]">Date of birth</label>
+                      <label class="col-sm-4 col-form-label" for="passenger_dob">Date of birth</label>
                       <div class="col-sm-8">
-                        <input class="form-control datepicker-other" id="passenger[adult][1][dob]"
-                               name="passenger[adult][1][dob]" placeholder="dd/mm/yyyy" required="" type="text">
+                        <input class="form-control datepicker-other" formControlName="passenger_dob" id="passenger_dob"
+                               type="text">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport]">Passport Number</label>
+                      <label class="col-sm-4 col-form-label" for="passenger_passport">Passport Number</label>
                       <div class="col-sm-8">
-                        <input class="form-control" id="passenger[adult][1][passport]"
-                               name="passenger[adult][1][passport]" required="" type="text">
+                        <input class="form-control" formControlName="passenger_passport" id="passenger_passport"
+                               type="text">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label" for="passenger[adult][1][passport_expiry]">Passport Expiry
+                      <label class="col-sm-4 col-form-label" for="passenger_passportexpiry">Passport Expiry
                         Date</label>
                       <div class="col-sm-8">
-                        <input class="form-control datepicker-other" id="passenger[adult][1][passport_expiry]"
-                               name="passenger[adult][1][passport_expiry]" placeholder="dd/mm/yyyy" required=""
-                               type="text">
+                        <input class="form-control datepicker-other" formControlName="passenger_passportexpiry"
+                               id="passenger_passportexpiry" type="text">
                       </div>
                     </div>
                   </div>
