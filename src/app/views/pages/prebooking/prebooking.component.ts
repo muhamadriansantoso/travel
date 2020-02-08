@@ -118,6 +118,14 @@ export class PrebookingComponent implements OnInit {
         controls[controlName].markAsTouched()
       );
 
+      for (var awal = 0; awal < this.passengerLength; awal++) {
+        for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+          Object.keys(this.bookingForm[awal].controls[awal2].controls).forEach(controlName =>
+            this.bookingForm[awal].controls[awal2].controls[controlName].markAsTouched()
+          );
+        }
+      }
+
       alert('Data Belum Lengkap');
     } else {
       alert('Submit');
