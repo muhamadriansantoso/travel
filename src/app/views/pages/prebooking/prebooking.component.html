@@ -204,9 +204,9 @@
                   then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
                     class="text-danger">pay extra</span> to make changes.</p>
               </div>
-              <div *ngFor="let bf of df.controls; let j = index" class="card mb-2">
-                <ng-container [formGroup]="bf">
-                  <ng-container *ngIf="df.value[j].passengerType == 'ADT'">
+              <ng-container *ngFor="let pt of passengerType; let i = index">
+                <div *ngFor="let bf of bookingForm[i].controls; let j = index" [formGroup]="bf" class="card mb-2">
+                  <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
                     <div class="card-header">
                       <div class="float-left">
                         <h5 class="box-title">Adult {{j + 1}}</h5>
@@ -214,14 +214,14 @@
                     </div>
                   </ng-container>
                   <ng-container
-                    *ngIf="df.value[j].passengerType == 'CHD' || df.value[j].passengerType == 'CNN'">
+                    *ngIf="bookingForm[i].value[j].passengerType == 'CHD' || bookingForm[i].value[j].passengerType == 'CNN'">
                     <div class="card-header">
                       <div class="float-left">
                         <h5 class="box-title">Child {{j + 1}}</h5>
                       </div>
                     </div>
                   </ng-container>
-                  <ng-container *ngIf="df.value[j].passengerType == 'INF'">
+                  <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'INF'">
                     <div class="card-header">
                       <div class="float-left">
                         <h5 class="box-title">Infant {{j + 1}}</h5>
@@ -237,18 +237,31 @@
                           <option value="Ms">Ms</option>
                           <option value="Miss">Miss</option>
                         </select>
+                        <div *ngIf="isControlHasError('passenger_title','required')" class="invalid-feedback"
+                             style="display: block">
+                          Passenger Title is required
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">First Name</label>
                       <div class="col-sm-8">
                         <input class="form-control" formControlName="passenger_firstname" type="text">
+                        <div *ngIf="isControlHasError('passenger_firstname','required')" class="invalid-feedback"
+                             style="display: block">
+                          Passenger First Name is required
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Last Name</label>
+                      <label class="col-sm-4 col-form-label" for="passenger_lastname">Last Name</label>
                       <div class="col-sm-8">
-                        <input class="form-control" formControlName="passenger_lastname" type="text">
+                        <input class="form-control" formControlName="passenger_lastname" id="passenger_lastname"
+                               type="text">
+                        <div *ngIf="isControlHasError('passenger_lastname','required')" class="invalid-feedback"
+                             style="display: block">
+                          Passenger Last Name is required
+                        </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -272,8 +285,8 @@
                       </div>
                     </div>
                   </div>
-                </ng-container>
-              </div>
+                </div>
+              </ng-container>
             </div>
           </div>
           <div class="text-right">
