@@ -154,17 +154,4 @@ export class PrebookingComponent implements OnInit {
     return result;
   }
 
-  isControlHasErrorDynamic(controlName: string, validationType: string): boolean {
-    for (var awal = 0; awal < this.passengerLength; awal++) {
-      for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
-        if (!this.bookingForm[awal].controls[awal2].controls[controlName]) {
-          return false;
-        }
-
-        const result = this.bookingForm[awal].controls[awal2].controls[controlName].hasError(validationType) && (this.bookingForm[awal].controls[awal2].controls[controlName].dirty || this.bookingForm[awal].controls[awal2].controls[controlName].touched);
-        return result;
-      }
-    }
-  }
-
 }
