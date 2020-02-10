@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-prebooking',
   templateUrl: './prebooking.component.html',
   styleUrls: ['./prebooking.component.scss']
 })
-export class PrebookingComponent implements OnInit {
+export class PrebookingComponent implements OnInit, OnDestroy {
 
   airPricePort: any;
   passengerType: any;
@@ -16,20 +17,31 @@ export class PrebookingComponent implements OnInit {
   bookingForm: any = [];
   passengerLength: any;
 
+  submitPassengerData: any = [];
+
   submitted = false;
+
+  private unsubscribe: Subject<any>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private api: APIService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
   ) {
+    this.unsubscribe = new Subject();
   }
 
   ngOnInit() {
     //start panggil function initBookingForm
     this.initBookingForm();
     //end panggil function initBookingForm
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 
   initBookingForm() {
@@ -111,9 +123,8 @@ export class PrebookingComponent implements OnInit {
 
   submitBook() {
     this.submitted = true;
-    console.log(this.bookingForm[1]);
+    const controls = this.bookingInfoForm.controls;
     if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid || this.bookingForm[1].invalid || this.bookingForm[2].invalid) {
-      const controls = this.bookingInfoForm.controls;
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
       );
@@ -127,9 +138,37 @@ export class PrebookingComponent implements OnInit {
       }
 
       alert('Data Belum Lengkap');
-    } else {
-      alert('Submit');
+      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+      // return;
     }
+
+    for (var awal = 0; awal < this.passengerLength; awal++) {
+      for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+        this.submitPassengerData = {
+          'passengerType': this.bookingForm[awal].controls[awal2].controls['passengerType'].value,
+          'passengerTitle': this.bookingForm[awal].controls[awal2].controls['passenger_title'].value,
+          'passengerFirstName': this.bookingForm[awal].controls[awal2].controls['passenger_firstname'].value,
+          'passengerLastName': this.bookingForm[awal].controls[awal2].controls['passenger_lastname'].value,
+          'passengerDob': this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value,
+          'passengerPassport': this.bookingForm[awal].controls[awal2].controls['passenger_passport'].value,
+          'passengerPassportExpiry': this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value,
+        };
+
+        console.log(this.submitPassengerData);
+      }
+    }
+
+    // console.log(bookingTraveler);
+    // this.api.AirCreateReservationPort(bookingTraveler).pipe(
+    //   tap((data:any) => {
+    //     console.log(data)
+    //   }),
+    //   takeUntil(this.unsubscribe),
+    //   finalize(() => {
+    //     this.cdr.markForCheck();
+    //   })
+    // )
+    //   .subscribe();
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
