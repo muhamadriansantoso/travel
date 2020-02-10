@@ -13,6 +13,8 @@ export class SearchFlightResultComponent implements OnInit {
 
   dataFlightSearch: any;
   airLineListUnique: any = [];
+  transitListUnique: any = [];
+  transitListSelected: any = [];
   sessionID: string;
   loadingButton: boolean;
   loadingPage: boolean;
@@ -43,9 +45,9 @@ export class SearchFlightResultComponent implements OnInit {
               dataPesawat.transData.forEach((transData: any) => {
                 this.airLineListUnique.push(transData.platingCarrierName);
               });
-            });
 
-            console.log(this.airLineListUnique);
+              this.transitListUnique.push(dataPesawat.stop);
+            });
           }),
           takeUntil(this.unsubscribe),
           finalize(() => {
@@ -99,6 +101,10 @@ export class SearchFlightResultComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  transitListChange(value) {
+    this.transitListSelected = value;
   }
 
 }
