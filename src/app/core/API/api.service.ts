@@ -62,13 +62,14 @@ export class APIService {
     return this.http.get('http://localhost/apitravel/api/v1/flight/prebooking', httpOptions);
   }
 
-  AirCreateReservationPort(bookingTraveler: any) {
+  AirCreateReservationPort(bookingTraveler: any, airPricePort: any) {
     const httpOptions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       params: {
-        'bookingTraveler': JSON.stringify(bookingTraveler)
+        'bookingTravelerData': JSON.stringify(bookingTraveler),
+        'airPricePortData': JSON.stringify(airPricePort),
       }
     };
     return this.http.get('http://localhost/apitravel/api/v1/flight/booking', httpOptions);

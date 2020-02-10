@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
+import {finalize, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-prebooking',
@@ -13,11 +14,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   airPricePort: any;
   passengerType: any;
+  passengerLength: number;
+
+  submitedPassengerData: any = [];
+
   bookingInfoForm: FormGroup;
   bookingForm: any = [];
-  passengerLength: any;
-
-  submitPassengerData: any = [];
 
   submitted = false;
 
@@ -123,6 +125,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitBook() {
     this.submitted = true;
+    this.submitedPassengerData = [];
     const controls = this.bookingInfoForm.controls;
     if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid || this.bookingForm[1].invalid || this.bookingForm[2].invalid) {
       Object.keys(controls).forEach(controlName =>
@@ -144,31 +147,28 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     for (var awal = 0; awal < this.passengerLength; awal++) {
       for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
-        this.submitPassengerData = {
-          'passengerType': this.bookingForm[awal].controls[awal2].controls['passengerType'].value,
-          'passengerTitle': this.bookingForm[awal].controls[awal2].controls['passenger_title'].value,
-          'passengerFirstName': this.bookingForm[awal].controls[awal2].controls['passenger_firstname'].value,
-          'passengerLastName': this.bookingForm[awal].controls[awal2].controls['passenger_lastname'].value,
-          'passengerDob': this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value,
-          'passengerPassport': this.bookingForm[awal].controls[awal2].controls['passenger_passport'].value,
-          'passengerPassportExpiry': this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value,
-        };
-
-        console.log(this.submitPassengerData);
+        this.submitedPassengerData.push({
+          passengerType: this.bookingForm[awal].controls[awal2].controls['passengerType'].value,
+          passengerTitle: this.bookingForm[awal].controls[awal2].controls['passenger_title'].value,
+          passengerFirstName: this.bookingForm[awal].controls[awal2].controls['passenger_firstname'].value,
+          passengerLastName: this.bookingForm[awal].controls[awal2].controls['passenger_lastname'].value,
+          passengerDOB: this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value,
+          passengerPassport: this.bookingForm[awal].controls[awal2].controls['passenger_passport'].value,
+          passengerPassportExpiry: this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value,
+        });
       }
     }
 
-    // console.log(bookingTraveler);
-    // this.api.AirCreateReservationPort(bookingTraveler).pipe(
-    //   tap((data:any) => {
-    //     console.log(data)
-    //   }),
-    //   takeUntil(this.unsubscribe),
-    //   finalize(() => {
-    //     this.cdr.markForCheck();
-    //   })
-    // )
-    //   .subscribe();
+    this.api.AirCreateReservationPort(this.submitedPassengerData, this.airPricePort).pipe(
+      tap((data: any) => {
+        console.log(data);
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.cdr.markForCheck();
+      })
+    )
+      .subscribe();
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
