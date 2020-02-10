@@ -12,6 +12,7 @@ import {Subject} from 'rxjs';
 export class SearchFlightResultComponent implements OnInit {
 
   dataFlightSearch: any;
+  airLineListUnique: any = [];
   sessionID: string;
   loadingButton: boolean;
   loadingPage: boolean;
@@ -37,6 +38,14 @@ export class SearchFlightResultComponent implements OnInit {
           tap((data: any) => {
             this.dataFlightSearch = data.data;
             this.sessionID = data.sessionID;
+
+            data.data.forEach((dataPesawat: any) => {
+              dataPesawat.transData.forEach((transData: any) => {
+                this.airLineListUnique.push(transData.platingCarrierName);
+              });
+            });
+
+            console.log(this.airLineListUnique);
           }),
           takeUntil(this.unsubscribe),
           finalize(() => {

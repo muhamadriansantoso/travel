@@ -13,13 +13,9 @@
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
-          <h4 align="center" class="mb-4" style="margin-top: 30px;margin-bottom: 10px;">Airlines</h4>
+          <h4 align="center" style="margin-top: 30px;margin-bottom: 10px;">Airlines</h4>
           <ul style="list-style:none;float: left;">
-            <li><input style="background:#09f;" type="checkbox"> Garuda Airlines</li>
-            <li><input type="checkbox"> Batik Air</li>
-            <li><input type="checkbox"> Qatar Airways</li>
-            <li><input type="checkbox"> Lion Air</li>
-            <li><input type="checkbox"> AirAsia</li>
+            <li *ngFor="let allu of airLineListUnique | unique;"><input type="checkbox"> {{allu}}</li>
           </ul>
         </div>
         <br>

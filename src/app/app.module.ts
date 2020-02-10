@@ -17,6 +17,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {SearchFlightResultComponent} from './views/pages/search-flight-result/search-flight-result.component';
 import {MinuteToHour} from './views/pages/minutetohour.pipe';
 import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
+import {UniquePipe} from './views/pages/unique.pipe';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import {PrebookingComponent} from './views/pages/prebooking/prebooking.component
       SearchFlightResultComponent,
       MinuteToHour,
       PrebookingComponent,
+      UniquePipe,
     ],
     imports: [
         LandingpageModule.forRoot(),
