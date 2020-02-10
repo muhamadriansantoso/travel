@@ -24,8 +24,8 @@
         <div class="card">
           <h4 align="center" class="mb-4" style="margin-top: 30px;margin-bottom: 10px;">Transit</h4>
           <ul style="list-style:none;">
-            <li *ngFor="let tlu of transitListUnique | unique"><input (change)="transitListChange(tlu)"
-                                                                      style="margin-right:5px;" type="checkbox">{{tlu}}
+            <li *ngFor="let tlu of transitListUnique | unique">
+              <input (change)="transitListChange(tlu)" style="margin-right:5px;" type="checkbox">{{tlu}}
               Transit
             </li>
           </ul>
