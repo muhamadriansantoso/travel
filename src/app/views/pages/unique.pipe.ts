@@ -9,7 +9,7 @@ export class UniquePipe implements PipeTransform {
 
   transform(value: any): any {
     if (value !== undefined && value !== null) {
-      return _.uniqBy(value);
+      return _.uniqBy(value, 'value');
     }
     return value;
   }

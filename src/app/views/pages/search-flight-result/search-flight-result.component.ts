@@ -43,10 +43,14 @@ export class SearchFlightResultComponent implements OnInit {
 
             data.data.forEach((dataPesawat: any) => {
               dataPesawat.transData.forEach((transData: any) => {
-                this.airLineListUnique.push(transData.platingCarrierName);
+                this.airLineListUnique.push({
+                  value: transData.platingCarrierName
+                });
               });
 
-              this.transitListUnique.push(dataPesawat.stop);
+              this.transitListUnique.push({
+                value: dataPesawat.stop
+              });
             });
           }),
           takeUntil(this.unsubscribe),
@@ -103,8 +107,10 @@ export class SearchFlightResultComponent implements OnInit {
       .subscribe();
   }
 
-  transitListChange(value) {
-    this.transitListSelected = value;
+  checked() {
+    return this.transitListUnique.filter(item => {
+      return item.checked;
+    });
   }
 
 }

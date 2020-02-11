@@ -9,24 +9,25 @@
 </section>
 <section class="ftco-section" style="padding: 0;" *ngIf="!loadingPage">
   <div class="container">
-    <h4 align="center" class="col-sm-3  menu-filter-pc">Filter</h4>
+    <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
-          <h4 align="center" style="margin-top: 30px;margin-bottom: 10px;">Airlines</h4>
+          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Airlines</h4>
           <ul style="list-style:none;float: left;">
-            <li *ngFor="let allu of airLineListUnique | unique;"><input style="margin-right:5px;"
-                                                                        type="checkbox">{{allu}}</li>
+            <li *ngFor="let allu of airLineListUnique | unique;">
+              <input style="margin-right:5px;" type="checkbox">{{allu.value}}</li>
           </ul>
         </div>
         <br>
 
         <div class="card">
-          <h4 align="center" class="mb-4" style="margin-top: 30px;margin-bottom: 10px;">Transit</h4>
+          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Transit</h4>
           <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
-              <input (change)="transitListChange(tlu)" style="margin-right:5px;" type="checkbox">{{tlu}}
-              Transit
+              <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
+              <span *ngIf="tlu.value == 1">Direct</span>
+              <span *ngIf="tlu.value != 1">{{tlu.value - 1}} Transit</span>
             </li>
           </ul>
         </div>
@@ -40,7 +41,8 @@
       </div>
       <br>
       <div class="col-sm-9 col-md-9">
-        <ng-container *ngFor="let dataflight of dataFlightSearch; let i = index">
+        <ng-container
+          *ngFor="let dataflight of dataFlightSearch | filter: { stop: ''} : checked() : false; let i = index">
           <div *ngIf="dataflight.stop == transitListSelected || this.transitListSelected == ''"
                class="card card-ticket">
             <div class="row">

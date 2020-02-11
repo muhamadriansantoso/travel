@@ -18,6 +18,7 @@ import {SearchFlightResultComponent} from './views/pages/search-flight-result/se
 import {MinuteToHour} from './views/pages/minutetohour.pipe';
 import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
 import {UniquePipe} from './views/pages/unique.pipe';
+import {CheckboxFilterPipe} from './views/pages/search-flight-result/checkbox-filter.pipe';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {UniquePipe} from './views/pages/unique.pipe';
       MinuteToHour,
       PrebookingComponent,
       UniquePipe,
+      CheckboxFilterPipe,
     ],
     imports: [
         LandingpageModule.forRoot(),
