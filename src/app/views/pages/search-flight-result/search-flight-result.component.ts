@@ -12,9 +12,9 @@ import {Subject} from 'rxjs';
 export class SearchFlightResultComponent implements OnInit {
 
   dataFlightSearch: any;
+  airLine: string;
   airLineListUnique: any = [];
   transitListUnique: any = [];
-  transitListSelected: any = [];
   sessionID: string;
   loadingButton: boolean;
   loadingPage: boolean;
@@ -40,6 +40,9 @@ export class SearchFlightResultComponent implements OnInit {
           tap((data: any) => {
             this.dataFlightSearch = data.data;
             this.sessionID = data.sessionID;
+            this.airLine = data.data[0].transData[0].platingCarrierName;
+
+            console.log(this.airLine);
 
             data.data.forEach((dataPesawat: any) => {
               dataPesawat.transData.forEach((transData: any) => {
@@ -107,9 +110,15 @@ export class SearchFlightResultComponent implements OnInit {
       .subscribe();
   }
 
-  checked() {
-    return this.transitListUnique.filter(item => {
-      return item.checked;
+  checkedAirline() {
+    return this.airLineListUnique.filter(airline => {
+      return airline.checked;
+    });
+  }
+
+  checkedTransit() {
+    return this.transitListUnique.filter(transit => {
+      return transit.checked;
     });
   }
 

@@ -4,29 +4,37 @@ import {Pipe, PipeTransform} from '@angular/core';
   name: 'filter'
 })
 export class CheckboxFilterPipe implements PipeTransform {
-  transform(items: any, filter: any, filterItems: Array<any>, isAnd: boolean): any {
-    if (filter && Array.isArray(items) && filterItems) {
-      let filterKeys = Object.keys(filter);
-      let checkedItems = filterItems.filter(item => {
+  transform(items: any, filterTransit: any, filterTransits: Array<any>, isAndTransit: boolean, filterAirline: any, filterAirLines: Array<any>, isAndAirline: boolean): any {
+    if (filterTransit && filterAirline && Array.isArray(items) && filterTransits && filterAirLines) {
+      let filterKeysTransit = Object.keys(filterTransit);
+      let filterKeysAirline = Object.keys(filterAirline);
+
+      let checkedItemsTransit = filterTransits.filter(item => {
         return item.checked;
       });
-      if (!checkedItems || checkedItems.length === 0) {
+      let checkedItemsAirline = filterAirLines.filter(item => {
+        return item.checked;
+      });
+
+      if ((!checkedItemsTransit || checkedItemsTransit.length === 0) && (!checkedItemsAirline || checkedItemsAirline.length === 0)) {
         return items;
       }
-      if (isAnd) {
-        return items.filter(item =>
-          filterKeys.reduce((acc1, keyName) =>
-              (acc1 && checkedItems.reduce((acc2, checkedItem) => acc2 && new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '', true))
-            , true)
-        );
-      } else {
+
+      if (isAndTransit) {
         return items.filter(item => {
-          return filterKeys.some((keyName) => {
-            return checkedItems.some((checkedItem) => {
+          filterKeysTransit.reduce((acc1, keyName) =>
+              (acc1 && checkedItemsTransit.reduce((acc2, checkedItem) => acc2 && new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '', true))
+            , true);
+        });
+      } else {
+        console.log('hit transit');
+        return items.filter(item => {
+          return filterKeysTransit.some((keyName) => {
+            return checkedItemsTransit.some((checkedItem) => {
               return new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '';
             });
+            });
           });
-        });
       }
     } else {
       return items;
