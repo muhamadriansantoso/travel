@@ -17,6 +17,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   passengerType: any;
   passengerLength: number;
 
+  listPaymentChannel: any;
+
   submitedPassengerData: any = [];
 
   bookingInfoForm: FormGroup;
@@ -40,6 +42,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.loadingPage = true;
     //start panggil function initBookingForm
     this.initBookingForm();
+
+    this.api.paymentChannel().subscribe((data: any) => {
+      this.listPaymentChannel = data.data;
+    });
     //end panggil function initBookingForm
   }
 
@@ -170,7 +176,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     this.api.AirCreateReservationPort(this.submitedPassengerData, this.airPricePort).pipe(
       tap((data: any) => {
-        console.log(data);
       }),
       takeUntil(this.unsubscribe),
       finalize(() => {

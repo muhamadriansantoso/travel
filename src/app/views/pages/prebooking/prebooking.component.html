@@ -346,8 +346,17 @@
           <div class="row">
             <div class="col-md-12 mb-3">
               <h4>Payment</h4>
-              <div class="col-md-8">
+              <div class="col-md-12">
                 <form>
+                  <ng-container *ngFor="let lpc of listPaymentChannel">
+                    <label class="card card-body d-block p-3 mb-3 pointer">
+                      <input name="product" type="radio" value="{{lpc.bankCode}}">
+                      <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
+                      <img class="float-right" height="22"
+                           src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
+                      <div class="clearfix"></div>
+                    </label>
+                  </ng-container>
                   <input class="btn btn-success" id="submit" name="submit" type="submit" value="Submit">
                 </form>
               </div>
