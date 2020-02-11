@@ -24,8 +24,10 @@ export class CheckboxFilterPipe implements PipeTransform {
         if (temp.length == 0) {
           for (let i = 0; i < list.length; i++) {
             for (let j = 0; j < airlineItems.length; j++) {
-              if (list[i].transData[0].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
-                temp.push(list[i]);
+              for (let k = 0; k < list[i].transData.length; k++) {
+                if (list[i].transData[k].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
+                  temp.push(list[i]);
+                }
               }
             }
           }
@@ -33,8 +35,10 @@ export class CheckboxFilterPipe implements PipeTransform {
           let tempSearch: any[] = [];
           for (let i = 0; i < temp.length; i++) {
             for (let j = 0; j < airlineItems.length; j++) {
-              if (temp[i].transData[0].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
-                tempSearch.push(temp[i]);
+              for (let k = 0; k < list[i].transData.length; k++) {
+                if (temp[i].transData[k].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
+                  tempSearch.push(temp[i]);
+                }
               }
             }
           }

@@ -43,6 +43,9 @@ export class SearchFlightResultComponent implements OnInit {
             this.airLine = data.data[0].transData[0].platingCarrierName;
 
             data.data.forEach((dataPesawat: any) => {
+              // this.airLineListUnique.push({
+              //   value: dataPesawat.transData[0].platingCarrierName
+              // });
               dataPesawat.transData.forEach((transData: any) => {
                 this.airLineListUnique.push({
                   value: transData.platingCarrierName
