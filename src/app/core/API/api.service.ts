@@ -75,6 +75,15 @@ export class APIService {
     return this.http.get('http://localhost/apitravel/api/v1/flight/booking', httpOptions);
   }
 
+  paymentChannel() {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    };
+    return this.http.post('http://localhost/apitravel/api/v1/payment', httpOptions);
+  }
+
   // AirPricePort(data:any) {
   //   var userData = 'data=' + data;
   //   var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});

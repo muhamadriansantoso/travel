@@ -112,226 +112,255 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <form [formGroup]="bookingInfoForm">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card mb-3">
-                <div class="card-header">
-                  <div class="float-left">
-                    <h5 class="box-title">Contact details - Booker</h5>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="title">Title</label>
-                    <div class="col-sm-8">
-                      <select [ngClass]="{ 'is-invalid': isControlHasError('title','required') }"
-                              class="form-control" formControlName="title" id="title">
-                        <option value="Mr">Mr</option>
-                        <option value="Ms">Ms</option>
-                        <option value="Miss">Miss</option>
-                      </select>
-                      <div *ngIf="isControlHasError('title','required')" class="invalid-feedback"
-                           style="display: block">
-                        Title is required
+    <mat-horizontal-stepper #stepper [linear]="true">
+      <mat-step>
+        <div class="row">
+          <div class="col-md-12">
+            <form [formGroup]="bookingInfoForm">
+              <ng-template matStepLabel>Booking Details</ng-template>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card mb-3">
+                    <div class="card-header">
+                      <div class="float-left">
+                        <h5 class="box-title">Contact details - Booker</h5>
                       </div>
                     </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="firstname">First Name</label>
-                    <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': isControlHasError('firstname','required') }"
-                             class="form-control" formControlName="firstname" id="firstname" type="text">
-                      <div *ngIf="isControlHasError('firstname','required')" class="invalid-feedback"
-                           style="display: block">
-                        First Name is required
+                    <div class="card-body">
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="title">Title</label>
+                        <div class="col-sm-8">
+                          <select [ngClass]="{ 'is-invalid': isControlHasError('title','required') }"
+                                  class="form-control" formControlName="title" id="title">
+                            <option value="Mr">Mr</option>
+                            <option value="Ms">Ms</option>
+                            <option value="Miss">Miss</option>
+                          </select>
+                          <div *ngIf="isControlHasError('title','required')" class="invalid-feedback"
+                               style="display: block">
+                            Title is required
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="lastname">Last Name</label>
-                    <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': isControlHasError('lastname','required') }"
-                             class="form-control" formControlName="lastname" id="lastname" type="text">
-                      <div *ngIf="isControlHasError('lastname','required')" class="invalid-feedback"
-                           style="display: block">
-                        Last Name is required
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="firstname">First Name</label>
+                        <div class="col-sm-8">
+                          <input [ngClass]="{ 'is-invalid': isControlHasError('firstname','required') }"
+                                 class="form-control" formControlName="firstname" id="firstname" type="text">
+                          <div *ngIf="isControlHasError('firstname','required')" class="invalid-feedback"
+                               style="display: block">
+                            First Name is required
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
-                    <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': isControlHasError('dob','required') }"
-                             autocomplete="off" class="form-control datepicker-other" formControlName="dob" id="dob"
-                             type="text">
-                      <div *ngIf="isControlHasError('dob','required')" class="invalid-feedback"
-                           style="display: block">
-                        Date of Birth is required
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="lastname">Last Name</label>
+                        <div class="col-sm-8">
+                          <input [ngClass]="{ 'is-invalid': isControlHasError('lastname','required') }"
+                                 class="form-control" formControlName="lastname" id="lastname" type="text">
+                          <div *ngIf="isControlHasError('lastname','required')" class="invalid-feedback"
+                               style="display: block">
+                            Last Name is required
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="email">Email address</label>
-                    <div class="col-sm-8">
-                      <input
-                        [ngClass]="{ 'is-invalid': isControlHasError('email','required') ||  isControlHasError('email','email')}"
-                        class="form-control" formControlName="email" id="email" type="text">
-                      <div *ngIf="isControlHasError('email','required')" class="invalid-feedback"
-                           style="display: block">
-                        Email Address is required
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
+                        <div class="col-sm-8">
+                          <input [ngClass]="{ 'is-invalid': isControlHasError('dob','required') }"
+                                 autocomplete="off" class="form-control datepicker-other" formControlName="dob" id="dob"
+                                 type="text">
+                          <div *ngIf="isControlHasError('dob','required')" class="invalid-feedback"
+                               style="display: block">
+                            Date of Birth is required
+                          </div>
+                        </div>
                       </div>
-                      <div *ngIf="isControlHasError('email','email')" class="invalid-feedback"
-                           style="display: block">
-                        Email Address must be a valid email address
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="email">Email address</label>
+                        <div class="col-sm-8">
+                          <input
+                            [ngClass]="{ 'is-invalid': isControlHasError('email','required') ||  isControlHasError('email','email')}"
+                            class="form-control" formControlName="email" id="email" type="text">
+                          <div *ngIf="isControlHasError('email','required')" class="invalid-feedback"
+                               style="display: block">
+                            Email Address is required
+                          </div>
+                          <div *ngIf="isControlHasError('email','email')" class="invalid-feedback"
+                               style="display: block">
+                            Email Address must be a valid email address
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label" for="phone">Mobile phone</label>
-                    <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': isControlHasError('phone','required') }"
-                             class="form-control" formControlName="phone" id="phone" type="text">
-                      <div *ngIf="isControlHasError('phone','required')" class="invalid-feedback"
-                           style="display: block">
-                        Phone is required
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" for="phone">Mobile phone</label>
+                        <div class="col-sm-8">
+                          <input [ngClass]="{ 'is-invalid': isControlHasError('phone','required') }"
+                                 class="form-control" formControlName="phone" id="phone" type="text">
+                          <div *ngIf="isControlHasError('phone','required')" class="invalid-feedback"
+                               style="display: block">
+                            Phone is required
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <h4 class="mb-3">Passenger details</h4>
-              <div class="alert alert-warning">
-                <h5>Double check your personal details</h5>
-                <p class="mb-0">If the details are not correct, the passenger might be denied boarding. Often you will
-                  then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
-                    class="text-danger">pay extra</span> to make changes.</p>
-              </div>
-              <ng-container *ngFor="let pt of passengerType; let i = index">
-                <div *ngFor="let bf of bookingForm[i].controls; let j = index" [formGroup]="bf" class="card mb-2">
-                  <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
-                    <div class="card-header">
-                      <div class="float-left">
-                        <h5 class="box-title">Adult {{j + 1}}</h5>
-                      </div>
-                    </div>
-                  </ng-container>
-                  <ng-container
-                    *ngIf="bookingForm[i].value[j].passengerType == 'CHD' || bookingForm[i].value[j].passengerType == 'CNN'">
-                    <div class="card-header">
-                      <div class="float-left">
-                        <h5 class="box-title">Child {{j + 1}}</h5>
-                      </div>
-                    </div>
-                  </ng-container>
-                  <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'INF'">
-                    <div class="card-header">
-                      <div class="float-left">
-                        <h5 class="box-title">Infant {{j + 1}}</h5>
-                      </div>
-                    </div>
-                  </ng-container>
-                  <div class="card-body">
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Title</label>
-                      <div class="col-sm-8">
-                        <select [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_title','required', i, j)}"
-                                class="form-control" formControlName="passenger_title">
-                          <option value="Mr">Mr</option>
-                          <option value="Ms">Ms</option>
-                          <option value="Miss">Miss</option>
-                        </select>
-                        <div *ngIf="isControlHasErrorDynamic('passenger_title','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Passenger Title is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">First Name</label>
-                      <div class="col-sm-8">
-                        <input
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_firstname','required', i, j)}"
-                          class="form-control" formControlName="passenger_firstname" type="text">
-                        <div *ngIf="isControlHasErrorDynamic('passenger_firstname','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Passenger First Name is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Last Name</label>
-                      <div class="col-sm-8">
-                        <input
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_lastname','required', i, j)}"
-                          class="form-control" formControlName="passenger_lastname" type="text">
-                        <div *ngIf="isControlHasErrorDynamic('passenger_lastname','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Passenger Last Name is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Date of birth</label>
-                      <div class="col-sm-8">
-                        <input [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j)}"
-                               class="form-control datepicker-other" formControlName="passenger_dob" type="text">
-                        <div *ngIf="isControlHasErrorDynamic('passenger_dob','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Passenger Date of Birth is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Passport Number</label>
-                      <div class="col-sm-8">
-                        <input
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_passport','required', i, j)}"
-                          class="form-control" formControlName="passenger_passport" type="text">
-                        <div *ngIf="isControlHasErrorDynamic('passenger_passport','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Passenger Passport is required
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-4 col-form-label">Passport Expiry
-                        Date</label>
-                      <div class="col-sm-8">
-                        <input
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)}"
-                          class="form-control datepicker-other" formControlName="passenger_passportexpiry"
-                          type="text">
-                        <div *ngIf="isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Passenger Passport Expiry is required
-                        </div>
-                      </div>
-                    </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h4 class="mb-3">Passenger details</h4>
+                  <div class="alert alert-warning">
+                    <h5>Double check your personal details</h5>
+                    <p class="mb-0">If the details are not correct, the passenger might be denied boarding. Often you
+                      will
+                      then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
+                        class="text-danger">pay extra</span> to make changes.</p>
                   </div>
+                  <ng-container *ngFor="let pt of passengerType; let i = index">
+                    <div *ngFor="let bf of bookingForm[i].controls; let j = index" [formGroup]="bf" class="card mb-2">
+                      <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
+                        <div class="card-header">
+                          <div class="float-left">
+                            <h5 class="box-title">Adult {{j + 1}}</h5>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container
+                        *ngIf="bookingForm[i].value[j].passengerType == 'CHD' || bookingForm[i].value[j].passengerType == 'CNN'">
+                        <div class="card-header">
+                          <div class="float-left">
+                            <h5 class="box-title">Child {{j + 1}}</h5>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'INF'">
+                        <div class="card-header">
+                          <div class="float-left">
+                            <h5 class="box-title">Infant {{j + 1}}</h5>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div class="card-body">
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Title</label>
+                          <div class="col-sm-8">
+                            <select
+                              [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_title','required', i, j)}"
+                              class="form-control" formControlName="passenger_title">
+                              <option value="Mr">Mr</option>
+                              <option value="Ms">Ms</option>
+                              <option value="Miss">Miss</option>
+                            </select>
+                            <div *ngIf="isControlHasErrorDynamic('passenger_title','required', i, j)"
+                                 class="invalid-feedback"
+                                 style="display: block">
+                              Passenger Title is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">First Name</label>
+                          <div class="col-sm-8">
+                            <input
+                              [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_firstname','required', i, j)}"
+                              class="form-control" formControlName="passenger_firstname" type="text">
+                            <div *ngIf="isControlHasErrorDynamic('passenger_firstname','required', i, j)"
+                                 class="invalid-feedback"
+                                 style="display: block">
+                              Passenger First Name is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Last Name</label>
+                          <div class="col-sm-8">
+                            <input
+                              [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_lastname','required', i, j)}"
+                              class="form-control" formControlName="passenger_lastname" type="text">
+                            <div *ngIf="isControlHasErrorDynamic('passenger_lastname','required', i, j)"
+                                 class="invalid-feedback"
+                                 style="display: block">
+                              Passenger Last Name is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Date of birth</label>
+                          <div class="col-sm-8">
+                            <input
+                              [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j)}"
+                              class="form-control datepicker-other" formControlName="passenger_dob" type="text">
+                            <div *ngIf="isControlHasErrorDynamic('passenger_dob','required', i, j)"
+                                 class="invalid-feedback"
+                                 style="display: block">
+                              Passenger Date of Birth is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Passport Number</label>
+                          <div class="col-sm-8">
+                            <input
+                              [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_passport','required', i, j)}"
+                              class="form-control" formControlName="passenger_passport" type="text">
+                            <div *ngIf="isControlHasErrorDynamic('passenger_passport','required', i, j)"
+                                 class="invalid-feedback"
+                                 style="display: block">
+                              Passenger Passport is required
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Passport Expiry
+                            Date</label>
+                          <div class="col-sm-8">
+                            <input
+                              [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)}"
+                              class="form-control datepicker-other" formControlName="passenger_passportexpiry"
+                              type="text">
+                            <div *ngIf="isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)"
+                                 class="invalid-feedback"
+                                 style="display: block">
+                              Passenger Passport Expiry is required
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
                 </div>
-              </ng-container>
+              </div>
+              <div class="text-right">
+                <button (click)="submitBook();" class="btn btn-success btn-lg" type="submit">Continue <i
+                  class="fas fa-long-arrow-alt-right"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Pay</ng-template>
+        <div class="container content">
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <h4>Payment</h4>
+              <div class="col-md-8">
+                <form>
+                  <input class="btn btn-success" id="submit" name="submit" type="submit" value="Submit">
+                </form>
+              </div>
             </div>
           </div>
-          <div class="text-right">
-            <button (click)="submitBook();" class="btn btn-success btn-lg" type="submit">Book<i
-              class="fas fa-long-arrow-alt-right"></i>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Process</ng-template>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>E-ticket</ng-template>
+      </mat-step>
+    </mat-horizontal-stepper>
   </div>
 </div>
