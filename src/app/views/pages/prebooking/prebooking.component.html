@@ -1,4 +1,13 @@
-<div *ngIf="airPricePort as app" class="col-md-12">
+<section *ngIf="loadingPage" class="loadingValidatingPrice centered-loader text-center">
+  <div class="centered-loader">
+    <img src="https://booking.fixtrips.com/theme/CoreThemeV2/img/loader/layout_1.gif">
+    <div class="theme-loading-body">
+      <h2 class="theme-loading-title">Just a moment</h2>
+      <p class="theme-loading-subtitle">We are validating for flights price </p>
+    </div>
+  </div>
+</section>
+<div *ngIf="!loadingPage && airPricePort as app" class="col-md-12">
   <div class="container">
     <div class="row">
       <div class="col-md-8">

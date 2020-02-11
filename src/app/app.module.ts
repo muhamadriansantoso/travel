@@ -2,6 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -21,40 +22,41 @@ import {UniquePipe} from './views/pages/unique.pipe';
 import {CheckboxFilterPipe} from './views/pages/search-flight-result/checkbox-filter.pipe';
 
 @NgModule({
-    declarations: [
-      AppComponent,
-      SearchFlightResultComponent,
-      MinuteToHour,
-      PrebookingComponent,
-      UniquePipe,
-      CheckboxFilterPipe,
-    ],
-    imports: [
-        LandingpageModule.forRoot(),
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgbModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        BrowserAnimationsModule,
-        NgxSoapModule,
-        ClickOutsideModule,
-        AutocompleteLibModule
-    ],
-    providers: [
-        {
-            provide: DateAdapter,
-            useClass: AppDateAdapter
-        },
-        {
-            provide: MAT_DATE_FORMATS,
-            useValue: APP_DATE_FORMATS
-        },
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    SearchFlightResultComponent,
+    MinuteToHour,
+    PrebookingComponent,
+    UniquePipe,
+    CheckboxFilterPipe,
+  ],
+  imports: [
+    LandingpageModule.forRoot(),
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    NgxSoapModule,
+    ClickOutsideModule,
+    AutocompleteLibModule,
+    MatStepperModule
+  ],
+  providers: [
+    {
+      provide: DateAdapter,
+      useClass: AppDateAdapter
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: APP_DATE_FORMATS
+    },
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
