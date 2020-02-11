@@ -20,7 +20,6 @@ export class CheckboxFilterPipe implements PipeTransform {
       temp = tempCat;
 
       if (airlineItems.length > 0) {
-        console.log(temp);
         if (temp.length == 0) {
           for (let i = 0; i < list.length; i++) {
             for (let j = 0; j < airlineItems.length; j++) {
