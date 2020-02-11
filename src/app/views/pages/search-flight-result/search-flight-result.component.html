@@ -44,7 +44,7 @@
       <br>
       <div class="col-sm-9 col-md-9">
         <div
-          *ngFor="let dataflight of dataFlightSearch | filter: { stop: ''} : checkedTransit() : false : { airLine: ''} : checkedAirline() : false; let i = index"
+          *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
           class="card card-ticket">
           <div class="row">
             <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"

@@ -1,44 +1,72 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
-  name: 'filter'
+  name: 'searchFligthFilter'
 })
 export class CheckboxFilterPipe implements PipeTransform {
-  transform(items: any, filterTransit: any, filterTransits: Array<any>, isAndTransit: boolean, filterAirline: any, filterAirLines: Array<any>, isAndAirline: boolean): any {
-    if (filterTransit && filterAirline && Array.isArray(items) && filterTransits && filterAirLines) {
-      let filterKeysTransit = Object.keys(filterTransit);
-      let filterKeysAirline = Object.keys(filterAirline);
+  transform(list: any, transitFilter: any, transitItems: Array<any>, airlineFilter: any, airlineItems: Array<any>): any {
+    if ((transitItems.length > 0) || (airlineItems.length > 0)) {
+      let temp: any[] = [];
+      let tempCat: any[] = [];
 
-      let checkedItemsTransit = filterTransits.filter(item => {
-        return item.checked;
-      });
-      let checkedItemsAirline = filterAirLines.filter(item => {
-        return item.checked;
-      });
-
-      if ((!checkedItemsTransit || checkedItemsTransit.length === 0) && (!checkedItemsAirline || checkedItemsAirline.length === 0)) {
-        return items;
+      for (let i = 0; i < list.length; i++) {
+        for (let j = 0; j < transitItems.length; j++) {
+          if (list[i].stop.toString().includes(transitItems[j].value.toString())) {
+            tempCat.push(list[i]);
+          }
+        }
       }
 
-      // if (isAndTransit && isAndAirline) {
-      //   return items.filter(item => {
-      //     filterKeysTransit.reduce((acc1, keyName) =>
-      //         (acc1 && checkedItemsTransit.reduce((acc2, checkedItem) => acc2 && new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '', true))
-      //       , true);
-      //   });
-      // }
-      if (!isAndTransit) {
-        console.log('hit transit');
-        return items.filter(item => {
-          return filterKeysTransit.some((keyName) => {
-            return checkedItemsTransit.some((checkedItem) => {
-              return new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '';
-            });
-            });
-          });
+      temp = tempCat;
+
+      if (airlineItems.length > 0) {
+        console.log(temp);
+        if (temp.length == 0) {
+          for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < airlineItems.length; j++) {
+              if (list[i].transData[0].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
+                temp.push(list[i]);
+              }
+            }
+          }
+        } else {
+          let tempSearch: any[] = [];
+          for (let i = 0; i < temp.length; i++) {
+            for (let j = 0; j < airlineItems.length; j++) {
+              if (temp[i].transData[0].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
+                tempSearch.push(temp[i]);
+              }
+            }
+          }
+
+          temp = tempSearch;
+        }
       }
+
+      return temp;
     } else {
-      return items;
+      return list;
     }
+
+    // if ((airlineItems.length > 0)) {
+    //   console.log(airlineItems);
+    //   let temp: any[] = [];
+    //   let tempCat: any[] = [];
+    //
+    //   for (let i = 0; i < list.length; i++) {
+    //     for (let j = 0; j < airlineItems.length; j++) {
+    //       if (list[i].transData[0].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
+    //         tempCat.push(list[i]);
+    //       }
+    //     }
+    //   }
+    //
+    //   console.log(tempCat);
+    //
+    //   temp = tempCat;
+    //   return temp;
+    // } else {
+    //   return list;
+    // }
   }
 }
