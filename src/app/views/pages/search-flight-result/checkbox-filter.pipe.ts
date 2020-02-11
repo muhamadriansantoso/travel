@@ -20,13 +20,14 @@ export class CheckboxFilterPipe implements PipeTransform {
         return items;
       }
 
-      if (isAndTransit) {
-        return items.filter(item => {
-          filterKeysTransit.reduce((acc1, keyName) =>
-              (acc1 && checkedItemsTransit.reduce((acc2, checkedItem) => acc2 && new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '', true))
-            , true);
-        });
-      } else {
+      // if (isAndTransit && isAndAirline) {
+      //   return items.filter(item => {
+      //     filterKeysTransit.reduce((acc1, keyName) =>
+      //         (acc1 && checkedItemsTransit.reduce((acc2, checkedItem) => acc2 && new RegExp(item[keyName], 'gi').test(checkedItem.value) || checkedItem.value === '', true))
+      //       , true);
+      //   });
+      // }
+      if (!isAndTransit) {
         console.log('hit transit');
         return items.filter(item => {
           return filterKeysTransit.some((keyName) => {
