@@ -69,24 +69,24 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                 Validators.required,
               ])
               ],
-              firstname: ['', Validators.compose([
+              firstname: ['Muhamad', Validators.compose([
                 Validators.required,
               ])
               ],
-              lastname: ['', Validators.compose([
+              lastname: ['Rian', Validators.compose([
                 Validators.required,
               ])
               ],
-              dob: ['', Validators.compose([
+              dob: ['1996-09-13', Validators.compose([
                 Validators.required,
               ])
               ],
-              email: ['', Validators.compose([
+              email: ['rian_santoso@ymail.com', Validators.compose([
                 Validators.required,
                 Validators.email
               ])
               ],
-              phone: ['', Validators.compose([
+              phone: ['085783126998', Validators.compose([
                 Validators.required,
               ])
               ],
@@ -102,23 +102,23 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_firstname: ['', Validators.compose([
+                  passenger_firstname: ['Aldy', Validators.compose([
                     Validators.required,
                   ])
                   ],
-                  passenger_lastname: ['', Validators.compose([
+                  passenger_lastname: ['Septi', Validators.compose([
                     Validators.required,
                   ])
                   ],
-                  passenger_dob: ['', Validators.compose([
+                  passenger_dob: ['1998-01-01', Validators.compose([
                     Validators.required,
                   ])
                   ],
-                  passenger_passport: ['', Validators.compose([
+                  passenger_passport: ['1234567890', Validators.compose([
                     Validators.required,
                   ])
                   ],
-                  passenger_passportexpiry: ['', Validators.compose([
+                  passenger_passportexpiry: ['2031-12-31', Validators.compose([
                     Validators.required,
                   ])
                   ],
