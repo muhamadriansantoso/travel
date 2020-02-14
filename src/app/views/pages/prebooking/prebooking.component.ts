@@ -43,7 +43,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     //start panggil function initBookingForm
     this.initBookingForm();
 
-    this.api.paymentChannel().subscribe((data: any) => {
+    this.api.paymentChannelEspay().subscribe((data: any) => {
       this.listPaymentChannel = data.data;
     });
     //end panggil function initBookingForm

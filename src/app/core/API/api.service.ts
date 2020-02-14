@@ -75,13 +75,13 @@ export class APIService {
     return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/booking', httpOptions);
   }
 
-  paymentChannel() {
+  paymentChannelEspay() {
     const httpOptions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     };
-    return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment', httpOptions);
+    return this.http.post('https://gohateka.com/apitravel/api/v1/payment/paymentChannelEspay', httpOptions);
   }
 
   // AirPricePort(data:any) {
