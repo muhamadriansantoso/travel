@@ -15,7 +15,7 @@ export class APIService {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     };
-    return this.http.get('http://localhost/apitravel/api/v1/airportlist', httpOptions);
+    return this.http.get('https://www.gohateka.com/apitravel/api/v1/airportlist', httpOptions);
   }
 
   AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
@@ -35,19 +35,19 @@ export class APIService {
         'type': type,
       }
     };
-    return this.http.get('http://localhost/apitravel/api/v1/flight/search', httpOptions);
+    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/search', httpOptions);
   }
 
   AirBookingInsertDB(sessionID: string, data: any) {
     var userData = 'sessionID=' + sessionID + '&data=' + data;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post('http://localhost/apitravel/api/internal/flight/insertSelectedBooking', userData, {headers: urlHeader});
+    return this.http.post('https://www.gohateka.com/apitravel/api/internal/flight/insertSelectedBooking', userData, {headers: urlHeader});
   }
 
   AirBookingGetDataDB(sessionID: string) {
     var userData = 'sessionID=' + sessionID;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post('http://localhost/apitravel/api/internal/flight/getSelectedBooking', userData, {headers: urlHeader});
+    return this.http.post('https://www.gohateka.com/apitravel/api/internal/flight/getSelectedBooking', userData, {headers: urlHeader});
   }
 
   AirPricePort(data: any) {
@@ -59,7 +59,7 @@ export class APIService {
         'data': JSON.stringify(data)
       }
     };
-    return this.http.get('http://localhost/apitravel/api/v1/flight/prebooking', httpOptions);
+    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/prebooking', httpOptions);
   }
 
   AirCreateReservationPort(bookingTraveler: any, airPricePort: any) {
@@ -72,7 +72,7 @@ export class APIService {
         'airPricePortData': JSON.stringify(airPricePort),
       }
     };
-    return this.http.get('http://localhost/apitravel/api/v1/flight/booking', httpOptions);
+    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/booking', httpOptions);
   }
 
   paymentChannel() {
@@ -81,7 +81,7 @@ export class APIService {
         'Content-Type': 'application/x-www-form-urlencoded',
       }
     };
-    return this.http.post('http://localhost/apitravel/api/v1/payment', httpOptions);
+    return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment', httpOptions);
   }
 
   // AirPricePort(data:any) {
