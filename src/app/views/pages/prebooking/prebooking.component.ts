@@ -22,6 +22,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitedPassengerData: any = [];
 
   bookingInfoForm: FormGroup;
+  payForm: FormGroup;
   bookingForm: any = [];
 
   submitted = false;
@@ -42,6 +43,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.loadingPage = true;
     //start panggil function initBookingForm
     this.initBookingForm();
+    this.initPayForm();
 
     this.api.paymentChannelEspay().subscribe((data: any) => {
       this.listPaymentChannel = data.data;
@@ -135,6 +137,36 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           })
         ).subscribe();
       });
+    });
+  }
+
+  initPayForm() {
+    this.payForm = this.fb.group({
+      title: ['Mr', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      firstname: ['Muhamad', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      lastname: ['Rian', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      dob: ['1996-09-13', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      email: ['rian_santoso@ymail.com', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])
+      ],
+      phone: ['085783126998', Validators.compose([
+        Validators.required,
+      ])
+      ],
     });
   }
 
