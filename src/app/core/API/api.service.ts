@@ -1,11 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
+const apiKey = 'CexDfYmUih';
+
 @Injectable({
   providedIn: 'root'
 })
-export class APIService {
 
+
+export class APIService {
   constructor(private http: HttpClient) {
   }
 
@@ -62,17 +65,10 @@ export class APIService {
     return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/prebooking', httpOptions);
   }
 
-  insertBookersToDB(bookingTraveler: any, airPricePort: any) {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      params: {
-        'bookingTravelerData': JSON.stringify(bookingTraveler),
-        'airPricePortData': JSON.stringify(airPricePort),
-      }
-    };
-    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/booking', httpOptions);
+  insertBookersToDB(signature) {
+    var userData = 'appid=' + apiKey + '&signature=' + signature;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post('https://www.gohateka.com/apitravel/api/v1/booking/insertBookingData', userData, {headers: urlHeader});
   }
 
   AirCreateReservationPort(bookingTraveler: any, airPricePort: any) {
