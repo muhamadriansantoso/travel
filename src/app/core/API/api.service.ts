@@ -62,6 +62,19 @@ export class APIService {
     return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/prebooking', httpOptions);
   }
 
+  insertBookersToDB(bookingTraveler: any, airPricePort: any) {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params: {
+        'bookingTravelerData': JSON.stringify(bookingTraveler),
+        'airPricePortData': JSON.stringify(airPricePort),
+      }
+    };
+    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/booking', httpOptions);
+  }
+
   AirCreateReservationPort(bookingTraveler: any, airPricePort: any) {
     const httpOptions = {
       headers: {
