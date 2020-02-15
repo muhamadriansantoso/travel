@@ -28,6 +28,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitted = false;
 
   private unsubscribe: Subject<any>;
+  private apiKey: string = 'test';
 
   constructor(
     private router: Router,
