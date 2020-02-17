@@ -264,7 +264,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.api.insertPaymentChannelEspay(this.sessionID, this.bookingID).subscribe();
+    const dataBooking = {
+      bankCode: controls['bankCode'].value,
+      productCode: controls['productCode'].value
+    };
+
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, dataBooking.productCode).subscribe();
   }
 
   paymentChannelSelected(bankCode, productCode) {

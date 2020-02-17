@@ -75,9 +75,9 @@ export class APIService {
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/paymentChannelEspay', userData, {headers: urlHeader});
   }
 
-  insertPaymentChannelEspay(sessionID, bookingID) {
+  insertPaymentChannelEspay(bookingID, bankCode, productCode) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'sessionID=' + sessionID + '&bookingID=' + bookingID;
+    var userData = 'bookingID=' + bookingID + '&bankCode=' + bankCode + '&productCode=' + productCode;
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/orderPaymentEspay', userData, {headers: urlHeader});
   }
 
