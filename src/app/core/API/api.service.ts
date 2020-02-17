@@ -75,10 +75,10 @@ export class APIService {
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/paymentChannelEspay', userData, {headers: urlHeader});
   }
 
-  insertPaymentChannelEspay(sessionID) {
+  insertPaymentChannelEspay(sessionID, bookingID) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'sessionID=' + sessionID;
-    return this.http.post('https://www.gohateka.com/apitravel/api/v1/booking/insertBookingData', userData, {headers: urlHeader});
+    var userData = 'sessionID=' + sessionID + '&bookingID=' + bookingID;
+    return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/orderPaymentEspay', userData, {headers: urlHeader});
   }
 
   // AirPricePort(data:any) {

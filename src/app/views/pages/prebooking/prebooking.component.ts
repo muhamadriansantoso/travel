@@ -14,6 +14,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   loadingPage: boolean;
 
   sessionID: any;
+  bookingID: any;
   airPricePort: any;
   passengerType: any;
   passengerLength: number;
@@ -230,11 +231,16 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       phone: controls['phone'].value,
     };
 
-    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone).subscribe();
-
-    this.api.paymentChannelEspay(this.sessionID).subscribe((data: any) => {
-      this.listPaymentChannel = data.data;
-    });
+    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone)
+      .subscribe((data: any) => {
+        if (data.status == 1) {
+          this.api.paymentChannelEspay(this.sessionID).subscribe((data: any) => {
+            this.listPaymentChannel = data.data.data;
+            this.sessionID = data.sessionID;
+            this.bookingID = data.id;
+          });
+        }
+      });
 
     // this.api.AirCreateReservationPort(this.sessionID, dataBooking.title).pipe(
     //   tap((data: any) => {
@@ -258,7 +264,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // this.api.insertPaymentChannelEspay(this.sessionID).subscribe();
+    this.api.insertPaymentChannelEspay(this.sessionID, this.bookingID).subscribe();
   }
 
   paymentChannelSelected(bankCode, productCode) {
