@@ -13,6 +13,7 @@ import {finalize, takeUntil, tap} from 'rxjs/operators';
 export class PrebookingComponent implements OnInit, OnDestroy {
   loadingPage: boolean;
 
+  sessionID: any;
   airPricePort: any;
   passengerType: any;
   passengerLength: number;
@@ -59,7 +60,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   initBookingForm() {
     this.route.params.subscribe(sessionID => {
-      this.api.AirBookingGetDataDB(sessionID.sessionID).subscribe((AirBookingGetDataDB: any) => {
+      this.sessionID = sessionID.sessionID;
+      this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         this.api.AirPricePort(AirBookingGetDataDB.data).pipe(
           tap((AirPricePort: any) => {
             this.airPricePort = AirPricePort.data[0];
@@ -175,22 +177,24 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.submitted = true;
     this.submitedPassengerData = [];
     const controls = this.bookingInfoForm.controls;
-    if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid || this.bookingForm[1].invalid || this.bookingForm[2].invalid) {
-      Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
-      );
+    for (var bookingFormlength = 0; bookingFormlength < this.bookingForm[0].length; bookingFormlength++) {
+      if (this.bookingInfoForm.invalid || this.bookingForm[bookingFormlength].invalid) {
+        Object.keys(controls).forEach(controlName =>
+          controls[controlName].markAsTouched()
+        );
 
-      for (var awal = 0; awal < this.passengerLength; awal++) {
-        for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
-          Object.keys(this.bookingForm[awal].controls[awal2].controls).forEach(controlName =>
-            this.bookingForm[awal].controls[awal2].controls[controlName].markAsTouched()
-          );
+        for (var awal = 0; awal < this.passengerLength; awal++) {
+          for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+            Object.keys(this.bookingForm[awal].controls[awal2].controls).forEach(controlName =>
+              this.bookingForm[awal].controls[awal2].controls[controlName].markAsTouched()
+            );
+          }
         }
-      }
 
-      alert('Data Belum Lengkap');
-      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
-      // return;
+        alert('Data Belum Lengkap');
+        //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+        return;
+      }
     }
 
     for (var awal = 0; awal < this.passengerLength; awal++) {
@@ -207,15 +211,25 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.api.AirCreateReservationPort(this.submitedPassengerData, this.airPricePort).pipe(
-      tap((data: any) => {
-      }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.cdr.markForCheck();
-      })
-    )
-      .subscribe();
+    const dataBooking = {
+      title: controls['title'].value,
+      firstname: controls['firstname'].value,
+      lastname: controls['lastname'].value,
+      dob: controls['dob'].value,
+      email: controls['email'].value,
+      phone: controls['phone'].value,
+    };
+
+    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone).subscribe();
+
+    // this.api.AirCreateReservationPort(this.sessionID, dataBooking.title).pipe(
+    //   tap((data: any) => {
+    //   }),
+    //   takeUntil(this.unsubscribe),
+    //   finalize(() => {
+    //     this.cdr.markForCheck();
+    //   })
+    // );
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {

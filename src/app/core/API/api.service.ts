@@ -65,23 +65,10 @@ export class APIService {
     return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/prebooking', httpOptions);
   }
 
-  insertBookersToDB(signature) {
-    var userData = 'appid=' + apiKey + '&signature=' + signature;
+  AirCreateReservationPort(sessionID, title, firstname, lastname, dob, email, phone) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&dob=' + dob + '&email=' + email + '&phone=' + phone;
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/booking/insertBookingData', userData, {headers: urlHeader});
-  }
-
-  AirCreateReservationPort(bookingTraveler: any, airPricePort: any) {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      params: {
-        'bookingTravelerData': JSON.stringify(bookingTraveler),
-        'airPricePortData': JSON.stringify(airPricePort),
-      }
-    };
-    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/booking', httpOptions);
   }
 
   paymentChannelEspay() {
