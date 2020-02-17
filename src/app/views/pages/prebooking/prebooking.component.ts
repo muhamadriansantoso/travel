@@ -34,6 +34,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitted = false;
 
   validateBookingLoader: boolean;
+  bookingFailurePopUP: boolean;
 
   private unsubscribe: Subject<any>;
   @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
@@ -52,8 +53,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.loadingPage = true;
     this.initBookingForm();
     this.paymentChannelForm();
-
-    this.validateBookingLoader = true;
   }
 
   ngOnDestroy(): void {
@@ -162,6 +161,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitBook() {
     this.submitted = true;
     this.submitedPassengerData = [];
+    this.validateBookingLoader = true;
     const controls = this.bookingInfoForm.controls;
     for (var bookingFormlength = 0; bookingFormlength < this.bookingForm[0].length; bookingFormlength++) {
       if (this.bookingInfoForm.invalid || this.bookingForm[bookingFormlength].invalid) {
@@ -206,26 +206,35 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       phone: controls['phone'].value,
     };
 
-    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone)
-      .subscribe((data: any) => {
+    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone).pipe(
+      tap((data: any) => {
         if (data.status == 1) {
-          this.api.paymentChannelEspay(this.sessionID).subscribe((data: any) => {
-            this.listPaymentChannel = data.data.data;
-            this.sessionID = data.sessionID;
-            this.bookingID = data.id;
-            this.myStepper.next();
-          });
+          this.api.paymentChannelEspay(this.sessionID).pipe(
+            tap((data: any) => {
+              if (data.status == 1) {
+                this.listPaymentChannel = data.data.data;
+                this.sessionID = data.sessionID;
+                this.bookingID = data.id;
+              } else {
+                this.bookingFailurePopUP = true;
+              }
+            }),
+            takeUntil(this.unsubscribe),
+            finalize(() => {
+              this.validateBookingLoader = false;
+              this.myStepper.next();
+              this.cdr.markForCheck();
+            })
+          ).subscribe();
+        } else {
+          this.bookingFailurePopUP = true;
         }
-      });
-
-    // this.api.AirCreateReservationPort(this.sessionID, dataBooking.title).pipe(
-    //   tap((data: any) => {
-    //   }),
-    //   takeUntil(this.unsubscribe),
-    //   finalize(() => {
-    //     this.cdr.markForCheck();
-    //   })
-    // );
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.cdr.markForCheck();
+      })
+    ).subscribe();
   }
 
   submitPayment() {
@@ -281,6 +290,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     const result = control.hasError(validationType) && (control.dirty || control.touched);
     return result;
+  }
+
+  bookingFailurePopUPHide() {
+    this.bookingFailurePopUP = false;
   }
 
 }

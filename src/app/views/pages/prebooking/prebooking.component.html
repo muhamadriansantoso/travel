@@ -361,13 +361,17 @@
                   style="display: block">
                   Payment Channel must be selected
                 </div>
-                <div class="text-left">
-                  <button class="btn btn-success btn-lg" matStepperPrevious type="submit">Go Back</button>
-                </div>
-                <div class="text-right">
-                  <button (click)="submitPayment()" class="btn btn-success btn-lg" type="submit">Pay <i
-                    class="fas fa-long-arrow-alt-right"></i>
-                  </button>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="text-left">
+                      <button class="btn btn-success btn-lg" matStepperPrevious type="submit">Go Back</button>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="text-right">
+                      <button (click)="submitPayment()" class="btn btn-success btn-lg" type="submit">Pay</button>
+                    </div>
+                  </div>
                 </div>
               </form>
             </div>
@@ -392,12 +396,41 @@
          data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
       <div class="swal2-content">
         <div class="swal2-html-container" id="swal2-content" style="display: block;">
-          We are currently processing your booking. This may take a few minutes.
+          Kami sedang memproses pemesanan Anda. Ini mungkin memakan waktu beberapa menit.
         </div>
       </div>
       <div class="swal2-actions swal2-loading" style="display: flex;">
         <button aria-label="" class="swal2-confirm swal2-styled" disabled=""
                 style="display: inline-block; border-left-color: #ed1942; border-right-color: #ed1942;"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="bookingFailurePopUP" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Booking tidak dapat kami proses,
+          silahkan coba kembali
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
       </div>
