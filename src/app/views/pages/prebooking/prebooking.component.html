@@ -337,38 +337,36 @@
         </form>
       </mat-step>
       <mat-step [stepControl]="paymentChannel">
-        <div class="container content">
-          <div class="row">
-            <div class="col-md-12 mb-3">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-12">
               <h4>Select Payment Channel</h4>
-              <div class="col-md-12">
-                <form [formGroup]="paymentChannel">
-                  <ng-template matStepLabel>Pay</ng-template>
-                  <ng-container *ngFor="let lpc of listPaymentChannel">
-                    <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
-                           [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
-                           class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
-                      <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
-                      <input [(ngModel)]="this.productCode" formControlName="productCode" type="hidden">
-                      <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
-                      <img class="float-right" height="22"
-                           src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
-                      <div class="clearfix"></div>
-                    </label>
-                  </ng-container>
-                  <div
-                    *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"
-                    class="invalid-feedback"
-                    style="display: block">
-                    Payment Channel must be selected
-                  </div>
-                  <div class="text-right">
-                    <button (click)="submitPayment()" class="btn btn-success btn-lg" matStepperNext type="submit">Pay <i
-                      class="fas fa-long-arrow-alt-right"></i>
-                    </button>
-                  </div>
-                </form>
-              </div>
+              <form [formGroup]="paymentChannel">
+                <ng-template matStepLabel>Pay</ng-template>
+                <ng-container *ngFor="let lpc of listPaymentChannel">
+                  <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
+                         [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
+                         class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
+                    <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
+                    <input [(ngModel)]="this.productCode" formControlName="productCode" type="hidden">
+                    <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
+                    <img class="float-right" height="22"
+                         src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
+                    <div class="clearfix"></div>
+                  </label>
+                </ng-container>
+                <div
+                  *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"
+                  class="invalid-feedback"
+                  style="display: block">
+                  Payment Channel must be selected
+                </div>
+                <div class="text-right">
+                  <button (click)="submitPayment()" class="btn btn-success btn-lg" matStepperNext type="submit">Pay <i
+                    class="fas fa-long-arrow-alt-right"></i>
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
