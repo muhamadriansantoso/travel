@@ -24,6 +24,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   bookingInfoForm: FormGroup;
   payForm: FormGroup;
+  paymentChannel: FormGroup;
   bookingForm: any = [];
 
   submitted = false;
@@ -43,14 +44,13 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadingPage = true;
-    //start panggil function initBookingForm
     this.initBookingForm();
     this.initPayForm();
+    this.paymentChannelForm();
 
     this.api.paymentChannelEspay().subscribe((data: any) => {
       this.listPaymentChannel = data.data;
     });
-    //end panggil function initBookingForm
   }
 
   ngOnDestroy(): void {
@@ -173,6 +173,23 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     });
   }
 
+  paymentChannelForm() {
+    this.paymentChannel = this.fb.group({
+      bankCode: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      productCode: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      productName: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+    });
+  }
+
   submitBook() {
     this.submitted = true;
     this.submitedPassengerData = [];
@@ -232,6 +249,22 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     // );
   }
 
+  submitPayment() {
+    const controls = this.paymentChannel.controls;
+
+    if (this.paymentChannel.invalid) {
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+
+      alert('Data Belum Lengkap');
+      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+      return;
+    }
+
+    // this.api.insertPaymentChannelEspay(this.sessionID).subscribe();
+  }
+
   isControlHasError(controlName: string, validationType: string): boolean {
     const control = this.bookingInfoForm.controls[controlName];
     if (!control) {
@@ -244,6 +277,16 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   isControlHasErrorDynamic(controlName: string, validationType: string, awal: number, awal2: number): boolean {
     const control = this.bookingForm[awal].controls[awal2].controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
+  }
+
+  isControlHasErrorPayment(controlName: string, validationType: string): boolean {
+    const control = this.paymentChannel.controls[controlName];
     if (!control) {
       return false;
     }

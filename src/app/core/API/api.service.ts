@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-const apiKey = 'CexDfYmUih';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -78,6 +76,12 @@ export class APIService {
       }
     };
     return this.http.post('https://gohateka.com/apitravel/api/v1/payment/paymentChannelEspay', httpOptions);
+  }
+
+  insertPaymentChannelEspay(sessionID) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'sessionID=' + sessionID;
+    return this.http.post('https://www.gohateka.com/apitravel/api/v1/booking/insertBookingData', userData, {headers: urlHeader});
   }
 
   // AirPricePort(data:any) {
