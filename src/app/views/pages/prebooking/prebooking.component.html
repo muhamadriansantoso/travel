@@ -346,6 +346,7 @@
                   <ng-template matStepLabel>Pay</ng-template>
                   <ng-container *ngFor="let lpc of listPaymentChannel">
                     <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
+                           [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
                            class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
                       <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
                       <input [(ngModel)]="this.productCode" formControlName="productCode" type="hidden">
@@ -355,8 +356,10 @@
                       <div class="clearfix"></div>
                     </label>
                   </ng-container>
-                  <div *ngIf="isControlHasErrorPayment('bankCode','required')" class="invalid-feedback"
-                       style="display: block">
+                  <div
+                    *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"
+                    class="invalid-feedback"
+                    style="display: block">
                     Payment Channel must be selected
                   </div>
                   <div class="text-right">

@@ -15,6 +15,10 @@
   justify-content: center;
 }
 
+.active {
+  border-left: solid 10px #81898a;
+}
+
 :host {
   ::ng-deep {
     .mat-horizontal-content-container {

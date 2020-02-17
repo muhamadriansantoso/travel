@@ -183,11 +183,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       productCode: ['', Validators.compose([
         Validators.required,
       ])
-      ],
-      productName: ['', Validators.compose([
-        Validators.required,
-      ])
-      ],
+      ]
     });
   }
 
