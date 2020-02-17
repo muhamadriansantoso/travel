@@ -48,10 +48,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.initBookingForm();
     this.initPayForm();
     this.paymentChannelForm();
-
-    this.api.paymentChannelEspay().subscribe((data: any) => {
-      this.listPaymentChannel = data.data;
-    });
   }
 
   ngOnDestroy(): void {
@@ -235,6 +231,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     };
 
     this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone).subscribe();
+
+    this.api.paymentChannelEspay(this.sessionID).subscribe((data: any) => {
+      this.listPaymentChannel = data.data;
+    });
 
     // this.api.AirCreateReservationPort(this.sessionID, dataBooking.title).pipe(
     //   tap((data: any) => {
