@@ -33,6 +33,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitted = false;
 
+  validateBookingLoader: boolean;
+
   private unsubscribe: Subject<any>;
   @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
 
@@ -50,6 +52,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.loadingPage = true;
     this.initBookingForm();
     this.paymentChannelForm();
+
+    this.validateBookingLoader = true;
   }
 
   ngOnDestroy(): void {

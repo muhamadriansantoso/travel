@@ -38,9 +38,11 @@
               "src/assets/css/aos.css",
               "src/assets/css/flaticon.css",
               "src/assets/css/icomoon.css",
-              "src/assets/css/style.css"
+              "src/assets/css/style.css",
+              "node_modules/sweetalert2/dist/sweetalert2.css"
             ],
             "scripts": [
+              "node_modules/sweetalert2/dist/sweetalert2.js"
             ]
           },
           "configurations": {

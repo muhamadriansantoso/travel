@@ -383,3 +383,24 @@
     </mat-horizontal-stepper>
   </div>
 </div>
+
+<div *ngIf="validateBookingLoader" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          We are currently processing your booking. This may take a few minutes.
+        </div>
+      </div>
+      <div class="swal2-actions swal2-loading" style="display: flex;">
+        <button aria-label="" class="swal2-confirm swal2-styled" disabled=""
+                style="display: inline-block; border-left-color: #ed1942; border-right-color: #ed1942;"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
