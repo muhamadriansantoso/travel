@@ -1,9 +1,10 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {MatStepper} from '@angular/material';
 
 @Component({
   selector: 'app-prebooking',
@@ -33,6 +34,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitted = false;
 
   private unsubscribe: Subject<any>;
+  @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
 
   constructor(
     private router: Router,
@@ -47,7 +49,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadingPage = true;
     this.initBookingForm();
-    this.initPayForm();
     this.paymentChannelForm();
   }
 
@@ -141,36 +142,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     });
   }
 
-  initPayForm() {
-    this.payForm = this.fb.group({
-      title: ['Mr', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      firstname: ['Muhamad', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      lastname: ['Rian', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      dob: ['1996-09-13', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      email: ['rian_santoso@ymail.com', Validators.compose([
-        Validators.required,
-        Validators.email
-      ])
-      ],
-      phone: ['085783126998', Validators.compose([
-        Validators.required,
-      ])
-      ],
-    });
-  }
-
   paymentChannelForm() {
     this.paymentChannel = this.fb.group({
       bankCode: ['', Validators.compose([
@@ -238,6 +209,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.listPaymentChannel = data.data.data;
             this.sessionID = data.sessionID;
             this.bookingID = data.id;
+            this.myStepper.next();
           });
         }
       });

@@ -112,8 +112,8 @@
         </div>
       </div>
     </div>
-    <mat-horizontal-stepper [linear]="false">
-      <mat-step [stepControl]="bookingInfoForm">
+    <mat-horizontal-stepper #stepper [linear]="true">
+      <mat-step [stepControl]="bookingInfoForm" completed="false">
         <form [formGroup]="bookingInfoForm">
           <ng-template matStepLabel>Booking Details</ng-template>
           <div class="row">
@@ -330,13 +330,13 @@
             </div>
           </div>
           <div class="text-right">
-            <button (click)="submitBook()" class="btn btn-success btn-lg" matStepperNext type="submit">Go to payment <i
+            <button (click)="submitBook()" class="btn btn-success btn-lg" type="submit">Go to payment <i
               class="fas fa-long-arrow-alt-right"></i>
             </button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="paymentChannel">
+      <mat-step [stepControl]="paymentChannel" completed="false">
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-12">
@@ -362,7 +362,7 @@
                   Payment Channel must be selected
                 </div>
                 <div class="text-right">
-                  <button (click)="submitPayment()" class="btn btn-success btn-lg" matStepperNext type="submit">Pay <i
+                  <button (click)="submitPayment()" class="btn btn-success btn-lg" type="submit">Pay <i
                     class="fas fa-long-arrow-alt-right"></i>
                   </button>
                 </div>
