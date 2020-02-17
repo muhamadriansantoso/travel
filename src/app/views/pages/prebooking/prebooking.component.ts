@@ -19,6 +19,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   passengerLength: number;
 
   listPaymentChannel: any;
+  bankCode: any;
+  productCode: any;
 
   submitedPassengerData: any = [];
 
@@ -30,7 +32,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitted = false;
 
   private unsubscribe: Subject<any>;
-  private apiKey: string = 'test';
 
   constructor(
     private router: Router,
@@ -251,7 +252,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitPayment() {
     const controls = this.paymentChannel.controls;
-
     if (this.paymentChannel.invalid) {
       Object.keys(controls).forEach(controlName =>
         controls[controlName].markAsTouched()
@@ -263,6 +263,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     }
 
     // this.api.insertPaymentChannelEspay(this.sessionID).subscribe();
+  }
+
+  paymentChannelSelected(bankCode, productCode) {
+    this.bankCode = bankCode;
+    this.productCode = productCode;
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {

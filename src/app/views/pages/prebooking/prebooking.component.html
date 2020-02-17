@@ -345,8 +345,10 @@
                 <form [formGroup]="paymentChannel">
                   <ng-template matStepLabel>Pay</ng-template>
                   <ng-container *ngFor="let lpc of listPaymentChannel">
-                    <label class="card card-body d-block p-3 mb-3 pointer">
-                      <input formControlName="bankCode" type="radio" value="{{lpc.bankCode}}">
+                    <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
+                           class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
+                      <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
+                      <input [(ngModel)]="this.productCode" formControlName="productCode" type="hidden">
                       <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
                       <img class="float-right" height="22"
                            src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
