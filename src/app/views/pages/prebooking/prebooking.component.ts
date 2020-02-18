@@ -46,12 +46,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router
   ) {
     this.unsubscribe = new Subject();
   }
@@ -252,6 +252,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           ).subscribe();
         } else {
           this.bookingFailurePopUP = true;
+          this.validateBookingLoader = false;
         }
       }),
       takeUntil(this.unsubscribe),
@@ -345,8 +346,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  bookingFailurePopUPHide() {
-    this.bookingFailurePopUP = false;
+  bookingFailurePopUPHide(value) {
+    if (value == 'redirectkehome') {
+      this.bookingFailurePopUP = false;
+      this.router.navigate(['/']);
+    }
     this.bookingDataFormInvalid = false;
     this.paymentFailed = false;
   }

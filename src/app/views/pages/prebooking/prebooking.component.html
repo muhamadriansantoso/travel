@@ -466,11 +466,11 @@
       </div>
       <div class="swal2-content">
         <div class="swal2-html-container" id="swal2-content" style="display: block;">Booking tidak dapat kami proses,
-          silahkan coba kembali
+          karena transaksi sudah tidak berlaku. Silahkan melakukan booking kembali
         </div>
       </div>
       <div class="swal2-actions">
-        <button (click)="bookingFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
+        <button (click)="bookingFailurePopUPHide('redirectkehome')" aria-label="" class="swal2-confirm swal2-styled"
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
@@ -523,12 +523,13 @@
         </div>
       </div>
       <div class="swal2-content">
-        <div class="swal2-html-container" id="swal2-content" style="display: block;">Proses tidak dapat dilakukan karna
-          melebihi dari tanggal yang ditentukan. Silahkan melakukan booking kembali
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Proses pembayaran tidak dapat
+          dilakukan karena
+          transaksi sudah tidak berlaku. Silahkan melakukan booking kembali
         </div>
       </div>
       <div class="swal2-actions">
-        <button (click)="bookingFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
+        <button (click)="bookingFailurePopUPHide('redirectkehome')" aria-label="" class="swal2-confirm swal2-styled"
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
