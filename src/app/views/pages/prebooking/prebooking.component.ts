@@ -273,13 +273,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     }
 
     const dataBooking = {
-      bankCode: controls['bankCode'].value,
-      productCode: controls['productCode'].value
+      bankCode: controls['bankCode'].value
     };
 
     this.validateBookingLoader = true;
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, dataBooking.productCode).pipe(
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.api.checkPaymentChannelEspay(this.bookingID).pipe(
