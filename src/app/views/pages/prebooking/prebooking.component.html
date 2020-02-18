@@ -1,6 +1,6 @@
 <section *ngIf="loadingPage" class="loadingValidatingPrice centered-loader text-center">
   <div class="centered-loader">
-    <img src="https://booking.fixtrips.com/theme/CoreThemeV2/img/loader/layout_1.gif">
+    <img src="./assets/images/loader.gif">
     <div class="theme-loading-body">
       <h2 class="theme-loading-title">Just a moment</h2>
       <p class="theme-loading-subtitle">We are validating for flights price </p>
@@ -112,8 +112,8 @@
         </div>
       </div>
     </div>
-    <mat-horizontal-stepper #stepper [linear]="true">
-      <mat-step [stepControl]="bookingInfoForm">
+    <mat-horizontal-stepper #stepper [linear]="true" [selectedIndex]="0">
+      <mat-step [completed]="false" [stepControl]="bookingInfoForm">
         <form [formGroup]="bookingInfoForm">
           <ng-template matStepLabel>Booking Details</ng-template>
           <div class="row">

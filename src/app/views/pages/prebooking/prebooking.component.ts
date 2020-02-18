@@ -63,6 +63,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.loadingPage = false;
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
