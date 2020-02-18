@@ -379,6 +379,48 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Process</ng-template>
+        <div *ngIf="paymentData as pd" style="padding:20px;font-size: 16px;color: #666;">
+          <div class="bcalogo text-center" style="margin-top:30px">
+            <img src="./assets/images/banklogo/{{pd.bank_name}}.png" width="200px"/>
+          </div>
+          <br/>
+          <div class="ttl3 text-center">Terima kasih telah menggunakan {{pd.bank_name}} Virtual Account</div>
+          <div class="ttl3 text-center mb-2">Nomor {{pd.bank_name}} Virtual Account Anda adalah :</div>
+          <div class="ttl1 text-center" style="color:#ed1942" style="font-weight: bold; font-size: 1.3rem">
+            {{pd.va_number}}
+          </div>
+          <div (click)="coppied()" [cbContent]="pd.va_number" class="text-center mb-3" ngxClipboard
+               style="cursor: pointer; color: blue; text-decoration: underline;">
+            <span>Salin Nomor Virtual Number</span>
+          </div>
+
+          <div class="text-center" style="font-weight:bold; color:#666">
+            Batas waktu pembayaran Anda adalah
+            <countdown [config]="{leftTime: leftTimePayment}">$!h! Jam $!m! Menit $!s! Detik</countdown>
+          </div>
+
+          <div class="ttl3 text-center" style="padding:10px 30px">Silahkan lakukan pembayaran ke rekening virtual
+            account diatas sejumlah <strong>Rp {{pd.amount | number:'1.0-0'}}</strong>.
+          </div>
+          <br/>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="ttl3 mb-1"><b>CARA PEMBAYARAN</b></div>
+              <div>
+                <ol>
+                  <li>Gunakan mesin ATM BANK PERMATA</li>
+                  <li>Pilih Other Transaction</li>
+                  <li>Pilih Payment</li>
+                  <li>Pilih Other Payment</li>
+                  <li>Masukan Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu Pilih Correct</li>
+                  <li>Informasi pembayaran akan tertera dan pilih Correct</li>
+                  <li>Pilih Akun Pembayaran dan Pilih Correct</li>
+                </ol>
+              </div>
+              <br/>
+            </div>
+          </div>
+        </div>
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>E-ticket</ng-template>

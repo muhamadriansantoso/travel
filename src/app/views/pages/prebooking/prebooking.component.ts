@@ -4,7 +4,8 @@ import {APIService} from '../../../core/API';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
-import {MatStepper} from '@angular/material';
+import {MatSnackBar, MatStepper} from '@angular/material';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-prebooking',
@@ -21,13 +22,16 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   passengerLength: number;
 
   listPaymentChannel: any;
+  paymentData: any;
+  currentDateTime: any;
+  transferExpiredTime: any;
+  leftTimePayment: any;
   bankCode: any;
   productCode: any;
 
   submitedPassengerData: any = [];
 
   bookingInfoForm: FormGroup;
-  payForm: FormGroup;
   paymentChannel: FormGroup;
   bookingForm: any = [];
 
@@ -45,6 +49,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private api: APIService,
     private fb: FormBuilder,
+    public snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef
   ) {
     this.unsubscribe = new Subject();
@@ -151,10 +156,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       bankCode: ['', Validators.compose([
         Validators.required,
       ])
-      ],
-      productCode: ['', Validators.compose([
-        Validators.required,
-      ])
       ]
     });
   }
@@ -163,7 +164,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.submitted = true;
     this.submitedPassengerData = [];
     const controls = this.bookingInfoForm.controls;
-    console.log(this.bookingForm);
     if (this.bookingForm.length == 1) {
       if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid) {
         Object.keys(controls).forEach(controlName =>
@@ -284,13 +284,16 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.api.checkPaymentChannelEspay(this.bookingID).pipe(
             tap((data: any) => {
               if (data.status == 1) {
-
+                this.paymentData = data.data;
+                this.currentDateTime = moment(new Date()).unix();
+                this.transferExpiredTime = moment(data.data.expired).unix();
+                this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
+                this.myStepper.next();
               }
             }),
             takeUntil(this.unsubscribe),
             finalize(() => {
               this.validateBookingLoader = false;
-              this.myStepper.next();
               this.cdr.markForCheck();
             })
           ).subscribe();
@@ -299,7 +302,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe),
       finalize(() => {
         this.validateBookingLoader = false;
-        this.myStepper.next();
         this.cdr.markForCheck();
       })
     ).subscribe();
@@ -343,6 +345,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   bookingFailurePopUPHide() {
     this.bookingFailurePopUP = false;
     this.bookingDataFormInvalid = false;
+  }
+
+  coppied() {
+    this.snackBar.open('Copied', '', {
+      duration: 1000,
+    });
   }
 
 }

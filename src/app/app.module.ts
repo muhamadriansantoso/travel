@@ -8,7 +8,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule, MatSnackBarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker';
 import {NgxSoapModule} from 'ngx-soap';
@@ -20,6 +20,8 @@ import {MinuteToHour} from './views/pages/minutetohour.pipe';
 import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
 import {UniquePipe} from './views/pages/unique.pipe';
 import {CheckboxFilterPipe} from './views/pages/search-flight-result/checkbox-filter.pipe';
+import {ClipboardModule} from 'ngx-clipboard';
+import {CountdownModule} from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,10 @@ import {CheckboxFilterPipe} from './views/pages/search-flight-result/checkbox-fi
     NgxSoapModule,
     ClickOutsideModule,
     AutocompleteLibModule,
-    MatStepperModule
+    MatStepperModule,
+    ClipboardModule,
+    MatSnackBarModule,
+    CountdownModule
   ],
   providers: [
     {
