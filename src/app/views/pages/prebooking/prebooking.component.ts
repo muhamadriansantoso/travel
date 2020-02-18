@@ -35,6 +35,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
+  bookingDataFormInvalid: boolean;
 
   private unsubscribe: Subject<any>;
   @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
@@ -161,10 +162,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   submitBook() {
     this.submitted = true;
     this.submitedPassengerData = [];
-    this.validateBookingLoader = true;
     const controls = this.bookingInfoForm.controls;
-    for (var bookingFormlength = 0; bookingFormlength < this.bookingForm[0].length; bookingFormlength++) {
-      if (this.bookingInfoForm.invalid || this.bookingForm[bookingFormlength].invalid) {
+    console.log(this.bookingForm);
+    if (this.bookingForm.length == 1) {
+      if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid) {
         Object.keys(controls).forEach(controlName =>
           controls[controlName].markAsTouched()
         );
@@ -177,11 +178,33 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           }
         }
 
-        alert('Data Belum Lengkap');
+        this.bookingDataFormInvalid = true;
         //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
         return;
       }
+    } else {
+      for (var bookingFormlength = 0; bookingFormlength < this.bookingForm.length; bookingFormlength++) {
+        if (this.bookingInfoForm.invalid || this.bookingForm[bookingFormlength].invalid) {
+          Object.keys(controls).forEach(controlName =>
+            controls[controlName].markAsTouched()
+          );
+
+          for (var awal = 0; awal < this.passengerLength; awal++) {
+            for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+              Object.keys(this.bookingForm[awal].controls[awal2].controls).forEach(controlName =>
+                this.bookingForm[awal].controls[awal2].controls[controlName].markAsTouched()
+              );
+            }
+          }
+
+          this.bookingDataFormInvalid = true;
+          //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+          return;
+        }
+      }
     }
+
+    this.validateBookingLoader = true;
 
     for (var awal = 0; awal < this.passengerLength; awal++) {
       for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
@@ -215,6 +238,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                 this.listPaymentChannel = data.data.data;
                 this.sessionID = data.sessionID;
                 this.bookingID = data.id;
+                this.myStepper.next();
               } else {
                 this.bookingFailurePopUP = true;
               }
@@ -222,7 +246,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             takeUntil(this.unsubscribe),
             finalize(() => {
               this.validateBookingLoader = false;
-              this.myStepper.next();
               this.cdr.markForCheck();
             })
           ).subscribe();
@@ -244,7 +267,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         controls[controlName].markAsTouched()
       );
 
-      alert('Data Belum Lengkap');
+      this.bookingDataFormInvalid = true;
       //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
       return;
     }
@@ -254,7 +277,33 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       productCode: controls['productCode'].value
     };
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, dataBooking.productCode).subscribe();
+    this.validateBookingLoader = true;
+
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, dataBooking.productCode).pipe(
+      tap((data: any) => {
+        if (data.status == 1) {
+          this.api.checkPaymentChannelEspay(this.bookingID).pipe(
+            tap((data: any) => {
+              if (data.status == 1) {
+
+              }
+            }),
+            takeUntil(this.unsubscribe),
+            finalize(() => {
+              this.validateBookingLoader = false;
+              this.myStepper.next();
+              this.cdr.markForCheck();
+            })
+          ).subscribe();
+        }
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.validateBookingLoader = false;
+        this.myStepper.next();
+        this.cdr.markForCheck();
+      })
+    ).subscribe();
   }
 
   paymentChannelSelected(bankCode, productCode) {
@@ -294,6 +343,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   bookingFailurePopUPHide() {
     this.bookingFailurePopUP = false;
+    this.bookingDataFormInvalid = false;
   }
 
 }

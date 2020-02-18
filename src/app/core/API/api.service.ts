@@ -81,6 +81,12 @@ export class APIService {
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/orderPaymentEspay', userData, {headers: urlHeader});
   }
 
+  checkPaymentChannelEspay(bookingID) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'bookingID=' + bookingID;
+    return this.http.post('https://gohateka.com/apitravel/api/v1/payment/checkPaymentEspay', userData, {headers: urlHeader});
+  }
+
   // AirPricePort(data:any) {
   //   var userData = 'data=' + data;
   //   var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
