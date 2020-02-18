@@ -40,6 +40,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
   bookingDataFormInvalid: boolean;
+  paymentFailed: boolean;
 
   private unsubscribe: Subject<any>;
   @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
@@ -297,6 +298,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               this.cdr.markForCheck();
             })
           ).subscribe();
+        } else {
+          this.paymentFailed = true;
         }
       }),
       takeUntil(this.unsubscribe),
@@ -345,6 +348,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   bookingFailurePopUPHide() {
     this.bookingFailurePopUP = false;
     this.bookingDataFormInvalid = false;
+    this.paymentFailed = false;
   }
 
   coppied() {

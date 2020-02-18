@@ -379,7 +379,7 @@
       </mat-step>
       <mat-step>
         <ng-template matStepLabel>Process</ng-template>
-        <div *ngIf="paymentData as pd" style="padding:20px;font-size: 16px;color: #666;">
+        <div *ngIf="paymentData as pd" style="font-size: 16px;color: #666;">
           <div class="bcalogo text-center" style="margin-top:30px">
             <img src="./assets/images/banklogo/{{pd.bank_name}}.png" width="200px"/>
           </div>
@@ -390,7 +390,7 @@
             {{pd.va_number}}
           </div>
           <div (click)="coppied()" [cbContent]="pd.va_number" class="text-center mb-3" ngxClipboard
-               style="cursor: pointer; color: blue; text-decoration: underline;">
+               style="cursor: pointer; color: blue; text-decoration: underline; font-size: 12px">
             <span>Salin Nomor Virtual Number</span>
           </div>
 
@@ -496,6 +496,35 @@
       <div class="swal2-content">
         <div class="swal2-html-container" id="swal2-content" style="display: block;">Silahkan lengkapi form yang
           tersedia
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="paymentFailed" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Proses tidak dapat dilakukan karna
+          melebihi dari tanggal yang ditentukan. Silahkan melakukan booking kembali
         </div>
       </div>
       <div class="swal2-actions">
