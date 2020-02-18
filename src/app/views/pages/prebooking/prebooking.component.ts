@@ -38,6 +38,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitted = false;
 
+  isLinear: boolean;
   stepBookingDetailsComplete: boolean;
   stepPayComplete: boolean;
   stepProcessComplete: boolean;
@@ -64,6 +65,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.loadingPage = true;
+    this.isLinear = true;
     this.initBookingForm();
     this.paymentChannelForm();
   }
@@ -85,7 +87,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.stepETicketComplete = false;
           this.stepperIndex = 0;
         } else if (AirBookingGetDataDB.status == 2) {
+          this.stepBookingDetailsComplete = true;
+          this.stepPayComplete = true;
+          this.stepProcessComplete = false;
+          this.stepETicketComplete = false;
           this.stepperIndex = 2;
+          this.isLinear = false;
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.hitAPICheckPayment();
         } else if (AirBookingGetDataDB.status == 3) {
@@ -260,6 +267,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                 this.listPaymentChannel = data.data.data;
                 this.sessionID = data.sessionID;
                 this.bookingID = data.id;
+                this.stepBookingDetailsComplete = true;
                 this.myStepper.next();
               } else {
                 this.bookingFailurePopUP = true;
@@ -305,6 +313,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       tap((data: any) => {
         if (data.status == 1) {
           this.hitAPICheckPayment();
+          this.stepPayComplete = true;
         } else {
           this.paymentFailed = true;
         }
