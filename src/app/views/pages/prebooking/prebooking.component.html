@@ -112,7 +112,7 @@
         </div>
       </div>
     </div>
-    <mat-horizontal-stepper #stepper [linear]="true" [selectedIndex]="0">
+    <mat-horizontal-stepper #stepper [linear]="true" [selectedIndex]=stepperIndex>
       <mat-step [completed]="false" [stepControl]="bookingInfoForm">
         <form [formGroup]="bookingInfoForm">
           <ng-template matStepLabel>Booking Details</ng-template>

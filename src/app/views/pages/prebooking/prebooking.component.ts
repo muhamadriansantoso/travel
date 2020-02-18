@@ -17,6 +17,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   sessionID: any;
   bookingID: any;
+  stepperIndex: any;
   airPricePort: any;
   passengerType: any;
   passengerLength: number;
@@ -73,7 +74,14 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         if (AirBookingGetDataDB.status == 1) {
-          console.log(1);
+          this.stepperIndex = 0;
+        } else if (AirBookingGetDataDB.status == 2) {
+          this.stepperIndex = 2;
+          this.bookingID = AirBookingGetDataDB.bookingID;
+          this.hitAPICheckPayment();
+        } else if (AirBookingGetDataDB.status == 3) {
+          this.bookingID = AirBookingGetDataDB.bookingID;
+          this.stepperIndex = 3;
         }
         this.api.AirPricePort(AirBookingGetDataDB.data).pipe(
           tap((AirPricePort: any) => {
@@ -287,22 +295,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode).pipe(
       tap((data: any) => {
         if (data.status == 1) {
-          this.api.checkPaymentChannelEspay(this.bookingID).pipe(
-            tap((data: any) => {
-              if (data.status == 1) {
-                this.paymentData = data.data;
-                this.currentDateTime = moment(new Date()).unix();
-                this.transferExpiredTime = moment(data.data.expired).unix();
-                this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
-                this.myStepper.next();
-              }
-            }),
-            takeUntil(this.unsubscribe),
-            finalize(() => {
-              this.validateBookingLoader = false;
-              this.cdr.markForCheck();
-            })
-          ).subscribe();
+          this.hitAPICheckPayment();
         } else {
           this.paymentFailed = true;
         }
@@ -318,6 +311,25 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   paymentChannelSelected(bankCode, productCode) {
     this.bankCode = bankCode;
     this.productCode = productCode;
+  }
+
+  hitAPICheckPayment() {
+    this.api.checkPaymentChannelEspay(this.bookingID).pipe(
+      tap((data: any) => {
+        if (data.status == 1) {
+          this.paymentData = data.data;
+          this.currentDateTime = moment(new Date()).unix();
+          this.transferExpiredTime = moment(data.data.expired).unix();
+          this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
+          this.myStepper.next();
+        }
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.validateBookingLoader = false;
+        this.cdr.markForCheck();
+      })
+    ).subscribe();
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
