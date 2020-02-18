@@ -72,6 +72,9 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(sessionID => {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
+        if (AirBookingGetDataDB.status == 1) {
+          console.log(1);
+        }
         this.api.AirPricePort(AirBookingGetDataDB.data).pipe(
           tap((AirPricePort: any) => {
             this.airPricePort = AirPricePort.data[0];
