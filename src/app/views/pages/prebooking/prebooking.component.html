@@ -112,8 +112,8 @@
         </div>
       </div>
     </div>
-    <mat-horizontal-stepper #stepper [linear]="true" [selectedIndex]=stepperIndex>
-      <mat-step [completed]="false" [stepControl]="bookingInfoForm">
+    <mat-horizontal-stepper #stepper [linear]="false" [selectedIndex]=stepperIndex>
+      <mat-step [completed]="stepBookingDetailsComplete" [stepControl]="bookingInfoForm">
         <form [formGroup]="bookingInfoForm">
           <ng-template matStepLabel>Booking Details</ng-template>
           <div class="row">
@@ -336,7 +336,7 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="paymentChannel">
+      <mat-step [completed]="stepPayComplete" [stepControl]="paymentChannel">
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-12">
@@ -377,7 +377,7 @@
           </div>
         </div>
       </mat-step>
-      <mat-step>
+      <mat-step [completed]="stepProcessComplete">
         <ng-template matStepLabel>Process</ng-template>
         <div *ngIf="paymentData as pd" style="font-size: 16px;color: #666;">
           <div class="bcalogo text-center" style="margin-top:30px">
@@ -385,44 +385,54 @@
           </div>
           <br/>
           <div class="ttl3 text-center">Terima kasih telah menggunakan {{pd.bank_name}} Virtual Account</div>
-          <div class="ttl3 text-center mb-2">Nomor {{pd.bank_name}} Virtual Account Anda adalah :</div>
-          <div class="ttl1 text-center" style="color:#ed1942" style="font-weight: bold; font-size: 1.3rem">
-            {{pd.va_number}}
-          </div>
-          <div (click)="coppied()" [cbContent]="pd.va_number" class="text-center mb-3" ngxClipboard
-               style="cursor: pointer; color: blue; text-decoration: underline; font-size: 12px">
-            <span>Salin Nomor Virtual Number</span>
-          </div>
+          <ng-container *ngIf="leftTimePayment > 0">
+            <div class="ttl3 text-center mb-2">Nomor {{pd.bank_name}} Virtual Account Anda adalah :</div>
+            <div class="ttl1 text-center" style="color:#ed1942" style="font-weight: bold; font-size: 1.3rem">
+              {{pd.va_number}}
+            </div>
+            <div (click)="coppied()" [cbContent]="pd.va_number" class="text-center mb-3" ngxClipboard
+                 style="cursor: pointer; color: blue; text-decoration: underline; font-size: 12px">
+              <span>Salin Nomor Virtual Number</span>
+            </div>
+          </ng-container>
 
           <div class="text-center" style="font-weight:bold; color:#666">
-            Batas waktu pembayaran Anda adalah
-            <countdown [config]="{leftTime: leftTimePayment}">$!h! Jam $!m! Menit $!s! Detik</countdown>
+            <ng-container *ngIf="leftTimePayment == 0">
+              Batas waktu pembayaran Anda telah
+              <span class="blinking">Expired</span>
+            </ng-container>
+            <ng-container *ngIf="leftTimePayment > 0">
+              Batas waktu pembayaran Anda adalah
+              <countdown [config]="{leftTime: leftTimePayment}">$!h! Jam $!m! Menit $!s! Detik</countdown>
+            </ng-container>
           </div>
 
-          <div class="ttl3 text-center" style="padding:10px 30px">Silahkan lakukan pembayaran ke rekening virtual
-            account diatas sejumlah <strong>Rp {{pd.amount | number:'1.0-0'}}</strong>.
-          </div>
-          <br/>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="ttl3 mb-1"><b>CARA PEMBAYARAN</b></div>
-              <div>
-                <ol>
-                  <li>Gunakan mesin ATM BANK PERMATA</li>
-                  <li>Pilih Other Transaction</li>
-                  <li>Pilih Payment</li>
-                  <li>Pilih Other Payment</li>
-                  <li>Masukan Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu Pilih Correct</li>
-                  <li>Informasi pembayaran akan tertera dan pilih Correct</li>
-                  <li>Pilih Akun Pembayaran dan Pilih Correct</li>
-                </ol>
-              </div>
-              <br/>
+          <ng-container *ngIf="leftTimePayment > 0">
+            <div class="ttl3 text-center" style="padding:10px 30px">Silahkan lakukan pembayaran ke rekening virtual
+              account diatas sejumlah <strong>Rp {{pd.amount | number:'1.0-0'}}</strong>.
             </div>
-          </div>
+            <br/>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="ttl3 mb-1"><b>CARA PEMBAYARAN</b></div>
+                <div>
+                  <ol>
+                    <li>Gunakan mesin ATM BANK PERMATA</li>
+                    <li>Pilih Other Transaction</li>
+                    <li>Pilih Payment</li>
+                    <li>Pilih Other Payment</li>
+                    <li>Masukan Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu Pilih Correct</li>
+                    <li>Informasi pembayaran akan tertera dan pilih Correct</li>
+                    <li>Pilih Akun Pembayaran dan Pilih Correct</li>
+                  </ol>
+                </div>
+                <br/>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </mat-step>
-      <mat-step>
+      <mat-step [completed]="stepETicketComplete">
         <ng-template matStepLabel>E-ticket</ng-template>
       </mat-step>
     </mat-horizontal-stepper>

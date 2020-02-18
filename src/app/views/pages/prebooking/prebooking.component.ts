@@ -38,6 +38,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitted = false;
 
+  stepBookingDetailsComplete: boolean;
+  stepPayComplete: boolean;
+  stepProcessComplete: boolean;
+  stepETicketComplete: boolean;
+
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
   bookingDataFormInvalid: boolean;
@@ -74,6 +79,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         if (AirBookingGetDataDB.status == 1) {
+          this.stepBookingDetailsComplete = false;
+          this.stepPayComplete = false;
+          this.stepProcessComplete = false;
+          this.stepETicketComplete = false;
           this.stepperIndex = 0;
         } else if (AirBookingGetDataDB.status == 2) {
           this.stepperIndex = 2;
@@ -303,6 +312,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       takeUntil(this.unsubscribe),
       finalize(() => {
         this.validateBookingLoader = false;
+        this.myStepper.next();
         this.cdr.markForCheck();
       })
     ).subscribe();
@@ -321,7 +331,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.currentDateTime = moment(new Date()).unix();
           this.transferExpiredTime = moment(data.data.expired).unix();
           this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
-          this.myStepper.next();
+          if (this.leftTimePayment > 0) {
+            this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
+          } else {
+            this.leftTimePayment = 0;
+          }
         }
       }),
       takeUntil(this.unsubscribe),
