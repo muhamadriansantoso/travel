@@ -14,59 +14,55 @@
         <form [formGroup]="bookingInfoForm">
           <ng-template matStepLabel>Booking Details</ng-template>
           <div class="row">
-            <div class="col-md-8">
-              <div class="row mb-3">
+            <div class="col-md-12">
+              <div class="card mb-2">
+                <div class="card-header">
+                  <h5 class="box-title">
+                    Flight Details
+                  </h5>
+                </div>
                 <div class="col-md-12">
-                  <div class="card mb-2">
-                    <div class="card-header">
-                      <h5 class="box-title">
-                        Flight Details
-                      </h5>
+                  <div *ngFor="let airSegment of app.airSegment" class="row mb-3" style="margin-top: 25px">
+                    <div class="col-md-2 mb-3">
+                      <div class="flight-section-airline-logo-wrap">
+                        <img class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{airSegment.Carrier}}.png">
+                      </div>
                     </div>
-                    <div class="col-md-12">
-                      <div *ngFor="let airSegment of app.airSegment" class="row mb-3" style="margin-top: 25px">
-                        <div class="col-md-2 mb-3">
-                          <div class="flight-section-airline-logo-wrap">
-                            <img class="img-fluid img-circle airline-logo"
-                                 src="https://s1.travix.com/global/assets/airlineLogos/{{airSegment.Carrier}}.png">
-                          </div>
-                        </div>
-                        <div class="col-md-10">
-                          <div class="row">
-                            <div class="col-md-12">
-                              <ul class="flight-details-schedule-list">
-                                <li>
-                                  <i class="fa fa-plane flight-details-schedule-icon"></i>
-                                  <p class="flight-details-schedule-date">
-                                    {{airSegment.ArrivalTime | date: 'MMM dd, yyyy'}}</p>
-                                  <div class="flight-details-schedule-time">
-                                    {{airSegment.DepartureTime | date: 'hh:mm'}} -
-                                    {{airSegment.ArrivalTime | date: 'hh:mm'}}
-                                    ({{airSegment.FlightTime | minuteToHour}})
-                                  </div>
-                                  <div class="flight-details-schedule-destination">
-                                    <div style="float: left; min-width: 40%">
-                                      <p style="font-weight: bold; margin-bottom: 0">
-                                        {{airSegment.Origin}}
-                                      </p>
-                                      <p class="flight-details-schedule-destination-city">
-                                        {{airSegment.Origin_city_name}}</p>
-                                    </div>
-                                    <div style="float: left; margin: 0 10px">
-                                      <span>→</span>
-                                    </div>
-                                    <div style="float: left; min-width: 40%">
-                                      <p style="font-weight: bold; margin-bottom: 0">
-                                        {{airSegment.Destination}}
-                                      </p>
-                                      <p class="flight-details-schedule-destination-city">
-                                        {{airSegment.Destination_city_name}}</p>
-                                    </div>
-                                  </div>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <ul class="flight-details-schedule-list">
+                            <li>
+                              <i class="fa fa-plane flight-details-schedule-icon"></i>
+                              <p class="flight-details-schedule-date">
+                                {{airSegment.ArrivalTime | date: 'MMM dd, yyyy'}}</p>
+                              <div class="flight-details-schedule-time">
+                                {{airSegment.DepartureTime | date: 'hh:mm'}} -
+                                {{airSegment.ArrivalTime | date: 'hh:mm'}}
+                                ({{airSegment.FlightTime | minuteToHour}})
+                              </div>
+                              <div class="flight-details-schedule-destination">
+                                <div style="float: left; min-width: 40%">
+                                  <p style="font-weight: bold; margin-bottom: 0">
+                                    {{airSegment.Origin}}
+                                  </p>
+                                  <p class="flight-details-schedule-destination-city">
+                                    {{airSegment.Origin_city_name}}</p>
+                                </div>
+                                <div style="float: left; margin: 0 10px">
+                                  <span>→</span>
+                                </div>
+                                <div style="float: left; min-width: 40%">
+                                  <p style="font-weight: bold; margin-bottom: 0">
+                                    {{airSegment.Destination}}
+                                  </p>
+                                  <p class="flight-details-schedule-destination-city">
+                                    {{airSegment.Destination_city_name}}</p>
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -74,51 +70,9 @@
                 </div>
               </div>
             </div>
-
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="box-title">Detail Price</h5>
-                </div>
-                <div class="card-body pt-2 pb-3">
-                  <div *ngFor="let passengerDetails of app.passengerType" class="mt-1">
-                    <ng-container *ngIf="passengerDetails.code == 'ADT'">
-                      <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
-                      <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
-                      <div class="clearfix"></div>
-                    </ng-container>
-                    <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
-                      <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
-                      <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
-                      <div class="clearfix"></div>
-                    </ng-container>
-                    <ng-container *ngIf="passengerDetails.code == 'INF'">
-                      <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
-                      <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
-                      <div class="clearfix"></div>
-                    </ng-container>
-                  </div>
-                  <div class="mt-1">
-                    <div class="float-left">Tax And Fees</div>
-                    <div class="float-right">
-                      <strong>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</strong>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="float-left">Total</div>
-                  <div class="float-right"><strong>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</strong></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <div class="card mb-3">
                 <div class="card-header">
                   <div class="float-left">
@@ -205,9 +159,50 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-3">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="box-title">Detail Price</h5>
+                </div>
+                <div class="card-body pt-2 pb-3">
+                  <div *ngFor="let passengerDetails of app.passengerType" class="mt-1">
+                    <ng-container *ngIf="passengerDetails.code == 'ADT'">
+                      <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
+                      <div class="float-right">
+                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
+                      <div class="clearfix"></div>
+                    </ng-container>
+                    <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
+                      <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
+                      <div class="float-right">
+                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
+                      <div class="clearfix"></div>
+                    </ng-container>
+                    <ng-container *ngIf="passengerDetails.code == 'INF'">
+                      <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
+                      <div class="float-right">
+                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
+                      <div class="clearfix"></div>
+                    </ng-container>
+                  </div>
+                  <div class="mt-1">
+                    <div class="float-left">Tax And Fees</div>
+                    <div class="float-right">
+                      <strong>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</strong>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                  <div class="float-left">Total</div>
+                  <div class="float-right"><strong>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</strong></div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-9">
               <h4 class="mb-3">Passenger details</h4>
               <div class="alert alert-warning">
                 <h5>Double check your personal details</h5>
@@ -328,12 +323,11 @@
                   </div>
                 </div>
               </ng-container>
+              <div class="text-right">
+                <button (click)="submitBook()" class="btn btn-success btn-group-sm" type="submit">Go to payment
+                </button>
+              </div>
             </div>
-          </div>
-          <div class="text-right">
-            <button (click)="submitBook()" class="btn btn-success btn-lg" type="submit">Go to payment <i
-              class="fas fa-long-arrow-alt-right"></i>
-            </button>
           </div>
         </form>
       </mat-step>
@@ -545,6 +539,40 @@
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="paymentSuccess" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+          <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+          <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+          <div class="swal2-success-ring"></div>
+          <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+          <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Proses pembayaran telah berhasil.
+          <br>
+          <br>
+          Tiket telah kami kirimkan ke alamat e-mail yang Anda isikan saat melakukan pemesanan.
+          <br>
+          <br>
+          Silahkan periksa inbox maupun folder spam di e-mail Anda.
+          <br>
+          <br>
+          Jika Anda tidak merasa menerima tiket di dalam e-mail Anda, Anda dapat menghubungi customer service kami
+          dengan menginformasikan kode booking.
+        </div>
       </div>
     </div>
   </div>

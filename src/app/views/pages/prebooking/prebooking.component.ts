@@ -48,6 +48,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   bookingFailurePopUP: boolean;
   bookingDataFormInvalid: boolean;
   paymentFailed: boolean;
+  paymentSuccess: boolean;
 
   socket;
 
@@ -101,6 +102,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.stepBookingDetailsComplete = true;
           this.stepPayComplete = true;
           this.stepProcessComplete = true;
+          this.paymentSuccess = true;
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.stepperIndex = 2;
         }
@@ -317,8 +319,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode).pipe(
       tap((data: any) => {
         if (data.status == 1) {
-          this.hitAPICheckPayment();
           this.stepPayComplete = true;
+          this.hitAPICheckPayment();
         } else {
           this.paymentFailed = true;
         }
@@ -338,6 +340,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         this.stepBookingDetailsComplete = true;
         this.stepPayComplete = true;
         this.stepProcessComplete = true;
+        this.paymentSuccess = true;
         this.myStepper.next();
       }
     });
