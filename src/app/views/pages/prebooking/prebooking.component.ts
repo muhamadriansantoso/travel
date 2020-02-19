@@ -6,6 +6,7 @@ import {Subject} from 'rxjs';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {MatSnackBar, MatStepper} from '@angular/material';
 import * as moment from 'moment';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-prebooking',
@@ -49,6 +50,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   bookingDataFormInvalid: boolean;
   paymentFailed: boolean;
 
+  socket;
+
   private unsubscribe: Subject<any>;
   @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
 
@@ -61,6 +64,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.unsubscribe = new Subject();
+    this.socket = io('http://gohateka.com:3000/');
   }
 
   ngOnInit() {
@@ -68,6 +72,17 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.isLinear = true;
     this.initBookingForm();
     this.paymentChannelForm();
+
+    this.socket.emit('event1', {
+      msg: 'Client to server, can you hear me server?'
+    });
+
+    this.socket.on('event2', (data: any) => {
+      console.log(data.msg);
+      this.socket.emit('event3', {
+        msg: 'Yes, its working for me!!'
+      });
+    });
   }
 
   ngOnDestroy(): void {
