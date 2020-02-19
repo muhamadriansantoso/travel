@@ -72,17 +72,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.isLinear = true;
     this.initBookingForm();
     this.paymentChannelForm();
-
-    this.socket.emit('event1', {
-      msg: 'Client to server, can you hear me server?'
-    });
-
-    this.socket.on('event2', (data: any) => {
-      console.log(data.msg);
-      this.socket.emit('event3', {
-        msg: 'Yes, its working for me!!'
-      });
-    });
+    this.checkingPaymentbySocketIO();
   }
 
   ngOnDestroy(): void {
@@ -110,7 +100,14 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.isLinear = false;
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.hitAPICheckPayment();
+          this.socket.emit('checkpaymentstatus', {
+            id: this.bookingID
+          });
         } else if (AirBookingGetDataDB.status == 3) {
+          this.stepBookingDetailsComplete = true;
+          this.stepPayComplete = true;
+          this.stepProcessComplete = true;
+          this.stepETicketComplete = true;
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.stepperIndex = 3;
         }
@@ -340,6 +337,18 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       })
     ).subscribe();
+  }
+
+  checkingPaymentbySocketIO() {
+    this.socket.on('initial notes', (data: any) => {
+      if (data.payment_status == 'PAID') {
+        this.stepBookingDetailsComplete = true;
+        this.stepPayComplete = true;
+        this.stepProcessComplete = true;
+        this.stepETicketComplete = true;
+        this.myStepper.next();
+      }
+    });
   }
 
   paymentChannelSelected(bankCode, productCode) {
