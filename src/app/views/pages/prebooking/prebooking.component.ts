@@ -22,6 +22,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   airPricePort: any;
   passengerType: any;
   passengerLength: number;
+  nonUpdatedPrice: any;
+  updatedPrice: any;
 
   listPaymentChannel: any;
   paymentData: any;
@@ -47,6 +49,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
   bookingDataFormInvalid: boolean;
+  priceUpdatedInformation: boolean;
   paymentFailed: boolean;
   paymentSuccess: boolean;
 
@@ -85,6 +88,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(sessionID => {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
+        this.nonUpdatedPrice = AirBookingGetDataDB.data.totalPrice;
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
           this.stepPayComplete = false;
@@ -111,6 +115,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.airPricePort = AirPricePort.data[0];
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
+            this.updatedPrice = AirPricePort.data[0].totalPrice;
+
+            if (this.nonUpdatedPrice != this.updatedPrice) {
+              this.priceUpdatedInformation = true;
+            }
 
             //bookingInfoForm
             this.bookingInfoForm = this.fb.group({
@@ -414,6 +423,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.router.navigate(['/']);
     }
     this.bookingDataFormInvalid = false;
+    this.priceUpdatedInformation = false;
     this.paymentFailed = false;
   }
 
