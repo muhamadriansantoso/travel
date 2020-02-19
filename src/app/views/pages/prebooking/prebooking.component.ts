@@ -43,7 +43,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   stepBookingDetailsComplete: boolean;
   stepPayComplete: boolean;
   stepProcessComplete: boolean;
-  stepETicketComplete: boolean;
 
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
@@ -89,24 +88,21 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.stepBookingDetailsComplete = false;
           this.stepPayComplete = false;
           this.stepProcessComplete = false;
-          this.stepETicketComplete = false;
           this.stepperIndex = 0;
         } else if (AirBookingGetDataDB.status == 2) {
           this.stepBookingDetailsComplete = true;
           this.stepPayComplete = true;
           this.stepProcessComplete = false;
-          this.stepETicketComplete = false;
-          this.stepperIndex = 2;
-          this.isLinear = false;
+          this.stepperIndex = 1;
+          this.isLinear = true;
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.hitAPICheckPayment();
         } else if (AirBookingGetDataDB.status == 3) {
           this.stepBookingDetailsComplete = true;
           this.stepPayComplete = true;
           this.stepProcessComplete = true;
-          this.stepETicketComplete = true;
           this.bookingID = AirBookingGetDataDB.bookingID;
-          this.stepperIndex = 3;
+          this.stepperIndex = 2;
         }
         this.api.AirPricePort(AirBookingGetDataDB.data).pipe(
           tap((AirPricePort: any) => {
@@ -342,7 +338,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         this.stepBookingDetailsComplete = true;
         this.stepPayComplete = true;
         this.stepProcessComplete = true;
-        this.stepETicketComplete = true;
         this.myStepper.next();
       }
     });

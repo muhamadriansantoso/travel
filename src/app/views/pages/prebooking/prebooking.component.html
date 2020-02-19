@@ -336,7 +336,7 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [completed]="stepPayComplete" [stepControl]="paymentChannel">
+      <mat-step [completed]="stepPayComplete">
         <div class="row">
           <div class="col-md-12">
             <div class="col-md-12">
@@ -376,9 +376,6 @@
             </div>
           </div>
         </div>
-      </mat-step>
-      <mat-step [completed]="stepProcessComplete">
-        <ng-template matStepLabel>Selesai</ng-template>
         <div *ngIf="paymentData as pd" style="font-size: 16px;color: #666;">
           <div class="bcalogo text-center" style="margin-top:30px">
             <img src="./assets/images/banklogo/{{pd.bank_name}}.png" width="200px"/>
@@ -431,6 +428,9 @@
             </div>
           </ng-container>
         </div>
+      </mat-step>
+      <mat-step [completed]="stepProcessComplete">
+        <ng-template matStepLabel>Selesai</ng-template>
       </mat-step>
     </mat-horizontal-stepper>
   </div>
