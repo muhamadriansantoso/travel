@@ -18,6 +18,8 @@ export class SearchFlightResultComponent implements OnInit {
   sessionID: string;
   loadingButton: boolean;
   loadingPage: boolean;
+  searchFlightError: boolean;
+  searchFlightErrorMessage: string;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -38,24 +40,26 @@ export class SearchFlightResultComponent implements OnInit {
       this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
         .pipe(
           tap((data: any) => {
-            this.dataFlightSearch = data.data;
-            this.sessionID = data.sessionID;
-            this.airLine = data.data[0].transData[0].platingCarrierName;
+            if (data.data.length > 0) {
+              this.dataFlightSearch = data.data;
+              this.sessionID = data.sessionID;
+              this.airLine = data.data[0].transData[0].platingCarrierName;
 
-            data.data.forEach((dataPesawat: any) => {
-              // this.airLineListUnique.push({
-              //   value: dataPesawat.transData[0].platingCarrierName
-              // });
-              dataPesawat.transData.forEach((transData: any) => {
-                this.airLineListUnique.push({
-                  value: transData.platingCarrierName
+              data.data.forEach((dataPesawat: any) => {
+                dataPesawat.transData.forEach((transData: any) => {
+                  this.airLineListUnique.push({
+                    value: transData.platingCarrierName
+                  });
+                });
+
+                this.transitListUnique.push({
+                  value: dataPesawat.stop
                 });
               });
-
-              this.transitListUnique.push({
-                value: dataPesawat.stop
-              });
-            });
+            } else {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = data.data.error;
+            }
           }),
           takeUntil(this.unsubscribe),
           finalize(() => {
@@ -121,6 +125,13 @@ export class SearchFlightResultComponent implements OnInit {
     return this.transitListUnique.filter(transit => {
       return transit.checked;
     });
+  }
+
+  searchInvalidPopUPHide(value) {
+    if (value == 'redirectkehome') {
+      this.searchFlightError = false;
+      this.router.navigate(['/']);
+    }
   }
 
 }
