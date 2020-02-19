@@ -94,7 +94,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.stepPayComplete = true;
           this.stepProcessComplete = false;
           this.stepperIndex = 1;
-          this.isLinear = true;
+          this.isLinear = false;
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.hitAPICheckPayment();
         } else if (AirBookingGetDataDB.status == 3) {
