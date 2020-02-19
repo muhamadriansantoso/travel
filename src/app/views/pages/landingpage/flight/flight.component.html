@@ -45,6 +45,10 @@
                              [source]="airportList" [list-formatter]="autocompleListFormatter" [min-chars]="2"
                              [max-num-list]="8" (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
                              formControlName="origin"/>
+                      <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
+                           style="display: block">
+                        Origin is required
+                      </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-6 pull-right">
@@ -57,6 +61,10 @@
                              [source]="airportList" [list-formatter]="autocompleListFormatter" [min-chars]="2"
                              [max-num-list]="8" (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
                              formControlName="destination"/>
+                      <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
+                           style="display: block">
+                        Destination is required
+                      </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-12">
@@ -70,6 +78,10 @@
                         <option value="Business">Bisnis</option>
                         <option value="First Class">First Class</option>
                       </select>
+                      <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
+                           style="display: block">
+                        Cabin Type is required
+                      </div>
                     </div>
                   </div>
 
@@ -179,6 +191,10 @@
                              formControlName="departure" ngbDatepicker
                              placeholder="Pilih tanggal keberangkatan"
                       >
+                      <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
+                           style="display: block">
+                        Departure date is required
+                      </div>
                     </div>
                   </div>
                   <div class="col-sm-6 col-6" *ngIf="roundType == 'roundtrip'">
@@ -210,5 +226,34 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<div *ngIf="searchFlightFormInvalid" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Silahkan lengkapi form yang
+          tersedia
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="searchFlightFormFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
   </div>
 </div>

@@ -25,6 +25,9 @@ export class FlightComponent implements OnInit {
   roundType: string;
   departureDate: string;
   minDate: any;
+
+  searchFlightFormInvalid: boolean;
+
   public passengersCollapsed: boolean = false;
 
   constructor(
@@ -169,6 +172,16 @@ export class FlightComponent implements OnInit {
 
   searchFlight() {
     const controls = this.searchFlightForm.controls;
+    if (this.searchFlightForm.invalid) {
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+
+      this.searchFlightFormInvalid = true;
+      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+      return;
+    }
+
     const authData = {
       cabin: controls['cabin'].value,
       adult: controls['adult'].value,
@@ -185,7 +198,7 @@ export class FlightComponent implements OnInit {
           d: this.formCityValue,
           a: this.toCityValue,
           date: this.departureDate,
-          r_date: '2020-03-08',
+          r_date: '',
           adult: authData.adult,
           child: authData.child,
           infant: authData.infant,
@@ -193,5 +206,19 @@ export class FlightComponent implements OnInit {
           type: 'one-way'
         },
     });
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.searchFlightForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
+  }
+
+  searchFlightFormFailurePopUPHide() {
+    this.searchFlightFormInvalid = false;
   }
 }
