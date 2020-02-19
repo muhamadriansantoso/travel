@@ -342,6 +342,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
           if (this.leftTimePayment > 0) {
             this.leftTimePayment = this.transferExpiredTime - this.currentDateTime;
+
+            // setTimeout(() => {
+            //   this.myStepper.next();
+            //     }, 10000);
           } else {
             this.leftTimePayment = 0;
           }
