@@ -32,6 +32,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   leftTimePayment: any;
   bankCode: any;
   productCode: any;
+  minDateAdult: any;
+  maxDateAdult: any;
+  minDateChild: any;
+  maxDateChild: any;
+  minDateInfant: any;
+  maxDateInfant: any;
 
   submitedPassengerData: any = [];
 
@@ -73,6 +79,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadingPage = true;
     this.isLinear = true;
+
     this.initBookingForm();
     this.paymentChannelForm();
     this.checkingPaymentbySocketIO();
@@ -89,6 +96,40 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         this.nonUpdatedPrice = AirBookingGetDataDB.data.totalPrice;
+        var bookingDate = moment('2020-12-25').toDate();
+        console.log(bookingDate);
+        this.minDateAdult = {
+          'year': bookingDate.getFullYear() - 100,
+          'month': parseInt(moment(bookingDate).format('MM'), 0),
+          'day': parseInt(moment(bookingDate).format('DD'), 0)
+        };
+        this.maxDateAdult = {
+          'year': bookingDate.getFullYear() - 12,
+          'month': parseInt(moment(bookingDate).format('MM'), 0),
+          'day': parseInt(moment(bookingDate).format('DD'), 0)
+        };
+
+        this.minDateChild = {
+          'year': bookingDate.getFullYear() - 12,
+          'month': parseInt(moment(bookingDate).format('MM'), 0),
+          'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+        };
+        this.maxDateChild = {
+          'year': bookingDate.getFullYear() - 2,
+          'month': parseInt(moment(bookingDate).format('MM'), 0),
+          'day': parseInt(moment(bookingDate).format('DD'), 0)
+        };
+
+        this.minDateInfant = {
+          'year': bookingDate.getFullYear() - 2,
+          'month': parseInt(moment(bookingDate).format('MM'), 0),
+          'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+        };
+        this.maxDateInfant = {
+          'year': bookingDate.getFullYear(),
+          'month': parseInt(moment(bookingDate).format('MM'), 0) - 1,
+          'day': parseInt(moment(bookingDate).format('DD'), 0)
+        };
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
           this.stepPayComplete = false;

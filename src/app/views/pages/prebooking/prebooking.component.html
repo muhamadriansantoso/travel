@@ -120,9 +120,15 @@
                   <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="dob">Date of birth</label>
                     <div class="col-sm-8">
-                      <input [ngClass]="{ 'is-invalid': isControlHasError('dob','required') }"
-                             autocomplete="off" class="form-control datepicker-other" formControlName="dob" id="dob"
-                             type="text">
+                      <input #d="ngbDatepicker"
+                             (click)="d.toggle()"
+                             [maxDate]="maxDateAdult"
+                             [minDate]="minDateAdult"
+                             [ngClass]="{ 'is-invalid': isControlHasError('dob','required') }"
+                             class="form-control"
+                             formControlName="dob"
+                             maxlength="0" ngbDatepicker
+                      >
                       <div *ngIf="isControlHasError('dob','required')" class="invalid-feedback"
                            style="display: block">
                         Date of Birth is required
@@ -282,9 +288,41 @@
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">Date of birth</label>
                       <div class="col-sm-8">
-                        <input
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j)}"
-                          class="form-control datepicker-other" formControlName="passenger_dob" type="text">
+                        <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
+                          <input #d="ngbDatepicker"
+                                 (click)="d.toggle()"
+                                 [maxDate]="maxDateAdult"
+                                 [minDate]="minDateAdult"
+                                 [ngClass]="{ 'is-invalid': isControlHasError('passenger_dob','required') }"
+                                 class="form-control"
+                                 formControlName="passenger_dob"
+                                 maxlength="0" ngbDatepicker
+                          >
+                        </ng-container>
+                        <ng-container
+                          *ngIf="bookingForm[i].value[j].passengerType == 'CHD' || bookingForm[i].value[j].passengerType == 'CNN'">
+                          <input #d="ngbDatepicker"
+                                 (click)="d.toggle()"
+                                 [maxDate]="maxDateChild"
+                                 [minDate]="minDateChild"
+                                 [ngClass]="{ 'is-invalid': isControlHasError('passenger_dob','required') }"
+                                 class="form-control"
+                                 formControlName="passenger_dob"
+                                 maxlength="0" ngbDatepicker
+                          >
+                        </ng-container>
+                        <ng-container
+                          *ngIf="bookingForm[i].value[j].passengerType == 'INF'">
+                          <input #d="ngbDatepicker"
+                                 (click)="d.toggle()"
+                                 [maxDate]="maxDateInfant"
+                                 [minDate]="minDateInfant"
+                                 [ngClass]="{ 'is-invalid': isControlHasError('passenger_dob','required') }"
+                                 class="form-control"
+                                 formControlName="passenger_dob"
+                                 maxlength="0" ngbDatepicker
+                          >
+                        </ng-container>
                         <div *ngIf="isControlHasErrorDynamic('passenger_dob','required', i, j)"
                              class="invalid-feedback"
                              style="display: block">

@@ -49,7 +49,8 @@ import {CountdownModule} from 'ngx-countdown';
     MatStepperModule,
     ClipboardModule,
     MatSnackBarModule,
-    CountdownModule
+    CountdownModule,
+    NgbModule
   ],
   providers: [
     {
