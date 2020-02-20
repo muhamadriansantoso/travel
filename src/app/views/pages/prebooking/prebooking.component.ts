@@ -96,40 +96,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         this.nonUpdatedPrice = AirBookingGetDataDB.data.totalPrice;
-        var bookingDate = moment('2020-12-25').toDate();
-        console.log(bookingDate);
-        this.minDateAdult = {
-          'year': bookingDate.getFullYear() - 100,
-          'month': parseInt(moment(bookingDate).format('MM'), 0),
-          'day': parseInt(moment(bookingDate).format('DD'), 0)
-        };
-        this.maxDateAdult = {
-          'year': bookingDate.getFullYear() - 12,
-          'month': parseInt(moment(bookingDate).format('MM'), 0),
-          'day': parseInt(moment(bookingDate).format('DD'), 0)
-        };
-
-        this.minDateChild = {
-          'year': bookingDate.getFullYear() - 12,
-          'month': parseInt(moment(bookingDate).format('MM'), 0),
-          'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
-        };
-        this.maxDateChild = {
-          'year': bookingDate.getFullYear() - 2,
-          'month': parseInt(moment(bookingDate).format('MM'), 0),
-          'day': parseInt(moment(bookingDate).format('DD'), 0)
-        };
-
-        this.minDateInfant = {
-          'year': bookingDate.getFullYear() - 2,
-          'month': parseInt(moment(bookingDate).format('MM'), 0),
-          'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
-        };
-        this.maxDateInfant = {
-          'year': bookingDate.getFullYear(),
-          'month': parseInt(moment(bookingDate).format('MM'), 0) - 1,
-          'day': parseInt(moment(bookingDate).format('DD'), 0)
-        };
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
           this.stepPayComplete = false;
@@ -157,6 +123,40 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
             this.updatedPrice = AirPricePort.data[0].totalPrice;
+
+            var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
+            this.minDateAdult = {
+              'year': bookingDate.getFullYear() - 100,
+              'month': parseInt(moment(bookingDate).format('MM'), 0),
+              'day': parseInt(moment(bookingDate).format('DD'), 0)
+            };
+            this.maxDateAdult = {
+              'year': bookingDate.getFullYear() - 12,
+              'month': parseInt(moment(bookingDate).format('MM'), 0),
+              'day': parseInt(moment(bookingDate).format('DD'), 0)
+            };
+
+            this.minDateChild = {
+              'year': bookingDate.getFullYear() - 12,
+              'month': parseInt(moment(bookingDate).format('MM'), 0),
+              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+            };
+            this.maxDateChild = {
+              'year': bookingDate.getFullYear() - 2,
+              'month': parseInt(moment(bookingDate).format('MM'), 0),
+              'day': parseInt(moment(bookingDate).format('DD'), 0)
+            };
+
+            this.minDateInfant = {
+              'year': bookingDate.getFullYear() - 2,
+              'month': parseInt(moment(bookingDate).format('MM'), 0),
+              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+            };
+            this.maxDateInfant = {
+              'year': bookingDate.getFullYear(),
+              'month': parseInt(moment(bookingDate).format('MM'), 0) - 1,
+              'day': parseInt(moment(bookingDate).format('DD'), 0)
+            };
 
             if (this.nonUpdatedPrice != this.updatedPrice) {
               this.priceUpdatedInformation = true;
