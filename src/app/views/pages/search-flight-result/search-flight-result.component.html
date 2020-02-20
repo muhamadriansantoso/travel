@@ -377,30 +377,23 @@
                       </div>
                       <div class="col-md-8">
                         <div>
-                          <div *ngFor="let dataflightTrans of dataflight.transData">
+                          <div *ngFor="let dataflightTrans of dataflight.numPassenger">
                             <ng-container *ngIf="dataflightTrans.numPassenger?.length > 1">
-                              <div *ngFor="let numPassengers of dataflightTrans.numPassenger">
-                                <ng-container *ngIf="numPassengers.passengerCode == 'ADT'">
-                                  {{numPassengers.numPassenger}}X Adult Basic price
-                                  {{dataflightTrans.platingCarrierName}}
-                                  {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                              <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
+                                {{dataflightTrans.numPassenger}}X Adult Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{numPassengers.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                                 </ng-container>
                                 <ng-container
-                                  *ngIf="numPassengers.passengerCode == 'CHD' || numPassengers.passengerCode == 'CNN'">
-                                  {{numPassengers.numPassenger}}X Child Basic price
-                                  {{dataflightTrans.platingCarrierName}}
-                                  {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                                  *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
+                                  {{dataflightTrans.numPassenger}}X Child Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{numPassengers.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                                 </ng-container>
-                                <ng-container *ngIf="numPassengers.passengerCode == 'INF'">
-                                  {{numPassengers.numPassenger}}X Infant Basic price
-                                  {{dataflightTrans.platingCarrierName}}
-                                  {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                              <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
+                                {{dataflightTrans.numPassenger}}X Infant Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{numPassengers.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
                                 </ng-container>
                               </div>
                             </ng-container>
