@@ -102,6 +102,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         this.nonUpdatedPrice = AirBookingGetDataDB.data.totalPrice;
+        this.origin = AirBookingGetDataDB.data.transData[0].origin;
+        this.destination = AirBookingGetDataDB.data.transData[0].destination;
+        this.originCityName = AirBookingGetDataDB.data.transData[0].origin_city_name;
+        this.destinationCityName = AirBookingGetDataDB.data.transData[0].destination_city_name;
+        this.departureTime = AirBookingGetDataDB.data.transData[0].departureTime;
+
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
           this.stepPayComplete = false;
@@ -129,11 +135,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
             this.updatedPrice = AirPricePort.data[0].totalPrice;
-            this.origin = AirPricePort.data[0].transData[0].origin;
-            this.destination = AirPricePort.data[0].transData[0].destination;
-            this.originCityName = AirPricePort.data[0].transData[0].origin_city_name;
-            this.destinationCityName = AirPricePort.data[0].transData[0].destination_city_name;
-            this.departureTime = AirPricePort.data[0].transData[0].departureTime;
 
             var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
             this.minDateAdult = {
