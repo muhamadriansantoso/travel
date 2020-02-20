@@ -52,6 +52,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   originCityName: string;
   destinationCityName: string;
   departureTime: string;
+  airPlane: string;
 
   isLinear: boolean;
   stepBookingDetailsComplete: boolean;
@@ -107,6 +108,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         this.originCityName = AirBookingGetDataDB.data.transData[0].origin_city_name;
         this.destinationCityName = AirBookingGetDataDB.data.transData[0].destination_city_name;
         this.departureTime = AirBookingGetDataDB.data.transData[0].departureTime;
+        this.airPlane = AirBookingGetDataDB.data.transData[0].platingCarrierName;
 
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
@@ -380,7 +382,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     this.validateBookingLoader = true;
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.originCityName, this.destination, this.destinationCityName, this.departureTime).pipe(
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.originCityName, this.destination, this.destinationCityName, this.departureTime, this.airPlane).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.stepPayComplete = true;
