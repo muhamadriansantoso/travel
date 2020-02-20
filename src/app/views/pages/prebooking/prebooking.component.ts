@@ -47,6 +47,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitted = false;
 
+  origin: string;
+  destination: string;
+  originCityName: string;
+  destinationCityName: string;
+  departureTime: string;
+
   isLinear: boolean;
   stepBookingDetailsComplete: boolean;
   stepPayComplete: boolean;
@@ -123,6 +129,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
             this.updatedPrice = AirPricePort.data[0].totalPrice;
+            this.origin = AirPricePort.data[0].transData[0].origin;
+            this.destination = AirPricePort.data[0].transData[0].destination;
+            this.originCityName = AirPricePort.data[0].transData[0].origin_city_name;
+            this.destinationCityName = AirPricePort.data[0].transData[0].destination_city_name;
+            this.departureTime = AirPricePort.data[0].transData[0].departureTime;
 
             var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
             this.minDateAdult = {
@@ -315,7 +326,9 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       phone: controls['phone'].value,
     };
 
-    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.dob, dataBooking.email, dataBooking.phone).pipe(
+    var dob = moment(dataBooking.dob.year + '-' + dataBooking.dob.month + '-' + dataBooking.dob.day).format('YYYY-MM-DD');
+
+    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dob, dataBooking.email, dataBooking.phone).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.api.paymentChannelEspay(this.sessionID).pipe(
@@ -366,7 +379,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     this.validateBookingLoader = true;
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode).pipe(
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.originCityName, this.destination, this.destinationCityName, this.departureTime).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.stepPayComplete = true;
