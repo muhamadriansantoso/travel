@@ -381,8 +381,9 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     };
 
     this.validateBookingLoader = true;
+    var departureTimeModified = moment(this.departureTime).format('YYYY-MM-DD, hh:mm:ss');
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.originCityName, this.destination, this.destinationCityName, this.departureTime, this.airPlane).pipe(
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.originCityName, this.destination, this.destinationCityName, departureTimeModified, this.airPlane).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.stepPayComplete = true;
