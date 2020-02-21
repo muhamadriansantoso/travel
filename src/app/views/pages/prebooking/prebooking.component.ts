@@ -188,10 +188,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
             };
 
-            if (this.paymentStatus == '') {
-              if (this.nonUpdatedPrice != this.updatedPrice) {
-                this.priceUpdatedInformation = true;
-              }
+            if (this.nonUpdatedPrice != this.updatedPrice && this.paymentStatus == null) {
+              this.priceUpdatedInformation = true;
             }
 
             //bookingInfoForm
