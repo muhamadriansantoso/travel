@@ -49,6 +49,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   submitted = false;
 
+  paymentStatus: string;
   origin: string;
   destination: string;
   originCityName: string;
@@ -111,6 +112,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         this.destinationCityName = AirBookingGetDataDB.data.transData[0].destination_city_name;
         this.departureTime = AirBookingGetDataDB.data.transData[0].departureTime;
         this.airPlane = AirBookingGetDataDB.data.transData[0].platingCarrierName;
+        this.paymentStatus = AirBookingGetDataDB.payment_status;
 
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
@@ -186,8 +188,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
             };
 
-            if (this.nonUpdatedPrice != this.updatedPrice) {
-              this.priceUpdatedInformation = true;
+            if (this.paymentStatus == '') {
+              if (this.nonUpdatedPrice != this.updatedPrice) {
+                this.priceUpdatedInformation = true;
+              }
             }
 
             //bookingInfoForm
@@ -245,7 +249,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_passportexpiry: ['', Validators.compose([
+                  passenger_passportexpiry: ['2031-12-31', Validators.compose([
                     Validators.required,
                   ])
                   ],
@@ -322,12 +326,13 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     for (var awal = 0; awal < this.passengerLength; awal++) {
       for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+        var passengerDob = moment(this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.year + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.month + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.day).format('YYYY-MM-DD');
         this.submitedPassengerData.push({
           passengerType: this.bookingForm[awal].controls[awal2].controls['passengerType'].value,
           passengerTitle: this.bookingForm[awal].controls[awal2].controls['passenger_title'].value,
           passengerFirstName: this.bookingForm[awal].controls[awal2].controls['passenger_firstname'].value,
           passengerLastName: this.bookingForm[awal].controls[awal2].controls['passenger_lastname'].value,
-          passengerDOB: this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value,
+          passengerDOB: passengerDob,
           passengerPassport: this.bookingForm[awal].controls[awal2].controls['passenger_passport'].value,
           passengerPassportExpiry: this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value,
         });
@@ -345,7 +350,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     var dob = moment(dataBooking.dob.year + '-' + dataBooking.dob.month + '-' + dataBooking.dob.day).format('YYYY-MM-DD');
 
-    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dob, dataBooking.email, dataBooking.phone).pipe(
+    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dob, dataBooking.email, dataBooking.phone, this.submitedPassengerData).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.api.paymentChannelEspay(this.sessionID).pipe(
