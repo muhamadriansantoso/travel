@@ -314,7 +314,7 @@
                                  (click)="d.toggle()"
                                  [maxDate]="maxDateInfant"
                                  [minDate]="minDateInfant"
-                                 [ngClass]="{ 'is-invalid': isControlHasError('passenger_dob','required') }"
+                                 [ngClass]="{ 'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j) }"
                                  class="form-control"
                                  formControlName="passenger_dob"
                                  maxlength="0" ngbDatepicker
@@ -348,10 +348,11 @@
                                (click)="d.toggle()"
                                [maxDate]="passportExpiredMaxDate"
                                [minDate]="passportExpiredMinDate"
-                               [ngClass]="{ 'is-invalid': isControlHasError('passenger_passportexpiry','required') }"
+                               [ngClass]="{ 'is-invalid': isControlHasErrorDynamic('passenger_passportexpiry','required', i, j) }"
                                class="form-control"
                                formControlName="passenger_passportexpiry"
-                               maxlength="0" ngbDatepicker>
+                               maxlength="0" ngbDatepicker
+                        >
                         <div *ngIf="isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)"
                              class="invalid-feedback"
                              style="display: block">

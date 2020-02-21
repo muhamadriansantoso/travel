@@ -245,7 +245,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_passportexpiry: ['2031-12-31', Validators.compose([
+                  passenger_passportexpiry: ['', Validators.compose([
                     Validators.required,
                   ])
                   ],
