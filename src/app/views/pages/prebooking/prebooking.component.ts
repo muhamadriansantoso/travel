@@ -38,6 +38,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   maxDateChild: any;
   minDateInfant: any;
   maxDateInfant: any;
+  passportExpiredMinDate: any;
+  passportExpiredMaxDate: any;
 
   submitedPassengerData: any = [];
 
@@ -172,6 +174,18 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               'day': parseInt(moment(bookingDate).format('DD'), 0)
             };
 
+            this.passportExpiredMinDate = {
+              'year': bookingDate.getFullYear(),
+              'month': parseInt(moment(bookingDate).format('MM'), 0) + 6,
+              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+            };
+
+            this.passportExpiredMaxDate = {
+              'year': bookingDate.getFullYear() + 24,
+              'month': parseInt(moment(bookingDate).format('MM'), 0),
+              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+            };
+
             if (this.nonUpdatedPrice != this.updatedPrice) {
               this.priceUpdatedInformation = true;
             }
@@ -190,7 +204,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                 Validators.required,
               ])
               ],
-              dob: ['1996-09-13', Validators.compose([
+              dob: ['', Validators.compose([
                 Validators.required,
               ])
               ],
@@ -223,7 +237,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_dob: ['1998-01-01', Validators.compose([
+                  passenger_dob: ['', Validators.compose([
                     Validators.required,
                   ])
                   ],

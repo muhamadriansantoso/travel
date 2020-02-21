@@ -12,7 +12,7 @@
     <mat-horizontal-stepper #stepper [linear]="isLinear" [selectedIndex]=stepperIndex>
       <mat-step [completed]="stepBookingDetailsComplete" [stepControl]="bookingInfoForm">
         <form [formGroup]="bookingInfoForm">
-          <ng-template matStepLabel>Booking Details</ng-template>
+          <ng-template matStepLabel>Book</ng-template>
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-2">
@@ -210,13 +210,6 @@
           <div class="row">
             <div class="col-md-9">
               <h4 class="mb-3">Passenger details</h4>
-              <div class="alert alert-warning">
-                <h5>Double check your personal details</h5>
-                <p class="mb-0">If the details are not correct, the passenger might be denied boarding. Often you
-                  will
-                  then have to <span class="text-danger">buy a new (more expensive) ticket</span> or <span
-                    class="text-danger">pay extra</span> to make changes.</p>
-              </div>
               <ng-container *ngFor="let pt of passengerType; let i = index">
                 <div *ngFor="let bf of bookingForm[i].controls; let j = index" [formGroup]="bf" class="card mb-2">
                   <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
@@ -242,6 +235,10 @@
                     </div>
                   </ng-container>
                   <div class="card-body">
+                    <div class="alert alert-warning">
+                      <p class="mb-0">Penting: Diperlukan passport minimal 6 bulan sejak tanggal keberangkatan untuk
+                        perjalanan internasional atau transit ke luar negeri</p>
+                    </div>
                     <div class="form-group row">
                       <label class="col-sm-4 col-form-label">Title</label>
                       <div class="col-sm-8">
@@ -347,10 +344,14 @@
                       <label class="col-sm-4 col-form-label">Passport Expiry
                         Date</label>
                       <div class="col-sm-8">
-                        <input
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)}"
-                          class="form-control datepicker-other" formControlName="passenger_passportexpiry"
-                          type="text">
+                        <input #d="ngbDatepicker"
+                               (click)="d.toggle()"
+                               [maxDate]="passportExpiredMaxDate"
+                               [minDate]="passportExpiredMinDate"
+                               [ngClass]="{ 'is-invalid': isControlHasError('passenger_passportexpiry','required') }"
+                               class="form-control"
+                               formControlName="passenger_passportexpiry"
+                               maxlength="0" ngbDatepicker>
                         <div *ngIf="isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)"
                              class="invalid-feedback"
                              style="display: block">
