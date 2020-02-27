@@ -1,6 +1,6 @@
 <div class="tab-pane DivTabFlight">
-  <ngb-tabset>
-    <ngb-tab>
+  <ngb-tabset (tabChange)="beforeChange($event)">
+    <ngb-tab id="one-way">
       <ng-template ngbTabTitle>
         <i class="fas fa-arrow-right"></i> One Way
       </ng-template>
@@ -151,7 +151,7 @@
       </ng-template>
     </ngb-tab>
 
-    <ngb-tab>
+    <ngb-tab id="round-trip">
       <ng-template ngbTabTitle>
         <i class="fa-arrows-alt-h fas"></i> Round Trip
       </ng-template>

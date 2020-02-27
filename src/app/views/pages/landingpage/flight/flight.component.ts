@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
+import {NgbTabChangeEvent} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-flight',
@@ -12,7 +13,6 @@ import * as moment from 'moment';
   styleUrls: ['./flight.component.scss']
 })
 export class FlightComponent implements OnInit {
-
   searchFlightForm: FormGroup;
   airportList: any;
   fromCity: string;
@@ -24,6 +24,7 @@ export class FlightComponent implements OnInit {
   infantPassenger: number;
   roundType: string;
   departureDate: string;
+  returnDate: string;
   minDate: any;
 
   searchFlightFormInvalid: boolean;
@@ -44,7 +45,8 @@ export class FlightComponent implements OnInit {
     this.adultPassenger = 1;
     this.childPassenger = 0;
     this.infantPassenger = 0;
-    this.roundType = 'oneway';
+    this.roundType = 'one-way';
+    this.returnDate = '';
 
     var today = new Date();
     this.minDate = {
@@ -200,9 +202,16 @@ export class FlightComponent implements OnInit {
       child: controls['child'].value,
       infant: controls['infant'].value,
       departure: controls['departure'].value,
+      return: controls['return'].value,
     };
 
     this.departureDate = moment(authData.departure.year + '-' + authData.departure.month + '-' + authData.departure.day).format('YYYY-MM-DD');
+
+    if (this.roundType == 'one-way') {
+      this.returnDate = '';
+    } else {
+      this.returnDate = moment(authData.return.year + '-' + authData.return.month + '-' + authData.return.day).format('YYYY-MM-DD');
+    }
 
     this.router.navigate(['/search-flight'], {
       queryParams:
@@ -210,12 +219,12 @@ export class FlightComponent implements OnInit {
           d: this.formCityValue,
           a: this.toCityValue,
           date: this.departureDate,
-          r_date: '',
+          r_date: this.returnDate,
           adult: authData.adult,
           child: authData.child,
           infant: authData.infant,
           cabin: authData.cabin,
-          type: 'one-way'
+          type: this.roundType
         },
     });
   }
@@ -233,4 +242,16 @@ export class FlightComponent implements OnInit {
   searchFlightFormFailurePopUPHide() {
     this.searchFlightFormInvalid = false;
   }
+
+  beforeChange($event: NgbTabChangeEvent) {
+    this.roundType = $event.nextId;
+    if (this.roundType == 'round-trip') {
+      this.searchFlightForm.get('return').setValidators(Validators.required);
+      this.searchFlightForm.get('return').updateValueAndValidity();
+    } else {
+      this.searchFlightForm.get('return').setValidators([]);
+      this.searchFlightForm.get('return').updateValueAndValidity();
+      this.returnDate = '';
+    }
+  };
 }
