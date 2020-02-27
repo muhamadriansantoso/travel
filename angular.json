@@ -33,12 +33,11 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/css/animate.css",
-              "src/assets/css/magnific-popup.css",
-              "src/assets/css/aos.css",
-              "src/assets/css/flaticon.css",
-              "src/assets/css/icomoon.css",
-              "src/assets/css/style.css",
+              "src/assets/fixtrips/css/all.css",
+              "src/assets/fixtrips/css/animate.css",
+              "src/assets/fixtrips/css/hover.css",
+              "src/assets/fixtrips/css/lightslider.css",
+              "src/assets/fixtrips/css/style.css",
               "node_modules/sweetalert2/dist/sweetalert2.css"
             ],
             "scripts": [
