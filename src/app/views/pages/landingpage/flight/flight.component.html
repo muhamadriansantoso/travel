@@ -150,6 +150,175 @@
         </div>
       </ng-template>
     </ngb-tab>
+
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <i class="fa-arrows-alt-h fas"></i> Round Trip
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div style="clear: both;"></div>
+          <div class="col-sm-12">
+            <div class="search-destination-separator"></div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="col-12 col-sm-12">
+            <div class="row-custom" style="margin: 10px;">
+              <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
+                <div class="width_medium">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Flying From</label>
+                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
+                             [list-formatter]="autocompleListFormatter"
+                             [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                             auto-complete class="form-control origin-typeahead" formControlName="origin"
+                             placeholder="Dari"
+                      />
+                      <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
+                           style="display: block">
+                        Origin is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="width_medium">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Flying To</label>
+                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
+                             [list-formatter]="autocompleListFormatter"
+                             [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                             auto-complete class="form-control origin-typeahead" formControlName="destination"
+                             placeholder="Tujuan"
+                      />
+                      <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
+                           style="display: block">
+                        Destination is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="width_small">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Departure</label>
+                      <span class="icon"><i class="fa fa-calendar"></i></span>
+                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
+                             formControlName="departure"
+                             maxlength="0" ngbDatepicker
+                             placeholder="Tanggal berangkat"
+                      />
+                      <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
+                           style="display: block">
+                        Departure date is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="width_small">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Return</label>
+                      <span class="icon"><i class="fa fa-calendar"></i></span>
+                      <input #r="ngbDatepicker" (click)="r.toggle()" [minDate]="minDate" class="form-control"
+                             formControlName="return"
+                             maxlength="0" ngbDatepicker
+                             placeholder="Tanggal kembali"
+                      />
+                      <div *ngIf="isControlHasError('return','required')" class="invalid-feedback"
+                           style="display: block">
+                        Return date is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="width_large">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Pax &amp; Class</label><span class="icon"><i class="fa-child fas"></i></span>
+                      <div (click)="showPassengerIn()" class="form-control f-traveller" style="cursor: pointer;">
+                        <span class="" style="margin-left: 17px;" title="Adults">{{adultPassenger}}
+                          Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="passengersCollapsed" class="adult-class-dropdown flight-pax" style="position: absolute;">
+                    <div class="dropdown-content" id="divFlightRoom1">
+                      <div class="adult-panel">
+                        <span class="heading">Adult</span>
+                        <div class="min-max-outer">
+                          <div class="min-max">
+                            <input (click)="adultPassengerMinus()" class="input-btn1" type="button" value="-">
+                            <input [(ngModel)]="adultPassenger" class="input-text" formControlName="adult" maxlength="1"
+                                   readonly>
+                            <input (click)="adultPassengerPlus()" class="input-btn2" type="button" value="+">
+                          </div>
+                          <span class="age-text">+12 Yrs</span>
+                        </div>
+                      </div>
+                      <div class="adult-panel">
+                        <span class="heading">Child</span>
+                        <div class="min-max-outer">
+                          <div class="min-max">
+                            <input (click)="childPassengerMinus()" class="input-btn1" type="button" value="-">
+                            <input [(ngModel)]="childPassenger" class="input-text" formControlName="child" maxlength="1"
+                                   readonly>
+                            <input (click)="childPassengerPlus()" class="input-btn2" type="button" value="+">
+                          </div>
+                          <span class="age-text">2-11 Yrs</span>
+                        </div>
+                      </div>
+
+                      <div class="adult-panel">
+                        <span class="heading">Infant(s)</span>
+                        <div class="min-max-outer">
+                          <div class="min-max">
+                            <input (click)="infantPassengerMinus()" class="input-btn1" type="button" value="-">
+                            <input [(ngModel)]="infantPassenger" class="input-text" formControlName="infant"
+                                   maxlength="1"
+                                   readonly>
+                            <input (click)="infantPassengerPlus()" class="input-btn2" type="button" value="+">
+                          </div>
+                          <span class="age-text">Under 2 Yrs</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="width_small">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <div class="airline-tab">
+                        <label>Preferred Class</label>
+                        <span class="icon"><i class="fas fa-wallet"></i></span>
+                        <select class="form-control" formControlName="cabin" id="cabin">
+                          <option value="Economy">Ekonomi</option>
+                          <option value="Premium_Economy">Premium Ekonomi</option>
+                          <option value="Business">Bisnis</option>
+                          <option value="First Class">First Class</option>
+                        </select>
+                        <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
+                             style="display: block">
+                          Cabin Type is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
   </ngb-tabset>
 
   <div class="row-custom">

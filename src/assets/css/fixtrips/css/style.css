@@ -1103,7 +1103,7 @@ header .bottom_header .login ul li a {
   position: relative;
   width: 100%;
   float: left;
-  z-index: 0;
+  z-index: -1;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 118px;
@@ -2937,7 +2937,7 @@ header .bottom_header .login ul li a {
   float: left;
   padding: 60px 0 80px;
   position: relative;
-  background-image: url('/assets/fixtrips/images/testimonial/bg.jpg');
+  background-image: url('../images/testimonial/bg.jpg');
   background-size: cover;
 }
 
@@ -3869,7 +3869,7 @@ footer hr {
   .main_content .page_left_panel .banner_tab_left .content .inner_tab .nav-tabs li.active .inner_list a,
   .main_content .page_left_panel .banner_tab_left .content .inner_tab .nav-tabs li.active .inner_list a:focus,
   .main_content .page_left_panel .banner_tab_left .content .inner_tab .nav-tabs li.active .inner_list a {
-    background: url('/assets/fixtrips/image/active.jpg') no-repeat 100%;
+    background: url(../image/active.jpg) no-repeat 100%;
     background-position: top;
     background-size: 100% 68px;
   }
@@ -4732,7 +4732,7 @@ footer hr {
   -webkit-height: 40px;
   line-height: 33px;
   -webkit-appearance: none;
-  background-image: url('/assets/fixtrips/image/arrow-down.png');
+  background-image: url(../image/arrow-down.png);
   background-position: right 3px center;
   background-repeat: no-repeat;
   padding-left: 10px;
@@ -4753,7 +4753,7 @@ footer hr {
   position: absolute;
   left: 8px;
   bottom: 0;
-  top: 19px;
+  top: 35px;
   color: #07969a;
   line-height: 34px;
   height: 45px;
@@ -4850,7 +4850,7 @@ footer hr {
   width: 100%;
   float: left;
   padding-left: 10px;
-  background-image: url('/assets/fixtrips/image/arrow-down.png');
+  background-image: url(../image/arrow-down.png);
   background-position: right 7px center;
   background-repeat: no-repeat;
 }
@@ -5618,8 +5618,7 @@ footer hr {
 
   .main_content .div_container {
     padding-left: 80px;
-    width: 1185px;
-    max-width: 1185px;
+    width: 1170px;
   }
 }
 
