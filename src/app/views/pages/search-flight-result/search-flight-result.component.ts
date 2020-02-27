@@ -76,7 +76,7 @@ export class SearchFlightResultComponent implements OnInit {
               if (data.data.length > 0) {
                 this.dataFlightSearch = data.data[0];
                 this.sessionID = data.sessionID;
-                this.airLine = data.data[0].transData[0].platingCarrierName;
+                this.airLine = data.data[0].data[0].transData[0].platingCarrierName;
 
                 data.data.forEach((dataPesawat: any) => {
                   dataPesawat.transData.forEach((transData: any) => {
