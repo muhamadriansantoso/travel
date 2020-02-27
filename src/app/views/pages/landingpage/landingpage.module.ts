@@ -1,3 +1,4 @@
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
@@ -11,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
+import {CarouselModule} from 'ngx-owl-carousel-o';
 
 const routes: Routes = [
   {
@@ -46,6 +48,7 @@ const routes: Routes = [
     PriceNumber
   ],
   imports: [
+    BrowserAnimationsModule,
     CommonModule,
     NgbModule,
     FormsModule,
@@ -54,6 +57,7 @@ const routes: Routes = [
     NguiAutoCompleteModule,
     FormsModule,
     ReactiveFormsModule,
+    CarouselModule,
     RouterModule.forChild(routes),
   ]
 })

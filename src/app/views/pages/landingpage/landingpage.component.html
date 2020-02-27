@@ -98,20 +98,14 @@
   <div class="container div_container">
     <div class="page_right_panel">
       <div class="banner main-banner">
-        <div class="carousel slide" data-ride="carousel" id="myCarousel1" time-interval="100">
-          <ol class="carousel-indicators">
-            <li class="active" data-slide-to="0" data-target="#myCarousel1"></li>
-            <li class="" data-slide-to="1" data-target="#myCarousel1"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="item next left">
-              <img alt="Banner Image" src="./assets/fixtrips/image/1.jpg">
-            </div>
-            <div class="item active left">
-              <img alt="Banner Image" src="./assets/fixtrips/image/2.jpg">
-            </div>
-          </div>
-        </div>
+        <owl-carousel-o [options]="customOptions">
+          <ng-template [id]="'1'" carouselSlide>
+            <img [src]="'./assets/fixtrips/image/1.jpg'">
+          </ng-template>
+          <ng-template [id]="'2'" carouselSlide>
+            <img [src]="'./assets/fixtrips/image/2.jpg'">
+          </ng-template>
+        </owl-carousel-o>
       </div>
       <div class="banner_tab">
         <div class="row">

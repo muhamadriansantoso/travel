@@ -1103,7 +1103,7 @@ header .bottom_header .login ul li a {
   position: relative;
   width: 100%;
   float: left;
-  z-index: -1;
+  z-index: 0;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 118px;
@@ -5618,7 +5618,8 @@ footer hr {
 
   .main_content .div_container {
     padding-left: 80px;
-    width: 1170px;
+    width: 1185px;
+    max-width: 1185px;
   }
 }
 

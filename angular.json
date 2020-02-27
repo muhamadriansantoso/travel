@@ -32,11 +32,14 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+              "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
               "src/styles.scss",
               "src/assets/fixtrips/css/animate.css",
               "src/assets/fixtrips/css/hover.css",
               "src/assets/fixtrips/css/lightslider.css",
               "src/assets/fixtrips/css/style.css",
+              "src/assets/css/style.css",
               "node_modules/sweetalert2/dist/sweetalert2.css"
             ],
             "scripts": [

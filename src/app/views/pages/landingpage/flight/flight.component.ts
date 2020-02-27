@@ -143,7 +143,11 @@ export class FlightComponent implements OnInit {
   }
 
   adultPassengerPlus() {
-    this.adultPassenger = this.adultPassenger + 1;
+    if (this.adultPassenger < 9) {
+      this.adultPassenger = this.adultPassenger + 1;
+    } else {
+      return false;
+    }
   }
 
   childPassengerMinus() {
@@ -155,7 +159,11 @@ export class FlightComponent implements OnInit {
   }
 
   childPassengerPlus() {
-    this.childPassenger = this.childPassenger + 1;
+    if (this.childPassenger < 9) {
+      this.childPassenger = this.childPassenger + 1;
+    } else {
+      return false;
+    }
   }
 
   infantPassengerMinus() {
@@ -167,7 +175,11 @@ export class FlightComponent implements OnInit {
   }
 
   infantPassengerPlus() {
-    this.infantPassenger = this.infantPassenger + 1;
+    if (this.infantPassenger < 9) {
+      this.infantPassenger = this.infantPassenger + 1;
+    } else {
+      return false;
+    }
   }
 
   searchFlight() {
