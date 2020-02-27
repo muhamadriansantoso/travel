@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" style="display: none">
   <div class="col-sm-12">
     <div class="card pull-right" style="border:0;">
       <div class="row">
@@ -180,15 +180,15 @@
                   <div class="col-sm-6 col-6">
                     <div class="form-group">
                       <label>
-                        <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
+                        <img class="icon_small" src="./assets/images/ICONS/icon_calendar.png">
                         Berangkat
                       </label>
                       <input #d="ngbDatepicker"
                              (click)="d.toggle()"
                              [minDate]="minDate"
-                             maxlength="0"
                              class="form-control"
-                             formControlName="departure" ngbDatepicker
+                             formControlName="departure"
+                             maxlength="0" ngbDatepicker
                              placeholder="Pilih tanggal keberangkatan"
                       >
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
@@ -197,22 +197,22 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6 col-6" *ngIf="roundType == 'roundtrip'">
+                  <div *ngIf="roundType == 'roundtrip'" class="col-sm-6 col-6">
                     <div class="form-group">
                       <label>
-                        <img src="./assets/images/ICONS/icon_calendar.png" class="icon_small">
+                        <img class="icon_small" src="./assets/images/ICONS/icon_calendar.png">
                         Pulang
                       </label>
-                      <input class="form-control checkin_date" formControlName="return"
-                             placeholder="Pilih tanggal kembali" type="text"
-                             style="background: #fff;" autocomplete="off">
+                      <input autocomplete="off" class="form-control checkin_date"
+                             formControlName="return" placeholder="Pilih tanggal kembali"
+                             style="background: #fff;" type="text">
                     </div>
                   </div>
                   <div class="col-sm-12">
                     <div class="form-group">
-                      <button (click)="searchFlight()" name="cari" type="submit"
-                              class="btn btn-danger button-search-flight-ticket">
-                        <img src="./assets/images/ICONS/icon_pesawat.png" class="icon_medium">
+                      <button (click)="searchFlight()" class="btn btn-danger button-search-flight-ticket" name="cari"
+                              type="submit">
+                        <img class="icon_medium" src="./assets/images/ICONS/icon_pesawat.png">
                         Cari Pesawat
                       </button>
                     </div>
@@ -227,6 +227,163 @@
     </div>
 
   </div>
+</div>
+
+<div class="tab-pane DivTabFlight">
+  <ngb-tabset>
+    <ngb-tab>
+      <ng-template ngbTabTitle>
+        <i class="fas fa-arrow-right"></i> One Way
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div style="clear: both;"></div>
+          <div class="col-sm-12">
+            <div class="search-destination-separator"></div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="col-12 col-sm-12">
+            <div class="row-custom" style="margin: 10px;">
+              <div class="width_large">
+                <div class="form_full">
+                  <div class="form-group">
+                    <label>Flying From</label>
+                    <span class="icon"><i class="fa fa-map-marker"></i></span>
+                    <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
+                           [list-formatter]="autocompleListFormatter"
+                           [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                           auto-complete class="form-control origin-typeahead" formControlName="origin"
+                           placeholder="Dari"
+                    />
+                    <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
+                         style="display: block">
+                      Origin is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="width_large">
+                <div class="form_full">
+                  <div class="form-group">
+                    <label>Flying To</label>
+                    <span class="icon"><i class="fa fa-map-marker"></i></span>
+                    <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
+                           [list-formatter]="autocompleListFormatter"
+                           [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                           auto-complete class="form-control origin-typeahead" formControlName="destination"
+                           placeholder="Tujuan"
+                    />
+                    <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
+                         style="display: block">
+                      Destination is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="width_medium">
+                <div class="form_full">
+                  <div class="form-group">
+                    <label>Departure</label>
+                    <span class="icon"><i class="fa fa-calendar"></i></span>
+                    <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
+                           formControlName="departure"
+                           maxlength="0" ngbDatepicker
+                           placeholder="Tanggal berangkat"
+                    />
+                    <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
+                         style="display: block">
+                      Departure date is required
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="width_large">
+                <div class="form_full">
+                  <div class="form-group">
+                    <label>Pax &amp; Class</label><span class="icon"><i class="fa-child fas"></i></span>
+                    <div aria-expanded="false" class="form-control f-traveller collapsed"
+                         data-target="#divPaxInfo_Flight" data-toggle="collapse" style="cursor: pointer;">
+                      <span class="" id="spanTotalPax_Flight" style="margin-left: 17px;" title="Adults">1 Adult, 0 Child, 0 Infant</span>
+                      <span id="spanAdults_Flight" style="display: none;" title="Adults">1</span>
+                      <span id="spanYouths_Flight" style="display: none;" title="Youths">0</span>
+                      <span id="spanChilds_Flight" style="display: none;" title="Childs">0</span>
+                      <span id="spanInfants_Flight" style="display: none;" title="Infants">0</span>
+                    </div>
+                  </div>
+                </div>
+                <div aria-expanded="false" class="adult-class-dropdown flight-pax collapse" id="divPaxInfo_Flight"
+                     style="position: absolute; height: 0px;">
+                  <input id="hfTotalRoom" type="hidden" value="1">
+                  <div class="dropdown-content" id="divFlightRoom1">
+
+                    <div class="adult-panel">
+                      <span class="heading">Adult(s)</span>
+                      <div class="min-max-outer">
+                        <div class="min-max">
+                          <input class="input-btn1" id="AdultMinus" type="button" value="-">
+                          <input class="input-text" id="ddlAdult" maxlength="1" readonly="readonly" value="1">
+                          <input class="input-btn2" id="AdultPlus" type="button" value="+">
+                        </div>
+                        <span class="age-text">+15 Yrs</span>
+                      </div>
+                    </div>
+                    <div class="adult-panel">
+                      <span class="heading">Child(ren)</span>
+                      <div class="min-max-outer">
+                        <div class="min-max">
+                          <input class="input-btn1" id="ChildMinus" type="button" value="-">
+                          <input class="input-text" id="ddlChild" maxlength="1" readonly="readonly" value="0">
+                          <input class="input-btn2" id="ChildPlus" type="button" value="+">
+                        </div>
+                        <span class="age-text">2-11 Yrs</span>
+                      </div>
+                    </div>
+
+                    <div class="adult-panel">
+                      <span class="heading">Infant(s)</span>
+                      <div class="min-max-outer">
+                        <div class="min-max">
+                          <input class="input-btn1" id="InfantMinus" type="button" value="-">
+                          <input class="input-text" id="ddlInfant" readonly="readonly" value="0">
+                          <input class="input-btn2" id="InfantPlus" type="button" value="+">
+                        </div>
+                        <span class="age-text">Under 2
+                                                                                    Yrs</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="width_small">
+                <div class="form_full">
+                  <div class="form-group">
+                    <div class="airline-tab">
+                      <label>Preferred Class</label>
+                      <span class="icon"><i class="fas fa-wallet"></i></span>
+                      <select class="form-control" formControlName="cabin" id="cabin">
+                        <option value="Economy">Ekonomi</option>
+                        <option value="Premium_Economy">Premium Ekonomi</option>
+                        <option value="Business">Bisnis</option>
+                        <option value="First Class">First Class</option>
+                      </select>
+                      <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
+                           style="display: block">
+                        Cabin Type is required
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
 </div>
 
 <div *ngIf="searchFlightFormInvalid" style="z-index: 999999;">

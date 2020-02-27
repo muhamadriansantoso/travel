@@ -1,37 +1,186 @@
-<section style="position: absolute; top: 15%; left: 10%; right: 10%">
-  <div class="container">
-    <div [ngStyle]="searchClicked?{'display': 'block'} : {'display': 'none'}" class="modal modal-tiket"></div>
-    <div (click)="searchClickedEvent()" (clickOutside)="searchClickedEventOut()" class="row no-gutters">
-      <div [ngStyle]="searchClicked?{'z-index': '1051'} : {'z-index': '0'}"
-           class="col-md-11 tab-wrap col-centered content-booking-ticket">
-        <div class="row">
-          <div class="col-sm-3 nav-link-wrap">
-            <div class="nav nav-pills justify-content-center menu-travel">
-              <a class="nav-link nav-link-categori" routerLink="/flight" routerLinkActive="active">
-                <img src="./assets/images/ICONS/icon_pesawat.png" style="width: 30px;height: 30px;"> Pesawat
-              </a>
+<!--<section style="position: absolute; top: 15%; left: 10%; right: 10%">-->
+<!--  <div class="container">-->
+<!--    <div [ngStyle]="searchClicked?{'display': 'block'} : {'display': 'none'}" class="modal modal-tiket"></div>-->
+<!--    <div (click)="searchClickedEvent()" (clickOutside)="searchClickedEventOut()" class="row no-gutters">-->
+<!--      <div [ngStyle]="searchClicked?{'z-index': '1051'} : {'z-index': '0'}"-->
+<!--           class="col-md-11 tab-wrap col-centered content-booking-ticket">-->
+<!--        <div class="row">-->
+<!--          <div class="col-sm-3 nav-link-wrap">-->
+<!--            <div class="nav nav-pills justify-content-center menu-travel">-->
+<!--              <a class="nav-link nav-link-categori" routerLink="/flight" routerLinkActive="active">-->
+<!--                <img src="./assets/images/ICONS/icon_pesawat.png" style="width: 30px;height: 30px;"> Pesawat-->
+<!--              </a>-->
 
-              <!--                            <a class="nav-link nav-link-categori" routerLinkActive="active" routerLink="/hotel">-->
-              <!--                                <img src="./assets/images/ICONS/icon_hotel.png" style="width: 30px;height: 30px;"> Hotel-->
-              <!--                            </a>-->
+<!--              &lt;!&ndash;                            <a class="nav-link nav-link-categori" routerLinkActive="active" routerLink="/hotel">&ndash;&gt;-->
+<!--              &lt;!&ndash;                                <img src="./assets/images/ICONS/icon_hotel.png" style="width: 30px;height: 30px;"> Hotel&ndash;&gt;-->
+<!--              &lt;!&ndash;                            </a>&ndash;&gt;-->
 
-              <!--<a class="nav-link nav-link-categori">-->
-              <!--<img src="./assets/images/ICONS/icon_kereta.png" style="width: 30px;height: 30px;"> Kereta-->
-              <!--</a>-->
-                        </div>
-          </div>
+<!--              &lt;!&ndash;<a class="nav-link nav-link-categori">&ndash;&gt;-->
+<!--              &lt;!&ndash;<img src="./assets/images/ICONS/icon_kereta.png" style="width: 30px;height: 30px;"> Kereta&ndash;&gt;-->
+<!--              &lt;!&ndash;</a>&ndash;&gt;-->
+<!--                        </div>-->
+<!--          </div>-->
 
-          <div class="col-sm-9">
-            <div class="card pull-right menu-travel">
-              <div class="tab-content">
-                <div class="tab-pane fade show active">
-                  <router-outlet></router-outlet>
-                </div>
-              </div>
+<!--          <div class="col-sm-9">-->
+<!--            <div class="card pull-right menu-travel">-->
+<!--              <div class="tab-content">-->
+<!--                <div class="tab-pane fade show active">-->
+<!--                  <router-outlet></router-outlet>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+
+<div class="main_content">
+  <div class="page_left_panel scrollbar" id="style-4">
+    <div class="sidetab">
+      <a class="textbtn" href="#" id="showPanel">Menu</a>
+      <a class="textbtnclose" href="#" id="hidePanel">×</a>
+    </div>
+    <div class="banner_tab_left">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="content">
+            <div class="inner_tab">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="active" role="presentation">
+                  <div class="inner_list">
+                    <a routerLink="/flight">
+                      <div class="image">
+                        <img src="./assets/fixtrips/image/pesawat_icon.png">
+                      </div>
+                      <span>Flights</span>
+                    </a>
+                  </div>
+                </li>
+                <!--                <li role="presentation" routerLinkActive="active">-->
+                <!--                  <div class="inner_list">-->
+                <!--                    <a routerLink="/hotel">-->
+                <!--                      <div class="image">-->
+                <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
+                <!--                      </div>-->
+                <!--                      <span>Hotel</span>-->
+                <!--                    </a>-->
+                <!--                  </div>-->
+                <!--                </li>-->
+                <!--                <li role="presentation" routerLinkActive="active">-->
+                <!--                  <div class="inner_list">-->
+                <!--                    <a routerLink="/transport">-->
+                <!--                      <div class="image">-->
+                <!--                        <img src="./assets/fixtrips/image/transport_icon.png">-->
+                <!--                      </div>-->
+                <!--                      <span>Transportation</span>-->
+                <!--                    </a>-->
+                <!--                  </div>-->
+                <!--                </li>-->
+                <!--                <li role="presentation" routerLinkActive="active">-->
+                <!--                  <div class="inner_list">-->
+                <!--                    <a routerLink="/attraction">-->
+                <!--                      <div class="image">-->
+                <!--                        <img src="./assets/fixtrips/image/attraction_icon.png">-->
+                <!--                      </div>-->
+                <!--                      <span>Attraction</span>-->
+                <!--                    </a>-->
+                <!--                  </div>-->
+                <!--                </li>-->
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+  <div class="container div_container">
+    <div class="page_right_panel">
+      <div class="banner main-banner">
+        <div class="carousel slide" data-ride="carousel" id="myCarousel1" time-interval="100">
+          <ol class="carousel-indicators">
+            <li class="active" data-slide-to="0" data-target="#myCarousel1"></li>
+            <li class="" data-slide-to="1" data-target="#myCarousel1"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="item next left">
+              <img alt="Banner Image" src="./assets/fixtrips/image/1.jpg">
+            </div>
+            <div class="item active left">
+              <img alt="Banner Image" src="./assets/fixtrips/image/2.jpg">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="banner_tab">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content">
+              <div class="inner_content">
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--      <div class="flight">-->
+      <!--        <div class="row">-->
+      <!--          <div class="col-md-6">-->
+      <!--            <div class="content">-->
+      <!--              <div class="image">-->
+      <!--                <img src="./assets/fixtrips/image/1(1).jpg">-->
+      <!--              </div>-->
+      <!--              <div class="inner_content">-->
+      <!--                <h2>Jakarta - Jeddah</h2>-->
+      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
+      <!--                <h4>1 Stop . 12 h 10 m</h4>-->
+      <!--                <h5>Rp3.000.000</h5>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--            <div class="content">-->
+      <!--              <div class="image">-->
+      <!--                <img src="./assets/fixtrips/image/2(1).jpg">-->
+      <!--              </div>-->
+      <!--              <div class="inner_content">-->
+      <!--                <h2>Madinah Pullman</h2>-->
+      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
+      <!--                <h4>Non-stop . 45 m</h4>-->
+      <!--                <h5>Rp3.000.000</h5>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--          <div class="col-md-6">-->
+      <!--            <div class="content">-->
+      <!--              <div class="image">-->
+      <!--                <img src="./assets/fixtrips/image/1(1).jpg">-->
+      <!--              </div>-->
+      <!--              <div class="inner_content">-->
+      <!--                <h2>Jambi</h2>-->
+      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
+      <!--                <h4>1 stop . 12 h 10 m</h4>-->
+      <!--                <h5>Rp3.000.000</h5>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--            <div class="content">-->
+      <!--              <div class="image">-->
+      <!--                <img src="./assets/fixtrips/image/2(1).jpg">-->
+      <!--              </div>-->
+      <!--              <div class="inner_content">-->
+      <!--                <h2>Penang</h2>-->
+      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
+      <!--                <h4>Non-stop . 45 m</h4>-->
+      <!--                <h5>Rp3.000.000</h5>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--          <div class="col-md-12">-->
+      <!--            <div class="view_all">-->
+      <!--              <a href="#">View All</a>-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+    </div>
+  </div>
+</div>
