@@ -33,7 +33,6 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/assets/fixtrips/css/all.css",
               "src/assets/fixtrips/css/animate.css",
               "src/assets/fixtrips/css/hover.css",
               "src/assets/fixtrips/css/lightslider.css",
