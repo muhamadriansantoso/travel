@@ -18,12 +18,12 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
                              auto-complete class="form-control origin-typeahead" formControlName="origin"
-                             placeholder="Dari"
+                             placeholder="Departures"
                       />
                       <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
                            style="display: block">
@@ -37,12 +37,12 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
                              auto-complete class="form-control origin-typeahead" formControlName="destination"
-                             placeholder="Tujuan"
+                             placeholder="Destination"
                       />
                       <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
                            style="display: block">
@@ -57,10 +57,11 @@
                     <div class="form-group">
                       <label>Departure</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
+                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" [value]="today"
+                             class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
-                             placeholder="Tanggal berangkat"
+                             style="cursor: pointer;"
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
@@ -169,12 +170,12 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
                              auto-complete class="form-control origin-typeahead" formControlName="origin"
-                             placeholder="Dari"
+                             placeholder="Departures"
                       />
                       <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
                            style="display: block">
@@ -188,12 +189,12 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
                              auto-complete class="form-control origin-typeahead" formControlName="destination"
-                             placeholder="Tujuan"
+                             placeholder="Destination"
                       />
                       <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
                            style="display: block">
