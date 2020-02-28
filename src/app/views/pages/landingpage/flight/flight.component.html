@@ -60,7 +60,7 @@
                       <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
-                             placeholder="{{today | date:'yyyy-MM-dd'}}"
+                             [placeholder]="today"
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
