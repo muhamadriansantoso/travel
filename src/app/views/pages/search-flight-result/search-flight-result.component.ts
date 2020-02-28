@@ -20,6 +20,7 @@ export class SearchFlightResultComponent implements OnInit {
   loadingPage: boolean;
   searchFlightError: boolean;
   searchFlightErrorMessage: string;
+  roundType: string;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -37,7 +38,8 @@ export class SearchFlightResultComponent implements OnInit {
   ngOnInit() {
     this.loadingPage = true;
     this.route.queryParams.subscribe(params => {
-      if (params.type) {
+      this.roundType = params.type;
+      if (this.roundType == 'one-way') {
         this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
           .pipe(
             tap((data: any) => {
@@ -74,11 +76,12 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
-                this.dataFlightSearch = data.data[0];
+                this.dataFlightSearch = data.data;
+                console.log(this.dataFlightSearch);
                 this.sessionID = data.sessionID;
-                this.airLine = data.data[0].data[0].transData[0].platingCarrierName;
+                this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
 
-                data.data.forEach((dataPesawat: any) => {
+                data.data[0].departure.forEach((dataPesawat: any) => {
                   dataPesawat.transData.forEach((transData: any) => {
                     this.airLineListUnique.push({
                       value: transData.platingCarrierName

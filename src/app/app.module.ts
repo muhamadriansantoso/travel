@@ -22,6 +22,15 @@ import {UniquePipe} from './views/pages/unique.pipe';
 import {CheckboxFilterPipe} from './views/pages/search-flight-result/checkbox-filter.pipe';
 import {ClipboardModule} from 'ngx-clipboard';
 import {CountdownModule} from 'ngx-countdown';
+import {NgWizardConfig, NgWizardModule, THEME} from 'ng-wizard';
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.arrows,
+  toolbarSettings: {
+    showNextButton: false,
+    showPreviousButton: false
+  }
+};
 
 @NgModule({
   declarations: [
@@ -50,7 +59,8 @@ import {CountdownModule} from 'ngx-countdown';
     ClipboardModule,
     MatSnackBarModule,
     CountdownModule,
-    NgbModule
+    NgbModule,
+    NgWizardModule.forRoot(ngWizardConfig)
   ],
   providers: [
     {
