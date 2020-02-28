@@ -23,6 +23,8 @@ export class SearchFlightResultComponent implements OnInit {
   searchFlightErrorMessage: string;
   roundType: string;
   phase: boolean;
+  origin: string;
+  destination: string;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -47,6 +49,9 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
+                this.origin = params.d;
+                this.destination = params.a;
+
                 this.dataFlightSearch = data.data;
                 this.sessionID = data.sessionID;
                 this.airLine = data.data[0].transData[0].platingCarrierName;
@@ -160,42 +165,29 @@ export class SearchFlightResultComponent implements OnInit {
 
   navigateToBooking(sessionID, data) {
     this.loadingButton = true;
-    if (this.roundType == 'round-trip') {
-      this.dataFlightAdvanced.push(data);
-      this.api.AirBookingInsertDB(sessionID, JSON.stringify(this.dataFlightAdvanced))
-        .pipe(
-          tap((data: any) => {
-            if (data.status == 1) {
-              this.router.navigate(['prebooking', data.sessionID]);
-            } else if (data.status == 0) {
-              window.location.reload();
-            }
-          }),
-          takeUntil(this.unsubscribe),
-          finalize(() => {
-            this.loadingButton = false;
-            this.cdr.markForCheck();
-          })
-        )
-        .subscribe();
-    } else {
-      this.api.AirBookingInsertDB(sessionID, JSON.stringify(data))
-        .pipe(
-          tap((data: any) => {
-            if (data.status == 1) {
-              this.router.navigate(['prebooking', data.sessionID]);
-            } else if (data.status == 0) {
-              window.location.reload();
-            }
-          }),
-          takeUntil(this.unsubscribe),
-          finalize(() => {
-            this.loadingButton = false;
-            this.cdr.markForCheck();
-          })
-        )
-        .subscribe();
-    }
+    data = Object.assign(data, {
+      origin: this.origin,
+      destination: this.destination,
+      roundType: this.roundType
+    });
+    this.dataFlightAdvanced.push(data);
+
+    this.api.AirBookingInsertDB(sessionID, JSON.stringify(this.dataFlightAdvanced))
+      .pipe(
+        tap((data: any) => {
+          if (data.status == 1) {
+            this.router.navigate(['prebooking', data.sessionID]);
+          } else if (data.status == 0) {
+            window.location.reload();
+          }
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loadingButton = false;
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe();
   }
 
   checkedAirline() {

@@ -52,8 +52,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   paymentStatus: string;
   origin: string;
   destination: string;
-  originCityName: string;
-  destinationCityName: string;
   departureTime: string;
   airPlane: string;
 
@@ -105,13 +103,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(sessionID => {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
-        this.nonUpdatedPrice = AirBookingGetDataDB.data.totalPrice;
-        this.origin = AirBookingGetDataDB.data.transData[0].origin;
-        this.destination = AirBookingGetDataDB.data.transData[0].destination;
-        this.originCityName = AirBookingGetDataDB.data.transData[0].origin_city_name;
-        this.destinationCityName = AirBookingGetDataDB.data.transData[0].destination_city_name;
-        this.departureTime = AirBookingGetDataDB.data.transData[0].departureTime;
-        this.airPlane = AirBookingGetDataDB.data.transData[0].platingCarrierName;
+        this.nonUpdatedPrice = AirBookingGetDataDB.data[0].totalPrice;
+        this.origin = AirBookingGetDataDB.data[0].origin;
+        this.destination = AirBookingGetDataDB.data[0].destination;
+        // this.departureTime = AirBookingGetDataDB.data.transData[0].departureTime;
+        // this.airPlane = AirBookingGetDataDB.data.transData[0].platingCarrierName;
         this.paymentStatus = AirBookingGetDataDB.payment_status;
 
         if (AirBookingGetDataDB.status == 1) {
@@ -135,7 +131,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.bookingID = AirBookingGetDataDB.bookingID;
           this.stepperIndex = 2;
         }
-        this.api.AirPricePort(AirBookingGetDataDB.data).pipe(
+        this.api.AirPricePort(this.sessionID).pipe(
           tap((AirPricePort: any) => {
             this.airPricePort = AirPricePort.data[0];
             this.passengerType = AirPricePort.data[0].passengerType;
@@ -400,7 +396,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.validateBookingLoader = true;
     var departureTimeModified = moment(this.departureTime, 'YYYY-MM-DDhh:mm:ss').format('YYYY-MM-DD hh:mm:ss');
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.originCityName, this.destination, this.destinationCityName, departureTimeModified, this.airPlane).pipe(
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.stepPayComplete = true;

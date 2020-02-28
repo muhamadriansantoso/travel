@@ -51,16 +51,10 @@ export class APIService {
     return this.http.post('https://www.gohateka.com/apitravel/api/internal/flight/getSelectedBooking', userData, {headers: urlHeader});
   }
 
-  AirPricePort(data: any) {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      params: {
-        'data': JSON.stringify(data)
-      }
-    };
-    return this.http.get('https://www.gohateka.com/apitravel/api/v1/flight/prebooking', httpOptions);
+  AirPricePort(sessionID: any) {
+    var userData = 'sessionID=' + sessionID;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post('https://www.gohateka.com/apitravel/api/v1/flight/prebooking', userData, {headers: urlHeader});
   }
 
   AirCreateReservationPort(sessionID, title, firstname, lastname, dob, email, phone, passengerData) {
@@ -75,9 +69,9 @@ export class APIService {
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/paymentChannelEspay', userData, {headers: urlHeader});
   }
 
-  insertPaymentChannelEspay(bookingID, bankCode, origin, originCityName, destination, destinationCityName, departureTime, airPlane) {
+  insertPaymentChannelEspay(bookingID, bankCode, origin, destination, departureTime, airPlane) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'bookingID=' + bookingID + '&bankCode=' + bankCode + '&origin=' + origin + '&originCityName=' + originCityName + '&destination=' + destination + '&destinationCityName=' + destinationCityName + '&departureTime=' + departureTime + '&airPlane=' + airPlane;
+    var userData = 'bookingID=' + bookingID + '&bankCode=' + bankCode + '&origin=' + origin + '&destination=' + destination + '&departureTime=' + departureTime + '&airPlane=' + airPlane;
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/payment/orderPaymentEspay', userData, {headers: urlHeader});
   }
 
