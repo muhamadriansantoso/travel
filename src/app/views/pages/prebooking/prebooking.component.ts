@@ -105,10 +105,9 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
         this.nonUpdatedPrice = AirBookingGetDataDB.data[0].totalPrice;
         this.origin = AirBookingGetDataDB.data[0].origin;
-        console.log(this.origin);
         this.destination = AirBookingGetDataDB.data[0].destination;
-        // this.departureTime = AirBookingGetDataDB.data.transData[0].departureTime;
-        // this.airPlane = AirBookingGetDataDB.data.transData[0].platingCarrierName;
+        this.departureTime = AirBookingGetDataDB.data[0].transData[0].departureTime;
+        this.airPlane = AirBookingGetDataDB.data[0].transData[0].platingCarrierName;
         this.paymentStatus = AirBookingGetDataDB.payment_status;
 
         if (AirBookingGetDataDB.status == 1) {

@@ -44,13 +44,13 @@ export class SearchFlightResultComponent implements OnInit {
     this.phase = false;
     this.route.queryParams.subscribe(params => {
       this.roundType = params.type;
+      this.origin = params.d;
+      this.destination = params.a;
       if (this.roundType == 'one-way') {
         this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
-                this.origin = params.d;
-                this.destination = params.a;
 
                 this.dataFlightSearch = data.data;
                 this.sessionID = data.sessionID;
@@ -155,7 +155,6 @@ export class SearchFlightResultComponent implements OnInit {
   returnShow(data) {
     this.phase = true;
     this.dataFlightAdvanced.push(data);
-    console.log(this.dataFlightAdvanced);
   }
 
   returnPrevious(data) {
