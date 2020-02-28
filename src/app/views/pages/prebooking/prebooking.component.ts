@@ -24,6 +24,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   passengerLength: number;
   nonUpdatedPrice: any;
   updatedPrice: any;
+  roundType: string;
 
   listPaymentChannel: any;
   paymentData: any;
@@ -109,6 +110,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         this.departureTime = AirBookingGetDataDB.data[0].transData[0].departureTime;
         this.airPlane = AirBookingGetDataDB.data[0].transData[0].platingCarrierName;
         this.paymentStatus = AirBookingGetDataDB.payment_status;
+        this.roundType = AirBookingGetDataDB.data[0].roundType;
 
         if (AirBookingGetDataDB.status == 1) {
           this.stepBookingDetailsComplete = false;
@@ -396,7 +398,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.validateBookingLoader = true;
     var departureTimeModified = moment(this.departureTime, 'YYYY-MM-DDhh:mm:ss').format('YYYY-MM-DD hh:mm:ss');
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane).pipe(
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane, this.roundType).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.stepPayComplete = true;

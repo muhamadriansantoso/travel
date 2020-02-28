@@ -57,7 +57,7 @@
                     <div class="form-group">
                       <label>Departure</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" [value]="today"
+                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" [value]="defaultDepatureDate"
                              class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
@@ -212,7 +212,7 @@
                       <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
-                             placeholder="Tanggal berangkat"
+                             [value]="defaultDepatureDate"
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
@@ -230,7 +230,7 @@
                       <input #r="ngbDatepicker" (click)="r.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="return"
                              maxlength="0" ngbDatepicker
-                             placeholder="Tanggal kembali"
+                             [value]="defaultReturnDate"
                       />
                       <div *ngIf="isControlHasError('return','required')" class="invalid-feedback"
                            style="display: block">

@@ -26,7 +26,8 @@ export class FlightComponent implements OnInit {
   departureDate: string;
   returnDate: string;
   minDate: any;
-  today: any;
+  defaultDepatureDate: any;
+  defaultReturnDate: any;
 
   searchFlightFormInvalid: boolean;
 
@@ -50,7 +51,8 @@ export class FlightComponent implements OnInit {
     this.returnDate = '';
 
     var today = new Date();
-    this.today = moment(today).format('YYYY-MM-DD');
+    this.defaultDepatureDate = moment(today).add(1, 'd').format('YYYY-MM-DD');
+    this.defaultReturnDate = moment(today).add(3, 'd').format('YYYY-MM-DD');
     this.minDate = {
       'year': today.getFullYear(),
       'month': parseInt(moment(today).format('MM'), 0),
@@ -85,11 +87,11 @@ export class FlightComponent implements OnInit {
       ],
       child: ['0'],
       infant: ['0'],
-      departure: ['', Validators.compose([
+      departure: [this.defaultDepatureDate, Validators.compose([
         Validators.required,
       ])
       ],
-      return: ['']
+      return: [this.defaultReturnDate]
     });
   }
 
