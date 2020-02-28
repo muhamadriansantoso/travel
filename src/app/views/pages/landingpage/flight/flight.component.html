@@ -18,7 +18,7 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
@@ -37,7 +37,7 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
@@ -60,7 +60,7 @@
                       <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
-                             placeholder="Tanggal berangkat"
+                             placeholder="{{today | date:'yyyy-MM-dd'}}"
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
@@ -169,7 +169,7 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
@@ -188,7 +188,7 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
-                      <span class="icon"><i class="fa fa-map-marker"></i></span>
+                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
                       <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
                              [list-formatter]="autocompleListFormatter"
                              [max-num-list]="8" [min-chars]="2" [source]="airportList"
