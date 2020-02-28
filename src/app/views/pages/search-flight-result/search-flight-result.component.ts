@@ -165,12 +165,12 @@ export class SearchFlightResultComponent implements OnInit {
 
   navigateToBooking(sessionID, data) {
     this.loadingButton = true;
-    data = Object.assign(data, {
+    this.dataFlightAdvanced.push(data);
+    this.dataFlightAdvanced[0] = Object.assign(this.dataFlightAdvanced[0], {
       origin: this.origin,
       destination: this.destination,
       roundType: this.roundType
     });
-    this.dataFlightAdvanced.push(data);
 
     this.api.AirBookingInsertDB(sessionID, JSON.stringify(this.dataFlightAdvanced))
       .pipe(
