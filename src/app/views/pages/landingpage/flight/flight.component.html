@@ -57,7 +57,8 @@
                     <div class="form-group">
                       <label>Departure</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" [value]="defaultDepatureDate"
+                      <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
+                             [minDate]="minDate"
                              class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
@@ -133,9 +134,9 @@
                         <span class="icon"><i class="fas fa-wallet"></i></span>
                         <select class="form-control" formControlName="cabin" id="cabin">
                           <option value="Economy">Ekonomi</option>
-                          <option value="Premium_Economy">Premium Ekonomi</option>
+                          <!--                          <option value="Premium_Economy">Premium Ekonomi</option>-->
                           <option value="Business">Bisnis</option>
-                          <option value="First Class">First Class</option>
+                          <!--                          <option value="First Class">First Class</option>-->
                         </select>
                         <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
                              style="display: block">
@@ -212,7 +213,7 @@
                       <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
-                             [value]="defaultDepatureDate"
+                             [(ngModel)]="defaultDepatureDate"
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
@@ -230,7 +231,7 @@
                       <input #r="ngbDatepicker" (click)="r.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="return"
                              maxlength="0" ngbDatepicker
-                             [value]="defaultReturnDate"
+                             [(ngModel)]="defaultReturnDate"
                       />
                       <div *ngIf="isControlHasError('return','required')" class="invalid-feedback"
                            style="display: block">
@@ -302,9 +303,9 @@
                         <span class="icon"><i class="fas fa-wallet"></i></span>
                         <select class="form-control" formControlName="cabin" id="cabin">
                           <option value="Economy">Ekonomi</option>
-                          <option value="Premium_Economy">Premium Ekonomi</option>
+                          <!--                          <option value="Premium_Economy">Premium Ekonomi</option>-->
                           <option value="Business">Bisnis</option>
-                          <option value="First Class">First Class</option>
+                          <!--                          <option value="First Class">First Class</option>-->
                         </select>
                         <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
                              style="display: block">

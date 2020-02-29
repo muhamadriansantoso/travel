@@ -51,8 +51,18 @@ export class FlightComponent implements OnInit {
     this.returnDate = '';
 
     var today = new Date();
-    this.defaultDepatureDate = moment(today).add(1, 'd').format('YYYY-MM-DD');
-    this.defaultReturnDate = moment(today).add(3, 'd').format('YYYY-MM-DD');
+    this.defaultDepatureDate = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 1
+    };
+
+    this.defaultReturnDate = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 3
+    };
+
     this.minDate = {
       'year': today.getFullYear(),
       'month': parseInt(moment(today).format('MM'), 0),
