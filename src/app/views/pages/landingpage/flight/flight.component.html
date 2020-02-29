@@ -338,8 +338,8 @@
           <div style="clear: both;"></div>
           <div class="col-12 col-sm-12">
             <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
-              <div class="row-custom" style="margin: 10px;">
-                <div class="width_large">
+              <div class="row" style="margin: 10px;">
+                <div class="col-md-4 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
@@ -358,7 +358,7 @@
                   </div>
                 </div>
 
-                <div class="width_large">
+                <div class="col-md-4 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
@@ -377,7 +377,7 @@
                   </div>
                 </div>
 
-                <div class="width_large">
+                <div class="col-md-4 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Departure</label>
@@ -396,30 +396,44 @@
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="width_large">
+              <div class="row" style="margin: 10px; margin-top: -10px">
+                <div class="col-md-6 no-padding">
                   <div class="form_full">
                     <div class="form-group">
-                      <button class="btn btn-warning  button-search-flight-ticket">Book flight
+                      <label style="margin-bottom: 20px"></label>
+                      <button class="btn btn-block btn-outline-primary button-search-flight-ticket"
+                              style="height: 45px;border-radius: 5px;">Tambah Penerbangan
                       </button>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div class="row-custom" style="margin: 10px;">
-                <div class="col-md-6">
+                <div class="col-md-6 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Pax</label><span class="icon"><i class="fa-child fas"></i></span>
                       <div (click)="showPassengerIn()" class="form-control f-traveller" style="cursor: pointer;">
-                          <span class="" style="margin-left: 17px;" title="Adults">{{adultPassenger}}
-                            Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                        <div class="label-custom">
+                          <div class="content-custom">
+                            <span class="" style="margin-left: 17px;" title="Adults">{{cabin}}, {{adultPassenger}}
+                              Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div *ngIf="passengersCollapsed" class="adult-class-dropdown flight-pax" style="position: absolute;">
                     <div class="dropdown-content" id="divFlightRoom1">
+                      <div class="adult-panel">
+                        <div class="min-max-outer no-padding">
+                          <select [(ngModel)]="cabin" class="form-control" formControlName="cabin" id="cabin">
+                            <option value="Economy">Ekonomi</option>
+                            <option value="Business">Bisnis</option>
+                          </select>
+                        </div>
+                      </div>
                       <div class="adult-panel">
                         <span class="heading">Adult</span>
                         <div class="min-max-outer">
@@ -456,27 +470,6 @@
                             <input (click)="infantPassengerPlus()" class="input-btn2" type="button" value="+">
                           </div>
                           <span class="age-text">Under 2 Yrs</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="form_full">
-                    <div class="form-group">
-                      <div class="airline-tab">
-                        <label>Preferred Class</label>
-                        <span class="icon"><i class="fas fa-wallet"></i></span>
-                        <select class="form-control" formControlName="cabin" id="cabin">
-                          <option value="Economy">Ekonomi</option>
-                          <!--                          <option value="Premium_Economy">Premium Ekonomi</option>-->
-                          <option value="Business">Bisnis</option>
-                          <!--                          <option value="First Class">First Class</option>-->
-                        </select>
-                        <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
-                             style="display: block">
-                          Cabin Type is required
                         </div>
                       </div>
                     </div>
