@@ -25,6 +25,7 @@ export class FlightComponent implements OnInit {
   roundType: string;
   departureDate: string;
   returnDate: string;
+  cabin: string;
   minDate: any;
   defaultDepatureDate: any;
   defaultReturnDate: any;
@@ -49,6 +50,7 @@ export class FlightComponent implements OnInit {
     this.infantPassenger = 0;
     this.roundType = 'one-way';
     this.returnDate = '';
+    this.cabin = 'Economy';
 
     var today = new Date();
     this.defaultDepatureDate = {
