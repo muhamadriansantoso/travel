@@ -129,22 +129,34 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
+                var ABC = 0;
+                data.data.forEach((globalData: any) => {
+                  globalData.departure.forEach((dataFlightSearch: any) => {
+                    this.dataFlightSearch.push(dataFlightSearch);
 
-                this.dataFlightSearch = data.data;
-                this.sessionID = data.sessionID;
-                this.airLine = data.data[0].transData[0].platingCarrierName;
+                    globalData.departure.forEach((dataPesawat: any) => {
+                      dataPesawat.transData.forEach((transData: any) => {
+                        this.airLineListUnique.push({
+                          value: transData.platingCarrierName
+                        });
+                      });
 
-                data.data.forEach((dataPesawat: any) => {
-                  dataPesawat.transData.forEach((transData: any) => {
-                    this.airLineListUnique.push({
-                      value: transData.platingCarrierName
+                      this.transitListUnique.push({
+                        value: dataPesawat.stop
+                      });
                     });
+
+                    for (var i = 0; i < globalData.departure.length; i++) {
+                      globalData.departure[i] = Object.assign(globalData.departure[i], {
+                        return: data.data[ABC].return,
+                      });
+                    }
                   });
 
-                  this.transitListUnique.push({
-                    value: dataPesawat.stop
-                  });
+                  ABC = ABC + 1;
                 });
+                this.sessionID = data.sessionID;
+                this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
               } else {
                 this.searchFlightError = true;
                 this.searchFlightErrorMessage = data.data.error;
