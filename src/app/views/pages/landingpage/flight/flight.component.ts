@@ -308,6 +308,10 @@ export class FlightComponent implements OnInit {
         return: controls['return'].value,
       };
 
+      for (var dateArrayStart = 0; dateArrayStart < this.defaultDepatureDateArray.length; dateArrayStart++) {
+        this.defaultDepatureDateArray[dateArrayStart] = moment(this.defaultDepatureDateArray[dateArrayStart].year + '-' + this.defaultDepatureDateArray[dateArrayStart].month + '-' + this.defaultDepatureDateArray[dateArrayStart].day).format('YYYY-MM-DD');
+      }
+
       this.returnDate = '';
 
       this.router.navigate(['/search-flight'], {
@@ -315,7 +319,7 @@ export class FlightComponent implements OnInit {
           {
             d: this.formCityValueArray,
             a: this.toCityValueArray,
-            date: '2020-03-05',
+            date: this.defaultDepatureDateArray,
             r_date: this.returnDate,
             adult: authData.adult,
             child: authData.child,
