@@ -135,6 +135,7 @@ export class SearchFlightResultComponent implements OnInit {
               if (data.data.length > 0) {
                 var ABC = 0;
                 this.dataMultiTripStep = data.data[0].flightSession.length;
+                this.dataMultiTrip = data.data;
                 data.data.forEach((globalData: any) => {
                   globalData.departure.forEach((dataFlightSearch: any) => {
                     this.dataFlightSearch.push(dataFlightSearch);
@@ -153,16 +154,6 @@ export class SearchFlightResultComponent implements OnInit {
 
                     for (var i = 0; i < globalData.departure.length; i++) {
                       globalData.departure[i] = Object.assign(globalData.departure[i], {
-                        index: ABC
-                      });
-                    }
-                  });
-
-                  globalData.flightSession.forEach((dataFlightSearchSession: any) => {
-                    this.dataMultiTrip.push(dataFlightSearchSession);
-
-                    for (var i = 0; i < globalData.flightSession.length; i++) {
-                      globalData.flightSession[i] = Object.assign(globalData.flightSession[i], {
                         index: ABC
                       });
                     }
@@ -220,12 +211,21 @@ export class SearchFlightResultComponent implements OnInit {
   returnShowMultiple(data, index) {
     this.dataFlightAdvanced.push(data);
     this.multiplePhase = this.multiplePhase + 1;
-    this.multiplePhaseIndex = index;
-    console.log(this.dataMultiTrip);
+    if (index == undefined) {
+      this.multiplePhaseIndex = this.multiplePhaseIndex;
+    } else {
+      this.multiplePhaseIndex = index;
+    }
+
+    console.log(this.dataMultiTrip[this.multiplePhaseIndex].flightSession[this.multiplePhase - 1]);
   }
 
   returnPrevious(data) {
-    this.phase = false;
+    if (this.roundType == 'round-trip') {
+      this.phase = false;
+    } else if (this.roundType == 'multiple-trip') {
+      this.multiplePhase = 0;
+    }
     this.dataFlightAdvanced = [];
   }
 
