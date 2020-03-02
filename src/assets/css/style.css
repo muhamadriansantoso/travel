@@ -3250,8 +3250,14 @@ a:hover, a:focus {
 }
 
 .card-ticket:hover {
-  border: 1px solid #888;
-  box-shadow: 0 1px 20px 0 rgba(0, 0, 0, .5);
+  background: #fffadb;
+  border: 2px solid #22a7f0 !important;
+  cursor: pointer;
+}
+
+.card-ticket:focus {
+  background: #fffadb !important;
+  border: 2px solid #22a7f0 !important;
   cursor: pointer;
 }
 
