@@ -386,7 +386,8 @@
                       <div class="form-group">
                         <label>Departure</label>
                         <span class="icon"><i class="fa fa-calendar"></i></span>
-                        <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
+                        <input #d="ngbDatepicker" (click)="d.toggle()"
+                               [(ngModel)]="defaultDepatureDateArray[pointIndex]"
                                [minDate]="minDate"
                                class="form-control"
                                formControlName="departureArray"
@@ -401,7 +402,7 @@
                     </div>
                   </div>
 
-                  <div *ngIf="multipleTripLength == pointIndex" class="col-md-1 no-padding">
+                  <div *ngIf="multipleTripLength == pointIndex && multipleTripLength > 1" class="col-md-1 no-padding">
                     <div class="form_full">
                       <div class="form-group">
                         <label style="margin-bottom: 20px"></label>
@@ -414,7 +415,7 @@
               </div>
 
               <div class="row" style="margin: 10px; margin-top: -10px">
-                <div class="col-md-6 no-padding">
+                <div *ngIf="multipleTripLength < 4" class="col-md-6 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label style="margin-bottom: 20px"></label>
@@ -493,8 +494,6 @@
                 </div>
               </div>
             </form>
-
-            {{ this.searchFlightForm.value | json }}
           </div>
         </div>
       </ng-template>

@@ -32,6 +32,7 @@ export class FlightComponent implements OnInit {
   cabin: string;
   minDate: any;
   defaultDepatureDate: any;
+  defaultDepatureDateArray: any = [];
   defaultReturnDate: any;
   multipleTripLength: number;
 
@@ -67,6 +68,18 @@ export class FlightComponent implements OnInit {
       'year': today.getFullYear(),
       'month': parseInt(moment(today).format('MM'), 0),
       'day': parseInt(moment(today).format('DD'), 0) + 1
+    };
+
+    this.defaultDepatureDateArray[0] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 1
+    };
+
+    this.defaultDepatureDateArray[1] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 2
     };
 
     this.defaultReturnDate = {
@@ -146,14 +159,25 @@ export class FlightComponent implements OnInit {
       ])
       ],
       return: [this.defaultReturnDate],
-      multipleTrip: this.fb.array([this.fb.group(
-        {
-          originArray: '',
-          destinationArray: '',
-          departureArray: '',
-        }
-      )])
+      multipleTrip: this.fb.array(
+        [
+          this.fb.group({
+              originArray: '',
+              destinationArray: '',
+              departureArray: '',
+            }
+          ),
+          this.fb.group({
+              originArray: '',
+              destinationArray: '',
+              departureArray: '',
+            }
+          )
+        ]
+      ),
     });
+
+    console.log(this.multipleTrip.controls);
   }
 
 
@@ -316,6 +340,13 @@ export class FlightComponent implements OnInit {
       destinationArray: '',
       departureArray: '',
     }));
+
+    var today = new Date();
+    this.defaultDepatureDateArray[this.multipleTripLength] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 1 + this.multipleTripLength
+    };
   }
 
   removeMultipleTrip(index) {
