@@ -4807,6 +4807,8 @@ footer hr {
 .delete_button:hover {
   cursor: pointer;
   color: #b50000 !important;
+  transform: rotate(360deg);
+  transition: all 0.3s ease-in-out 0s;
 }
 
 .main_content .page_right_panel .banner_tab .content .inner_content .tab-pane .plus_button input[type="button"] {
