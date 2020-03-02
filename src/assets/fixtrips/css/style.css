@@ -173,6 +173,10 @@ select:-moz-focusring {
   background: #15bdcc !important;
 }
 
+.no-padding {
+  padding: unset !important;
+}
+
 .padding0 {
   margin-left: -5px !important;
   margin-right: -5px !important;
@@ -4922,7 +4926,7 @@ footer hr {
   float: left;
   position: relative;
   padding-left: 120px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .main_content .page_right_panel .banner_tab .content .inner_content .tab-pane .adult-class-dropdown .dropdown-content .adult-panel .min-max-outer .min-max {

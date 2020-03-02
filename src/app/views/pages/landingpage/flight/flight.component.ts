@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {APIService} from '../../../../core/API';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
@@ -16,18 +16,25 @@ export class FlightComponent implements OnInit {
   searchFlightForm: FormGroup;
   airportList: any;
   fromCity: string;
+  fromCityArray: any = [];
   formCityValue: string;
+  formCityValueArray: any = [];
   toCity: string;
+  toCityArray: any = [];
   toCityValue: string;
+  toCityValueArray: any = [];
   adultPassenger: number;
   childPassenger: number;
   infantPassenger: number;
   roundType: string;
   departureDate: string;
   returnDate: string;
+  cabin: string;
   minDate: any;
   defaultDepatureDate: any;
+  defaultDepatureDateArray: any = [];
   defaultReturnDate: any;
+  multipleTripLength: number;
 
   searchFlightFormInvalid: boolean;
 
@@ -43,16 +50,44 @@ export class FlightComponent implements OnInit {
   ) {
   }
 
+  get multipleTrip() {
+    return this.searchFlightForm.get('multipleTrip') as FormArray;
+  }
+
   ngOnInit() {
     this.adultPassenger = 1;
     this.childPassenger = 0;
     this.infantPassenger = 0;
     this.roundType = 'one-way';
     this.returnDate = '';
+    this.cabin = 'Economy';
+    this.multipleTripLength = 1;
 
     var today = new Date();
-    this.defaultDepatureDate = moment(today).add(1, 'd').format('YYYY-MM-DD');
-    this.defaultReturnDate = moment(today).add(3, 'd').format('YYYY-MM-DD');
+    this.defaultDepatureDate = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 1
+    };
+
+    this.defaultDepatureDateArray[0] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 1
+    };
+
+    this.defaultDepatureDateArray[1] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 2
+    };
+
+    this.defaultReturnDate = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 3
+    };
+
     this.minDate = {
       'year': today.getFullYear(),
       'month': parseInt(moment(today).format('MM'), 0),
@@ -65,34 +100,6 @@ export class FlightComponent implements OnInit {
     });
 
     this.initSearchFlightForm();
-  }
-
-  initSearchFlightForm() {
-    this.searchFlightForm = this.fb.group({
-      origin: ['', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      destination: ['', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      cabin: ['Economy', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      adult: ['1', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      child: ['0'],
-      infant: ['0'],
-      departure: [this.defaultDepatureDate, Validators.compose([
-        Validators.required,
-      ])
-      ],
-      return: [this.defaultReturnDate]
-    });
   }
 
   autocompleListFormatter = (data: any): SafeHtml => {
@@ -125,6 +132,52 @@ export class FlightComponent implements OnInit {
         this.toCityValue = '';
       }
     }
+  }
+
+  initSearchFlightForm() {
+    this.searchFlightForm = this.fb.group({
+      origin: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      destination: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      cabin: ['Economy', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      adult: ['1', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      child: ['0'],
+      infant: ['0'],
+      departure: [this.defaultDepatureDate, Validators.compose([
+        Validators.required,
+      ])
+      ],
+      return: [this.defaultReturnDate],
+      multipleTrip: this.fb.array(
+        [
+          this.fb.group({
+              originArray: '',
+              destinationArray: '',
+              departureArray: '',
+            }
+          ),
+          this.fb.group({
+              originArray: '',
+              destinationArray: '',
+              departureArray: '',
+            }
+          )
+        ]
+      ),
+    });
+
+    console.log(this.multipleTrip.controls);
   }
 
 
@@ -258,4 +311,50 @@ export class FlightComponent implements OnInit {
       this.returnDate = '';
     }
   };
+
+  cityAutoCompleteArray(data, formorto, index) {
+    const dataType = typeof data;
+    if (dataType == 'object') {
+      if (formorto == 'from') {
+        this.fromCityArray[index] = data.city + ', ' + data.iata;
+        this.formCityValueArray[index] = data.iata;
+      } else if (formorto == 'to') {
+        this.toCityArray[index] = data.city + ', ' + data.iata;
+        this.toCityValueArray[index] = data.iata;
+      }
+    } else {
+      if (formorto == 'from') {
+        this.fromCity = '';
+        this.formCityValue = '';
+      } else if (formorto == 'to') {
+        this.toCity = '';
+        this.toCityValue = '';
+      }
+    }
+  }
+
+  addMultipleTrip() {
+    this.multipleTripLength = this.multipleTrip.length;
+    this.multipleTrip.push(this.fb.group({
+      originArray: '',
+      destinationArray: '',
+      departureArray: '',
+    }));
+
+    var today = new Date();
+    this.defaultDepatureDateArray[this.multipleTripLength] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0) + 1 + this.multipleTripLength
+    };
+  }
+
+  removeMultipleTrip(index) {
+    this.multipleTrip.removeAt(index);
+    this.fromCityArray[this.multipleTrip.length] = '';
+    this.formCityValueArray[this.multipleTrip.length] = '';
+    this.toCityArray[this.multipleTrip.length] = '';
+    this.toCityValueArray[this.multipleTrip.length] = '';
+    this.multipleTripLength = this.multipleTrip.length - 1;
+  }
 }

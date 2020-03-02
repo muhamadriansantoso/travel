@@ -1,0 +1,13 @@
+.label-custom {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 98%;
+}
+
+.content-custom {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}

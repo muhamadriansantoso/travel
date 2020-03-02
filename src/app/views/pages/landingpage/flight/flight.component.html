@@ -12,9 +12,9 @@
           </div>
           <div style="clear: both;"></div>
           <div class="col-12 col-sm-12">
-            <div class="row-custom" style="margin: 10px;">
-              <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
-                <div class="width_large">
+            <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
+              <div class="row" style="margin: 10px;">
+                <div class="col-md-3 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
@@ -33,7 +33,7 @@
                   </div>
                 </div>
 
-                <div class="width_large">
+                <div class="col-md-3 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
@@ -52,12 +52,13 @@
                   </div>
                 </div>
 
-                <div class="width_medium">
+                <div class="col-md-3 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Departure</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" [value]="defaultDepatureDate"
+                      <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
+                             [minDate]="minDate"
                              class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
@@ -71,18 +72,30 @@
                   </div>
                 </div>
 
-                <div class="width_large">
+                <div class="col-md-3 no-padding">
                   <div class="form_full">
                     <div class="form-group">
-                      <label>Pax &amp; Class</label><span class="icon"><i class="fa-child fas"></i></span>
+                      <label>Pax</label><span class="icon"><i class="fa-child fas"></i></span>
                       <div (click)="showPassengerIn()" class="form-control f-traveller" style="cursor: pointer;">
-                        <span class="" style="margin-left: 17px;" title="Adults">{{adultPassenger}}
-                          Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                        <div class="label-custom">
+                          <div class="content-custom">
+                            <span class="" style="margin-left: 17px;" title="Adults">{{cabin}}, {{adultPassenger}}
+                              Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div *ngIf="passengersCollapsed" class="adult-class-dropdown flight-pax" style="position: absolute;">
                     <div class="dropdown-content" id="divFlightRoom1">
+                      <div class="adult-panel">
+                        <div class="min-max-outer no-padding">
+                          <select [(ngModel)]="cabin" class="form-control" formControlName="cabin" id="cabin">
+                            <option value="Economy">Ekonomi</option>
+                            <option value="Business">Bisnis</option>
+                          </select>
+                        </div>
+                      </div>
                       <div class="adult-panel">
                         <span class="heading">Adult</span>
                         <div class="min-max-outer">
@@ -124,29 +137,29 @@
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="width_small">
-                  <div class="form_full">
-                    <div class="form-group">
-                      <div class="airline-tab">
-                        <label>Preferred Class</label>
-                        <span class="icon"><i class="fas fa-wallet"></i></span>
-                        <select class="form-control" formControlName="cabin" id="cabin">
-                          <option value="Economy">Ekonomi</option>
-                          <option value="Premium_Economy">Premium Ekonomi</option>
-                          <option value="Business">Bisnis</option>
-                          <option value="First Class">First Class</option>
-                        </select>
-                        <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
-                             style="display: block">
-                          Cabin Type is required
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
+              <!--              <div class="width_small">-->
+              <!--                <div class="form_full">-->
+              <!--                  <div class="form-group">-->
+              <!--                    <div class="airline-tab">-->
+              <!--                      <label>Preferred Class</label>-->
+              <!--                      <span class="icon"><i class="fas fa-wallet"></i></span>-->
+              <!--                      <select class="form-control" formControlName="cabin" id="cabin">-->
+              <!--                        <option value="Economy">Ekonomi</option>-->
+              <!--                        &lt;!&ndash;                          <option value="Premium_Economy">Premium Ekonomi</option>&ndash;&gt;-->
+              <!--                        <option value="Business">Bisnis</option>-->
+              <!--                        &lt;!&ndash;                          <option value="First Class">First Class</option>&ndash;&gt;-->
+              <!--                      </select>-->
+              <!--                      <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"-->
+              <!--                           style="display: block">-->
+              <!--                        Cabin Type is required-->
+              <!--                      </div>-->
+              <!--                    </div>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
+            </form>
           </div>
         </div>
       </ng-template>
@@ -164,9 +177,9 @@
           </div>
           <div style="clear: both;"></div>
           <div class="col-12 col-sm-12">
-            <div class="row-custom" style="margin: 10px;">
-              <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
-                <div class="width_medium">
+            <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
+              <div class="row" style="margin: 10px;">
+                <div class="col-md-3 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying From</label>
@@ -185,7 +198,7 @@
                   </div>
                 </div>
 
-                <div class="width_medium">
+                <div class="col-md-3 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Flying To</label>
@@ -204,7 +217,7 @@
                   </div>
                 </div>
 
-                <div class="width_small">
+                <div class="col-md-2 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Departure</label>
@@ -212,7 +225,7 @@
                       <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="departure"
                              maxlength="0" ngbDatepicker
-                             [value]="defaultDepatureDate"
+                             [(ngModel)]="defaultDepatureDate"
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
@@ -222,7 +235,7 @@
                   </div>
                 </div>
 
-                <div class="width_small">
+                <div class="col-md-2 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label>Return</label>
@@ -230,7 +243,7 @@
                       <input #r="ngbDatepicker" (click)="r.toggle()" [minDate]="minDate" class="form-control"
                              formControlName="return"
                              maxlength="0" ngbDatepicker
-                             [value]="defaultReturnDate"
+                             [(ngModel)]="defaultReturnDate"
                       />
                       <div *ngIf="isControlHasError('return','required')" class="invalid-feedback"
                            style="display: block">
@@ -240,18 +253,30 @@
                   </div>
                 </div>
 
-                <div class="width_large">
+                <div class="col-md-2 no-padding">
                   <div class="form_full">
                     <div class="form-group">
-                      <label>Pax &amp; Class</label><span class="icon"><i class="fa-child fas"></i></span>
+                      <label>Pax</label><span class="icon"><i class="fa-child fas"></i></span>
                       <div (click)="showPassengerIn()" class="form-control f-traveller" style="cursor: pointer;">
-                        <span class="" style="margin-left: 17px;" title="Adults">{{adultPassenger}}
-                          Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                        <div class="label-custom">
+                          <div class="content-custom">
+                            <span class="" style="margin-left: 17px;" title="Adults">{{cabin}}, {{adultPassenger}}
+                              Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div *ngIf="passengersCollapsed" class="adult-class-dropdown flight-pax" style="position: absolute;">
                     <div class="dropdown-content" id="divFlightRoom1">
+                      <div class="adult-panel">
+                        <div class="min-max-outer no-padding">
+                          <select [(ngModel)]="cabin" class="form-control" formControlName="cabin" id="cabin">
+                            <option value="Economy">Ekonomi</option>
+                            <option value="Business">Bisnis</option>
+                          </select>
+                        </div>
+                      </div>
                       <div class="adult-panel">
                         <span class="heading">Adult</span>
                         <div class="min-max-outer">
@@ -293,29 +318,182 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
 
-                <div class="width_small">
+    <ngb-tab id="multi-city">
+      <ng-template ngbTabTitle>
+        <i class="fa fa-arrows"></i> Multiple Trip
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div style="clear: both;"></div>
+          <div class="col-sm-12">
+            <div class="search-destination-separator"></div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="col-12 col-sm-12">
+            <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
+              <div formArrayName="multipleTrip">
+                <div *ngFor="let item of multipleTrip.controls; let pointIndex=index" [formGroupName]="pointIndex"
+                     class="row" style="margin: 10px;">
+                  <div class="col-md-4 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label>Flying From</label>
+                        <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
+                        <input (valueChanged)="cityAutoCompleteArray($event, 'from', pointIndex)"
+                               [(ngModel)]="fromCityArray[pointIndex]"
+                               [list-formatter]="autocompleListFormatter"
+                               [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                               auto-complete class="form-control origin-typeahead" formControlName="originArray"
+                               placeholder="Departures"
+                        />
+                        <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
+                             style="display: block">
+                          Origin is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label>Flying To</label>
+                        <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
+                        <input (valueChanged)="cityAutoCompleteArray($event, 'to', pointIndex)"
+                               [(ngModel)]="toCityArray[pointIndex]"
+                               [list-formatter]="autocompleListFormatter"
+                               [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                               auto-complete class="form-control origin-typeahead" formControlName="destinationArray"
+                               placeholder="Destination"
+                        />
+                        <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
+                             style="display: block">
+                          Destination is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-3 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label>Departure</label>
+                        <span class="icon"><i class="fa fa-calendar"></i></span>
+                        <input #d="ngbDatepicker" (click)="d.toggle()"
+                               [(ngModel)]="defaultDepatureDateArray[pointIndex]"
+                               [minDate]="minDate"
+                               class="form-control"
+                               formControlName="departureArray"
+                               maxlength="0" ngbDatepicker
+                               style="cursor: pointer;"
+                        />
+                        <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
+                             style="display: block">
+                          Departure date is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="multipleTripLength == pointIndex && multipleTripLength > 1" class="col-md-1 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label style="margin-bottom: 20px"></label>
+                        <span (click)="removeMultipleTrip(pointIndex)" class="icon" style="color: red"><i
+                          class="fa fa-times"></i></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row" style="margin: 10px; margin-top: -10px">
+                <div *ngIf="multipleTripLength < 4" class="col-md-6 no-padding">
                   <div class="form_full">
                     <div class="form-group">
-                      <div class="airline-tab">
-                        <label>Preferred Class</label>
-                        <span class="icon"><i class="fas fa-wallet"></i></span>
-                        <select class="form-control" formControlName="cabin" id="cabin">
-                          <option value="Economy">Ekonomi</option>
-                          <option value="Premium_Economy">Premium Ekonomi</option>
-                          <option value="Business">Bisnis</option>
-                          <option value="First Class">First Class</option>
-                        </select>
-                        <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"
-                             style="display: block">
-                          Cabin Type is required
+                      <label style="margin-bottom: 20px"></label>
+                      <button (click)="addMultipleTrip()"
+                              class="btn btn-block btn-outline-primary button-search-flight-ticket"
+                              style="height: 45px;border-radius: 5px;">Tambah Penerbangan
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 no-padding">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Pax</label><span class="icon"><i class="fa-child fas"></i></span>
+                      <div (click)="showPassengerIn()" class="form-control f-traveller" style="cursor: pointer;">
+                        <div class="label-custom">
+                          <div class="content-custom">
+                            <span class="" style="margin-left: 17px;" title="Adults">{{cabin}}, {{adultPassenger}}
+                              Adult, {{childPassenger}} Child, {{infantPassenger}} Infant</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="passengersCollapsed" class="adult-class-dropdown flight-pax" style="position: absolute;">
+                    <div class="dropdown-content" id="divFlightRoom1">
+                      <div class="adult-panel">
+                        <div class="min-max-outer no-padding">
+                          <select [(ngModel)]="cabin" class="form-control" formControlName="cabin" id="cabin">
+                            <option value="Economy">Ekonomi</option>
+                            <option value="Business">Bisnis</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="adult-panel">
+                        <span class="heading">Adult</span>
+                        <div class="min-max-outer">
+                          <div class="min-max">
+                            <input (click)="adultPassengerMinus()" class="input-btn1" type="button" value="-">
+                            <input [(ngModel)]="adultPassenger" class="input-text" formControlName="adult" maxlength="1"
+                                   readonly>
+                            <input (click)="adultPassengerPlus()" class="input-btn2" type="button" value="+">
+                          </div>
+                          <span class="age-text">+12 Yrs</span>
+                        </div>
+                      </div>
+                      <div class="adult-panel">
+                        <span class="heading">Child</span>
+                        <div class="min-max-outer">
+                          <div class="min-max">
+                            <input (click)="childPassengerMinus()" class="input-btn1" type="button" value="-">
+                            <input [(ngModel)]="childPassenger" class="input-text" formControlName="child" maxlength="1"
+                                   readonly>
+                            <input (click)="childPassengerPlus()" class="input-btn2" type="button" value="+">
+                          </div>
+                          <span class="age-text">2-11 Yrs</span>
+                        </div>
+                      </div>
+
+                      <div class="adult-panel">
+                        <span class="heading">Infant(s)</span>
+                        <div class="min-max-outer">
+                          <div class="min-max">
+                            <input (click)="infantPassengerMinus()" class="input-btn1" type="button" value="-">
+                            <input [(ngModel)]="infantPassenger" class="input-text" formControlName="infant"
+                                   maxlength="1"
+                                   readonly>
+                            <input (click)="infantPassengerPlus()" class="input-btn2" type="button" value="+">
+                          </div>
+                          <span class="age-text">Under 2 Yrs</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </ng-template>
