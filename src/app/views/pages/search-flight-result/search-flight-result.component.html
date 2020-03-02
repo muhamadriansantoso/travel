@@ -446,7 +446,8 @@
   </div>
 </section>
 
-<section *ngIf="!loadingPage && roundType=='round-trip' && !phase" class="ftco-section" style="padding: 0;">
+<section *ngIf="!loadingPage && roundType=='round-trip' || roundType=='multiple-trip' && !phase" class="ftco-section"
+         style="padding: 0;">
   <div class="alert alert-warning">
     <p class="mb-0 text-center">Pilih pesawat untuk keberangkatan</p>
   </div>
@@ -881,7 +882,8 @@
   </div>
 </section>
 
-<section *ngIf="!loadingPage && roundType=='round-trip' && phase" class="ftco-section" style="padding: 0;">
+<section *ngIf="!loadingPage && roundType=='round-trip' || roundType=='multiple-trip' && phase" class="ftco-section"
+         style="padding: 0;">
   <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
     <div
       *ngFor="let dataflight of dataFlightAdvanced | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"

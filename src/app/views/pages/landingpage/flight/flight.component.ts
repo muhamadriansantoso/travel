@@ -64,28 +64,32 @@ export class FlightComponent implements OnInit {
     this.multipleTripLength = 1;
 
     var today = new Date();
+    var todayPlusOne = moment(today).add(1, 'days').toDate();
+    var todayPlusTwo = moment(today).add(2, 'days').toDate();
+    var todayPlusFour = moment(today).add(4, 'days').toDate();
+
     this.defaultDepatureDate = {
-      'year': today.getFullYear(),
-      'month': parseInt(moment(today).format('MM'), 0),
-      'day': parseInt(moment(today).format('DD'), 0) + 1
+      'year': todayPlusOne.getFullYear(),
+      'month': parseInt(moment(todayPlusOne).format('MM'), 0),
+      'day': parseInt(moment(todayPlusOne).format('DD'), 0)
     };
 
     this.defaultDepatureDateArray[0] = {
-      'year': today.getFullYear(),
-      'month': parseInt(moment(today).format('MM'), 0),
-      'day': parseInt(moment(today).format('DD'), 0) + 1
+      'year': todayPlusOne.getFullYear(),
+      'month': parseInt(moment(todayPlusOne).format('MM'), 0),
+      'day': parseInt(moment(todayPlusOne).format('DD'), 0)
     };
 
     this.defaultDepatureDateArray[1] = {
-      'year': today.getFullYear(),
-      'month': parseInt(moment(today).format('MM'), 0),
-      'day': parseInt(moment(today).format('DD'), 0) + 2
+      'year': todayPlusTwo.getFullYear(),
+      'month': parseInt(moment(todayPlusTwo).format('MM'), 0),
+      'day': parseInt(moment(todayPlusTwo).format('DD'), 0)
     };
 
     this.defaultReturnDate = {
-      'year': today.getFullYear(),
-      'month': parseInt(moment(today).format('MM'), 0),
-      'day': parseInt(moment(today).format('DD'), 0) + 3
+      'year': todayPlusFour.getFullYear(),
+      'month': parseInt(moment(todayPlusFour).format('MM'), 0),
+      'day': parseInt(moment(todayPlusFour).format('DD'), 0)
     };
 
     this.minDate = {
@@ -176,8 +180,6 @@ export class FlightComponent implements OnInit {
         ]
       ),
     });
-
-    console.log(this.multipleTrip.controls);
   }
 
 
@@ -242,48 +244,87 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlight() {
-    const controls = this.searchFlightForm.controls;
-    if (this.searchFlightForm.invalid) {
-      Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
-      );
+    if (this.roundType == 'one-way' || this.roundType == 'round-trip') {
+      const controls = this.searchFlightForm.controls;
+      if (this.searchFlightForm.invalid) {
+        Object.keys(controls).forEach(controlName =>
+          controls[controlName].markAsTouched()
+        );
 
-      this.searchFlightFormInvalid = true;
-      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
-      return;
-    }
+        this.searchFlightFormInvalid = true;
+        //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+        return;
+      }
 
-    const authData = {
-      cabin: controls['cabin'].value,
-      adult: controls['adult'].value,
-      child: controls['child'].value,
-      infant: controls['infant'].value,
-      departure: controls['departure'].value,
-      return: controls['return'].value,
-    };
+      const authData = {
+        cabin: controls['cabin'].value,
+        adult: controls['adult'].value,
+        child: controls['child'].value,
+        infant: controls['infant'].value,
+        departure: controls['departure'].value,
+        return: controls['return'].value,
+      };
 
-    this.departureDate = moment(authData.departure.year + '-' + authData.departure.month + '-' + authData.departure.day).format('YYYY-MM-DD');
+      this.departureDate = moment(authData.departure.year + '-' + authData.departure.month + '-' + authData.departure.day).format('YYYY-MM-DD');
 
-    if (this.roundType == 'one-way') {
+      if (this.roundType == 'one-way') {
+        this.returnDate = '';
+      } else {
+        this.returnDate = moment(authData.return.year + '-' + authData.return.month + '-' + authData.return.day).format('YYYY-MM-DD');
+      }
+
+      this.router.navigate(['/search-flight'], {
+        queryParams:
+          {
+            d: this.formCityValue,
+            a: this.toCityValue,
+            date: this.departureDate,
+            r_date: this.returnDate,
+            adult: authData.adult,
+            child: authData.child,
+            infant: authData.infant,
+            cabin: authData.cabin,
+            type: this.roundType
+          },
+      });
+    } else if (this.roundType == 'multiple-trip') {
+      const controls = this.searchFlightForm.controls;
+      if (this.searchFlightForm.invalid) {
+        Object.keys(controls).forEach(controlName =>
+          controls[controlName].markAsTouched()
+        );
+
+        this.searchFlightFormInvalid = true;
+        //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+        return;
+      }
+
+      const authData = {
+        cabin: controls['cabin'].value,
+        adult: controls['adult'].value,
+        child: controls['child'].value,
+        infant: controls['infant'].value,
+        departure: controls['departure'].value,
+        return: controls['return'].value,
+      };
+
       this.returnDate = '';
-    } else {
-      this.returnDate = moment(authData.return.year + '-' + authData.return.month + '-' + authData.return.day).format('YYYY-MM-DD');
-    }
 
-    this.router.navigate(['/search-flight'], {
-      queryParams:
-        {
-          d: this.formCityValue,
-          a: this.toCityValue,
-          date: this.departureDate,
-          r_date: this.returnDate,
-          adult: authData.adult,
-          child: authData.child,
-          infant: authData.infant,
-          cabin: authData.cabin,
-          type: this.roundType
-        },
-    });
+      this.router.navigate(['/search-flight'], {
+        queryParams:
+          {
+            d: this.formCityValueArray,
+            a: this.toCityValueArray,
+            date: '2020-03-05',
+            r_date: this.returnDate,
+            adult: authData.adult,
+            child: authData.child,
+            infant: authData.infant,
+            cabin: authData.cabin,
+            type: this.roundType
+          },
+      });
+    }
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
@@ -305,9 +346,22 @@ export class FlightComponent implements OnInit {
     if (this.roundType == 'round-trip') {
       this.searchFlightForm.get('return').setValidators(Validators.required);
       this.searchFlightForm.get('return').updateValueAndValidity();
-    } else {
+    } else if (this.roundType == 'one-way') {
       this.searchFlightForm.get('return').setValidators([]);
       this.searchFlightForm.get('return').updateValueAndValidity();
+      this.returnDate = '';
+    } else if (this.roundType == 'multiple-trip') {
+      this.searchFlightForm.get('origin').setValidators([]);
+      this.searchFlightForm.get('origin').updateValueAndValidity();
+      this.searchFlightForm.get('destination').setValidators([]);
+      this.searchFlightForm.get('destination').updateValueAndValidity();
+
+      this.searchFlightForm.get('originArray').setValidators(Validators.required);
+      this.searchFlightForm.get('originArray').updateValueAndValidity();
+      this.searchFlightForm.get('destinationArray').setValidators(Validators.required);
+      this.searchFlightForm.get('destinationArray').updateValueAndValidity();
+      this.searchFlightForm.get('departureArray').setValidators(Validators.required);
+      this.searchFlightForm.get('departureArray').updateValueAndValidity();
       this.returnDate = '';
     }
   };
@@ -342,10 +396,11 @@ export class FlightComponent implements OnInit {
     }));
 
     var today = new Date();
+    var todayPlusLength = moment(today).add(this.multipleTripLength + 1, 'days').toDate();
     this.defaultDepatureDateArray[this.multipleTripLength] = {
-      'year': today.getFullYear(),
-      'month': parseInt(moment(today).format('MM'), 0),
-      'day': parseInt(moment(today).format('DD'), 0) + 1 + this.multipleTripLength
+      'year': todayPlusLength.getFullYear(),
+      'month': parseInt(moment(todayPlusLength).format('MM'), 0),
+      'day': parseInt(moment(todayPlusLength).format('DD'), 0)
     };
   }
 

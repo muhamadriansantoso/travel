@@ -138,27 +138,6 @@
                   </div>
                 </div>
               </div>
-
-              <!--              <div class="width_small">-->
-              <!--                <div class="form_full">-->
-              <!--                  <div class="form-group">-->
-              <!--                    <div class="airline-tab">-->
-              <!--                      <label>Preferred Class</label>-->
-              <!--                      <span class="icon"><i class="fas fa-wallet"></i></span>-->
-              <!--                      <select class="form-control" formControlName="cabin" id="cabin">-->
-              <!--                        <option value="Economy">Ekonomi</option>-->
-              <!--                        &lt;!&ndash;                          <option value="Premium_Economy">Premium Ekonomi</option>&ndash;&gt;-->
-              <!--                        <option value="Business">Bisnis</option>-->
-              <!--                        &lt;!&ndash;                          <option value="First Class">First Class</option>&ndash;&gt;-->
-              <!--                      </select>-->
-              <!--                      <div *ngIf="isControlHasError('cabin','required')" class="invalid-feedback"-->
-              <!--                           style="display: block">-->
-              <!--                        Cabin Type is required-->
-              <!--                      </div>-->
-              <!--                    </div>-->
-              <!--                  </div>-->
-              <!--                </div>-->
-              <!--              </div>-->
             </form>
           </div>
         </div>
@@ -325,7 +304,7 @@
       </ng-template>
     </ngb-tab>
 
-    <ngb-tab id="multi-city">
+    <ngb-tab id="multiple-trip">
       <ng-template ngbTabTitle>
         <i class="fa fa-arrows"></i> Multiple Trip
       </ng-template>
@@ -353,7 +332,7 @@
                                auto-complete class="form-control origin-typeahead" formControlName="originArray"
                                placeholder="Departures"
                         />
-                        <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
+                        <div *ngIf="isControlHasError('originArray','required')" class="invalid-feedback"
                              style="display: block">
                           Origin is required
                         </div>
@@ -373,7 +352,7 @@
                                auto-complete class="form-control origin-typeahead" formControlName="destinationArray"
                                placeholder="Destination"
                         />
-                        <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
+                        <div *ngIf="isControlHasError('destinationArray','required')" class="invalid-feedback"
                              style="display: block">
                           Destination is required
                         </div>
@@ -394,7 +373,7 @@
                                maxlength="0" ngbDatepicker
                                style="cursor: pointer;"
                         />
-                        <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
+                        <div *ngIf="isControlHasError('departureArray','required')" class="invalid-feedback"
                              style="display: block">
                           Departure date is required
                         </div>
@@ -415,11 +394,11 @@
               </div>
 
               <div class="row" style="margin: 10px; margin-top: -10px">
-                <div *ngIf="multipleTripLength < 4" class="col-md-6 no-padding">
+                <div class="col-md-6 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label style="margin-bottom: 20px"></label>
-                      <button (click)="addMultipleTrip()"
+                      <button (click)="addMultipleTrip()" [disabled]="multipleTripLength > 3"
                               class="btn btn-block btn-outline-primary button-search-flight-ticket"
                               style="height: 45px;border-radius: 5px;">Tambah Penerbangan
                       </button>

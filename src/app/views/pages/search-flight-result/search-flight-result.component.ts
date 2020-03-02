@@ -79,7 +79,7 @@ export class SearchFlightResultComponent implements OnInit {
             })
           )
           .subscribe();
-      } else {
+      } else if (this.roundType == 'round-trip') {
         this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
           .pipe(
             tap((data: any) => {
@@ -112,6 +112,39 @@ export class SearchFlightResultComponent implements OnInit {
                 });
                 this.sessionID = data.sessionID;
                 this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
+              } else {
+                this.searchFlightError = true;
+                this.searchFlightErrorMessage = data.data.error;
+              }
+            }),
+            takeUntil(this.unsubscribe),
+            finalize(() => {
+              this.loadingPage = false;
+              this.cdr.markForCheck();
+            })
+          )
+          .subscribe();
+      } else if (this.roundType == 'multiple-trip') {
+        this.api.AirLowFareSearchPortArray(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
+          .pipe(
+            tap((data: any) => {
+              if (data.data.length > 0) {
+
+                this.dataFlightSearch = data.data;
+                this.sessionID = data.sessionID;
+                this.airLine = data.data[0].transData[0].platingCarrierName;
+
+                data.data.forEach((dataPesawat: any) => {
+                  dataPesawat.transData.forEach((transData: any) => {
+                    this.airLineListUnique.push({
+                      value: transData.platingCarrierName
+                    });
+                  });
+
+                  this.transitListUnique.push({
+                    value: dataPesawat.stop
+                  });
+                });
               } else {
                 this.searchFlightError = true;
                 this.searchFlightErrorMessage = data.data.error;
