@@ -4801,12 +4801,12 @@ footer hr {
 
 .delete_button {
   cursor: pointer;
-  color: red;
+  color: red !important;
 }
 
 .delete_button:hover {
   cursor: pointer;
-  color: #b50000;
+  color: #b50000 !important;
 }
 
 .main_content .page_right_panel .banner_tab .content .inner_content .tab-pane .plus_button input[type="button"] {
