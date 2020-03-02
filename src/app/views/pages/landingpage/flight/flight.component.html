@@ -415,11 +415,11 @@
               </div>
 
               <div class="row" style="margin: 10px; margin-top: -10px">
-                <div *ngIf="multipleTripLength < 4" class="col-md-6 no-padding">
+                <div class="col-md-6 no-padding">
                   <div class="form_full">
                     <div class="form-group">
                       <label style="margin-bottom: 20px"></label>
-                      <button (click)="addMultipleTrip()"
+                      <button (click)="addMultipleTrip()" [disabled]="multipleTripLength > 3"
                               class="btn btn-block btn-outline-primary button-search-flight-ticket"
                               style="height: 45px;border-radius: 5px;">Tambah Penerbangan
                       </button>
