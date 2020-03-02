@@ -3314,6 +3314,10 @@ a:hover, a:focus {
   font-weight: 500;
 }
 
+.menu-filter-pc .card {
+  padding: 5px 23px 23px 23px;
+}
+
 .image-logo-maskapai {
   width: 80px;
   height: 80px;
