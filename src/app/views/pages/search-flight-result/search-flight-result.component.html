@@ -9,21 +9,21 @@
 </section>
 <section *ngIf="!loadingPage && roundType=='one-way'" class="ftco-section" style="padding: 0;">
   <div class="container">
-    <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
-    <div class="row">
-      <div class="col-sm-3 col-md-3  menu-filter-pc">
-        <div class="card">
-          <h6 class="filter-left">Airlines</h6>
-          <hr class="m-0 mb-1">
-          <ul style="list-style:none;float: left;">
-            <li *ngFor="let allu of airLineListUnique | unique;">
-              <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
-              {{allu.value}}
-            </li>
-          </ul>
-          <h6 class="filter-left">Transit</h6>
-          <hr class="m-0 mb-1">
-          <ul style="list-style:none;">
+<div class="row">
+  <div class="col-sm-3 col-md-3  menu-filter-pc">
+    <div class="card">
+      <h5 class="filter-left">Filter</h5>
+      <hr class="m-0 mb-2">
+      <h6 class="filter-left">Airlines</h6>
+      <ul style="list-style:none;float: left;">
+        <li *ngFor="let allu of airLineListUnique | unique;">
+          <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
+          {{allu.value}}
+        </li>
+      </ul>
+      <hr class="m-0 mb-2 mt-3">
+      <h6 class="filter-left">Transit</h6>
+      <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
               <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
               <span *ngIf="tlu.value == 1">Direct</span>
@@ -262,7 +262,7 @@
               <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                   currency:'IDR ':'symbol':'3.0'}}</strong></p>
               <button (click)="navigateToBooking(sessionID, dataflight)"
-                      class="btn btn-warning rounded button-search-flight-ticket">Book
+                      class="btn btn-warning rounded button-search-flight-ticket">Book Flight
               </button>
             </div>
           </div>
@@ -451,20 +451,20 @@
     <p class="mb-0 text-center">Pilih pesawat untuk keberangkatan</p>
   </div>
   <div class="container">
-    <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
+          <h5 class="filter-left">Filter</h5>
+          <hr class="m-0 mb-2">
           <h6 class="filter-left">Airlines</h6>
-          <hr class="m-0 mb-1">
           <ul style="list-style:none;float: left;">
             <li *ngFor="let allu of airLineListUnique | unique;">
               <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
               {{allu.value}}
             </li>
           </ul>
+          <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
-          <hr class="m-0 mb-1">
           <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
               <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
@@ -698,7 +698,7 @@
             <div class="col-md-2 text-center">
               <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                   currency:'IDR ':'symbol':'3.0'}}</strong></p>
-              <button (click)="returnShow(dataflight)" class="btn btn-warning  button-search-flight-ticket">Book flight
+              <button (click)="returnShow(dataflight)" class="btn btn-warning  button-search-flight-ticket">Book Flight
               </button>
             </div>
           </div>
@@ -1108,20 +1108,20 @@
   </div>
 
   <div class="container">
-    <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
+          <h5 class="filter-left">Filter</h5>
+          <hr class="m-0 mb-2">
           <h6 class="filter-left">Airlines</h6>
-          <hr class="m-0 mb-1">
           <ul style="list-style:none;float: left;">
             <li *ngFor="let allu of airLineListUnique | unique;">
               <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
               {{allu.value}}
             </li>
           </ul>
+          <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
-          <hr class="m-0 mb-1">
           <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
               <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
@@ -1353,7 +1353,7 @@
             </div>
             <div class="col-md-2 text-center">
               <button (click)="navigateToBooking(sessionID, dataflight)"
-                      class="btn btn-warning  button-search-flight-ticket">Book flight
+                      class="btn btn-warning  button-search-flight-ticket">Book Flight
               </button>
             </div>
           </div>
