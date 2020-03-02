@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {APIService} from '../../../../core/API';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import * as moment from 'moment';
@@ -16,9 +16,13 @@ export class FlightComponent implements OnInit {
   searchFlightForm: FormGroup;
   airportList: any;
   fromCity: string;
+  fromCityArray: any = [];
   formCityValue: string;
+  formCityValueArray: any = [];
   toCity: string;
+  toCityArray: any = [];
   toCityValue: string;
+  toCityValueArray: any = [];
   adultPassenger: number;
   childPassenger: number;
   infantPassenger: number;
@@ -29,6 +33,7 @@ export class FlightComponent implements OnInit {
   minDate: any;
   defaultDepatureDate: any;
   defaultReturnDate: any;
+  multipleTripLength: number;
 
   searchFlightFormInvalid: boolean;
 
@@ -44,6 +49,10 @@ export class FlightComponent implements OnInit {
   ) {
   }
 
+  get multipleTrip() {
+    return this.searchFlightForm.get('multipleTrip') as FormArray;
+  }
+
   ngOnInit() {
     this.adultPassenger = 1;
     this.childPassenger = 0;
@@ -51,6 +60,7 @@ export class FlightComponent implements OnInit {
     this.roundType = 'one-way';
     this.returnDate = '';
     this.cabin = 'Economy';
+    this.multipleTripLength = 1;
 
     var today = new Date();
     this.defaultDepatureDate = {
@@ -77,34 +87,6 @@ export class FlightComponent implements OnInit {
     });
 
     this.initSearchFlightForm();
-  }
-
-  initSearchFlightForm() {
-    this.searchFlightForm = this.fb.group({
-      origin: ['', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      destination: ['', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      cabin: ['Economy', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      adult: ['1', Validators.compose([
-        Validators.required,
-      ])
-      ],
-      child: ['0'],
-      infant: ['0'],
-      departure: [this.defaultDepatureDate, Validators.compose([
-        Validators.required,
-      ])
-      ],
-      return: [this.defaultReturnDate]
-    });
   }
 
   autocompleListFormatter = (data: any): SafeHtml => {
@@ -137,6 +119,41 @@ export class FlightComponent implements OnInit {
         this.toCityValue = '';
       }
     }
+  }
+
+  initSearchFlightForm() {
+    this.searchFlightForm = this.fb.group({
+      origin: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      destination: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      cabin: ['Economy', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      adult: ['1', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      child: ['0'],
+      infant: ['0'],
+      departure: [this.defaultDepatureDate, Validators.compose([
+        Validators.required,
+      ])
+      ],
+      return: [this.defaultReturnDate],
+      multipleTrip: this.fb.array([this.fb.group(
+        {
+          originArray: '',
+          destinationArray: '',
+          departureArray: '',
+        }
+      )])
+    });
   }
 
 
@@ -270,4 +287,43 @@ export class FlightComponent implements OnInit {
       this.returnDate = '';
     }
   };
+
+  cityAutoCompleteArray(data, formorto, index) {
+    const dataType = typeof data;
+    if (dataType == 'object') {
+      if (formorto == 'from') {
+        this.fromCityArray[index] = data.city + ', ' + data.iata;
+        this.formCityValueArray[index] = data.iata;
+      } else if (formorto == 'to') {
+        this.toCityArray[index] = data.city + ', ' + data.iata;
+        this.toCityValueArray[index] = data.iata;
+      }
+    } else {
+      if (formorto == 'from') {
+        this.fromCity = '';
+        this.formCityValue = '';
+      } else if (formorto == 'to') {
+        this.toCity = '';
+        this.toCityValue = '';
+      }
+    }
+  }
+
+  addMultipleTrip() {
+    this.multipleTripLength = this.multipleTrip.length;
+    this.multipleTrip.push(this.fb.group({
+      originArray: '',
+      destinationArray: '',
+      departureArray: '',
+    }));
+  }
+
+  removeMultipleTrip(index) {
+    this.multipleTrip.removeAt(index);
+    this.fromCityArray[this.multipleTrip.length] = '';
+    this.formCityValueArray[this.multipleTrip.length] = '';
+    this.toCityArray[this.multipleTrip.length] = '';
+    this.toCityValueArray[this.multipleTrip.length] = '';
+    this.multipleTripLength = this.multipleTrip.length - 1;
+  }
 }

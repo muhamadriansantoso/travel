@@ -338,60 +338,75 @@
           <div style="clear: both;"></div>
           <div class="col-12 col-sm-12">
             <form [formGroup]="searchFlightForm" autocomplete="off" class="search-destination">
-              <div class="row" style="margin: 10px;">
-                <div class="col-md-4 no-padding">
-                  <div class="form_full">
-                    <div class="form-group">
-                      <label>Flying From</label>
-                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
-                      <input (valueChanged)="cityAutoComplete($event, 'from')" [(ngModel)]="fromCity"
-                             [list-formatter]="autocompleListFormatter"
-                             [max-num-list]="8" [min-chars]="2" [source]="airportList"
-                             auto-complete class="form-control origin-typeahead" formControlName="origin"
-                             placeholder="Departures"
-                      />
-                      <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
-                           style="display: block">
-                        Origin is required
+              <div formArrayName="multipleTrip">
+                <div *ngFor="let item of multipleTrip.controls; let pointIndex=index" [formGroupName]="pointIndex"
+                     class="row" style="margin: 10px;">
+                  <div class="col-md-4 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label>Flying From</label>
+                        <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
+                        <input (valueChanged)="cityAutoCompleteArray($event, 'from', pointIndex)"
+                               [(ngModel)]="fromCityArray[pointIndex]"
+                               [list-formatter]="autocompleListFormatter"
+                               [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                               auto-complete class="form-control origin-typeahead" formControlName="originArray"
+                               placeholder="Departures"
+                        />
+                        <div *ngIf="isControlHasError('origin','required')" class="invalid-feedback"
+                             style="display: block">
+                          Origin is required
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="col-md-4 no-padding">
-                  <div class="form_full">
-                    <div class="form-group">
-                      <label>Flying To</label>
-                      <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
-                      <input (valueChanged)="cityAutoComplete($event, 'to')" [(ngModel)]="toCity"
-                             [list-formatter]="autocompleListFormatter"
-                             [max-num-list]="8" [min-chars]="2" [source]="airportList"
-                             auto-complete class="form-control origin-typeahead" formControlName="destination"
-                             placeholder="Destination"
-                      />
-                      <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
-                           style="display: block">
-                        Destination is required
+                  <div class="col-md-4 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label>Flying To</label>
+                        <span class="icon"><i class="fa fa-map-marker-alt"></i></span>
+                        <input (valueChanged)="cityAutoCompleteArray($event, 'to', pointIndex)"
+                               [(ngModel)]="toCityArray[pointIndex]"
+                               [list-formatter]="autocompleListFormatter"
+                               [max-num-list]="8" [min-chars]="2" [source]="airportList"
+                               auto-complete class="form-control origin-typeahead" formControlName="destinationArray"
+                               placeholder="Destination"
+                        />
+                        <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
+                             style="display: block">
+                          Destination is required
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="col-md-4 no-padding">
-                  <div class="form_full">
-                    <div class="form-group">
-                      <label>Departure</label>
-                      <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
-                             [minDate]="minDate"
-                             class="form-control"
-                             formControlName="departure"
-                             maxlength="0" ngbDatepicker
-                             style="cursor: pointer;"
-                      />
-                      <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
-                           style="display: block">
-                        Departure date is required
+                  <div class="col-md-3 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label>Departure</label>
+                        <span class="icon"><i class="fa fa-calendar"></i></span>
+                        <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
+                               [minDate]="minDate"
+                               class="form-control"
+                               formControlName="departureArray"
+                               maxlength="0" ngbDatepicker
+                               style="cursor: pointer;"
+                        />
+                        <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
+                             style="display: block">
+                          Departure date is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="multipleTripLength == pointIndex" class="col-md-1 no-padding">
+                    <div class="form_full">
+                      <div class="form-group">
+                        <label style="margin-bottom: 20px"></label>
+                        <span (click)="removeMultipleTrip(pointIndex)" class="icon" style="color: red"><i
+                          class="fa fa-times"></i></span>
                       </div>
                     </div>
                   </div>
@@ -403,7 +418,8 @@
                   <div class="form_full">
                     <div class="form-group">
                       <label style="margin-bottom: 20px"></label>
-                      <button class="btn btn-block btn-outline-primary button-search-flight-ticket"
+                      <button (click)="addMultipleTrip()"
+                              class="btn btn-block btn-outline-primary button-search-flight-ticket"
                               style="height: 45px;border-radius: 5px;">Tambah Penerbangan
                       </button>
                     </div>
@@ -477,6 +493,8 @@
                 </div>
               </div>
             </form>
+
+            {{ this.searchFlightForm.value | json }}
           </div>
         </div>
       </ng-template>
