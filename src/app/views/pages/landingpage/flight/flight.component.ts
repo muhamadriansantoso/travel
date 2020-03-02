@@ -180,8 +180,6 @@ export class FlightComponent implements OnInit {
         ]
       ),
     });
-
-    console.log(this.multipleTrip.controls);
   }
 
 
@@ -246,48 +244,87 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlight() {
-    const controls = this.searchFlightForm.controls;
-    if (this.searchFlightForm.invalid) {
-      Object.keys(controls).forEach(controlName =>
-        controls[controlName].markAsTouched()
-      );
+    if (this.roundType == 'one-way' || this.roundType == 'round-trip') {
+      const controls = this.searchFlightForm.controls;
+      if (this.searchFlightForm.invalid) {
+        Object.keys(controls).forEach(controlName =>
+          controls[controlName].markAsTouched()
+        );
 
-      this.searchFlightFormInvalid = true;
-      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
-      return;
-    }
+        this.searchFlightFormInvalid = true;
+        //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+        return;
+      }
 
-    const authData = {
-      cabin: controls['cabin'].value,
-      adult: controls['adult'].value,
-      child: controls['child'].value,
-      infant: controls['infant'].value,
-      departure: controls['departure'].value,
-      return: controls['return'].value,
-    };
+      const authData = {
+        cabin: controls['cabin'].value,
+        adult: controls['adult'].value,
+        child: controls['child'].value,
+        infant: controls['infant'].value,
+        departure: controls['departure'].value,
+        return: controls['return'].value,
+      };
 
-    this.departureDate = moment(authData.departure.year + '-' + authData.departure.month + '-' + authData.departure.day).format('YYYY-MM-DD');
+      this.departureDate = moment(authData.departure.year + '-' + authData.departure.month + '-' + authData.departure.day).format('YYYY-MM-DD');
 
-    if (this.roundType == 'one-way') {
+      if (this.roundType == 'one-way') {
+        this.returnDate = '';
+      } else {
+        this.returnDate = moment(authData.return.year + '-' + authData.return.month + '-' + authData.return.day).format('YYYY-MM-DD');
+      }
+
+      this.router.navigate(['/search-flight'], {
+        queryParams:
+          {
+            d: this.formCityValue,
+            a: this.toCityValue,
+            date: this.departureDate,
+            r_date: this.returnDate,
+            adult: authData.adult,
+            child: authData.child,
+            infant: authData.infant,
+            cabin: authData.cabin,
+            type: this.roundType
+          },
+      });
+    } else if (this.roundType == 'multiple-trip') {
+      const controls = this.searchFlightForm.controls;
+      if (this.searchFlightForm.invalid) {
+        Object.keys(controls).forEach(controlName =>
+          controls[controlName].markAsTouched()
+        );
+
+        this.searchFlightFormInvalid = true;
+        //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+        return;
+      }
+
+      const authData = {
+        cabin: controls['cabin'].value,
+        adult: controls['adult'].value,
+        child: controls['child'].value,
+        infant: controls['infant'].value,
+        departure: controls['departure'].value,
+        return: controls['return'].value,
+      };
+
       this.returnDate = '';
-    } else {
-      this.returnDate = moment(authData.return.year + '-' + authData.return.month + '-' + authData.return.day).format('YYYY-MM-DD');
-    }
 
-    this.router.navigate(['/search-flight'], {
-      queryParams:
-        {
-          d: this.formCityValue,
-          a: this.toCityValue,
-          date: this.departureDate,
-          r_date: this.returnDate,
-          adult: authData.adult,
-          child: authData.child,
-          infant: authData.infant,
-          cabin: authData.cabin,
-          type: this.roundType
-        },
-    });
+      this.router.navigate(['/search-flight'], {
+        queryParams:
+          {
+            d: this.formCityValueArray,
+            a: this.toCityValueArray,
+            date: '2020-03-05',
+            r_date: this.returnDate,
+            adult: authData.adult,
+            child: authData.child,
+            infant: authData.infant,
+            cabin: authData.cabin,
+            type: this.roundType
+          },
+      });
+    }
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
@@ -318,6 +355,13 @@ export class FlightComponent implements OnInit {
       this.searchFlightForm.get('origin').updateValueAndValidity();
       this.searchFlightForm.get('destination').setValidators([]);
       this.searchFlightForm.get('destination').updateValueAndValidity();
+
+      this.searchFlightForm.get('originArray').setValidators(Validators.required);
+      this.searchFlightForm.get('originArray').updateValueAndValidity();
+      this.searchFlightForm.get('destinationArray').setValidators(Validators.required);
+      this.searchFlightForm.get('destinationArray').updateValueAndValidity();
+      this.searchFlightForm.get('departureArray').setValidators(Validators.required);
+      this.searchFlightForm.get('departureArray').updateValueAndValidity();
       this.returnDate = '';
     }
   };
