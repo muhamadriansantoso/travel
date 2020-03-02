@@ -13,7 +13,8 @@
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
-          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Airlines</h4>
+          <h6 class="filter-left">Airlines</h6>
+          <hr class="m-0 mb-1">
           <ul style="list-style:none;float: left;">
             <li *ngFor="let allu of airLineListUnique | unique;">
               <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
@@ -24,7 +25,7 @@
         <br>
 
         <div class="card">
-          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Transit</h4>
+          <h6 class="filter-left">Transit</h6>
           <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
               <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
@@ -456,7 +457,8 @@
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
-          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Airlines</h4>
+          <h6 class="filter-left">Airlines</h6>
+          <hr class="m-0 mb-1">
           <ul style="list-style:none;float: left;">
             <li *ngFor="let allu of airLineListUnique | unique;">
               <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
@@ -467,7 +469,7 @@
         <br>
 
         <div class="card">
-          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Transit</h4>
+          <h6 class="filter-left">Transit</h6>
           <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
               <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
@@ -1113,7 +1115,8 @@
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
-          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Airlines</h4>
+          <h6 class="filter-left">Airlines</h6>
+          <hr class="m-0 mb-1">
           <ul style="list-style:none;float: left;">
             <li *ngFor="let allu of airLineListUnique | unique;">
               <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
@@ -1124,7 +1127,7 @@
         <br>
 
         <div class="card">
-          <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Transit</h4>
+          <h6 class="filter-left">Transit</h6>
           <ul style="list-style:none;">
             <li *ngFor="let tlu of transitListUnique | unique">
               <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
