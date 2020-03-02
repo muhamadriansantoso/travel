@@ -23,8 +23,12 @@ export class SearchFlightResultComponent implements OnInit {
   searchFlightErrorMessage: string;
   roundType: string;
   phase: boolean;
+  multiplePhase: number;
+  multiplePhaseIndex: number;
   origin: string;
   destination: string;
+  dataMultiTrip: any = [];
+  dataMultiTripStep: number;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -42,6 +46,7 @@ export class SearchFlightResultComponent implements OnInit {
   ngOnInit() {
     this.loadingPage = true;
     this.phase = false;
+    this.multiplePhase = 0;
     this.route.queryParams.subscribe(params => {
       this.roundType = params.type;
       this.origin = params.d;
@@ -51,7 +56,6 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
-
                 this.dataFlightSearch = data.data;
                 this.sessionID = data.sessionID;
                 this.airLine = data.data[0].transData[0].platingCarrierName;
@@ -130,6 +134,7 @@ export class SearchFlightResultComponent implements OnInit {
             tap((data: any) => {
               if (data.data.length > 0) {
                 var ABC = 0;
+                this.dataMultiTripStep = data.data[0].flightSession.length;
                 data.data.forEach((globalData: any) => {
                   globalData.departure.forEach((dataFlightSearch: any) => {
                     this.dataFlightSearch.push(dataFlightSearch);
@@ -148,7 +153,17 @@ export class SearchFlightResultComponent implements OnInit {
 
                     for (var i = 0; i < globalData.departure.length; i++) {
                       globalData.departure[i] = Object.assign(globalData.departure[i], {
-                        return: data.data[ABC].return,
+                        index: ABC
+                      });
+                    }
+                  });
+
+                  globalData.flightSession.forEach((dataFlightSearchSession: any) => {
+                    this.dataMultiTrip.push(dataFlightSearchSession);
+
+                    for (var i = 0; i < globalData.flightSession.length; i++) {
+                      globalData.flightSession[i] = Object.assign(globalData.flightSession[i], {
+                        index: ABC
                       });
                     }
                   });
@@ -200,6 +215,13 @@ export class SearchFlightResultComponent implements OnInit {
   returnShow(data) {
     this.phase = true;
     this.dataFlightAdvanced.push(data);
+  }
+
+  returnShowMultiple(data, index) {
+    this.dataFlightAdvanced.push(data);
+    this.multiplePhase = this.multiplePhase + 1;
+    this.multiplePhaseIndex = index;
+    console.log(this.dataMultiTrip);
   }
 
   returnPrevious(data) {
