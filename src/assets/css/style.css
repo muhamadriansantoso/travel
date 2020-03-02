@@ -3213,8 +3213,8 @@ a:hover, a:focus {
 
 .content-booking-ticket {
   /*box-shadow: 0 5px 5px 0 rgba(46,61,73,.2);*/
-  margin-top: -190px;
   /*background: #09f;*/
+  margin-top: -190px;
   border-radius: 10px;
 }
 
@@ -3244,20 +3244,20 @@ a:hover, a:focus {
 /*End Style Catalouge Hotel*/
 /*Style Ticket*/
 .card-ticket {
-  box-shadow: 0 1px 3px 0 rgba(27, 27, 27, .1);
+  /*box-shadow: 0 1px 3px 0 rgba(27, 27, 27, .1);*/
   margin-bottom: 10px;
   padding: 20px !important
 }
 
 .card-ticket:hover {
-  background: #fffadb;
-  border: 2px solid #22a7f0 !important;
+  background: #ffc1071c;
+  border: 1px solid #22a7f0 !important;
   cursor: pointer;
 }
 
 .card-ticket:focus {
-  background: #fffadb !important;
-  border: 2px solid #22a7f0 !important;
+  background: #ffc1071c;
+  border: 1px solid #22a7f0 !important;
   cursor: pointer;
 }
 
@@ -3314,6 +3314,10 @@ a:hover, a:focus {
   font-weight: 500;
 }
 
+.menu-filter-pc .card {
+  padding: 5px 23px 23px 23px;
+}
+
 .image-logo-maskapai {
   width: 80px;
   height: 80px;
@@ -3321,6 +3325,14 @@ a:hover, a:focus {
 
 .card {
   padding: 5px;
+  border: unset;
+}
+
+.filter-left {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-align: left;
 }
 
 .price-ticket {
