@@ -3250,7 +3250,7 @@ a:hover, a:focus {
 }
 
 .card-ticket:hover {
-  background: #ffc1071c;
+  background: #fbff0740;
   border: 1px solid #22a7f0 !important;
   cursor: pointer;
 }

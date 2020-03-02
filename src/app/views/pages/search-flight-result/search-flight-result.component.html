@@ -261,7 +261,7 @@
             </div>
             <div class="col-md-2 text-center">
               <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                  currency:'IDR ':'symbol':'3.0'}}</strong></p>
+                currency:'IDR ':'symbol':'3.0'}}</strong></p>
               <button (click)="navigateToBooking(sessionID, dataflight)"
                       class="btn btn-warning rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
@@ -1541,226 +1541,7 @@
 
 <section *ngIf="!loadingPage && roundType=='multiple-trip'" class="ftco-section"
          style="padding: 0;">
-  <ng-container *ngIf="multiplePhase <= dataMultiTripStep">
-    <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
-      <div
-        *ngFor="let dataflight of dataFlightAdvanced | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
-        class="card card-ticket">
-        <div class="row">
-          <div (click)="returnPrevious(dataflight)"
-               class="col-md-10 text-center">
-            <div class="row">
-              <div class="col-md-2 mb-3">
-                <div class="flight-section-airline-logo-wrap">
-                  <img
-                    class="img-fluid img-circle airline-logo"
-                    src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
-                </div>
-              </div>
-              <ng-container *ngIf="dataflight.stop == 1">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'hh:mm'}}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].origin_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                      <div class="flight-section-path">
-                        <div class="flight-section-fly-time">
-                          <p>{{dataflight.transData[0].flightTime | minuteToHour}}</p>
-                        </div>
-                        <div class="flight-section-path-line"></div>
-                        <div>
-                          <div class="flight-section-path-line-start">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"
-                                 style="visibility: hidden"></div>
-                            <div class="flight-section-path-line-title">Direct</div>
-                          </div>
-
-                          <div>
-                            <div class="flight-section-path-line-end">
-                              <i class="fa fa-plane flight-section-path-icon"></i>
-                              <div class="flight-section-path-line-dot"></div>
-                              <div class="flight-section-path-line-title">
-                                {{dataflight.transData[0].destination}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                          'hh:mm'}}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].destination_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-
-              <ng-container *ngIf="dataflight.stop == 2">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'hh:mm'}}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].origin_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                      <div class="flight-section-path">
-                        <div class="flight-section-fly-time">
-                          <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
-                            {{(dataflight.stop) - 1}} Transit</p>
-                        </div>
-                        <div class="flight-section-path-line"></div>
-                        <div>
-                          <div class="flight-section-path-line-start">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].destination}}
-                            </div>
-                          </div>
-
-                          <div>
-                            <div class="flight-section-path-line-end">
-                              <i class="fa fa-plane flight-section-path-icon"></i>
-                              <div class="flight-section-path-line-dot"></div>
-                              <div class="flight-section-path-line-title">
-                                {{dataflight.transData[1].destination}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                          'hh:mm'}}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[1].destination_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-
-              <ng-container *ngIf="dataflight.stop == 3">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'hh:mm'}}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].origin_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                      <div class="flight-section-path">
-                        <div class="flight-section-fly-time">
-                          <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
-                            {{(dataflight.stop) - 1}} Transit</p>
-                        </div>
-                        <div class="flight-section-path-line"></div>
-                        <div>
-                          <div class="flight-section-path-line-start">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle-1">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[1].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle-2">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[1].destination}}
-                            </div>
-                          </div>
-
-                          <div>
-                            <div class="flight-section-path-line-end">
-                              <i class="fa fa-plane flight-section-path-icon"></i>
-                              <div class="flight-section-path-line-dot"></div>
-                              <div class="flight-section-path-line-title">
-                                {{dataflight.transData[2].destination}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                          'hh:mm'}}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[1].destination_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-
-            </div>
-            <div class="row mt-3">
-              <div class="col-md-6 col-xs-12">
-                <div class="title-maskapai">
-                  {{dataflight.transData[0].platingCarrierName}}
-                  <span>{{dataflight.transData[0].flightNumber}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <ng-container *ngIf="multiplePhase < dataMultiTripStep">
     <div class="alert alert-warning">
       <p class="mb-0 text-center">Pilih pesawat untuk penerbangan {{multiplePhase + 1}}</p>
     </div>
@@ -2195,10 +1976,10 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="multiplePhase != 0 && multiplePhase < dataMultiTripStep">
+        <ng-container *ngIf="multiplePhase != 0">
           <div class="col-sm-9 col-md-9">
             <div
-              *ngFor="let dataflight of this.dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
+              *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
               class="card card-ticket">
               <div class="row">
                 <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
@@ -2598,10 +2379,10 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="multiplePhase == dataMultiTripStep ">
+        <ng-container *ngIf="multiplePhase > 0">
           <div class="col-sm-9 col-md-9">
             <div
-              *ngFor="let dataflight of this.dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
+              *ngFor="let dataflight of dataMultiTrip | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
               class="card card-ticket">
               <div class="row">
                 <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
@@ -2819,7 +2600,7 @@
                 <div class="col-md-2 text-center">
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                       currency:'IDR ':'symbol':'3.0'}}</strong></p>
-                  <button (click)="navigateToBooking(sessionID, dataflight)"
+                  <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn btn-warning  button-search-flight-ticket">Book flight
                   </button>
                 </div>
