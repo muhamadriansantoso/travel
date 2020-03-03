@@ -47,7 +47,7 @@
       </div>
       <br>
       <div class="col-sm-9 col-md-9">
-        <div class="mt-3 mb-3 p-2">
+        <div class="mb-3 p-2 bg-white rounded">
           <div class="row">
             <div class="col-12 flex-sortby">
               <span class="result-sortby">107 results</span>
@@ -504,6 +504,20 @@
       <br>
 
       <div class="col-sm-9 col-md-9">
+        <div class="mb-3 p-2 bg-white rounded">
+          <div class="row">
+            <div class="col-12 flex-sortby">
+              <span class="result-sortby">107 results</span>
+              <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
+                class="input-sortby" id="secondarySort" name="secondarySort">
+                <option value="BEST">Best</option>
+                <option value="CHEAPEST">Cheapest first</option>
+                <option value="FASTEST">Fastest first</option>
+                <option value="DEPARTURE_OUTBOUND_ASC">Outbound: Departure time</option>
+              </select></div>
+            </div>
+          </div>
+        </div>
         <div
           *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
           class="card card-ticket">
@@ -724,7 +738,8 @@
             <div class="col-md-2 text-center">
               <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                 currency:'IDR ':'symbol':'3.0'}}</strong></p>
-              <button (click)="returnShow(dataflight)" class="btn btn-warning  button-search-flight-ticket">Select <i
+              <button (click)="returnShow(dataflight)"
+                      class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
             </div>
           </div>
@@ -1383,8 +1398,8 @@
             </div>
             <div class="col-md-2 text-center">
               <button (click)="navigateToBooking(sessionID, dataflight)"
-                      class="btn btn-warning  button-search-flight-ticket">Select <i class="fas fa-arrow-right"></i>
-              </button>
+                      class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
+                class="fas fa-arrow-right"></i></button>
             </div>
           </div>
 
@@ -1824,6 +1839,20 @@
 
         <ng-container *ngIf="multiplePhase == 0">
           <div class="col-sm-9 col-md-9">
+            <div class="mb-3 p-2 bg-white rounded">
+              <div class="row">
+                <div class="col-12 flex-sortby">
+                  <span class="result-sortby">107 results</span>
+                  <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
+                    class="input-sortby" id="secondarySort" name="secondarySort">
+                    <option value="BEST">Best</option>
+                    <option value="CHEAPEST">Cheapest first</option>
+                    <option value="FASTEST">Fastest first</option>
+                    <option value="DEPARTURE_OUTBOUND_ASC">Outbound: Departure time</option>
+                  </select></div>
+                </div>
+              </div>
+            </div>
             <div
               *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
               class="card card-ticket">
@@ -2044,8 +2073,8 @@
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                     currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
-                          class="btn btn-warning  button-search-flight-ticket">Book flight
-                  </button>
+                          class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
+                    class="fas fa-arrow-right"></i></button>
                 </div>
               </div>
 
@@ -2448,8 +2477,8 @@
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                     currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
-                          class="btn btn-warning  button-search-flight-ticket">Book flight
-                  </button>
+                          class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
+                    class="fas fa-arrow-right"></i></button>
                 </div>
               </div>
 
@@ -2852,8 +2881,8 @@
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                     currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="navigateToBooking(sessionID, dataflight)"
-                          class="btn btn-warning  button-search-flight-ticket">Book flight
-                  </button>
+                          class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
+                    class="fas fa-arrow-right"></i></button>
                 </div>
               </div>
 

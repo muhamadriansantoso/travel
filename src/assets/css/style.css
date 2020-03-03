@@ -3373,6 +3373,13 @@ a:hover, a:focus {
   line-height: 1.375rem;
 }
 
+.input-sortby:focus {
+  outline: unset;
+  outline-color: unset;
+  outline-style: unset;
+  outline-width: unset;
+}
+
 .filter-left {
   margin-top: 10px;
   margin-bottom: 10px;
