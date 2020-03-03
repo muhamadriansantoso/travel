@@ -262,7 +262,7 @@
               <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
                 currency:'IDR ':'symbol':'3.0'}}</strong></p>
               <button (click)="navigateToBooking(sessionID, dataflight)"
-                      class="btn btn-warning rounded button-search-flight-ticket">Select <i
+                      class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
             </div>
           </div>
@@ -466,13 +466,15 @@
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
-          <ul style="list-style:none;">
-            <li *ngFor="let tlu of transitListUnique | unique">
-              <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
-              <span *ngIf="tlu.value == 1">Direct</span>
-              <span *ngIf="tlu.value != 1">{{tlu.value - 1}} Transit</span>
-            </li>
-          </ul>
+          <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
+            <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
+                   name="Transit" type="checkbox">
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+                   for="transit-{{tlu.value}}">Direct</label>
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+                   for="transit-{{tlu.value}}">{{tlu.value - 1}}
+              Transit</label>
+          </div>
         </div>
         <br>
 
@@ -1125,13 +1127,15 @@
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
-          <ul style="list-style:none;">
-            <li *ngFor="let tlu of transitListUnique | unique">
-              <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
-              <span *ngIf="tlu.value == 1">Direct</span>
-              <span *ngIf="tlu.value != 1">{{tlu.value - 1}} Transit</span>
-            </li>
-          </ul>
+          <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
+            <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
+                   name="Transit" type="checkbox">
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+                   for="transit-{{tlu.value}}">Direct</label>
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+                   for="transit-{{tlu.value}}">{{tlu.value - 1}}
+              Transit</label>
+          </div>
         </div>
         <br>
       </div>
