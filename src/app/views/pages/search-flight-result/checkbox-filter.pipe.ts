@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {orderBy} from 'lodash';
 
 @Pipe({
   name: 'searchFligthFilter'
@@ -45,8 +46,7 @@ export class CheckboxFilterPipe implements PipeTransform {
           temp = tempSearch;
         }
       }
-
-      return temp;
+      return orderBy(temp, ['totalPrice'], ['desc']);
     } else {
       return list;
     }
