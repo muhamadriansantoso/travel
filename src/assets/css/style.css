@@ -3343,6 +3343,14 @@ a:hover, a:focus {
   padding-right: 10px;
 }
 
+.flight-details:focus {
+  outline: unset !important;
+  outline-color: unset !important;
+  outline-style: unset !important;
+  outline-width: unset !important;
+  border-bottom: 2px solid red !important;
+}
+
 .right-button {
   align-items: center;
 }
