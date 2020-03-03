@@ -357,6 +357,16 @@ export class FlightComponent implements OnInit {
       this.searchFlightForm.get('departure').updateValueAndValidity();
       this.searchFlightForm.get('return').setValidators(Validators.required);
       this.searchFlightForm.get('return').updateValueAndValidity();
+
+      for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+        this.multipleTrip.controls[startFormArray].get('originArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('originArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('destinationArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('destinationArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('departureArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('departureArray').updateValueAndValidity();
+      }
+
     } else if (this.roundType == 'one-way') {
       this.searchFlightForm.get('origin').setValidators(Validators.required);
       this.searchFlightForm.get('origin').updateValueAndValidity();
@@ -366,6 +376,16 @@ export class FlightComponent implements OnInit {
       this.searchFlightForm.get('departure').updateValueAndValidity();
       this.searchFlightForm.get('return').setValidators([]);
       this.searchFlightForm.get('return').updateValueAndValidity();
+
+      for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+        this.multipleTrip.controls[startFormArray].get('originArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('originArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('destinationArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('destinationArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('departureArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('departureArray').updateValueAndValidity();
+      }
+
       this.returnDate = '';
     } else if (this.roundType == 'multiple-trip') {
       this.searchFlightForm.get('origin').setValidators([]);
