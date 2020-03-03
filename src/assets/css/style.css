@@ -3332,6 +3332,47 @@ a:hover, a:focus {
   border: unset;
 }
 
+.flex-sortby {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-center-sortby {
+  display: flex;
+  align-items: center;
+}
+
+.result-sortby {
+  margin-top: .375rem;
+  font-size: .75rem;
+  line-height: 1.125rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  box-sizing: inherit;
+}
+
+.main-sortby {
+  display: block;
+  color: #111236;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.125rem;
+  flex-shrink: 0;
+  padding-right: 10px;
+}
+
+.input-sortby {
+  display: inline-block;
+  width: 100%;
+  height: 2.25rem;
+  padding: .375rem 1.875rem .375rem .75rem;
+  border: .0625rem solid #b2b2bf;
+  border-radius: .25rem;
+  background-size: 1.125rem 1.125rem;
+  color: #111236;
+  line-height: 1.375rem;
+}
+
 .filter-left {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -3596,17 +3637,17 @@ a:hover, a:focus {
   border-radius: 2px;
   min-width: 600px;
   max-height: 350px;
-  -webkit-box-shadow: 0 2px 4px 1px rgba(0,0,0,.14);
-  box-shadow: 0 2px 4px 1px rgba(0,0,0,.14);
+  -webkit-box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .14);
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, .14);
   overflow-y: auto;
 }
 
-.citylistinbox{
-  border: 1px solid rgba(67,67,67,.17);
+.citylistinbox {
+  border: 1px solid rgba(67, 67, 67, .17);
   padding: 8px 16px;
 }
 
-.citylistinbox>div:not(:last-child){
+.citylistinbox > div:not(:last-child) {
   border-bottom: none;
 }
 
@@ -3631,8 +3672,10 @@ a:hover, a:focus {
   color: #fff;
 }
 
+/*==================================================================================*/
 /*End Style Payment*/
 /*Media Mobile*/
+/*==================================================================================*/
 @media only screen and (max-width: 600px) {
   .content-booking-ticket {
     box-shadow: 0 5px 5px 0 rgba(46, 61, 73, .2);
@@ -3673,8 +3716,9 @@ a:hover, a:focus {
     background: #09f;
   }
 
-  /**/
+  /*==============================================================*/
   /*Style Ticket Mobile*/
+  /*==============================================================*/
   .card {
     padding: 5px;
     border: 0;

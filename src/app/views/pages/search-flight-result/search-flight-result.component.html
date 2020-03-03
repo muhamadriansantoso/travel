@@ -1,4 +1,4 @@
-<section class="loadingSearchFlight centered-loader text-center" *ngIf="loadingPage">
+<section *ngIf="loadingPage" class="loadingSearchFlight centered-loader text-center">
   <div class="centered-loader">
     <img src="./assets/images/loader.gif">
     <div class="theme-loading-body">
@@ -19,20 +19,23 @@
           <hr class="m-0 mb-2">
           <h6 class="filter-left">Airlines</h6>
           <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">
-        <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input" id="checkbox-{{allu.value}}"
-               name="airlines" type="checkbox">
-        <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
-      </div>
-      <hr class="m-0 mb-2 mt-3">
-      <h6 class="filter-left">Transit</h6>
-      <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
-        <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
-               name="Transit" type="checkbox">
-        <label *ngIf="tlu.value == 1" class="custom-control-label pointer" for="transit-{{tlu.value}}">Direct</label>
-        <label *ngIf="tlu.value != 1" class="custom-control-label pointer" for="transit-{{tlu.value}}">{{tlu.value - 1}}
-          Transit</label>
-      </div>
-    </div>
+            <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
+                   id="checkbox-{{allu.value}}"
+                   name="airlines" type="checkbox">
+            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+          </div>
+          <hr class="m-0 mb-2 mt-3">
+          <h6 class="filter-left">Transit</h6>
+          <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
+            <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
+                   name="Transit" type="checkbox">
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+                   for="transit-{{tlu.value}}">Direct</label>
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+                   for="transit-{{tlu.value}}">{{tlu.value - 1}}
+              Transit</label>
+          </div>
+        </div>
         <br>
         <!--        <div class="card" style="margin-top: 30px;margin-bottom: 10px;">-->
         <!--          <h4 align="center" class="mb-4" style="margin-top: 30px;margin-bottom: 10px;">Fasilitas</h4>-->
@@ -44,40 +47,12 @@
       </div>
       <br>
       <div class="col-sm-9 col-md-9">
-        <div _ngcontent-noy-c1="" class="mt-3 mb-3 p-2">
+        <div class="mt-3 mb-3 p-2">
           <div class="row">
-            <div class="col-12" style="
-    display: flex;
-    justify-content: space-between;
-"><span style="
-    margin-top: .375rem;
-    font-size: .75rem;
-    line-height: 1.125rem;
-    font-weight: 400;
-    letter-spacing: normal;
-    box-sizing: inherit;
-">107 results</span>
-              <div style="
-    display: flex;
-    align-items: center;
-"><label style="
-    display: block;
-    color: #111236;
-    font-size: .75rem;
-    font-weight: 700;
-    line-height: 1.125rem;
-    flex-shrink: 0;
-">Sort by</label>&nbsp;<select id="secondarySort" name="secondarySort" style="
-    display: inline-block;
-    width: 100%;
-    height: 2.25rem;
-    padding: .375rem 1.875rem .375rem .75rem;
-    border: .0625rem solid #b2b2bf;
-    border-radius: .25rem;
-    line-height: 1.375rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-">
+            <div class="col-12 flex-sortby">
+              <span class="result-sortby">107 results</span>
+              <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
+                class="input-sortby" id="secondarySort" name="secondarySort">
                 <option value="BEST">Best</option>
                 <option value="CHEAPEST">Cheapest first</option>
                 <option value="FASTEST">Fastest first</option>
@@ -106,11 +81,11 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -150,11 +125,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -165,18 +140,18 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                                dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -212,11 +187,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -227,18 +202,18 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                                dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -282,11 +257,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -549,11 +524,11 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -593,11 +568,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -608,18 +583,18 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                                dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -655,11 +630,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -670,18 +645,18 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                                dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -725,11 +700,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -955,11 +930,11 @@
                 <div class="row">
                   <div class="col-md-3">
                     <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                        'hh:mm'}}</p>
+                      'hh:mm'}}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].origin_city_name}}</p>
                     <p class="destination-date">{{dataflight.transData[0].departureTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      date: 'MMM dd, yyyy'}}</p>
                   </div>
 
                   <div class="col-md-6 text-center">
@@ -999,11 +974,11 @@
 
                   <div class="col-md-3">
                     <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                        'hh:mm'}}</p>
+                      'hh:mm'}}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].destination_city_name}}</p>
                     <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      date: 'MMM dd, yyyy'}}</p>
                   </div>
                 </div>
               </div>
@@ -1014,18 +989,18 @@
                 <div class="row">
                   <div class="col-md-3">
                     <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                        'hh:mm'}}</p>
+                      'hh:mm'}}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].origin_city_name}}</p>
                     <p class="destination-date">{{dataflight.transData[0].departureTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      date: 'MMM dd, yyyy'}}</p>
                   </div>
 
                   <div class="col-md-6 text-center">
                     <div class="flight-section-path">
                       <div class="flight-section-fly-time">
                         <p>{{(dataflight.transData[0].flightTime +
-                            dataflight.transData[1].flightTime) | minuteToHour}},
+                          dataflight.transData[1].flightTime) | minuteToHour}},
                           {{(dataflight.stop) - 1}} Transit</p>
                       </div>
                       <div class="flight-section-path-line"></div>
@@ -1061,11 +1036,11 @@
 
                   <div class="col-md-3">
                     <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                        'hh:mm'}}</p>
+                      'hh:mm'}}</p>
                     <p class="destination-title">
                       {{dataflight.transData[1].destination_city_name}}</p>
                     <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      date: 'MMM dd, yyyy'}}</p>
                   </div>
                 </div>
               </div>
@@ -1076,18 +1051,18 @@
                 <div class="row">
                   <div class="col-md-3">
                     <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                        'hh:mm'}}</p>
+                      'hh:mm'}}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].origin_city_name}}</p>
                     <p class="destination-date">{{dataflight.transData[0].departureTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      date: 'MMM dd, yyyy'}}</p>
                   </div>
 
                   <div class="col-md-6 text-center">
                     <div class="flight-section-path">
                       <div class="flight-section-fly-time">
                         <p>{{(dataflight.transData[0].flightTime +
-                            dataflight.transData[1].flightTime) | minuteToHour}},
+                          dataflight.transData[1].flightTime) | minuteToHour}},
                           {{(dataflight.stop) - 1}} Transit</p>
                       </div>
                       <div class="flight-section-path-line"></div>
@@ -1131,11 +1106,11 @@
 
                   <div class="col-md-3">
                     <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                        'hh:mm'}}</p>
+                      'hh:mm'}}</p>
                     <p class="destination-title">
                       {{dataflight.transData[1].destination_city_name}}</p>
                     <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      date: 'MMM dd, yyyy'}}</p>
                   </div>
                 </div>
               </div>
@@ -1209,11 +1184,11 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -1253,11 +1228,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -1268,18 +1243,18 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                                dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -1315,11 +1290,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -1330,18 +1305,18 @@
                     <div class="row">
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[0].departureTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                                dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -1385,11 +1360,11 @@
 
                       <div class="col-md-3">
                         <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'hh:mm'}}</p>
+                          'hh:mm'}}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
                         <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                            date: 'MMM dd, yyyy'}}</p>
+                          date: 'MMM dd, yyyy'}}</p>
                       </div>
                     </div>
                   </div>
@@ -1617,11 +1592,11 @@
                   <div class="row">
                     <div class="col-md-3">
                       <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'hh:mm'}}</p>
+                        'hh:mm'}}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].origin_city_name}}</p>
                       <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        date: 'MMM dd, yyyy'}}</p>
                     </div>
 
                     <div class="col-md-6 text-center">
@@ -1661,11 +1636,11 @@
 
                     <div class="col-md-3">
                       <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                          'hh:mm'}}</p>
+                        'hh:mm'}}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].destination_city_name}}</p>
                       <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        date: 'MMM dd, yyyy'}}</p>
                     </div>
                   </div>
                 </div>
@@ -1676,18 +1651,18 @@
                   <div class="row">
                     <div class="col-md-3">
                       <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'hh:mm'}}</p>
+                        'hh:mm'}}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].origin_city_name}}</p>
                       <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        date: 'MMM dd, yyyy'}}</p>
                     </div>
 
                     <div class="col-md-6 text-center">
                       <div class="flight-section-path">
                         <div class="flight-section-fly-time">
                           <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                            dataflight.transData[1].flightTime) | minuteToHour}},
                             {{(dataflight.stop) - 1}} Transit</p>
                         </div>
                         <div class="flight-section-path-line"></div>
@@ -1723,11 +1698,11 @@
 
                     <div class="col-md-3">
                       <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                          'hh:mm'}}</p>
+                        'hh:mm'}}</p>
                       <p class="destination-title">
                         {{dataflight.transData[1].destination_city_name}}</p>
                       <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        date: 'MMM dd, yyyy'}}</p>
                     </div>
                   </div>
                 </div>
@@ -1738,18 +1713,18 @@
                   <div class="row">
                     <div class="col-md-3">
                       <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'hh:mm'}}</p>
+                        'hh:mm'}}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].origin_city_name}}</p>
                       <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        date: 'MMM dd, yyyy'}}</p>
                     </div>
 
                     <div class="col-md-6 text-center">
                       <div class="flight-section-path">
                         <div class="flight-section-fly-time">
                           <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                            dataflight.transData[1].flightTime) | minuteToHour}},
                             {{(dataflight.stop) - 1}} Transit</p>
                         </div>
                         <div class="flight-section-path-line"></div>
@@ -1793,11 +1768,11 @@
 
                     <div class="col-md-3">
                       <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                          'hh:mm'}}</p>
+                        'hh:mm'}}</p>
                       <p class="destination-title">
                         {{dataflight.transData[1].destination_city_name}}</p>
                       <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        date: 'MMM dd, yyyy'}}</p>
                     </div>
                   </div>
                 </div>
@@ -1869,11 +1844,11 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -1913,11 +1888,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -1928,18 +1903,18 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                    dataflight.transData[1].flightTime) | minuteToHour}},
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -1975,11 +1950,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -1990,18 +1965,18 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                    dataflight.transData[1].flightTime) | minuteToHour}},
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2045,11 +2020,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2067,7 +2042,7 @@
                 </div>
                 <div class="col-md-2 text-center">
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                      currency:'IDR ':'symbol':'3.0'}}</strong></p>
+                    currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn btn-warning  button-search-flight-ticket">Book flight
                   </button>
@@ -2273,11 +2248,11 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2317,11 +2292,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2332,18 +2307,18 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                    dataflight.transData[1].flightTime) | minuteToHour}},
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2379,11 +2354,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2394,18 +2369,18 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                    dataflight.transData[1].flightTime) | minuteToHour}},
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2449,11 +2424,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2471,7 +2446,7 @@
                 </div>
                 <div class="col-md-2 text-center">
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                      currency:'IDR ':'symbol':'3.0'}}</strong></p>
+                    currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn btn-warning  button-search-flight-ticket">Book flight
                   </button>
@@ -2677,11 +2652,11 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2721,11 +2696,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2736,18 +2711,18 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                    dataflight.transData[1].flightTime) | minuteToHour}},
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2783,11 +2758,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2798,18 +2773,18 @@
                         <div class="row">
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[0].departureTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                    dataflight.transData[1].flightTime) | minuteToHour}},
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2853,11 +2828,11 @@
 
                           <div class="col-md-3">
                             <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'hh:mm'}}</p>
+                              'hh:mm'}}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
                             <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                                date: 'MMM dd, yyyy'}}</p>
+                              date: 'MMM dd, yyyy'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2875,7 +2850,7 @@
                 </div>
                 <div class="col-md-2 text-center">
                   <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                      currency:'IDR ':'symbol':'3.0'}}</strong></p>
+                    currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="navigateToBooking(sessionID, dataflight)"
                           class="btn btn-warning  button-search-flight-ticket">Book flight
                   </button>
