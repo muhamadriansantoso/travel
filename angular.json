@@ -40,10 +40,12 @@
               "src/assets/fixtrips/css/lightslider.css",
               "src/assets/fixtrips/css/style.css",
               "src/assets/css/style.css",
-              "node_modules/sweetalert2/dist/sweetalert2.css"
+              "node_modules/sweetalert2/dist/sweetalert2.css",
+              "src/assets/css/bootstrap.css"
             ],
             "scripts": [
-              "node_modules/sweetalert2/dist/sweetalert2.js"
+              "node_modules/sweetalert2/dist/sweetalert2.js",
+              "src/assets/js/bootstrap.js"
             ]
           },
           "configurations": {
