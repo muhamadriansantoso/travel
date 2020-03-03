@@ -37,13 +37,6 @@
           </div>
         </div>
         <br>
-        <!--        <div class="card" style="margin-top: 30px;margin-bottom: 10px;">-->
-        <!--          <h4 align="center" class="mb-4" style="margin-top: 30px;margin-bottom: 10px;">Fasilitas</h4>-->
-        <!--          <ul style="list-style: none;">-->
-        <!--            <li><input name="" type="checkbox">&nbsp;&nbsp;&nbsp;<i class="fa fa-suitcase"></i> Bagasi</li>-->
-        <!--            <li><input name="" type="checkbox">&nbsp;&nbsp;&nbsp;<i class="fa fa-utensils"></i> Makanan</li>-->
-        <!--          </ul>-->
-        <!--        </div>-->
       </div>
       <br>
       <div class="col-sm-9 col-md-9">
@@ -510,7 +503,10 @@
         <div class="mb-3 p-2 bg-white rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
-              <span class="result-sortby">107 results</span>
+              <ng-container
+                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                <span class="result-sortby">{{result?.length}} results</span>
+              </ng-container>
               <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
                 class="selectpicker input-sortby" id="secondarySort" name="secondarySort">
                 <option value="BEST">Best</option>
@@ -1845,7 +1841,10 @@
             <div class="mb-3 p-2 bg-white rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
-                  <span class="result-sortby">107 results</span>
+                  <ng-container
+                    *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                    <span class="result-sortby">{{result?.length}} results</span>
+                  </ng-container>
                   <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
                     class="selectpicker input-sortby" id="secondarySort" name="secondarySort">
                     <option value="BEST">Best</option>
