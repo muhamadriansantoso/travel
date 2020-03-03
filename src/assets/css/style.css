@@ -1,3 +1,7 @@
+.pointer {
+  cursor: pointer;
+}
+
 .text-primary {
   color: #f9be37 !important;
 }

@@ -18,7 +18,7 @@
       <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">
         <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input" id="checkbox-{{allu.value}}"
                name="airlines" type="checkbox">
-        <label class="custom-control-label" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+        <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
       </div>
       <hr class="m-0 mb-2 mt-3">
       <h6 class="filter-left">Transit</h6>
@@ -462,7 +462,7 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
@@ -1121,7 +1121,7 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>

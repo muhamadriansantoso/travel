@@ -2055,6 +2055,10 @@ header .bottom_header .login ul li a {
 
 
 /*========================OPTIONS YOU CAN CHOOSE===========================*/
+.pointer {
+  cursor: pointer;
+}
+
 .options_choose {
   width: 100%;
   float: left;
