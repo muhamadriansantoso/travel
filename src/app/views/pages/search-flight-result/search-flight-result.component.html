@@ -47,18 +47,19 @@
                 *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
                 <span class="result-sortby">{{result?.length}} results</span>
               </ng-container>
-              <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
-                class="selectpicker input-sortby" id="secondarySort" name="secondarySort">
-                <option value="BEST">Best</option>
-                <option value="CHEAPEST">Cheapest first</option>
-                <option value="FASTEST">Fastest first</option>
-                <option value="DEPARTURE_OUTBOUND_ASC">Outbound: Departure time</option>
-              </select></div>
+              <div class="flex-center-sortby">
+                <label class="main-sortby">Sort by</label>
+                <select (change)="sortingSearchResult($event.target.value)" [(ngModel)]="sortByWhat"
+                        class="selectpicker input-sortby">
+                  <option value="0">Cheapest</option>
+                  <option value="1">Fastest</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
         <div
-          *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result; let i = index"
+          *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
           class="card card-ticket">
           <div class="row">
             <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
@@ -507,13 +508,14 @@
                 *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
                 <span class="result-sortby">{{result?.length}} results</span>
               </ng-container>
-              <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
-                class="selectpicker input-sortby" id="secondarySort" name="secondarySort">
-                <option value="BEST">Best</option>
-                <option value="CHEAPEST">Cheapest first</option>
-                <option value="FASTEST">Fastest first</option>
-                <option value="DEPARTURE_OUTBOUND_ASC">Outbound: Departure time</option>
-              </select></div>
+              <div class="flex-center-sortby">
+                <label class="main-sortby">Sort by</label>
+                <select (change)="sortingSearchResult($event.target.value)" [(ngModel)]="sortByWhat"
+                        class="selectpicker input-sortby">
+                  <option value="0">Cheapest</option>
+                  <option value="1">Fastest</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -1845,13 +1847,14 @@
                     *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
                     <span class="result-sortby">{{result?.length}} results</span>
                   </ng-container>
-                  <div class="flex-center-sortby"><label class="main-sortby">Sort by</label><select
-                    class="selectpicker input-sortby" id="secondarySort" name="secondarySort">
-                    <option value="BEST">Best</option>
-                    <option value="CHEAPEST">Cheapest first</option>
-                    <option value="FASTEST">Fastest first</option>
-                    <option value="DEPARTURE_OUTBOUND_ASC">Outbound: Departure time</option>
-                  </select></div>
+                  <div class="flex-center-sortby">
+                    <label class="main-sortby">Sort by</label>
+                    <select (change)="sortingSearchResult($event.target.value)" [(ngModel)]="sortByWhat"
+                            class="selectpicker input-sortby">
+                      <option value="0">Cheapest</option>
+                      <option value="1">Fastest</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
