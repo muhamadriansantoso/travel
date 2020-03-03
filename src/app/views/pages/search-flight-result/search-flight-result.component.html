@@ -15,22 +15,21 @@
       <h5 class="filter-left">Filter</h5>
       <hr class="m-0 mb-2">
       <h6 class="filter-left">Airlines</h6>
-      <ul style="list-style:none;float: left;">
-        <li *ngFor="let allu of airLineListUnique | unique;">
-          <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
-          {{allu.value}}
-        </li>
-      </ul>
+      <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">
+        <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input" id="checkbox-{{allu.value}}"
+               name="airlines" type="checkbox">
+        <label class="custom-control-label" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+      </div>
       <hr class="m-0 mb-2 mt-3">
       <h6 class="filter-left">Transit</h6>
       <ul style="list-style:none;">
-            <li *ngFor="let tlu of transitListUnique | unique">
-              <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
-              <span *ngIf="tlu.value == 1">Direct</span>
-              <span *ngIf="tlu.value != 1">{{tlu.value - 1}} Transit</span>
-            </li>
-          </ul>
-        </div>
+        <li *ngFor="let tlu of transitListUnique | unique">
+          <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
+          <span *ngIf="tlu.value == 1">Direct</span>
+          <span *ngIf="tlu.value != 1">{{tlu.value - 1}} Transit</span>
+        </li>
+      </ul>
+    </div>
         <br>
         <!--        <div class="card" style="margin-top: 30px;margin-bottom: 10px;">-->
         <!--          <h4 align="center" class="mb-4" style="margin-top: 30px;margin-bottom: 10px;">Fasilitas</h4>-->
@@ -459,12 +458,12 @@
           <h5 class="filter-left">Filter</h5>
           <hr class="m-0 mb-2">
           <h6 class="filter-left">Airlines</h6>
-          <ul style="list-style:none;float: left;">
-            <li *ngFor="let allu of airLineListUnique | unique;">
-              <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
-              {{allu.value}}
-            </li>
-          </ul>
+          <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">
+            <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
+                   id="checkbox-{{allu.value}}"
+                   name="airlines" type="checkbox">
+            <label class="custom-control-label" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+          </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <ul style="list-style:none;">
@@ -1118,12 +1117,12 @@
           <h5 class="filter-left">Filter</h5>
           <hr class="m-0 mb-2">
           <h6 class="filter-left">Airlines</h6>
-          <ul style="list-style:none;float: left;">
-            <li *ngFor="let allu of airLineListUnique | unique;">
-              <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
-              {{allu.value}}
-            </li>
-          </ul>
+          <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">
+            <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
+                   id="checkbox-{{allu.value}}"
+                   name="airlines" type="checkbox">
+            <label class="custom-control-label" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+          </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <ul style="list-style:none;">
