@@ -216,8 +216,6 @@ export class SearchFlightResultComponent implements OnInit {
     } else {
       this.multiplePhaseIndex = index;
     }
-
-    console.log(this.dataMultiTrip[this.multiplePhaseIndex].flightSession[this.multiplePhase - 1]);
   }
 
   returnPrevious(data) {
