@@ -222,7 +222,7 @@ body {
   font-family: 'Ubuntu', sans-serif !important;
   overflow-x: hidden;
   position: relative;
-  background: #f5f7fa;
+  background: #f5f7fa !important;
 }
 
 
