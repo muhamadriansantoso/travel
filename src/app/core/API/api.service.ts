@@ -47,7 +47,7 @@ export class APIService {
       params: {
         'departure[]': d,
         'arrival[]': a,
-        'departure_date': date,
+        'departure_date[]': date,
         'return_date': r_date,
         'adult': adult,
         'child': child,

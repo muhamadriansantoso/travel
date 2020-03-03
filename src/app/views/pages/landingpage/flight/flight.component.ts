@@ -308,6 +308,10 @@ export class FlightComponent implements OnInit {
         return: controls['return'].value,
       };
 
+      for (var dateArrayStart = 0; dateArrayStart < this.defaultDepatureDateArray.length; dateArrayStart++) {
+        this.defaultDepatureDateArray[dateArrayStart] = moment(this.defaultDepatureDateArray[dateArrayStart].year + '-' + this.defaultDepatureDateArray[dateArrayStart].month + '-' + this.defaultDepatureDateArray[dateArrayStart].day).format('YYYY-MM-DD');
+      }
+
       this.returnDate = '';
 
       this.router.navigate(['/search-flight'], {
@@ -315,7 +319,7 @@ export class FlightComponent implements OnInit {
           {
             d: this.formCityValueArray,
             a: this.toCityValueArray,
-            date: '2020-03-05',
+            date: this.defaultDepatureDateArray,
             r_date: this.returnDate,
             adult: authData.adult,
             child: authData.child,
@@ -343,25 +347,62 @@ export class FlightComponent implements OnInit {
 
   beforeChange($event: NgbTabChangeEvent) {
     this.roundType = $event.nextId;
+    console.log(this.multipleTrip.controls[0].get('originArray'));
     if (this.roundType == 'round-trip') {
+      this.searchFlightForm.get('origin').setValidators(Validators.required);
+      this.searchFlightForm.get('origin').updateValueAndValidity();
+      this.searchFlightForm.get('destination').setValidators(Validators.required);
+      this.searchFlightForm.get('destination').updateValueAndValidity();
+      this.searchFlightForm.get('departure').setValidators(Validators.required);
+      this.searchFlightForm.get('departure').updateValueAndValidity();
       this.searchFlightForm.get('return').setValidators(Validators.required);
       this.searchFlightForm.get('return').updateValueAndValidity();
+
+      for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+        this.multipleTrip.controls[startFormArray].get('originArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('originArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('destinationArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('destinationArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('departureArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('departureArray').updateValueAndValidity();
+      }
+
     } else if (this.roundType == 'one-way') {
+      this.searchFlightForm.get('origin').setValidators(Validators.required);
+      this.searchFlightForm.get('origin').updateValueAndValidity();
+      this.searchFlightForm.get('destination').setValidators(Validators.required);
+      this.searchFlightForm.get('destination').updateValueAndValidity();
+      this.searchFlightForm.get('departure').setValidators(Validators.required);
+      this.searchFlightForm.get('departure').updateValueAndValidity();
       this.searchFlightForm.get('return').setValidators([]);
       this.searchFlightForm.get('return').updateValueAndValidity();
+
+      for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+        this.multipleTrip.controls[startFormArray].get('originArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('originArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('destinationArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('destinationArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('departureArray').setValidators([]);
+        this.multipleTrip.controls[startFormArray].get('departureArray').updateValueAndValidity();
+      }
+
       this.returnDate = '';
     } else if (this.roundType == 'multiple-trip') {
       this.searchFlightForm.get('origin').setValidators([]);
       this.searchFlightForm.get('origin').updateValueAndValidity();
       this.searchFlightForm.get('destination').setValidators([]);
       this.searchFlightForm.get('destination').updateValueAndValidity();
+      this.searchFlightForm.get('return').setValidators([]);
+      this.searchFlightForm.get('return').updateValueAndValidity();
 
-      this.searchFlightForm.get('originArray').setValidators(Validators.required);
-      this.searchFlightForm.get('originArray').updateValueAndValidity();
-      this.searchFlightForm.get('destinationArray').setValidators(Validators.required);
-      this.searchFlightForm.get('destinationArray').updateValueAndValidity();
-      this.searchFlightForm.get('departureArray').setValidators(Validators.required);
-      this.searchFlightForm.get('departureArray').updateValueAndValidity();
+      for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+        this.multipleTrip.controls[startFormArray].get('originArray').setValidators(Validators.required);
+        this.multipleTrip.controls[startFormArray].get('originArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('destinationArray').setValidators(Validators.required);
+        this.multipleTrip.controls[startFormArray].get('destinationArray').updateValueAndValidity();
+        this.multipleTrip.controls[startFormArray].get('departureArray').setValidators(Validators.required);
+        this.multipleTrip.controls[startFormArray].get('departureArray').updateValueAndValidity();
+      }
       this.returnDate = '';
     }
   };
