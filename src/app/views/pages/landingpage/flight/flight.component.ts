@@ -320,8 +320,8 @@ export class FlightComponent implements OnInit {
       this.router.navigate(['/search-flight'], {
         queryParams:
           {
-            d: this.formCityValueArray,
-            a: this.toCityValueArray,
+            d: this.formCityValueArray.filter(item => item),
+            a: this.toCityValueArray.filter(item => item),
             date: this.defaultDepatureDateArray,
             r_date: this.returnDate,
             adult: authData.adult,
