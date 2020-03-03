@@ -289,10 +289,13 @@ export class FlightComponent implements OnInit {
       });
     } else if (this.roundType == 'multiple-trip') {
       const controls = this.searchFlightForm.controls;
-      if (this.searchFlightForm.invalid) {
-        Object.keys(controls).forEach(controlName =>
-          controls[controlName].markAsTouched()
-        );
+
+      if (this.multipleTrip.invalid) {
+        for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+          Object.keys(this.multipleTrip.controls[startFormArray.toString()].controls).forEach(controlName =>
+            this.multipleTrip.controls[startFormArray.toString()].controls[controlName].markAsTouched()
+          );
+        }
 
         this.searchFlightFormInvalid = true;
         //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
@@ -341,13 +344,22 @@ export class FlightComponent implements OnInit {
     return result;
   }
 
+  isControlHasErrorArray(controlName: string, validationType: string, index: string): boolean {
+    const control = this.multipleTrip.controls[index].controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
+  }
+
   searchFlightFormFailurePopUPHide() {
     this.searchFlightFormInvalid = false;
   }
 
   beforeChange($event: NgbTabChangeEvent) {
     this.roundType = $event.nextId;
-    console.log(this.multipleTrip.controls[0].get('originArray'));
     if (this.roundType == 'round-trip') {
       this.searchFlightForm.get('origin').setValidators(Validators.required);
       this.searchFlightForm.get('origin').updateValueAndValidity();
@@ -431,9 +443,18 @@ export class FlightComponent implements OnInit {
   addMultipleTrip() {
     this.multipleTripLength = this.multipleTrip.length;
     this.multipleTrip.push(this.fb.group({
-      originArray: '',
-      destinationArray: '',
-      departureArray: '',
+      originArray: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      destinationArray: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
+      departureArray: ['', Validators.compose([
+        Validators.required,
+      ])
+      ],
     }));
 
     var today = new Date();

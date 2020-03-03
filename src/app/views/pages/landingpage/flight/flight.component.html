@@ -332,7 +332,8 @@
                                auto-complete class="form-control origin-typeahead" formControlName="originArray"
                                placeholder="Departures"
                         />
-                        <div *ngIf="isControlHasError('originArray','required')" class="invalid-feedback"
+                        <div *ngIf="isControlHasErrorArray('originArray','required', pointIndex)"
+                             class="invalid-feedback"
                              style="display: block">
                           Origin is required
                         </div>
@@ -352,7 +353,8 @@
                                auto-complete class="form-control origin-typeahead" formControlName="destinationArray"
                                placeholder="Destination"
                         />
-                        <div *ngIf="isControlHasError('destinationArray','required')" class="invalid-feedback"
+                        <div *ngIf="isControlHasErrorArray('destinationArray','required', pointIndex)"
+                             class="invalid-feedback"
                              style="display: block">
                           Destination is required
                         </div>
@@ -373,7 +375,8 @@
                                maxlength="0" ngbDatepicker
                                style="cursor: pointer;"
                         />
-                        <div *ngIf="isControlHasError('departureArray','required')" class="invalid-feedback"
+                        <div *ngIf="isControlHasErrorArray('departureArray','required', pointIndex)"
+                             class="invalid-feedback"
                              style="display: block">
                           Departure date is required
                         </div>
