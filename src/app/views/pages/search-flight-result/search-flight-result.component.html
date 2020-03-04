@@ -22,16 +22,17 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer text-secondary"
+                   for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
             <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
                    name="Transit" type="checkbox">
-            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">Direct</label>
-            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">{{tlu.value - 1}}
               Transit</label>
           </div>
@@ -40,7 +41,7 @@
       </div>
       <br>
       <div class="col-sm-9 col-md-9">
-        <div class="mb-3 p-2 bg-white rounded border-bottom">
+        <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
@@ -276,8 +277,8 @@
 
             </div>
             <div class="col-md-2 text-center">
-              <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                currency:'IDR ':'symbol':'3.0'}}</strong></p>
+              <p class="text-price"><strong>{{dataflight.totalPrice |
+                currency:'IDR ':'symbol':'3.0'}}</strong><small class="d-block mb-3">per person</small></p>
               <button (click)="navigateToBooking(sessionID, dataflight)"
                       class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
@@ -298,7 +299,7 @@
             </div>
           </div>
 
-          <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2">
+          <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
             <div class="col-md-12">
               <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
                    style="margin-top: 25px">
@@ -384,7 +385,7 @@
           </div>
 
           <div [ngbCollapse]="!priceDetailsCollapsed[i]">
-            <div class="card mt-2">
+            <div class="card mt-2" style="background: #f2f8ff;">
               <div class="col-md-12">
                 <div class="row mb-3" style="margin-top: 25px">
                   <div class="col-md-12">
@@ -481,16 +482,17 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer text-secondary"
+                   for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
             <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
                    name="Transit" type="checkbox">
-            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">Direct</label>
-            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">{{tlu.value - 1}}
               Transit</label>
           </div>
@@ -501,7 +503,7 @@
       <br>
 
       <div class="col-sm-9 col-md-9">
-        <div class="mb-3 p-2 bg-white rounded border-bottom">
+        <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
@@ -737,8 +739,8 @@
 
             </div>
             <div class="col-md-2 text-center">
-              <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                currency:'IDR ':'symbol':'3.0'}}</strong></p>
+              <p class="text-price"><strong>{{dataflight.totalPrice |
+                currency:'IDR ':'symbol':'3.0'}}</strong><small class="d-block mb-3">per person</small></p>
               <button (click)="returnShow(dataflight)"
                       class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
@@ -759,7 +761,7 @@
             </div>
           </div>
 
-          <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2">
+          <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
             <div class="col-md-12">
               <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
                    style="margin-top: 25px">
@@ -845,7 +847,7 @@
           </div>
 
           <div [ngbCollapse]="!priceDetailsCollapsed[i]">
-            <div class="card mt-2">
+            <div class="card mt-2" style="background: #f2f8ff;">
               <div class="col-md-12">
                 <div class="row mb-3" style="margin-top: 25px">
                   <div class="col-md-12">
@@ -1161,16 +1163,17 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer text-secondary"
+                   for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
             <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
                    name="Transit" type="checkbox">
-            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">Direct</label>
-            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">{{tlu.value - 1}}
               Transit</label>
           </div>
@@ -1180,7 +1183,7 @@
       <br>
 
       <div class="col-sm-9 col-md-9">
-        <div class="mb-3 p-2 bg-white rounded border-bottom">
+        <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
@@ -1436,7 +1439,7 @@
             </div>
           </div>
 
-          <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2">
+          <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
             <div class="col-md-12">
               <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
                    style="margin-top: 25px">
@@ -1522,7 +1525,7 @@
           </div>
 
           <div [ngbCollapse]="!priceDetailsCollapsed[i]">
-            <div class="card mt-2">
+            <div class="card mt-2" style="background: #f2f8ff;">
               <div class="col-md-12">
                 <div class="row mb-3" style="margin-top: 25px">
                   <div class="col-md-12">
@@ -1857,7 +1860,7 @@
 
         <ng-container *ngIf="multiplePhase == 0">
           <div class="col-sm-9 col-md-9">
-            <div class="mb-3 p-2 bg-white rounded border-bottom">
+            <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
@@ -2092,8 +2095,8 @@
                   </div>
                 </div>
                 <div class="col-md-2 text-center">
-                  <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                    currency:'IDR ':'symbol':'3.0'}}</strong></p>
+                  <p class="text-price"><strong>{{dataflight.totalPrice |
+                    currency:'IDR ':'symbol':'3.0'}}</strong><small class="d-block mb-3">per person</small></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                     class="fas fa-arrow-right"></i></button>
@@ -2114,7 +2117,7 @@
                 </div>
               </div>
 
-              <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2">
+              <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
                 <div class="col-md-12">
                   <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
                        style="margin-top: 25px">
@@ -2200,7 +2203,7 @@
               </div>
 
               <div [ngbCollapse]="!priceDetailsCollapsed[i]">
-                <div class="card mt-2">
+                <div class="card mt-2" style="background: #f2f8ff;">
                   <div class="col-md-12">
                     <div class="row mb-3" style="margin-top: 25px">
                       <div class="col-md-12">
@@ -2279,7 +2282,7 @@
 
         <ng-container *ngIf="multiplePhase != 0 && multiplePhase < dataMultiTripStep">
           <div class="col-sm-9 col-md-9">
-            <div class="mb-3 p-2 bg-white rounded border-bottom">
+            <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
@@ -2534,7 +2537,7 @@
                 </div>
               </div>
 
-              <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2">
+              <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
                 <div class="col-md-12">
                   <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
                        style="margin-top: 25px">
@@ -2620,7 +2623,7 @@
               </div>
 
               <div [ngbCollapse]="!priceDetailsCollapsed[i]">
-                <div class="card mt-2">
+                <div class="card mt-2" style="background: #f2f8ff;">
                   <div class="col-md-12">
                     <div class="row mb-3" style="margin-top: 25px">
                       <div class="col-md-12">
@@ -2699,7 +2702,7 @@
 
         <ng-container *ngIf="multiplePhase == dataMultiTripStep ">
           <div class="col-sm-9 col-md-9">
-            <div class="mb-3 p-2 bg-white rounded border-bottom">
+            <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
@@ -2953,7 +2956,7 @@
                 </div>
               </div>
 
-              <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2">
+              <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
                 <div class="col-md-12">
                   <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
                        style="margin-top: 25px">
@@ -3039,7 +3042,7 @@
               </div>
 
               <div [ngbCollapse]="!priceDetailsCollapsed[i]">
-                <div class="card mt-2">
+                <div class="card mt-2" style="background: #f2f8ff;">
                   <div class="col-md-12">
                     <div class="row mb-3" style="margin-top: 25px">
                       <div class="col-md-12">

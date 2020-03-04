@@ -201,10 +201,11 @@
                     <div class="form-group">
                       <label>Departure</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #d="ngbDatepicker" (click)="d.toggle()" [minDate]="minDate" class="form-control"
-                             formControlName="departure"
-                             maxlength="0" ngbDatepicker
-                             [(ngModel)]="defaultDepatureDate"
+                      <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
+                             [minDate]="minDate"
+                             class="form-control"
+                             formControlName="departure" maxlength="0"
+                             ngbDatepicker
                       />
                       <div *ngIf="isControlHasError('departure','required')" class="invalid-feedback"
                            style="display: block">
@@ -219,10 +220,10 @@
                     <div class="form-group">
                       <label>Return</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #r="ngbDatepicker" (click)="r.toggle()" [minDate]="minDate" class="form-control"
-                             formControlName="return"
-                             maxlength="0" ngbDatepicker
-                             [(ngModel)]="defaultReturnDate"
+                      <input #r="ngbDatepicker" (click)="r.toggle()" [(ngModel)]="defaultReturnDate" [minDate]="minDate"
+                             class="form-control"
+                             formControlName="return" maxlength="0"
+                             ngbDatepicker
                       />
                       <div *ngIf="isControlHasError('return','required')" class="invalid-feedback"
                            style="display: block">
@@ -402,8 +403,7 @@
                     <div class="form-group">
                       <label style="margin-bottom: 20px"></label>
                       <button (click)="addMultipleTrip()" [disabled]="multipleTripLength > 3"
-                              class="btn btn-block btn-outline-primary button-search-flight-ticket"
-                              style="height: 45px;border-radius: 5px;">Tambah Penerbangan
+                              class="btn btn-block add-new_flight"><i class="fa fa-plus-square"></i> Tambah Penerbangan
                       </button>
                     </div>
                   </div>
