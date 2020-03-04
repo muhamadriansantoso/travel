@@ -928,7 +928,7 @@
          style="padding: 0;">
   <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
     <div
-      *ngFor="let dataflight of dataFlightAdvanced | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
+      *ngFor="let dataflight of dataFlightAdvanced"
       class="card card-ticket">
       <div class="row">
         <div (click)="returnPrevious(dataflight)"
@@ -1180,6 +1180,24 @@
       <br>
 
       <div class="col-sm-9 col-md-9">
+        <div class="mb-3 p-2 bg-white rounded border-bottom">
+          <div class="row">
+            <div class="col-12 flex-sortby">
+              <ng-container
+                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                <span class="result-sortby">{{result?.length}} results</span>
+              </ng-container>
+              <div class="flex-center-sortby">
+                <label class="main-sortby">Sort by</label>
+                <select (change)="sortingSearchResult($event.target.value)" [(ngModel)]="sortByWhat"
+                        class="selectpicker input-sortby">
+                  <option value="0">Cheapest</option>
+                  <option value="1">Fastest</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
         <div
           *ngFor="let dataflight of dataFlightAdvanced[0].return | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline(); let i = index"
           class="card card-ticket">

@@ -90,6 +90,7 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
+                this.dataMultiTrip = data.data;
                 var ABC = 0;
                 data.data.forEach((globalData: any) => {
                   globalData.departure.forEach((dataFlightSearch: any) => {
@@ -207,7 +208,20 @@ export class SearchFlightResultComponent implements OnInit {
 
   returnShow(data) {
     this.phase = true;
+    this.airLineListUnique = [];
+    this.transitListUnique = [];
     this.dataFlightAdvanced.push(data);
+    this.dataFlightAdvanced[0].return.forEach((globalData: any) => {
+      globalData.transData.forEach((transData: any) => {
+        this.airLineListUnique.push({
+          value: transData.platingCarrierName
+        });
+      });
+
+      this.transitListUnique.push({
+        value: globalData.stop
+      });
+    });
   }
 
   returnShowMultiple(data, index) {
@@ -222,11 +236,39 @@ export class SearchFlightResultComponent implements OnInit {
 
   returnPrevious(data) {
     if (this.roundType == 'round-trip') {
+      this.dataFlightAdvanced = [];
+      this.dataFlightSearch = [];
       this.phase = false;
+      var ABC = 0;
+      this.dataMultiTrip.forEach((globalData: any) => {
+        globalData.departure.forEach((dataFlightSearch: any) => {
+          this.dataFlightSearch.push(dataFlightSearch);
+
+          globalData.departure.forEach((dataPesawat: any) => {
+            dataPesawat.transData.forEach((transData: any) => {
+              this.airLineListUnique.push({
+                value: transData.platingCarrierName
+              });
+            });
+
+            this.transitListUnique.push({
+              value: dataPesawat.stop
+            });
+          });
+
+          for (var i = 0; i < globalData.departure.length; i++) {
+            globalData.departure[i] = Object.assign(globalData.departure[i], {
+              index: ABC
+            });
+          }
+        });
+
+        ABC = ABC + 1;
+      });
     } else if (this.roundType == 'multiple-trip') {
       this.multiplePhase = 0;
+      this.dataFlightAdvanced = [];
     }
-    this.dataFlightAdvanced = [];
   }
 
   navigateToBooking(sessionID, data) {
