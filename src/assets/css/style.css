@@ -3380,6 +3380,13 @@ a:hover, a:focus {
   outline-width: unset;
 }
 
+.input-sortby option:focus {
+  outline: unset;
+  outline-color: unset;
+  outline-style: unset;
+  outline-width: unset;
+}
+
 .filter-left {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -3522,6 +3529,14 @@ a:hover, a:focus {
   left: auto;
   text-align: center;
   width: 30px;
+}
+
+.plane-departure {
+  transform: rotate(-40deg);
+}
+
+.plane-destination {
+  transform: rotate(40deg);
 }
 
 .flight-section-path-icon {
