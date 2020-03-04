@@ -90,6 +90,7 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               if (data.data.length > 0) {
+                this.dataMultiTrip = data.data;
                 var ABC = 0;
                 data.data.forEach((globalData: any) => {
                   globalData.departure.forEach((dataFlightSearch: any) => {
@@ -207,7 +208,20 @@ export class SearchFlightResultComponent implements OnInit {
 
   returnShow(data) {
     this.phase = true;
+    this.airLineListUnique = [];
+    this.transitListUnique = [];
     this.dataFlightAdvanced.push(data);
+    this.dataFlightAdvanced[0].return.forEach((globalData: any) => {
+      globalData.transData.forEach((transData: any) => {
+        this.airLineListUnique.push({
+          value: transData.platingCarrierName
+        });
+      });
+
+      this.transitListUnique.push({
+        value: globalData.stop
+      });
+    });
   }
 
   returnShowMultiple(data, index) {
@@ -216,17 +230,68 @@ export class SearchFlightResultComponent implements OnInit {
     if (index == undefined) {
       this.multiplePhaseIndex = this.multiplePhaseIndex;
     } else {
+      this.airLineListUnique = [];
+      this.transitListUnique = [];
       this.multiplePhaseIndex = index;
+      this.dataMultiTrip[this.multiplePhaseIndex].flightSession[this.multiplePhase - 1].forEach((globalData: any) => {
+        globalData.transData.forEach((transData: any) => {
+          this.airLineListUnique.push({
+            value: transData.platingCarrierName
+          });
+        });
+
+        this.transitListUnique.push({
+          value: globalData.stop
+        });
+      });
     }
   }
 
   returnPrevious(data) {
     if (this.roundType == 'round-trip') {
+      this.dataFlightAdvanced = [];
+      this.dataFlightSearch = [];
       this.phase = false;
+      this.dataMultiTrip.forEach((globalData: any) => {
+        globalData.departure.forEach((dataFlightSearch: any) => {
+          this.dataFlightSearch.push(dataFlightSearch);
+
+          globalData.departure.forEach((dataPesawat: any) => {
+            dataPesawat.transData.forEach((transData: any) => {
+              this.airLineListUnique.push({
+                value: transData.platingCarrierName
+              });
+            });
+
+            this.transitListUnique.push({
+              value: dataPesawat.stop
+            });
+          });
+        });
+      });
     } else if (this.roundType == 'multiple-trip') {
       this.multiplePhase = 0;
+      this.dataFlightAdvanced = [];
+      this.dataFlightSearch = [];
+
+      this.dataMultiTrip.forEach((globalData: any) => {
+        globalData.departure.forEach((dataFlightSearch: any) => {
+          this.dataFlightSearch.push(dataFlightSearch);
+
+          globalData.departure.forEach((dataPesawat: any) => {
+            dataPesawat.transData.forEach((transData: any) => {
+              this.airLineListUnique.push({
+                value: transData.platingCarrierName
+              });
+            });
+
+            this.transitListUnique.push({
+              value: dataPesawat.stop
+            });
+          });
+        });
+      });
     }
-    this.dataFlightAdvanced = [];
   }
 
   navigateToBooking(sessionID, data) {
