@@ -2279,6 +2279,24 @@
 
         <ng-container *ngIf="multiplePhase != 0 && multiplePhase < dataMultiTripStep">
           <div class="col-sm-9 col-md-9">
+            <div class="mb-3 p-2 bg-white rounded border-bottom">
+              <div class="row">
+                <div class="col-12 flex-sortby">
+                  <ng-container
+                    *ngIf="dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                    <span class="result-sortby">{{result?.length}} results</span>
+                  </ng-container>
+                  <div class="flex-center-sortby">
+                    <label class="main-sortby">Sort by</label>
+                    <select (change)="sortingSearchResult($event.target.value)" [(ngModel)]="sortByWhat"
+                            class="selectpicker input-sortby">
+                      <option value="0">Cheapest</option>
+                      <option value="1">Fastest</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div
               *ngFor="let dataflight of this.dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
               class="card card-ticket">
@@ -2496,8 +2514,6 @@
                   </div>
                 </div>
                 <div class="col-md-2 text-center">
-                  <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                    currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                     class="fas fa-arrow-right"></i></button>
@@ -2683,6 +2699,24 @@
 
         <ng-container *ngIf="multiplePhase == dataMultiTripStep ">
           <div class="col-sm-9 col-md-9">
+            <div class="mb-3 p-2 bg-white rounded border-bottom">
+              <div class="row">
+                <div class="col-12 flex-sortby">
+                  <ng-container
+                    *ngIf="dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                    <span class="result-sortby">{{result?.length}} results</span>
+                  </ng-container>
+                  <div class="flex-center-sortby">
+                    <label class="main-sortby">Sort by</label>
+                    <select (change)="sortingSearchResult($event.target.value)" [(ngModel)]="sortByWhat"
+                            class="selectpicker input-sortby">
+                      <option value="0">Cheapest</option>
+                      <option value="1">Fastest</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div
               *ngFor="let dataflight of this.dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
               class="card card-ticket">
@@ -2900,8 +2934,6 @@
                   </div>
                 </div>
                 <div class="col-md-2 text-center">
-                  <p style="font-size: 12pt; margin-bottom: 0px"><strong>{{dataflight.totalPrice |
-                    currency:'IDR ':'symbol':'3.0'}}</strong></p>
                   <button (click)="navigateToBooking(sessionID, dataflight)"
                           class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                     class="fas fa-arrow-right"></i></button>
