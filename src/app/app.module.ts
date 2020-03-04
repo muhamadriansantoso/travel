@@ -23,6 +23,7 @@ import {CheckboxFilterPipe} from './views/pages/search-flight-result/checkbox-fi
 import {ClipboardModule} from 'ngx-clipboard';
 import {CountdownModule} from 'ngx-countdown';
 import {NgWizardConfig, NgWizardModule, THEME} from 'ng-wizard';
+import {SpacetoplusPipe} from './views/pages/spacetoplus.pipe';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -40,6 +41,7 @@ const ngWizardConfig: NgWizardConfig = {
     PrebookingComponent,
     UniquePipe,
     CheckboxFilterPipe,
+    SpacetoplusPipe
   ],
   imports: [
     LandingpageModule.forRoot(),

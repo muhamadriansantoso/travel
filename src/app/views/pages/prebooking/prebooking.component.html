@@ -16,53 +16,216 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card mb-2">
-                <div class="card-header">
+                <div class="card-header" style="margin-bottom: 10px">
                   <h5 class="box-title">
                     Flight Details
                   </h5>
                 </div>
                 <div class="col-md-12">
-                  <div *ngFor="let airSegment of app.airSegment" class="row mb-3" style="margin-top: 25px">
-                    <div class="col-md-2 mb-3">
-                      <div class="flight-section-airline-logo-wrap">
-                        <img class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{airSegment.Carrier}}.png">
-                      </div>
-                    </div>
-                    <div class="col-md-10">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <ul class="flight-details-schedule-list">
-                            <li>
-                              <i class="fa fa-plane flight-details-schedule-icon"></i>
-                              <p class="flight-details-schedule-date">
-                                {{airSegment.ArrivalTime | date: 'MMM dd, yyyy'}}</p>
-                              <div class="flight-details-schedule-time">
-                                {{airSegment.DepartureTime | date: 'hh:mm'}} -
-                                {{airSegment.ArrivalTime | date: 'hh:mm'}}
-                                ({{airSegment.FlightTime | minuteToHour}})
+                  <div *ngFor="let dataflight of airSegmentData; let i = index" class="card card-ticket">
+                    <div class="row">
+                      <div class="col-md-10 text-center">
+                        <div class="row">
+                          <div class="col-md-2">
+                            <div class="flight-section-airline-logo-wrap">
+                              <img
+                                class="img-fluid img-circle airline-logo"
+                                src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                            </div>
+                          </div>
+                          <ng-container *ngIf="dataflight.stop == 1">
+                            <div class="col-md-10">
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <p
+                                    class="title-ticket">{{(dataflight.transData[0].departureTime | spaceToPlus) | date:
+                                      'hh:mm'}}</p>
+                                  <p class="destination-title">
+                                    {{dataflight.transData[0].origin_city_name}}</p>
+                                  <p class="destination-date">{{(dataflight.transData[0].departureTime | spaceToPlus) |
+                                      date: 'MMM dd, yyyy'}}</p>
+                                </div>
+
+                                <div class="col-md-6 text-center">
+                                  <div class="flight-section-path">
+                                    <div class="flight-section-fly-time">
+                                      <p>{{dataflight.transData[0].flightTime | minuteToHour}}</p>
+                                    </div>
+                                    <div class="flight-section-path-line"></div>
+                                    <div>
+                                      <div class="flight-section-path-line-start">
+                                        <i class="fa fa-plane plane-departure flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"></div>
+                                        <div class="flight-section-path-line-title">
+                                          {{dataflight.transData[0].origin}}
+                                        </div>
+                                      </div>
+
+                                      <div class="flight-section-path-line-middle">
+                                        <i class="fa fa-plane flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"
+                                             style="visibility: hidden"></div>
+                                        <div class="flight-section-path-line-title">Direct</div>
+                                      </div>
+
+                                      <div>
+                                        <div class="flight-section-path-line-end">
+                                          <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
+                                          <div class="flight-section-path-line-dot"></div>
+                                          <div class="flight-section-path-line-title">
+                                            {{dataflight.transData[0].destination}}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                  <p class="title-ticket">{{(dataflight.transData[0].arrivalTime | spaceToPlus) | date:
+                                      'hh:mm'}}</p>
+                                  <p class="destination-title">
+                                    {{dataflight.transData[0].destination_city_name}}</p>
+                                  <p class="destination-date">{{(dataflight.transData[0].arrivalTime | spaceToPlus) |
+                                      date: 'MMM dd, yyyy'}}</p>
+                                </div>
                               </div>
-                              <div class="flight-details-schedule-destination">
-                                <div style="float: left; min-width: 40%">
-                                  <p style="font-weight: bold; margin-bottom: 0">
-                                    {{airSegment.Origin}}
-                                  </p>
-                                  <p class="flight-details-schedule-destination-city">
-                                    {{airSegment.Origin_city_name}}</p>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *ngIf="dataflight.stop == 2">
+                            <div class="col-md-10">
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <p
+                                    class="title-ticket">{{(dataflight.transData[0].departureTime | spaceToPlus) | date:
+                                      'hh:mm'}}</p>
+                                  <p class="destination-title">
+                                    {{dataflight.transData[0].origin_city_name}}</p>
+                                  <p class="destination-date">{{(dataflight.transData[0].departureTime | spaceToPlus) |
+                                      date: 'MMM dd, yyyy'}}</p>
                                 </div>
-                                <div style="float: left; margin: 0 10px">
-                                  <span>→</span>
+
+                                <div class="col-md-6 text-center">
+                                  <div class="flight-section-path">
+                                    <div class="flight-section-fly-time">
+                                      <p>{{(dataflight.transData[0].flightTime +
+                                          dataflight.transData[1].flightTime) | minuteToHour}},
+                                        {{(dataflight.stop) - 1}} Transit</p>
+                                    </div>
+                                    <div class="flight-section-path-line"></div>
+                                    <div>
+                                      <div class="flight-section-path-line-start">
+                                        <i class="fa fa-plane plane-departure flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"></div>
+                                        <div class="flight-section-path-line-title">
+                                          {{dataflight.transData[0].origin}}
+                                        </div>
+                                      </div>
+
+                                      <div class="flight-section-path-line-middle">
+                                        <i class="fa fa-plane flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"></div>
+                                        <div class="flight-section-path-line-title">
+                                          {{dataflight.transData[0].destination}}
+                                        </div>
+                                      </div>
+
+                                      <div>
+                                        <div class="flight-section-path-line-end">
+                                          <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
+                                          <div class="flight-section-path-line-dot"></div>
+                                          <div class="flight-section-path-line-title">
+                                            {{dataflight.transData[1].destination}}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div style="float: left; min-width: 40%">
-                                  <p style="font-weight: bold; margin-bottom: 0">
-                                    {{airSegment.Destination}}
-                                  </p>
-                                  <p class="flight-details-schedule-destination-city">
-                                    {{airSegment.Destination_city_name}}</p>
+
+                                <div class="col-md-3">
+                                  <p class="title-ticket">{{(dataflight.transData[1].arrivalTime | spaceToPlus) | date:
+                                      'hh:mm'}}</p>
+                                  <p class="destination-title">
+                                    {{dataflight.transData[1].destination_city_name}}</p>
+                                  <p class="destination-date">{{(dataflight.transData[1].arrivalTime | spaceToPlus) |
+                                      date: 'MMM dd, yyyy'}}</p>
                                 </div>
                               </div>
-                            </li>
-                          </ul>
+                            </div>
+                          </ng-container>
+
+                          <ng-container *ngIf="dataflight.stop == 3">
+                            <div class="col-md-10">
+                              <div class="row">
+                                <div class="col-md-3">
+                                  <p
+                                    class="title-ticket">{{(dataflight.transData[0].departureTime | spaceToPlus) | date:
+                                      'hh:mm'}}</p>
+                                  <p class="destination-title">
+                                    {{dataflight.transData[0].origin_city_name}}</p>
+                                  <p class="destination-date">{{(dataflight.transData[0].departureTime | spaceToPlus) |
+                                      date: 'MMM dd, yyyy'}}</p>
+                                </div>
+
+                                <div class="col-md-6 text-center">
+                                  <div class="flight-section-path">
+                                    <div class="flight-section-fly-time">
+                                      <p>{{(dataflight.transData[0].flightTime +
+                                          dataflight.transData[1].flightTime) | minuteToHour}},
+                                        {{(dataflight.stop) - 1}} Transit</p>
+                                    </div>
+                                    <div class="flight-section-path-line"></div>
+                                    <div>
+                                      <div class="flight-section-path-line-start">
+                                        <i class="fa fa-plane plane-departure flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"></div>
+                                        <div class="flight-section-path-line-title">
+                                          {{dataflight.transData[0].origin}}
+                                        </div>
+                                      </div>
+
+                                      <div class="flight-section-path-line-middle-1">
+                                        <i class="fa fa-plane flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"></div>
+                                        <div class="flight-section-path-line-title">
+                                          {{dataflight.transData[1].origin}}
+                                        </div>
+                                      </div>
+
+                                      <div class="flight-section-path-line-middle-2">
+                                        <i class="fa fa-plane flight-section-path-icon"></i>
+                                        <div class="flight-section-path-line-dot"></div>
+                                        <div class="flight-section-path-line-title">
+                                          {{dataflight.transData[1].destination}}
+                                        </div>
+                                      </div>
+
+                                      <div>
+                                        <div class="flight-section-path-line-end">
+                                          <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
+                                          <div class="flight-section-path-line-dot"></div>
+                                          <div class="flight-section-path-line-title">
+                                            {{dataflight.transData[2].destination}}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                  <p class="title-ticket">{{(dataflight.transData[1].arrivalTime | spaceToPlus) | date:
+                                      'hh:mm'}}</p>
+                                  <p class="destination-title">
+                                    {{dataflight.transData[1].destination_city_name}}</p>
+                                  <p class="destination-date">{{(dataflight.transData[1].arrivalTime | spaceToPlus) |
+                                      date: 'MMM dd, yyyy'}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
                         </div>
                       </div>
                     </div>

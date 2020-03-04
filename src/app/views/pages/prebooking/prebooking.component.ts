@@ -25,6 +25,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   nonUpdatedPrice: any;
   updatedPrice: any;
   roundType: string;
+  airSegmentData: any;
 
   listPaymentChannel: any;
   paymentData: any;
@@ -139,6 +140,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
             this.updatedPrice = AirPricePort.data[0].totalPrice;
+
+            this.airSegmentData = AirPricePort.data[0].airSegmentData;
 
             var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
             this.minDateAdult = {
