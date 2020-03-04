@@ -245,7 +245,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_passportexpiry: ['2031-12-31', Validators.compose([
+                  passenger_passportexpiry: ['', Validators.compose([
                     Validators.required,
                   ])
                   ],
@@ -323,6 +323,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     for (var awal = 0; awal < this.passengerLength; awal++) {
       for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
         var passengerDob = moment(this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.year + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.month + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.day).format('YYYY-MM-DD');
+        var passengerPassportExpiry = moment(this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.year + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.month + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.day).format('YYYY-MM-DD');
         this.submitedPassengerData.push({
           passengerType: this.bookingForm[awal].controls[awal2].controls['passengerType'].value,
           passengerTitle: this.bookingForm[awal].controls[awal2].controls['passenger_title'].value,
@@ -330,7 +331,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           passengerLastName: this.bookingForm[awal].controls[awal2].controls['passenger_lastname'].value,
           passengerDOB: passengerDob,
           passengerPassport: this.bookingForm[awal].controls[awal2].controls['passenger_passport'].value,
-          passengerPassportExpiry: this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value,
+          passengerPassportExpiry: passengerPassportExpiry,
         });
       }
     }
