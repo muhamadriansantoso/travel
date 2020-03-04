@@ -3332,6 +3332,25 @@ a:hover, a:focus {
   border: unset;
 }
 
+.text-price {
+  font-size: 12pt;
+  color: unset;
+}
+
+.add-new_flight {
+  height: 45px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  border: 1px dashed #b4c4d6 !important;
+  font-size: 14px;
+  color: #07969a !important;
+}
+
+.add-new_flight:hover {
+  background-color: aliceblue;
+}
+
+
 .flex-sortby {
   display: flex;
   justify-content: space-between;
