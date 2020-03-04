@@ -22,16 +22,17 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer text-secondary"
+                   for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
             <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
                    name="Transit" type="checkbox">
-            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">Direct</label>
-            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">{{tlu.value - 1}}
               Transit</label>
           </div>
@@ -40,7 +41,7 @@
       </div>
       <br>
       <div class="col-sm-9 col-md-9">
-        <div class="mb-3 p-2 bg-white rounded border-bottom">
+        <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
@@ -481,16 +482,17 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer text-secondary"
+                   for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
             <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
                    name="Transit" type="checkbox">
-            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">Direct</label>
-            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">{{tlu.value - 1}}
               Transit</label>
           </div>
@@ -501,7 +503,7 @@
       <br>
 
       <div class="col-sm-9 col-md-9">
-        <div class="mb-3 p-2 bg-white rounded border-bottom">
+        <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
@@ -1161,16 +1163,17 @@
             <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
                    id="checkbox-{{allu.value}}"
                    name="airlines" type="checkbox">
-            <label class="custom-control-label pointer" for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            <label class="custom-control-label pointer text-secondary"
+                   for="checkbox-{{allu.value}}">{{allu.value}}</label>
           </div>
           <hr class="m-0 mb-2 mt-3">
           <h6 class="filter-left">Transit</h6>
           <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
             <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
                    name="Transit" type="checkbox">
-            <label *ngIf="tlu.value == 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">Direct</label>
-            <label *ngIf="tlu.value != 1" class="custom-control-label pointer"
+            <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
                    for="transit-{{tlu.value}}">{{tlu.value - 1}}
               Transit</label>
           </div>
@@ -1180,7 +1183,7 @@
       <br>
 
       <div class="col-sm-9 col-md-9">
-        <div class="mb-3 p-2 bg-white rounded border-bottom">
+        <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
@@ -1857,7 +1860,7 @@
 
         <ng-container *ngIf="multiplePhase == 0">
           <div class="col-sm-9 col-md-9">
-            <div class="mb-3 p-2 bg-white rounded border-bottom">
+            <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
@@ -2279,7 +2282,7 @@
 
         <ng-container *ngIf="multiplePhase != 0 && multiplePhase < dataMultiTripStep">
           <div class="col-sm-9 col-md-9">
-            <div class="mb-3 p-2 bg-white rounded border-bottom">
+            <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
@@ -2699,7 +2702,7 @@
 
         <ng-container *ngIf="multiplePhase == dataMultiTripStep ">
           <div class="col-sm-9 col-md-9">
-            <div class="mb-3 p-2 bg-white rounded border-bottom">
+            <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
