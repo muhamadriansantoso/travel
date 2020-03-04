@@ -230,7 +230,20 @@ export class SearchFlightResultComponent implements OnInit {
     if (index == undefined) {
       this.multiplePhaseIndex = this.multiplePhaseIndex;
     } else {
+      this.airLineListUnique = [];
+      this.transitListUnique = [];
       this.multiplePhaseIndex = index;
+      this.dataMultiTrip[this.multiplePhaseIndex].flightSession[this.multiplePhase - 1].forEach((globalData: any) => {
+        globalData.transData.forEach((transData: any) => {
+          this.airLineListUnique.push({
+            value: transData.platingCarrierName
+          });
+        });
+
+        this.transitListUnique.push({
+          value: globalData.stop
+        });
+      });
     }
   }
 
@@ -239,7 +252,6 @@ export class SearchFlightResultComponent implements OnInit {
       this.dataFlightAdvanced = [];
       this.dataFlightSearch = [];
       this.phase = false;
-      var ABC = 0;
       this.dataMultiTrip.forEach((globalData: any) => {
         globalData.departure.forEach((dataFlightSearch: any) => {
           this.dataFlightSearch.push(dataFlightSearch);
@@ -255,19 +267,30 @@ export class SearchFlightResultComponent implements OnInit {
               value: dataPesawat.stop
             });
           });
-
-          for (var i = 0; i < globalData.departure.length; i++) {
-            globalData.departure[i] = Object.assign(globalData.departure[i], {
-              index: ABC
-            });
-          }
         });
-
-        ABC = ABC + 1;
       });
     } else if (this.roundType == 'multiple-trip') {
       this.multiplePhase = 0;
       this.dataFlightAdvanced = [];
+      this.dataFlightSearch = [];
+
+      this.dataMultiTrip.forEach((globalData: any) => {
+        globalData.departure.forEach((dataFlightSearch: any) => {
+          this.dataFlightSearch.push(dataFlightSearch);
+
+          globalData.departure.forEach((dataPesawat: any) => {
+            dataPesawat.transData.forEach((transData: any) => {
+              this.airLineListUnique.push({
+                value: transData.platingCarrierName
+              });
+            });
+
+            this.transitListUnique.push({
+              value: dataPesawat.stop
+            });
+          });
+        });
+      });
     }
   }
 
