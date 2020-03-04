@@ -1,10 +1,11 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import {orderBy} from 'lodash';
 
 @Pipe({
   name: 'searchFligthFilter'
 })
 export class CheckboxFilterPipe implements PipeTransform {
-  transform(list: any, transitFilter: any, transitItems: Array<any>, airlineFilter: any, airlineItems: Array<any>): any {
+  transform(list: any, transitFilter: any, transitItems: Array<any>, airlineFilter: any, airlineItems: Array<any>, sortResult: string): any {
     if ((transitItems.length > 0) || (airlineItems.length > 0)) {
       let temp: any[] = [];
       let tempCat: any[] = [];
@@ -45,31 +46,21 @@ export class CheckboxFilterPipe implements PipeTransform {
           temp = tempSearch;
         }
       }
-
-      return temp;
+      if (sortResult == '0') {
+        return orderBy(temp, ['totalPrice'], ['asc']);
+      } else if (sortResult == '1') {
+        return orderBy(temp, ['flightTimeTotal'], ['asc']);
+      } else {
+        return temp;
+      }
     } else {
-      return list;
+      if (sortResult == '0') {
+        return orderBy(list, ['totalPrice'], ['asc']);
+      } else if (sortResult == '1') {
+        return orderBy(list, ['flightTimeTotal'], ['asc']);
+      } else {
+        return list;
+      }
     }
-
-    // if ((airlineItems.length > 0)) {
-    //   console.log(airlineItems);
-    //   let temp: any[] = [];
-    //   let tempCat: any[] = [];
-    //
-    //   for (let i = 0; i < list.length; i++) {
-    //     for (let j = 0; j < airlineItems.length; j++) {
-    //       if (list[i].transData[0].platingCarrierName.toString().includes(airlineItems[j].value.toString())) {
-    //         tempCat.push(list[i]);
-    //       }
-    //     }
-    //   }
-    //
-    //   console.log(tempCat);
-    //
-    //   temp = tempCat;
-    //   return temp;
-    // } else {
-    //   return list;
-    // }
   }
 }

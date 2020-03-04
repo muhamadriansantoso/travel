@@ -29,6 +29,7 @@ export class SearchFlightResultComponent implements OnInit {
   destination: string;
   dataMultiTrip: any = [];
   dataMultiTripStep: number;
+  sortByWhat: number;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -47,6 +48,7 @@ export class SearchFlightResultComponent implements OnInit {
     this.loadingPage = true;
     this.phase = false;
     this.multiplePhase = 0;
+    this.sortByWhat = 0;
     this.route.queryParams.subscribe(params => {
       this.roundType = params.type;
       this.origin = params.d;
@@ -267,6 +269,10 @@ export class SearchFlightResultComponent implements OnInit {
     return this.transitListUnique.filter(transit => {
       return transit.checked;
     });
+  }
+
+  sortingSearchResult(value) {
+    this.sortByWhat = value;
   }
 
   searchInvalidPopUPHide(value) {
