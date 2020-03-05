@@ -57,6 +57,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   departureTime: string;
   airPlane: string;
   supplier: string;
+  airPricingInfoKey: string;
 
   isLinear: boolean;
   stepBookingDetailsComplete: boolean;
@@ -142,6 +143,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.passengerLength = AirPricePort.data[0].passengerType.length;
             this.updatedPrice = AirPricePort.data[0].totalPrice;
             this.supplier = AirPricePort.data[0].supplier;
+            this.airPricingInfoKey = AirPricePort.data[0].airPricingInfoKey;
 
             this.airSegmentData = AirPricePort.data[0].airSegmentData;
 
@@ -360,7 +362,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
     var dob = moment(dataBooking.dob.year + '-' + dataBooking.dob.month + '-' + dataBooking.dob.day).format('YYYY-MM-DD');
 
-    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dob, dataBooking.email, dataBooking.phone, this.submitedPassengerData, this.supplier).pipe(
+    this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dob, dataBooking.email, dataBooking.phone, this.submitedPassengerData, this.supplier, this.airPricingInfoKey).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.api.paymentChannelEspay(this.sessionID).pipe(
