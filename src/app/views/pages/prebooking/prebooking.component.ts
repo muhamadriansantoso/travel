@@ -146,49 +146,57 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.airSegmentData = AirPricePort.data[0].airSegmentData;
 
             var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
+            var bookingminDateAdult = moment(bookingDate).subtract(100, 'years').toDate();
+            var bookingmaxDateAdult = moment(bookingDate).subtract(12, 'years').toDate();
+            var bookingminDateChild = moment(bookingDate).subtract(12, 'years').add(1, 'days').toDate();
+            var bookingmaxDateChild = moment(bookingDate).subtract(2, 'years').toDate();
+            var bookingminDateInfant = moment(bookingDate).subtract(2, 'years').toDate();
+            var bookingmaxDateInfant = moment(bookingDate).subtract(1, 'months').toDate();
+            var bookingpassportExpiredMinDate = moment(bookingDate).add(6, 'months').add(1, 'days').toDate();
+            var bookingpassportExpiredMaxDate = moment(bookingDate).add(24, 'years').add(1, 'days').toDate();
+
             this.minDateAdult = {
-              'year': bookingDate.getFullYear() - 100,
-              'month': parseInt(moment(bookingDate).format('MM'), 0),
-              'day': parseInt(moment(bookingDate).format('DD'), 0)
+              'year': bookingminDateAdult.getFullYear(),
+              'month': parseInt(moment(bookingminDateAdult).format('MM'), 0),
+              'day': parseInt(moment(bookingminDateAdult).format('DD'), 0)
             };
             this.maxDateAdult = {
-              'year': bookingDate.getFullYear() - 12,
-              'month': parseInt(moment(bookingDate).format('MM'), 0),
-              'day': parseInt(moment(bookingDate).format('DD'), 0)
+              'year': bookingmaxDateAdult.getFullYear(),
+              'month': parseInt(moment(bookingmaxDateAdult).format('MM'), 0),
+              'day': parseInt(moment(bookingmaxDateAdult).format('DD'), 0)
             };
 
             this.minDateChild = {
-              'year': bookingDate.getFullYear() - 12,
-              'month': parseInt(moment(bookingDate).format('MM'), 0),
-              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+              'year': bookingminDateChild.getFullYear(),
+              'month': parseInt(moment(bookingminDateChild).format('MM'), 0),
+              'day': parseInt(moment(bookingminDateChild).format('DD'), 0)
             };
             this.maxDateChild = {
-              'year': bookingDate.getFullYear() - 2,
-              'month': parseInt(moment(bookingDate).format('MM'), 0),
-              'day': parseInt(moment(bookingDate).format('DD'), 0)
+              'year': bookingmaxDateChild.getFullYear(),
+              'month': parseInt(moment(bookingmaxDateChild).format('MM'), 0),
+              'day': parseInt(moment(bookingmaxDateChild).format('DD'), 0)
             };
 
             this.minDateInfant = {
-              'year': bookingDate.getFullYear() - 2,
-              'month': parseInt(moment(bookingDate).format('MM'), 0),
-              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+              'year': bookingminDateInfant.getFullYear(),
+              'month': parseInt(moment(bookingminDateInfant).format('MM'), 0),
+              'day': parseInt(moment(bookingminDateInfant).format('DD'), 0)
             };
             this.maxDateInfant = {
-              'year': bookingDate.getFullYear(),
-              'month': parseInt(moment(bookingDate).format('MM'), 0) - 1,
-              'day': parseInt(moment(bookingDate).format('DD'), 0)
+              'year': bookingmaxDateInfant.getFullYear(),
+              'month': parseInt(moment(bookingmaxDateInfant).format('MM'), 0),
+              'day': parseInt(moment(bookingmaxDateInfant).format('DD'), 0)
             };
 
             this.passportExpiredMinDate = {
-              'year': bookingDate.getFullYear(),
-              'month': parseInt(moment(bookingDate).format('MM'), 0) + 6,
-              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+              'year': bookingpassportExpiredMinDate.getFullYear(),
+              'month': parseInt(moment(bookingpassportExpiredMinDate).format('MM'), 0),
+              'day': parseInt(moment(bookingpassportExpiredMinDate).format('DD'), 0)
             };
-
             this.passportExpiredMaxDate = {
-              'year': bookingDate.getFullYear() + 24,
-              'month': parseInt(moment(bookingDate).format('MM'), 0),
-              'day': parseInt(moment(bookingDate).format('DD'), 0) + 1
+              'year': bookingpassportExpiredMaxDate.getFullYear(),
+              'month': parseInt(moment(bookingpassportExpiredMaxDate).format('MM'), 0),
+              'day': parseInt(moment(bookingpassportExpiredMaxDate).format('DD'), 0)
             };
 
             if (this.nonUpdatedPrice != this.updatedPrice && this.paymentStatus == null) {
