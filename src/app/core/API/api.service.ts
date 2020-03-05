@@ -79,7 +79,7 @@ export class APIService {
 
   AirCreateReservationPort(sessionID, title, firstname, lastname, dob, email, phone, passengerData, supplier, airPricingInfo) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&dob=' + dob + '&email=' + email + '&phone=' + phone + '&passengerData=' + JSON.stringify(passengerData) + '&supplier=' + supplier + '&airPricingInfo=' + JSON.stringify(airPricingInfo);
+    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&dob=' + dob + '&email=' + email + '&phone=' + phone + '&passengerData=' + JSON.stringify(passengerData) + '&supplier=' + supplier + '&airPricingInfo=' + encodeURIComponent(JSON.stringify(airPricingInfo));
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/booking/insertBookingData', userData, {headers: urlHeader});
   }
 
