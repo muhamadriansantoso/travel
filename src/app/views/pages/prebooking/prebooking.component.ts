@@ -283,6 +283,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.submitted = true;
     this.submitedPassengerData = [];
     const controls = this.bookingInfoForm.controls;
+    console.log(this.bookingForm);
     if (this.bookingForm.length == 1) {
       if (this.bookingInfoForm.invalid || this.bookingForm[0].invalid) {
         Object.keys(controls).forEach(controlName =>
