@@ -242,11 +242,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_firstname: ['Darwin', Validators.compose([
+                  passenger_firstname: ['Deva', Validators.compose([
                     Validators.required,
                   ])
                   ],
-                  passenger_lastname: ['Effendi', Validators.compose([
+                  passenger_lastname: ['Darwin', Validators.compose([
                     Validators.required,
                   ])
                   ],
