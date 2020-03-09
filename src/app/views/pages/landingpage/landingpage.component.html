@@ -1,40 +1,280 @@
-<!--<section style="position: absolute; top: 15%; left: 10%; right: 10%">-->
-<!--  <div class="container">-->
-<!--    <div [ngStyle]="searchClicked?{'display': 'block'} : {'display': 'none'}" class="modal modal-tiket"></div>-->
-<!--    <div (click)="searchClickedEvent()" (clickOutside)="searchClickedEventOut()" class="row no-gutters">-->
-<!--      <div [ngStyle]="searchClicked?{'z-index': '1051'} : {'z-index': '0'}"-->
-<!--           class="col-md-11 tab-wrap col-centered content-booking-ticket">-->
-<!--        <div class="row">-->
-<!--          <div class="col-sm-3 nav-link-wrap">-->
-<!--            <div class="nav nav-pills justify-content-center menu-travel">-->
-<!--              <a class="nav-link nav-link-categori" routerLink="/flight" routerLinkActive="active">-->
-<!--                <img src="./assets/images/ICONS/icon_pesawat.png" style="width: 30px;height: 30px;"> Pesawat-->
-<!--              </a>-->
+<header class="another_page_header">
+  <div class="top_header top_header_account" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div id="logoshow">
+            <div class="logo #fix-logo" id="fix-logo" style="display: none;">
+              <img src="./assets/fixtrips/image/fixtrips.png">
+            </div>
+          </div>
 
-<!--              &lt;!&ndash;                            <a class="nav-link nav-link-categori" routerLinkActive="active" routerLink="/hotel">&ndash;&gt;-->
-<!--              &lt;!&ndash;                                <img src="./assets/images/ICONS/icon_hotel.png" style="width: 30px;height: 30px;"> Hotel&ndash;&gt;-->
-<!--              &lt;!&ndash;                            </a>&ndash;&gt;-->
+          <div class="left_panel">
 
-<!--              &lt;!&ndash;<a class="nav-link nav-link-categori">&ndash;&gt;-->
-<!--              &lt;!&ndash;<img src="./assets/images/ICONS/icon_kereta.png" style="width: 30px;height: 30px;"> Kereta&ndash;&gt;-->
-<!--              &lt;!&ndash;</a>&ndash;&gt;-->
-<!--                        </div>-->
-<!--          </div>-->
+            <ul>
+              <li>
+                <a href="#">Promo</a>
+              </li>
+              <li>
+                <a href="#">Help Center</a>
+              </li>
 
-<!--          <div class="col-sm-9">-->
-<!--            <div class="card pull-right menu-travel">-->
-<!--              <div class="tab-content">-->
-<!--                <div class="tab-pane fade show active">-->
-<!--                  <router-outlet></router-outlet>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
+            </ul>
+          </div>
+          <div class="right_panel">
+            <ul>
+              <li class="welcome">
+                <span id="welcome_button">Login<i class="fa fa-user"></i></span>
+                <div class="welcome_content_panel" id="welcome_content">
+                  <ul>
+                    <li>
+                      <a href="#">Credit USD
+                        0</a>
+                    </li>
+                    <li>
+                      <a href="#">My
+                        Account</a>
+                    </li>
+                    <li>
+                      <a href="#">Log
+                        Out</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="agent_register">
+                <a href="#">Register</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom_header bottom_header_fix">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="logo">
+            <img alt="Logo" src="./assets/fixtrips/image/fixtrips.png" style="width: 135px;margin-top: 5px;">
+          </div>
+          <div class="right_panel">
+            <nav class="navbar navbar-default">
+              <div class="navbar-header">
+                <button aria-expanded="false" class="navbar-toggle collapsed"
+                        data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <li>
+                    <a href="#">Build Packages</a>
+                  </li>
+                  <li>
+                    <a href="#">Accomodation</a>
+                  </li>
+                  <li>
+                    <a href="#">Attraction</a>
+                  </li>
+                  <li>
+                    <a href="#">Transfer</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="login_full">
+    <!-- LOGIN POPUP -->
+    <div class="login-popup">
+      <!-- Modal -->
+      <div class="modal fade" id="divLoginPopup1">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Recover your Password</h4>
+            </div>
+            <div class="modal-body">
+              <div class="login-popup-panel">
+                <div class="popup-header">
+                  <span class="title">LOGIN</span>
+                  <button class="close" data-dismiss="modal" type="button">×</button>
+                </div>
+                <div class="registration-content">
+                  <div class="form-full">
+                    <div class="form-group">
+                      <label class="positeion-relative">
+                        <input class="form-control" placeholder="Email" type="text">
+                        <span class="icon"><i class="fa fa-user"></i></span>
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label class="positeion-relative">
+                        <input class="form-control" placeholder="Password" type="password">
+                        <span class="icon"><i class="fa fa-lock"></i></span>
+                      </label>
+                    </div>
+                    <span class="forgot-password" data-target="#divForgotPassword-loginpopup" data-toggle="modal">Forgot your password?</span>
+                    <a class="login-btn" href="#"><i class="fa fa-sign-in"></i>&nbsp;Login</a>
+                    <div class="or">
+                      <span class="circle">or</span>
+                    </div>
+                    <div class="facebook-google-panel">
+                      <div class="row padding0">
+                        <div class="col-sm-6">
+                          <div class="fg-login">
+                            <span class="icon"><i class="fa fa-facebook"></i></span>
+                            <span class="text">Facebook</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="fg-login google-login">
+                            <span class="icon"><img alt="Google Plus Icon" src="image/gplus_button_logo.png"></span>
+                            <span class="text">Google</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <span class="line-partition"></span>
+                    <p class="sign-uptext">
+                      Not have an Account Yet?
+                      <a data-target="#divSignupPopup" data-toggle="modal" href="#">Sign up
+                        now!</a>
+                    </p>
+                    <!--<p class="sign-uptext agent-login"><a href="AgentLogin.html">Agent Login</a></p>-->
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- FORGOT PASSWORD POPUP -->
+    <div class="login-forgotpopup">
+      <!-- Modal -->
+      <div class="modal fade" id="divForgotPassword-loginpopup" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Recover your Password</h4>
+            </div>
+            <div class="modal-body">
+              <div class="forgot-password-panel">
+                <button class="close" data-dismiss="modal" type="button">×</button>
+                <div class="key-outer">
+                  <div class="key">
+                    <span class="icon"><i class="fa fa-key"></i></span>
+                  </div>
+                </div>
+                <h3>Recover Your Password</h3>
+                <input placeholder="User Name" type="text">
+                <input type="submit" value="Reset my Password">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- SINGUP POPUP -->
+    <div class="login-popup">
+      <!-- Modal -->
+      <div class="modal fade" id="divSignupPopup">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Recover your Password</h4>
+            </div>
+            <div class="modal-body">
+              <div class="login-popup-panel">
+                <div class="popup-header">
+                  <span class="title">Create your account</span>
+                  <button class="close" data-dismiss="modal" type="button">×</button>
+                </div>
+
+
+                <div class="registration-content">
+                  <div class="form-full">
+                    <div class="form-group">
+                      <label class="positeion-relative">
+                        <input class="form-control" placeholder="Name" type="text">
+                        <span class="icon"><i class="fa fa-user"></i></span>
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label class="positeion-relative">
+                        <input class="form-control" placeholder="Phone No" type="text">
+                        <span class="icon"><i class="fa fa-phone"></i></span>
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label class="positeion-relative">
+                        <input class="form-control" placeholder="Email" type="text">
+                        <span class="icon"><i class="fa fa-user"></i></span>
+                      </label>
+                    </div>
+                    <div class="form-group">
+                      <label class="positeion-relative">
+                        <input class="form-control" placeholder="Password" type="password">
+                        <span class="icon"><i class="fa fa-lock"></i></span>
+                      </label>
+                    </div>
+                    <a class="login-btn" href="#">Create Your Account</a>
+                    <div class="or">
+                      <span class="circle">or</span>
+                    </div>
+                    <div class="facebook-google-panel">
+                      <div class="row padding0">
+                        <div class="col-sm-6">
+                          <div class="fg-login">
+                            <span class="icon"><i class="fa fa-facebook"></i></span>
+                            <span class="text">Facebook</span>
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="fg-login google-login">
+                            <span class="icon"><img alt="Google Plus Icon" src="image/gplus_button_logo.png"></span>
+                            <span class="text">Google</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
 <div class="main_content">
   <div class="page_left_panel scrollbar" id="style-4">
@@ -61,6 +301,16 @@
                 <!--                <li role="presentation" routerLinkActive="active">-->
                 <!--                  <div class="inner_list">-->
                 <!--                    <a routerLink="/hotel">-->
+                <!--                      <div class="image">-->
+                <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
+                <!--                      </div>-->
+                <!--                      <span>Recreation</span>-->
+                <!--                    </a>-->
+                <!--                  </div>-->
+                <!--                </li>-->
+                <!--                <li role="presentation">-->
+                <!--                  <div class="inner_list">-->
+                <!--                    <a routerLink="/recreation">-->
                 <!--                      <div class="image">-->
                 <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
                 <!--                      </div>-->
