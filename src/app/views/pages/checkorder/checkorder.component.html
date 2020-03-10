@@ -76,18 +76,69 @@
     <div class="kt-portlet" style="padding: 20px">
       <div class="kt-portlet__body kt-portlet__body--fit">
         <div class="row">
-          <div class="col-md-4 mb-3">
+          <div class="col-md-6 mb-3">
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-3">
-                    <i class="fas fa-calendar fa-3x"></i>
-                  </div>
                   <div class="col-9">
-                    <h5 class="mb-0">{{this.retrieveData.bookingDate}}</h5>
+                    <h5 class="mb-0">{{retrieveData.bookingDate}}</h5>
                     <small class="text-secondary">Booking Date</small>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-9">
+                    <h5 class="mb-0">{{retrieveData.paymentStatus}}</h5>
+                    <small class="text-secondary">Payment Status</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-9">
+                    <h5 class="mb-0">{{retrieveData.bookingStatus}}</h5>
+                    <small class="text-secondary">Booking Status</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 mb-3">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="box-title">Booker Details</h5>
+              </div>
+              <div class="table-responsive">
+                <table class="table text-nowrap">
+                  <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Date of Birth</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>
+                      {{retrieveData.bookersTitle}}.
+                      {{retrieveData.bookersFirstname}}
+                      {{retrieveData.bookersLastname}}</td>
+                    <td>{{retrieveData.bookersMobile}}</td>
+                    <td>{{retrieveData.bookersDob}}</td>
+                  </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -130,55 +181,21 @@
                   <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Phone Number</th>
                     <th>Date of Birth</th>
                   </tr>
                   </thead>
                   <tbody>
-                  <tr>
-                    <td>Mr ahmad badru (ADT)</td>
-                    <td>-</td>
-                    <td>03 Mar 1980</td>
-                  </tr>
+                  <ng-container *ngFor="let passengerInfo of retrieveData.passengerInfo">
+                    <tr>
+                      <td>
+                        {{passengerInfo.BookingTravelerName.Prefix}}.
+                        {{passengerInfo.BookingTravelerName.First}}
+                        {{passengerInfo.BookingTravelerName.Last}} ({{passengerInfo.TravelerType}})
+                      </td>
+                      <td>{{passengerInfo.DOB}}</td>
+                    </tr>
+                  </ng-container>
                   </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="box-title">Costings Details</h5>
-              </div>
-              <div class="table-responsive">
-                <table class="table text-nowrap">
-                  <thead>
-                  <tr>
-                    <th>Unit</th>
-                    <th class="text-right">Fare (IDR)</th>
-                    <th class="text-right">Tax (IDR)</th>
-                    <th class="text-right">Other Charge (IDR)</th>
-                    <th class="text-right">Total (IDR)</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr>
-                    <td>1 ADT</td>
-                    <td class="text-right">1.723.250</td>
-                    <td class="text-right">651.163</td>
-                    <td class="text-right">0</td>
-                    <td class="text-right">2.374.413</td>
-                  </tr>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Total</th>
-                    <th class="text-right">1.723.250</th>
-                    <th class="text-right">651.163</th>
-                    <th class="text-right">0</th>
-                    <th class="text-right">2.374.413</th>
-                  </tr>
-                  </tfoot>
                 </table>
               </div>
             </div>
