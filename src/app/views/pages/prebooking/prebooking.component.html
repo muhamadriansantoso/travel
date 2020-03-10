@@ -581,7 +581,7 @@
           </div>
         </ng-container>
         <ng-container *ngIf="paymentData as pd">
-          <div style="font-size: 16px;color: #666;">
+          <div style="font-size: 16px;color: #666; padding: 4%">
             <div class="text-center">
               <img src="./assets/images/banklogo/{{pd.bank_name}}.png" width="200px"/>
             </div>
@@ -615,20 +615,97 @@
               </div>
               <br/>
               <div class="row">
+                <h3>CARA PEMBAYARAN</h3>
                 <div class="col-md-12">
-                  <div class="ttl3 mb-1"><b>CARA PEMBAYARAN</b></div>
+                  <ng-container *ngIf="pd.debit_from_bank == '009'">
+                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM BNI</b></div>
+                    <div>
+                      <ol>
+                        <li>Masukkan kartu ATM BNI dan PIN Anda</li>
+                        <li>Pilih <b>Menu Lain</b></li>
+                        <li>Pilih menu <b>Transfer</b></li>
+                        <li>Pilih sumber rekening dan pilih tujuan rekening <b>Ke Rekening BNI</b></li>
+                        <li>Masukkan 16 digit <b>Nomor Virtual Account ({{pd.va_number}})</b></li>
+                        <li>Masukkan <b>jumlah</b> sesuai dengan tagihan Anda dan <b>pilih Benar</b></li>
+                        <li>Transaksi selesai</li>
+                      </ol>
+                    </div>
+                    <br/>
+                    <div class="ttl3 mb-1"><b>Transfer Melalui BNI INTERNET BANKING</b></div>
+                    <div>
+                      <ol>
+                        <li>Masuk ke situs <a href="https://ibank.bni.co.id" target="_blank">https://ibank.bni.co.id</a>
+                        </li>
+                        <li>Lakukan <b>Log in</b> dengan akun <b>BNI Internet Banking</b> Anda</li>
+                        <li>Pilih menu <b>Transaksi > Info dan Administrasi Transfer > Atur Rekening Tujuan</b> dan klik
+                          <b>OK</b></li>
+                        <li>Pada Menu <b>Atur Rekening tujuan</b>, pilih <b>Tambah Rekening Tujuan</b> dan Klik
+                          <b>OK</b></li>
+                        <li>Masukkan Nama singkat, pilih kode Network & Bank Transfer Antar Rek. BNI</li>
+                        <li>Masukkan Nomor Rekening dengan 16 digit Nomor Virtual Account, kemudian klik tombol Lanjut
+                        </li>
+                        <li>Isikan kembali konfirmasi Nomor Rekening dan informasi lainnya, lalu Lanjutkan</li>
+                        <li>Setelah rekening tujuan berhasil ditambahkkan, pilih menu Transfer, Kemudian pilih Transfer
+                          Antar Rek. BNI
+                        </li>
+                        <li>Pilih rekening tujuan sesuai dengan Nomor Virtual Account yang telah disimpan dan lanjutkan
+                          Transaksi
+                        </li>
+                        <li>Transaksi Selesai</li>
+                      </ol>
+                    </div>
+                    <br/>
+                    <div class="ttl3 mb-1"><b>Transfer Melalui BNI MOBILE BANKING</b></div>
+                    <div>
+                      <ol>
+                        <li>Buka Aplikasi <b>Mobile Banking BNI</b></li>
+                        <li>Lakukan <b>Log in</b> pada Mobile Banking BNI Anda</li>
+                        <li>Pilih menu <b>Transfer > Antar Rekening BNI > Rekening Tujuan > Input rekening Baru</b></li>
+                        <li>Isi Informasi detailnya dan masukkan 16 digit <b>Nomor Virtual Account</b> pada Nomor
+                          Rekening, Lalu <b>klik Lanjut</b>, kemudian <b>Klik Lanjut lagi</b></li>
+                        <li>Setelah ditambahkan, isi Kolom <b>Nominal tagihan</b> sesuai dengan jumlah tagihan Anda dan
+                          <b>klik Lanjut</b></li>
+                        <li>Pada layar konfirmasi, isikan password transaksi dan Klik <b>Lanjut</b></li>
+                        <li>Transaksi Selesai</li>
+                      </ol>
+                    </div>
+                    <br/>
+                  </ng-container>
+                  <div class="ttl3 mb-1"><b>Transfer Melalui ATM BERSAMA / ALTO</b></div>
                   <div>
                     <ol>
-                      <li>Gunakan mesin ATM BANK PERMATA</li>
-                      <li>Pilih Other Transaction</li>
-                      <li>Pilih Payment</li>
-                      <li>Pilih Other Payment</li>
-                      <li>Masukan Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu Pilih Correct</li>
-                      <li>Informasi pembayaran akan tertera dan pilih Correct</li>
-                      <li>Pilih Akun Pembayaran dan Pilih Correct</li>
+                      <li>Gunakan mesin ATM BANK MANDIRI atau berlogo ATM BERSAMA / Alto</li>
+                      <li>Pada menu utama, pilih <b>Transaksi lainnya</b></li>
+                      <li>Pilih <b>Transfer</b></li>
+                      <li>Pilih <b>Antar Bank Online</b></li>
+                      <li>Masukkan No. <b>{{pd.debit_from_bank}}</b> dan <b>{{pd.va_number}}</b></li>
+                      <li>Masukkan jumlah tagihan yang akan Anda bayar secara lengkap (Pembayaran dengan jumlah tidak
+                        sesuai akan otomatis ditolak)
+                      </li>
+                      <li>Kosongkan No. Referensi, lalu tekan <b>Benar</b></li>
+                      <li>Pada halaman konfirmasi transfer akan muncul jumlah yang dibayarkan, nomor rekening & nama
+                        Merchant. Jika informasi telah sesuai tekan Benar
+                      </li>
                     </ol>
                   </div>
                   <br/>
+                  <div class="ttl3 mb-1"><b>Transfer Melalui ATM BCA / PRIMA</b></div>
+                  <div>
+                    <ol>
+                      <li>Gunakan mesin ATM BCA atau yang berlogo PRIMA</li>
+                      <li>Pada menu utama, pilih <b>Transaksi lainnya</b></li>
+                      <li>Pilih <b>Transfer</b></li>
+                      <li>Pilih <b>Rekening Bank Online</b></li>
+                      <li>Masukkan kode Bank <b>{{pd.debit_from_bank}}</b> lalu tekan <b>Lanjut / Benar</b></li>
+                      <li>Masukkan jumlah tagihan yang akan Anda bayar secara lengkap (Pembayaran dengan jumlah tidak
+                        sesuai akan otomatis ditolak)
+                      </li>
+                      <li>Masukkan 16 digit No. Rekening pembayaran <b>{{pd.va_number}}</b> lalu tekan <b>Benar</b></li>
+                      <li>Pada halaman konfirmasi transfer akan muncul jumlah yang dibayarkan, nomor rekening & nama
+                        Merchant. Jika informasi sesuai tekan Benar
+                      </li>
+                    </ol>
+                  </div>
                 </div>
               </div>
             </ng-container>
