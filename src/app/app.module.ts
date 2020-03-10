@@ -24,6 +24,7 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {CountdownModule} from 'ngx-countdown';
 import {NgWizardConfig, NgWizardModule, THEME} from 'ng-wizard';
 import {SpacetoplusPipe} from './views/pages/spacetoplus.pipe';
+import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -41,7 +42,8 @@ const ngWizardConfig: NgWizardConfig = {
     PrebookingComponent,
     UniquePipe,
     CheckboxFilterPipe,
-    SpacetoplusPipe
+    SpacetoplusPipe,
+    CheckorderComponent
   ],
   imports: [
     LandingpageModule.forRoot(),

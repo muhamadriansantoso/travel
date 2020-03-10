@@ -27,6 +27,7 @@ export class LandingpageComponent implements OnInit {
   model: any;
   loading: boolean = false;
   searchClicked: boolean = false;
+  isCollapsed: boolean;
 
   message: string;
   client: Client;
@@ -35,6 +36,7 @@ export class LandingpageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isCollapsed = true;
   }
 
   searchClickedEvent() {

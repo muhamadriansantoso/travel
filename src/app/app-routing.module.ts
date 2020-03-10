@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'prebooking/:sessionID',
     component: PrebookingComponent
   },
+  {
+    path: 'check-order',
+    component: PrebookingComponent
+  },
 ];
 
 @NgModule({
