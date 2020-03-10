@@ -36,11 +36,11 @@ export class CheckorderComponent implements OnInit {
 
   initRetrieveForm() {
     this.retrieveForm = this.fb.group({
-      email: ['', Validators.compose([
+      email: ['rian_santoso@ymail.com', Validators.compose([
         Validators.required,
       ])
       ],
-      booking_id: ['', Validators.compose([
+      booking_id: ['202039000006', Validators.compose([
         Validators.required,
       ])
       ],
