@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LandingpageComponent} from './views/pages/landingpage/landingpage.component';
 import {SearchFlightResultComponent} from './views/pages/search-flight-result/search-flight-result.component';
 import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
+import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
 
 const routes: Routes = [
   {
@@ -19,8 +20,8 @@ const routes: Routes = [
     component: PrebookingComponent
   },
   {
-    path: 'check-order',
-    component: PrebookingComponent
+    path: 'retrieve-booking',
+    component: CheckorderComponent
   },
 ];
 

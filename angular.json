@@ -41,7 +41,9 @@
               "src/assets/fixtrips/css/style.css",
               "src/assets/css/style.css",
               "node_modules/sweetalert2/dist/sweetalert2.css",
-              "src/assets/css/bootstrap.css"
+              "src/assets/css/bootstrap.css",
+              "src/assets/fixtrips/css/style.bundle.css",
+              "src/assets/fixtrips/css/check_order.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",

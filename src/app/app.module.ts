@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -43,7 +43,7 @@ const ngWizardConfig: NgWizardConfig = {
     UniquePipe,
     CheckboxFilterPipe,
     SpacetoplusPipe,
-    CheckorderComponent
+    CheckorderComponent,
   ],
   imports: [
     LandingpageModule.forRoot(),
@@ -64,7 +64,7 @@ const ngWizardConfig: NgWizardConfig = {
     MatSnackBarModule,
     CountdownModule,
     NgbModule,
-    NgWizardModule.forRoot(ngWizardConfig)
+    NgWizardModule.forRoot(ngWizardConfig),
   ],
   providers: [
     {
@@ -76,6 +76,7 @@ const ngWizardConfig: NgWizardConfig = {
       useValue: APP_DATE_FORMATS
     },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {
