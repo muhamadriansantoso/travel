@@ -20,7 +20,6 @@ export class CheckorderComponent implements OnInit {
   submit() {
     this.api.retrieveBooking('rian_santoso@ymail.com', '1').subscribe((data: any) => {
       console.log(data);
-      this.cdr.detectChanges();
     });
   }
 
