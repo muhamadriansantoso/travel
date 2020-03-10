@@ -163,7 +163,7 @@
                   <tbody>
                   <ng-container *ngFor="let airSegment of retrieveData.airSegment">
                     <tr>
-                      <td>{{airSegment.CarrierName}} ({{airSegment.Carrier}})</td>
+                      <td>{{airSegment.CarrierName}} ({{airSegment.Carrier}} {{airSegment.FlightNumber}})</td>
                       <td>30 Apr 2020 15:00<br>{{airSegment.Origin}} - {{airSegment.OriginByCity}}</td>
                       <td>30 Apr 2020 17:45<br>{{airSegment.Destination}} - {{airSegment.DestinationByCity}}</td>
                     </tr>
