@@ -583,7 +583,7 @@
         <ng-container *ngIf="paymentData as pd">
           <div style="font-size: 16px;color: #666; padding: 4%">
             <div class="text-center">
-              <img src="./assets/images/banklogo/{{pd.bank_name}}.png" width="200px"/>
+              <img src="./assets/images/banklogo/{{pd.debit_from_bank}}.png" width="200px"/>
             </div>
             <br/>
             <div class="ttl3 text-center">Terima kasih telah menggunakan {{pd.bank_name}} Virtual Account</div>
@@ -617,6 +617,28 @@
               <div class="row">
                 <h3>CARA PEMBAYARAN</h3>
                 <div class="col-md-12">
+                  <ng-container *ngIf="pd.debit_from_bank == '008'">
+                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM MANDIRI</b></div>
+                    <div>
+                      <ol>
+                        <li>Gunakan mesin ATM BANK MANDIRI</li>
+                        <li>Setelah itu silahkan <b>pilih bahasa</b> yang ingin Anda gunakan</li>
+                        <li>Silahkan masukkan PIN ATM Anda, lalu tekan <b>ENTER</b></li>
+                        <li>Piih <b>BAYAR / BELI</b></li>
+                        <li>Piih <b>Lainnya</b></li>
+                        <li>Piih <b>lainnya sekali lagi</b></li>
+                        <li>Piih <b>Multipayment</b></li>
+                        <li>Masukkan Kode Perusahaan / Institusi <b>89208</b>. Setelah itu pilih <b>Benar</b></li>
+                        <li>Masukkan 16 digit Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu pilih <b>Benar</b></li>
+                        <li>Masukkan nominal sejumlah yang ditagihkan, lalu <b>pilih Benar</b></li>
+                        <li>Akan muncul informasi transaksi Anda dan jumlah yang ditagihkan. Jika sudah Benar, <b>Pilih
+                          Benar untuk membayar</b></li>
+                        <li>Transaksi pembayaran via ATM MANDIRI telah <b>selesai</b> dilakukan</li>
+                      </ol>
+                    </div>
+                    <br/>
+                  </ng-container>
+
                   <ng-container *ngIf="pd.debit_from_bank == '009'">
                     <div class="ttl3 mb-1"><b>Transfer Melalui ATM BNI</b></div>
                     <div>
@@ -671,6 +693,55 @@
                     </div>
                     <br/>
                   </ng-container>
+
+                  <ng-container *ngIf="pd.debit_from_bank == '011'">
+                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM DANAMON</b></div>
+                    <div>
+                      <ol>
+                        <li>Masukkan kartu ATM DANAMON dan PIN Anda</li>
+                        <li>Pilih <b>Menu Pembayaran</b></li>
+                        <li>Pilih menu <b>Lainnya > Menu Virtual Account</b></li>
+                        <li>Masukkan Kode Perusahaan</li>
+                        <li>Masukkan 16 digit <b>Nomor Virtual Account ({{pd.va_number}})</b></li>
+                        <li>Pada layar konfirmasi, pastikan tagihan Anda sudah sesuai</li>
+                        <li>Pilih “YA” untuk memproses transaksi</li>
+                        <li>Transaksi selesai</li>
+                      </ol>
+                    </div>
+                    <br/>
+                    <div class="ttl3 mb-1"><b>Transfer Melalui DANAMON INTERNET & MOBILE BANKING</b></div>
+                    <div>
+                      <ol>
+                        <li>Akses D-Mobile melalui Handphone / PC</li>
+                        <li>Masukkan <b>User ID</b> dan <b>Password</b></li>
+                        <li>Pilih menu <b>Pembayaran > Virtual Account</b></li>
+                        <li>Masukkan <b>Kode Perusahaan</b></li>
+                        <li>Masukkan 16 digit Nomor Virtual Account <b>({{pd.va_number}})</b></li>
+                        <li>Akan muncul rincian pembayaran Anda, Jika sudah benar, masukkan <b>PIN</b> Transaksi Anda.
+                        </li>
+                        <li>Transaksi <b>Selesai</b></li>
+                      </ol>
+                    </div>
+                    <br/>
+                  </ng-container>
+
+                  <ng-container *ngIf="pd.debit_from_bank == '013'">
+                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM PERMATA</b></div>
+                    <div>
+                      <ol>
+                        <li>Gunakan mesin ATM BANK PERMATA</li>
+                        <li>Pilih <b>Other Transaction</b></li>
+                        <li>Pilih <b>Payment</b></li>
+                        <li>Pilih <b>Other Payment</b></li>
+                        <li>Masukkan 16 digit Nomor pembayaran <b>{{pd.va_number}}</b>, Lalu tekan <b>Benar</b></li>
+                        <li>Informasi pembayaran akan tertera dan pilih <b>Correct</b></li>
+                        <li>Pilih Akun pembayaran dan pilih <b>Correct</b></li>
+                        <li>Transaksi pembayaran via ATM PERMATA telah selesai dilakukan</li>
+                      </ol>
+                    </div>
+                    <br/>
+                  </ng-container>
+
                   <div class="ttl3 mb-1"><b>Transfer Melalui ATM BERSAMA / ALTO</b></div>
                   <div>
                     <ol>
