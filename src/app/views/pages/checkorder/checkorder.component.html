@@ -9,7 +9,7 @@
             <div class="kt-wizard-v2__nav">
               <div class="kt-wizard-v2__nav-items">
                 <!--doc: Replace A tag with SPAN tag to disable the step link click -->
-                <a class="kt-wizard-v2__nav-item" data-ktwizard-state="current" data-ktwizard-type="step" href="#">
+                <a class="kt-wizard-v2__nav-item" data-ktwizard-state="current" data-ktwizard-type="step">
                   <div class="kt-wizard-v2__nav-body">
                     <div class="kt-wizard-v2__nav-icon">
                       <img src="./assets/fixtrips/image/pesawat_icon.png">
@@ -46,7 +46,8 @@
                 </div>
               </div>
               <div class="kt-form__actions" style="float: right">
-                <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
+                <button (click)="submit()"
+                        class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u">
                   Retrieve Booking
                 </button>
               </div>
