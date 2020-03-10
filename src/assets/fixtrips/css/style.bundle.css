@@ -1,3 +1,57 @@
+.btn.kt-spinner:not(.kt-spinner--center) {
+  padding-left: 3rem;
+}
+
+.btn.kt-spinner:not(.kt-spinner--center):before {
+  left: 1rem;
+}
+
+.btn.kt-spinner.kt-spinner--right {
+  padding-left: 1rem;
+  padding-right: 3rem;
+}
+
+.btn.kt-spinner.kt-spinner--right:before {
+  left: auto;
+  right: 1rem;
+}
+
+.btn.kt-spinner.kt-spinner--sm:not(.kt-spinner--center) {
+  padding-left: 2.5rem;
+}
+
+.btn.kt-spinner.kt-spinner--sm:not(.kt-spinner--center):before {
+  left: 1rem;
+}
+
+.btn.kt-spinner.kt-spinner--sm.kt-spinner--right {
+  padding-left: 1rem;
+  padding-right: 2.5rem;
+}
+
+.btn.kt-spinner.kt-spinner--sm.kt-spinner--right:before {
+  left: auto;
+  right: 1rem;
+}
+
+.btn.kt-spinner.kt-spinner--lg:not(.kt-spinner--center) {
+  padding-left: 3.5rem;
+}
+
+.btn.kt-spinner.kt-spinner--lg:not(.kt-spinner--center):before {
+  left: 1rem;
+}
+
+.btn.kt-spinner.kt-spinner--lg.kt-spinner--right {
+  padding-left: 1rem;
+  padding-right: 3.5rem;
+}
+
+.btn.kt-spinner.kt-spinner--lg.kt-spinner--right:before {
+  left: auto;
+  right: 1rem;
+}
+
 .kt-container, .kt-container.kt-container--fluid {
   width: 100%;
   margin: 0;

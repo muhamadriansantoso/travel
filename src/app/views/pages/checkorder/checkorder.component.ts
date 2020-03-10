@@ -1,6 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {APIService} from '../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-checkorder',
@@ -10,17 +12,26 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class CheckorderComponent implements OnInit {
   retrieveForm: FormGroup;
   retrieveFormInvalid: boolean;
+  retrieveData: any;
   invalidData: boolean;
+  loading: boolean;
+  submitClicked: boolean;
 
+  @ViewChild('scrollToMe', {static: false}) scrollToMe: ElementRef;
+  private unsubscribe: Subject<any>;
   constructor(
     private api: APIService,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
   ) {
+    this.unsubscribe = new Subject();
   }
 
   ngOnInit() {
     this.initRetrieveForm();
+    this.retrieveForm.valueChanges.subscribe(value => {
+      this.submitClicked = false;
+    });
   }
 
   initRetrieveForm() {
@@ -48,16 +59,38 @@ export class CheckorderComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
+    this.submitClicked = true;
+
     const authData = {
       email: controls['email'].value,
       booking_id: controls['booking_id'].value
     };
 
-    this.api.retrieveBooking(authData.email, authData.booking_id).subscribe((data: any) => {
-      if (data.status == 0) {
-        this.invalidData = true;
-      }
-    });
+    this.api.retrieveBooking(authData.email, authData.booking_id)
+      .pipe(
+        tap((data: any) => {
+          if (data.status == 0) {
+            this.invalidData = true;
+            this.submitClicked = false;
+          } else if (data.status == 1) {
+            this.retrieveData = data.data;
+          }
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loading = false;
+          this.scroll();
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe();
+  }
+
+  scroll() {
+    setTimeout(() => {
+      this.scrollToMe.nativeElement.scrollIntoView({behavior: 'smooth'});
+    }, 200);
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
