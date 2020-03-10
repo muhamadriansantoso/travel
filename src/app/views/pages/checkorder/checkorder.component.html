@@ -28,7 +28,7 @@
           </div>
           <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v2__wrapper">
             <!--begin: Form Wizard Form-->
-            <form class="kt-form" id="kt_form" novalidate="novalidate">
+            <form [formGroup]="retrieveForm" autocomplete="off" class="kt-form">
               <!--begin: Form Wizard Step 1-->
               <div class="kt-wizard-v2__content" data-ktwizard-state="current" data-ktwizard-type="step-content">
                 <div class="kt-heading kt-heading--md">Retrieve Booking</div>
@@ -36,11 +36,21 @@
                   <div class="kt-wizard-v2__form">
                     <div class="form-group">
                       <label>Email Address</label>
-                      <input class="form-control" name="fname" placeholder="Enter your email address" type="text">
+                      <input class="form-control" formControlName="email" placeholder="Enter your email address"
+                             type="text">
+                      <div *ngIf="isControlHasError('email','required')" class="invalid-feedback"
+                           style="display: block">
+                        Email is required
+                      </div>
                     </div>
                     <div class="form-group">
                       <label>Booking ID</label>
-                      <input class="form-control" name="lname" placeholder="Enter your booking ID" type="text">
+                      <input class="form-control" formControlName="booking_id" placeholder="Enter your booking ID"
+                             type="text">
+                      <div *ngIf="isControlHasError('booking_id','required')" class="invalid-feedback"
+                           style="display: block">
+                        Booking ID is required
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -61,3 +71,59 @@
   </div>
 </div>
 <app-footer></app-footer>
+
+<div *ngIf="invalidData" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Data is not found
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="closeInvalidData()" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="retrieveFormInvalid" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Please fill form completely
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="closeInvalidData()" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
