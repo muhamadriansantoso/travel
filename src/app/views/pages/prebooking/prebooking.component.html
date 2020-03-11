@@ -541,8 +541,67 @@
         <ng-template matStepLabel>Pay</ng-template>
         <ng-container *ngIf="!paymentData as pd">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="text-align: right">
               <h4>Select Payment Channel</h4>
+            </div>
+            <div class="col-md-3">
+              <div class="col-md-12 mb-3">
+                <div class="card">
+                  <div class="card-body pt-2 pb-3">
+                    <div class="mt-1">
+                      <div class="float-left">Order ID</div>
+                      <div class="float-right">
+                        <strong>{{bookingID}}</strong>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="box-title">Detail Price</h5>
+                  </div>
+                  <div class="card-body pt-2 pb-3">
+                    <div *ngFor="let passengerDetails of app.passengerType" class="mt-1">
+                      <ng-container *ngIf="passengerDetails.code == 'ADT'">
+                        <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
+                        <div class="float-right">
+                          <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong>
+                        </div>
+                        <div class="clearfix"></div>
+                      </ng-container>
+                      <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
+                        <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
+                        <div class="float-right">
+                          <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong>
+                        </div>
+                        <div class="clearfix"></div>
+                      </ng-container>
+                      <ng-container *ngIf="passengerDetails.code == 'INF'">
+                        <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
+                        <div class="float-right">
+                          <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong>
+                        </div>
+                        <div class="clearfix"></div>
+                      </ng-container>
+                    </div>
+                    <div class="mt-1">
+                      <div class="float-left">Tax And Fees</div>
+                      <div class="float-right">
+                        <strong>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</strong>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <div class="float-left">Total</div>
+                    <div class="float-right"><strong>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</strong></div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-md-9">
               <form [formGroup]="paymentChannel">
@@ -576,47 +635,6 @@
                   </div>
                 </div>
               </form>
-            </div>
-            <div class="col-md-3">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="box-title">Detail Price</h5>
-                </div>
-                <div class="card-body pt-2 pb-3">
-                  <div *ngFor="let passengerDetails of app.passengerType" class="mt-1">
-                    <ng-container *ngIf="passengerDetails.code == 'ADT'">
-                      <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
-                      <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
-                      <div class="clearfix"></div>
-                    </ng-container>
-                    <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
-                      <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
-                      <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
-                      <div class="clearfix"></div>
-                    </ng-container>
-                    <ng-container *ngIf="passengerDetails.code == 'INF'">
-                      <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
-                      <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong></div>
-                      <div class="clearfix"></div>
-                    </ng-container>
-                  </div>
-                  <div class="mt-1">
-                    <div class="float-left">Tax And Fees</div>
-                    <div class="float-right">
-                      <strong>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</strong>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <div class="float-left">Total</div>
-                  <div class="float-right"><strong>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</strong></div>
-                  <div class="clearfix"></div>
-                </div>
-              </div>
             </div>
           </div>
         </ng-container>
