@@ -1,5 +1,5 @@
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {LandingpageComponent} from './landingpage.component';
@@ -13,6 +13,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {CarouselModule} from 'ngx-owl-carousel-o';
+import {HeaderComponent} from '../header/header.component';
 
 const routes: Routes = [
   {
@@ -45,7 +46,8 @@ const routes: Routes = [
     FlightComponent,
     HotelsComponent,
     FlightAndHotelComponent,
-    PriceNumber
+    PriceNumber,
+    HeaderComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -59,7 +61,13 @@ const routes: Routes = [
     ReactiveFormsModule,
     CarouselModule,
     RouterModule.forChild(routes),
-  ]
+  ],
+  exports: [
+    HeaderComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class LandingpageModule {
   static forRoot(): ModuleWithProviders {

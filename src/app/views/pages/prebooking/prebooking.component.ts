@@ -363,6 +363,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.api.AirCreateReservationPort(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dob, dataBooking.email, dataBooking.phone, this.submitedPassengerData, this.supplier).pipe(
       tap((data: any) => {
         if (data.status == 1) {
+          this.bookingID = data.orderID;
           this.api.paymentChannelEspay(this.sessionID).pipe(
             tap((data: any) => {
               if (data.status == 1) {

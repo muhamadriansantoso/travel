@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -24,6 +24,7 @@ import {ClipboardModule} from 'ngx-clipboard';
 import {CountdownModule} from 'ngx-countdown';
 import {NgWizardConfig, NgWizardModule, THEME} from 'ng-wizard';
 import {SpacetoplusPipe} from './views/pages/spacetoplus.pipe';
+import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -41,7 +42,8 @@ const ngWizardConfig: NgWizardConfig = {
     PrebookingComponent,
     UniquePipe,
     CheckboxFilterPipe,
-    SpacetoplusPipe
+    SpacetoplusPipe,
+    CheckorderComponent,
   ],
   imports: [
     LandingpageModule.forRoot(),
@@ -62,7 +64,7 @@ const ngWizardConfig: NgWizardConfig = {
     MatSnackBarModule,
     CountdownModule,
     NgbModule,
-    NgWizardModule.forRoot(ngWizardConfig)
+    NgWizardModule.forRoot(ngWizardConfig),
   ],
   providers: [
     {
@@ -74,6 +76,7 @@ const ngWizardConfig: NgWizardConfig = {
       useValue: APP_DATE_FORMATS
     },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule {

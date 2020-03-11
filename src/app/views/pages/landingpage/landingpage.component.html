@@ -1,41 +1,4 @@
-<!--<section style="position: absolute; top: 15%; left: 10%; right: 10%">-->
-<!--  <div class="container">-->
-<!--    <div [ngStyle]="searchClicked?{'display': 'block'} : {'display': 'none'}" class="modal modal-tiket"></div>-->
-<!--    <div (click)="searchClickedEvent()" (clickOutside)="searchClickedEventOut()" class="row no-gutters">-->
-<!--      <div [ngStyle]="searchClicked?{'z-index': '1051'} : {'z-index': '0'}"-->
-<!--           class="col-md-11 tab-wrap col-centered content-booking-ticket">-->
-<!--        <div class="row">-->
-<!--          <div class="col-sm-3 nav-link-wrap">-->
-<!--            <div class="nav nav-pills justify-content-center menu-travel">-->
-<!--              <a class="nav-link nav-link-categori" routerLink="/flight" routerLinkActive="active">-->
-<!--                <img src="./assets/images/ICONS/icon_pesawat.png" style="width: 30px;height: 30px;"> Pesawat-->
-<!--              </a>-->
-
-<!--              &lt;!&ndash;                            <a class="nav-link nav-link-categori" routerLinkActive="active" routerLink="/hotel">&ndash;&gt;-->
-<!--              &lt;!&ndash;                                <img src="./assets/images/ICONS/icon_hotel.png" style="width: 30px;height: 30px;"> Hotel&ndash;&gt;-->
-<!--              &lt;!&ndash;                            </a>&ndash;&gt;-->
-
-<!--              &lt;!&ndash;<a class="nav-link nav-link-categori">&ndash;&gt;-->
-<!--              &lt;!&ndash;<img src="./assets/images/ICONS/icon_kereta.png" style="width: 30px;height: 30px;"> Kereta&ndash;&gt;-->
-<!--              &lt;!&ndash;</a>&ndash;&gt;-->
-<!--                        </div>-->
-<!--          </div>-->
-
-<!--          <div class="col-sm-9">-->
-<!--            <div class="card pull-right menu-travel">-->
-<!--              <div class="tab-content">-->
-<!--                <div class="tab-pane fade show active">-->
-<!--                  <router-outlet></router-outlet>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-
+<app-header></app-header>
 <div class="main_content">
   <div class="page_left_panel scrollbar" id="style-4">
     <div class="sidetab">
@@ -61,6 +24,16 @@
                 <!--                <li role="presentation" routerLinkActive="active">-->
                 <!--                  <div class="inner_list">-->
                 <!--                    <a routerLink="/hotel">-->
+                <!--                      <div class="image">-->
+                <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
+                <!--                      </div>-->
+                <!--                      <span>Recreation</span>-->
+                <!--                    </a>-->
+                <!--                  </div>-->
+                <!--                </li>-->
+                <!--                <li role="presentation">-->
+                <!--                  <div class="inner_list">-->
+                <!--                    <a routerLink="/recreation">-->
                 <!--                      <div class="image">-->
                 <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
                 <!--                      </div>-->
@@ -178,3 +151,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

@@ -328,7 +328,8 @@
                                 {{dataflightTrans.origin}}
                               </p>
                               <p class="flight-details-schedule-destination-city">
-                                {{dataflightTrans.origin_city_name}}</p>
+                                {{dataflightTrans.origin_airport_name}}
+                              </p>
                             </div>
                             <div style="float: left; margin: 0 10px">
                               <span>→</span>
@@ -338,7 +339,8 @@
                                 {{dataflightTrans.destination}}
                               </p>
                               <p class="flight-details-schedule-destination-city">
-                                {{dataflightTrans.destination_city_name}}</p>
+                                {{dataflightTrans.destination_airport_name}}
+                              </p>
                             </div>
                           </div>
                         </li>
@@ -790,7 +792,7 @@
                                 {{dataflightTrans.origin}}
                               </p>
                               <p class="flight-details-schedule-destination-city">
-                                {{dataflightTrans.origin_city_name}}</p>
+                                {{dataflightTrans.origin_airport_name}}</p>
                             </div>
                             <div style="float: left; margin: 0 10px">
                               <span>→</span>
@@ -800,7 +802,7 @@
                                 {{dataflightTrans.destination}}
                               </p>
                               <p class="flight-details-schedule-destination-city">
-                                {{dataflightTrans.destination_city_name}}</p>
+                                {{dataflightTrans.destination_airport_name}}</p>
                             </div>
                           </div>
                         </li>
@@ -1466,7 +1468,7 @@
                                 {{dataflightTrans.origin}}
                               </p>
                               <p class="flight-details-schedule-destination-city">
-                                {{dataflightTrans.origin_city_name}}</p>
+                                {{dataflightTrans.origin_airport_name}}</p>
                             </div>
                             <div style="float: left; margin: 0 10px">
                               <span>→</span>
@@ -1476,7 +1478,7 @@
                                 {{dataflightTrans.destination}}
                               </p>
                               <p class="flight-details-schedule-destination-city">
-                                {{dataflightTrans.destination_city_name}}</p>
+                                {{dataflightTrans.destination_airport_name}}</p>
                             </div>
                           </div>
                         </li>
@@ -1855,9 +1857,6 @@
 
         <ng-container *ngIf="multiplePhase == 0">
           <div class="col-sm-9 col-md-9">
-            <div class="alert alert-warning">
-              <p class="mb-0 text-center">Pilih pesawat untuk penerbangan {{multiplePhase + 1}}</p>
-            </div>
             <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
@@ -2144,7 +2143,7 @@
                                     {{dataflightTrans.origin}}
                                   </p>
                                   <p class="flight-details-schedule-destination-city">
-                                    {{dataflightTrans.origin_city_name}}</p>
+                                    {{dataflightTrans.origin_airport_name}}</p>
                                 </div>
                                 <div style="float: left; margin: 0 10px">
                                   <span>→</span>
@@ -2154,7 +2153,7 @@
                                     {{dataflightTrans.destination}}
                                   </p>
                                   <p class="flight-details-schedule-destination-city">
-                                    {{dataflightTrans.destination_city_name}}</p>
+                                    {{dataflightTrans.destination_airport_name}}</p>
                                 </div>
                               </div>
                             </li>
@@ -2280,6 +2279,9 @@
 
         <ng-container *ngIf="multiplePhase != 0 && multiplePhase < dataMultiTripStep">
           <div class="col-sm-9 col-md-9">
+            <div class="alert alert-warning">
+              <p class="mb-0 text-center">Pilih pesawat untuk penerbangan {{multiplePhase + 1}}</p>
+            </div>
             <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
                 <div class="col-12 flex-sortby">
@@ -2564,7 +2566,7 @@
                                     {{dataflightTrans.origin}}
                                   </p>
                                   <p class="flight-details-schedule-destination-city">
-                                    {{dataflightTrans.origin_city_name}}</p>
+                                    {{dataflightTrans.origin_airport_name}}</p>
                                 </div>
                                 <div style="float: left; margin: 0 10px">
                                   <span>→</span>
@@ -2574,7 +2576,7 @@
                                     {{dataflightTrans.destination}}
                                   </p>
                                   <p class="flight-details-schedule-destination-city">
-                                    {{dataflightTrans.destination_city_name}}</p>
+                                    {{dataflightTrans.destination_airport_name}}</p>
                                 </div>
                               </div>
                             </li>
@@ -2983,7 +2985,7 @@
                                     {{dataflightTrans.origin}}
                                   </p>
                                   <p class="flight-details-schedule-destination-city">
-                                    {{dataflightTrans.origin_city_name}}</p>
+                                    {{dataflightTrans.origin_airport_name}}</p>
                                 </div>
                                 <div style="float: left; margin: 0 10px">
                                   <span>→</span>
@@ -2993,7 +2995,7 @@
                                     {{dataflightTrans.destination}}
                                   </p>
                                   <p class="flight-details-schedule-destination-city">
-                                    {{dataflightTrans.destination_city_name}}</p>
+                                    {{dataflightTrans.destination_airport_name}}</p>
                                 </div>
                               </div>
                             </li>

@@ -5640,8 +5640,9 @@ footer hr {
 
   .main_content .div_container {
     padding-left: 80px;
-    width: 1185px;
-    max-width: 1185px;
+    width: 1170px;
+    max-width: 1170px;
+    min-width: 1170px;
   }
 }
 
