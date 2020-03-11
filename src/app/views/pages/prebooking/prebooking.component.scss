@@ -43,10 +43,6 @@
 
 :host {
   ::ng-deep {
-    .mat-horizontal-content-container {
-      padding: unset;
-    }
-
     .mat-horizontal-stepper-header {
       pointer-events: none !important;
     }

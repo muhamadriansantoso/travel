@@ -7,9 +7,8 @@
     </div>
   </div>
 </section>
-<div *ngIf="!loadingPage && airPricePort as app" class="col-md-12">
-  <div class="container">
-    <mat-horizontal-stepper #stepper [linear]="isLinear" [selectedIndex]=stepperIndex>
+<div *ngIf="!loadingPage && airPricePort as app">
+  <mat-horizontal-stepper #stepper [linear]="isLinear" [selectedIndex]=stepperIndex>
       <mat-step [completed]="stepBookingDetailsComplete" [stepControl]="bookingInfoForm">
         <form [formGroup]="bookingInfoForm">
           <ng-template matStepLabel>Book</ng-template>
@@ -787,7 +786,6 @@
         <ng-template matStepLabel>Selesai</ng-template>
       </mat-step>
     </mat-horizontal-stepper>
-  </div>
 </div>
 
 <div *ngIf="validateBookingLoader" style="z-index: 999999;">
