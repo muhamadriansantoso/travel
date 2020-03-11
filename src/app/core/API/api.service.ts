@@ -19,6 +19,10 @@ export class APIService {
     return this.http.get('https://www.gohateka.com/apitravel/api/v1/airportlist', httpOptions);
   }
 
+  getSlider() {
+    return this.http.get('https://www.gohateka.com/apitravel/api/internal/getSlider');
+  }
+
   AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
     const httpOptions = {
       headers: {
