@@ -11,7 +11,7 @@
           <div class="content">
             <div class="inner_tab">
               <ul class="nav nav-tabs" role="tablist">
-                <li class="active" role="presentation">
+                <li (click)="activeClass('flight')" [ngClass]="{'active': flightClicked}">
                   <div class="inner_list">
                     <a routerLink="/flight">
                       <div class="image">
@@ -21,16 +21,16 @@
                     </a>
                   </div>
                 </li>
-                <!--                <li role="presentation" routerLinkActive="active">-->
-                <!--                  <div class="inner_list">-->
-                <!--                    <a routerLink="/hotel">-->
-                <!--                      <div class="image">-->
-                <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
-                <!--                      </div>-->
-                <!--                      <span>Recreation</span>-->
-                <!--                    </a>-->
-                <!--                  </div>-->
-                <!--                </li>-->
+                <li (click)="activeClass('hotel')" [ngClass]="{'active': hotelClicked}">
+                  <div class="inner_list">
+                    <a routerLink="/hotel">
+                      <div class="image">
+                        <img src="./assets/fixtrips/image/hotel_icon.png">
+                      </div>
+                      <span>Hotel</span>
+                    </a>
+                  </div>
+                </li>
                 <!--                <li role="presentation">-->
                 <!--                  <div class="inner_list">-->
                 <!--                    <a routerLink="/recreation">-->

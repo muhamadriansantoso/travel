@@ -4,6 +4,7 @@ import {registerLocaleData} from '@angular/common';
 import {Client} from 'ngx-soap';
 import {OwlOptions} from 'ngx-owl-carousel-o';
 import {APIService} from '../../../core/API';
+import {Router} from '@angular/router';
 
 
 registerLocaleData(localeId, 'id');
@@ -30,17 +31,28 @@ export class LandingpageComponent implements OnInit {
   searchClicked: boolean = false;
   isCollapsed: boolean;
   slider: any;
+  flightClicked: boolean;
+  hotelClicked: boolean;
 
   message: string;
   client: Client;
 
   constructor(
     private api: APIService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router,
   ) {
   }
 
   ngOnInit() {
+    if (this.router.url == '/flight' || this.router.url == '/') {
+      this.flightClicked = true;
+      this.hotelClicked = false;
+    } else if (this.router.url == '/hotel') {
+      this.flightClicked = false;
+      this.hotelClicked = true;
+    }
+
     this.isCollapsed = true;
     this.api.getSlider().subscribe((data: any) => {
       this.slider = data;
@@ -54,6 +66,16 @@ export class LandingpageComponent implements OnInit {
 
   searchClickedEventOut() {
     this.searchClicked = false;
+  }
+
+  activeClass(value) {
+    if (value == 'flight') {
+      this.flightClicked = true;
+      this.hotelClicked = false;
+    } else if (value == 'hotel') {
+      this.flightClicked = false;
+      this.hotelClicked = true;
+    }
   }
 
 }
