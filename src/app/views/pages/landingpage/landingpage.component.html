@@ -72,12 +72,11 @@
     <div class="page_right_panel">
       <div class="banner main-banner">
         <owl-carousel-o [options]="customOptions">
-          <ng-template [id]="'1'" carouselSlide>
-            <img [src]="'./assets/fixtrips/image/1.jpg'">
-          </ng-template>
-          <ng-template [id]="'2'" carouselSlide>
-            <img [src]="'./assets/fixtrips/image/2.jpg'">
-          </ng-template>
+          <ng-container *ngFor="let s of slider">
+            <ng-template [id]="s.id" carouselSlide>
+              <img [src]="'./assets/fixtrips/image/1.jpg'">
+            </ng-template>
+          </ng-container>
         </owl-carousel-o>
       </div>
       <div class="banner_tab">

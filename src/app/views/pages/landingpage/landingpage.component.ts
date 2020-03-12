@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import localeId from '@angular/common/locales/id';
 import {registerLocaleData} from '@angular/common';
 import {Client} from 'ngx-soap';
 import {OwlOptions} from 'ngx-owl-carousel-o';
+import {APIService} from '../../../core/API';
 
 
 registerLocaleData(localeId, 'id');
@@ -28,15 +29,23 @@ export class LandingpageComponent implements OnInit {
   loading: boolean = false;
   searchClicked: boolean = false;
   isCollapsed: boolean;
+  slider: any;
 
   message: string;
   client: Client;
 
-  constructor() {
+  constructor(
+    private api: APIService,
+    private cdr: ChangeDetectorRef
+  ) {
   }
 
   ngOnInit() {
     this.isCollapsed = true;
+    this.api.getSlider().subscribe((data: any) => {
+      this.slider = data;
+      this.cdr.detectChanges();
+    });
   }
 
   searchClickedEvent() {
