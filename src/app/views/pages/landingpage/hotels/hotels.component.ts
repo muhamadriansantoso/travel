@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
+import {APIService} from '../../../../core/API';
 
 @Component({
   selector: 'app-hotels',
@@ -13,11 +14,16 @@ export class HotelsComponent implements OnInit {
   minDate: any;
 
   constructor(
+    private api: APIService,
     private fb: FormBuilder,
   ) {
   }
 
   ngOnInit() {
+    this.api.hotelGeolocation().subscribe((data: any) => {
+      console.log(data)
+    });
+
     var today = new Date();
     var todayPlusOne = moment(today).add(1, 'days').toDate();
 

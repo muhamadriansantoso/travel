@@ -25,7 +25,7 @@ export class APIService {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
     };
-    return this.http.get('https://www.gohateka.com/apitravel/api/v1/airportlist', httpOptions);
+    return this.http.get('https://www.gohateka.com/apitravel/api/v1/hotelgeolocation', httpOptions);
   }
 
   getSlider() {
