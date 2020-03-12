@@ -3,13 +3,17 @@
     <div class="col-12 col-sm-12">
       <form [formGroup]="searchHotelForm" autocomplete="off" class="search-destination">
         <div class="row" style="margin: 10px;">
-          <div class="col-md-5 no-padding">
+          <div class="col-md-4 no-padding">
             <div class="form_full">
               <div class="form-group">
                 <label>City or Destination</label>
                 <span class="icon"><i class="fa fa-map-marker"></i></span>
-                <input autocomplete="off" class="form-control" formControlName="destination" placeholder="Destination"
-                       type="text">
+                <input (valueChanged)="getGeoID($event)" [(ngModel)]="geoName"
+                       [list-formatter]="autocompleListFormatter"
+                       [max-num-list]="8" [min-chars]="2" [source]="geoList"
+                       auto-complete class="form-control origin-typeahead" formControlName="destination"
+                       placeholder="Destination"
+                />
                 <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
                      style="display: block">
                   Destination is required
@@ -24,6 +28,7 @@
                 <label>Check In</label>
                 <span class="icon"><i class="fa fa-calendar"></i></span>
                 <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultCheckInDate"
+                       (ngModelChange)="changeCheckInDate()"
                        [minDate]="minDate"
                        class="form-control"
                        formControlName="checkindate"
@@ -34,12 +39,16 @@
             </div>
           </div>
 
-          <div class="col-md-3 no-padding">
+          <div class="col-md-4 no-padding">
             <div class="form_full">
               <div class="form-group">
-                <label>Duration</label>
+                <label>Duration - Checkout</label>
                 <span class="icon"><i class="fa fa-calendar"></i></span>
-                <input class="form-control" id="txtCheckOut" placeholder="dd/mm/yyyy" type="text">
+                <select class="form-control" formControlName="duration">
+                  <option *ngFor="let di of durationIndex; let i = index" value="1">
+                    {{di}} Night - {{durationStayDate[i]}}
+                  </option>
+                </select>
               </div>
             </div>
           </div>
