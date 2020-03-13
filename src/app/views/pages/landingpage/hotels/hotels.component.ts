@@ -117,14 +117,13 @@ export class HotelsComponent implements OnInit {
     };
 
     this.checkinDate = moment(authData.checkindate.year + '-' + authData.checkindate.month + '-' + authData.checkindate.day).format('YYYY-MM-DD');
-    this.checkoutDate = moment(this.checkinDate).add(authData.duration, 'days').format('YYYY-MM-DD');
 
     this.router.navigate(['/search-hotel'], {
       queryParams:
         {
           geo: '',
           start_date: this.checkinDate,
-          end_date: this.checkoutDate,
+          duration: authData.duration,
         },
     });
   }

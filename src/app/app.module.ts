@@ -26,6 +26,7 @@ import {NgWizardConfig, NgWizardModule, THEME} from 'ng-wizard';
 import {SpacetoplusPipe} from './views/pages/spacetoplus.pipe';
 import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
 import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-hotel-result.component';
+import {HotelDetailComponent} from './views/pages/hotel-detail/hotel-detail.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -46,6 +47,7 @@ const ngWizardConfig: NgWizardConfig = {
     SpacetoplusPipe,
     CheckorderComponent,
     SeachHotelResultComponent,
+    HotelDetailComponent,
   ],
   imports: [
     LandingpageModule.forRoot(),

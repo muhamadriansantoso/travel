@@ -3,6 +3,7 @@ import {APIService} from '../../../core/API';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-seach-hotel-result',
@@ -12,6 +13,9 @@ import {finalize, takeUntil, tap} from 'rxjs/operators';
 export class SeachHotelResultComponent implements OnInit {
   dataHotelSearch: any;
   loadingPage: boolean;
+  start_date: string;
+  end_date: string;
+  duration: string;
   private unsubscribe: Subject<any>;
 
   constructor(
@@ -26,7 +30,10 @@ export class SeachHotelResultComponent implements OnInit {
   ngOnInit() {
     this.loadingPage = true;
     this.route.queryParams.subscribe(params => {
-      this.api.searchHotel(params.geo, params.start_date, params.end_date)
+      this.start_date = params.start_date;
+      this.duration = params.duration;
+      this.end_date = moment(this.start_date).add(this.duration, 'days').format('YYYY-MM-DD');
+      this.api.searchHotel(params.geo, this.start_date, this.end_date)
         .pipe(
           tap((data: any) => {
             this.dataHotelSearch = data;
@@ -40,5 +47,9 @@ export class SeachHotelResultComponent implements OnInit {
         .subscribe();
     });
   }
+
+  openDetail(id, start_date, duration) {
+    this.router.navigate(['/detail-hotel', id, start_date, duration]);
+  };
 
 }

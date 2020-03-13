@@ -45,7 +45,7 @@
                 <label>Duration - Checkout</label>
                 <span class="icon"><i class="fa fa-calendar"></i></span>
                 <select class="form-control" formControlName="duration">
-                  <option *ngFor="let di of durationIndex; let i = index" value="1">
+                  <option *ngFor="let di of durationIndex; let i = index" value="{{di}}">
                     {{di}} Night - {{durationStayDate[i]}}
                   </option>
                 </select>

@@ -6,6 +6,7 @@ import {SearchFlightResultComponent} from './views/pages/search-flight-result/se
 import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
 import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
 import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-hotel-result.component';
+import {HotelDetailComponent} from './views/pages/hotel-detail/hotel-detail.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'search-hotel',
     component: SeachHotelResultComponent
+  },
+  {
+    path: 'detail-hotel/:hotelID/:startDate/:duration',
+    component: HotelDetailComponent
   },
   {
     path: 'prebooking/:sessionID',
