@@ -5,6 +5,7 @@ import {LandingpageComponent} from './views/pages/landingpage/landingpage.compon
 import {SearchFlightResultComponent} from './views/pages/search-flight-result/search-flight-result.component';
 import {PrebookingComponent} from './views/pages/prebooking/prebooking.component';
 import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
+import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-hotel-result.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
   {
     path: 'search-flight',
     component: SearchFlightResultComponent
+  },
+  {
+    path: 'search-hotel',
+    component: SeachHotelResultComponent
   },
   {
     path: 'prebooking/:sessionID',

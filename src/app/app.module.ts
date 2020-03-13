@@ -25,6 +25,7 @@ import {CountdownModule} from 'ngx-countdown';
 import {NgWizardConfig, NgWizardModule, THEME} from 'ng-wizard';
 import {SpacetoplusPipe} from './views/pages/spacetoplus.pipe';
 import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
+import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-hotel-result.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -44,6 +45,7 @@ const ngWizardConfig: NgWizardConfig = {
     CheckboxFilterPipe,
     SpacetoplusPipe,
     CheckorderComponent,
+    SeachHotelResultComponent,
   ],
   imports: [
     LandingpageModule.forRoot(),
