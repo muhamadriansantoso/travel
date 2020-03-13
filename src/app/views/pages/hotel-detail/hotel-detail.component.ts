@@ -38,7 +38,6 @@ export class HotelDetailComponent implements OnInit {
       .pipe(
         tap((data: any) => {
           this.detailHotel = data;
-          console.log(this.detailHotel);
         }),
         takeUntil(this.unsubscribe),
         finalize(() => {
