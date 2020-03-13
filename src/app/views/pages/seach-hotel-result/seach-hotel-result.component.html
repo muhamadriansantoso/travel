@@ -20,16 +20,22 @@
         <div class="row">
           <div class="col-md-3">
             <div style="width: 100%; height: 150px; overflow: hidden;">
-              <img
-                src="https://s3-ap-southeast-1.amazonaws.com/airy-beeld/stg/69/11bc7624/7316/4a1f/9b77/3a1c23ed8bf8.png"
-                style="width: 100%; height: 100%;">
+              <ng-container *ngFor="let image of datahotel.images">
+                <ng-container *ngIf="image.type == 'THUMBNAIL'">
+                  <img src="{{image.uri}}" style="width: 100%; height: 100%;">
+                </ng-container>
+              </ng-container>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="mb-3">{{datahotel.name3}}</div>
-            <small class="d-block mb-3">Lokasi: <strong>Kuta, Kabupaten Badung, Bali, Indonesia</strong></small>
+            <div class="mb-3">{{datahotel.name}}</div>
+            <small class="d-block mb-3">Lokasi: <strong>{{datahotel.address}}</strong></small>
             <ul style="margin: 0px; padding: 0px; list-style: none;">
-              <li
+              <li *ngIf="datahotel.eco == true"
+                  style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
+                ECO
+              </li>
+              <li *ngIf="datahotel.syariah == true"
                 style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
                 SYARIAH
               </li>
@@ -38,7 +44,7 @@
           <div class="col-md-3 text-center"><small class="d-inline-block mb-2">Harga Per Malam</small>
             <a class="btn btn-success"
                href="https://gojameka.com/hotel/detail/10001457?start_date=2020-03-13&amp;end_date=2020-03-14">
-              <strong>Rp 200,000</strong>
+              <strong>{{datahotel.rates.total_base_rate |currency:'Rp ':'symbol':'3.0'}}</strong>
             </a>
           </div>
         </div>
