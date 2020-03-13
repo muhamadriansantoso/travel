@@ -21,7 +21,7 @@
           <div class="col-md-3">
             <div style="width: 100%; height: 150px; overflow: hidden;">
               <ng-container *ngFor="let image of datahotel.images">
-                <ng-container *ngIf="image.type == 'THUMBNAIL'">
+                <ng-container *ngIf="image.type == 'MEDIUM'">
                   <img src="{{image.uri}}" style="width: 100%; height: 100%;">
                 </ng-container>
               </ng-container>
