@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as moment from 'moment';
 import {APIService} from '../../../../core/API';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-hotels',
@@ -20,11 +21,16 @@ export class HotelsComponent implements OnInit {
   durationIndex: any[] = [];
   durationStayDate: any[] = [];
 
+  searchHotelFormInvalid: boolean;
+  checkinDate: string;
+  checkoutDate: string;
+
   constructor(
     private api: APIService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
     private _sanitizer: DomSanitizer,
+    private router: Router
   ) {
   }
 
@@ -91,6 +97,36 @@ export class HotelsComponent implements OnInit {
       this.geoName = '';
       this.geoID = '';
     }
+  }
+
+  searchHotel() {
+    const controls = this.searchHotelForm.controls;
+    if (this.searchHotelForm.invalid) {
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+
+      this.searchHotelFormInvalid = true;
+      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+      return;
+    }
+
+    const authData = {
+      checkindate: controls['checkindate'].value,
+      duration: controls['duration'].value,
+    };
+
+    this.checkinDate = moment(authData.checkindate.year + '-' + authData.checkindate.month + '-' + authData.checkindate.day).format('YYYY-MM-DD');
+    this.checkoutDate = moment(this.checkinDate).add(authData.duration, 'days').format('YYYY-MM-DD');
+
+    this.router.navigate(['/search-hotel'], {
+      queryParams:
+        {
+          geo: '',
+          start_date: this.checkinDate,
+          end_date: this.checkoutDate,
+        },
+    });
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
