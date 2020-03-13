@@ -86,6 +86,12 @@ export class APIService {
     return this.http.get('https://www.gohateka.com/apitravel/api/v1/hotel/search', httpOptions);
   }
 
+  getDetailHotel(id: string, startDate: string, endDate: string) {
+    var userData = 'id=' + id + '&start_date=' + startDate + '&end_date=' + endDate;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post('https://www.gohateka.com/apitravel/api/v1/hotel/detail', userData, {headers: urlHeader});
+  }
+
   AirBookingInsertDB(sessionID: string, data: any) {
     var userData = 'sessionID=' + sessionID + '&data=' + data;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
