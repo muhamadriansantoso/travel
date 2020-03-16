@@ -94,7 +94,7 @@
           </div>
           <div class="col-md-3 text-center">
             <h5>
-              {{roomTypes.rates[0].chargeable_rate.average_rate | currency:'Rp ':'symbol':'3.0'}}
+              {{roomTypes.rates[0].average_rate | currency:'Rp ':'symbol':'3.0'}}
             </h5>
             <ng-container *ngIf="roomTypes.available_allotments == 0;else availableBook">
               <button class="btn btn-success btn-sm px-4" disabled style="cursor: not-allowed" type="button">Kamar
