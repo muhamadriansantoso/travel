@@ -1,13 +1,14 @@
 <div *ngIf="detailHotel as dh" class="container mt-3">
   <div class="airy-card">
     <div class="row">
-      <div class="col-md-9"><h3>{{dh.name}}</h3>
+      <div class="col-md-9">
+        <h3>{{dh.name}}</h3>
         <p>{{dh.address}}</p></div>
-      <div class="col-md-3 text-right">
+      <div (click)="scroll()" class="col-md-3 text-right">
         <div class="btn btn-success rounded-pill">
           <small class="d-block">Pesan mulai dari</small>
           <strong>
-            <!--            {{dh.rates.total_base_rate |currency:'Rp ':'symbol':'3.0'}}-->
+            {{dh.rates.total_base_rate |currency:'Rp ':'symbol':'3.0'}}
           </strong>
         </div>
       </div>
@@ -16,8 +17,9 @@
     <div class="row">
       <div class="col-md-12">
         <div class="airy-slider">
-          <div style="width: 100%; height: 300px; position: relative; margin: auto;"><img
-            src="https://s3-ap-southeast-1.amazonaws.com/airy-beeld/stg/37/12c298d7/cce8/42a3/a9a4/d27e90b0f85d.png"
+          <div style="width: 100%; height: 300px; position: relative; margin: auto;">
+            <img
+              src="https://s3-ap-southeast-1.amazonaws.com/airy-beeld/stg/37/12c298d7/cce8/42a3/a9a4/d27e90b0f85d.png"
             style="width: 100%; height: 100%; object-fit: cover;">
             <div
               style="cursor: pointer; position: absolute; top: 50%; width: auto; margin-top: -22px; padding: 16px; color: white; font-weight: bold; font-size: 18px;">
@@ -42,7 +44,8 @@
       </div>
       <div class="col-md-6">
         <div class="row">
-          <div class="col-md-12"><h5>Facilities</h5>
+          <div class="col-md-12">
+            <h5>Facilities</h5>
             <hr style="margin-bottom: 10px; margin-top: 5px;">
           </div>
         </div>
@@ -56,23 +59,77 @@
       </div>
     </div>
   </div>
-  <div class="row" id="roomAvailable">
+  <div #scrollToMe class="row">
     <div class="col-md-12"><h5 class="mb-3">Ketersediaan Kamar</h5></div>
     <div class="col-md-8">
-      <div class="airy-card">
+      <div *ngFor="let roomTypes of dh.room_types; let i = index" class="airy-card">
         <div class="row">
           <div class="col-md-3">
-            <div class="airy-card-thumbnail"><img src="https://via.placeholder.com/150"></div>
+            <ng-container *ngFor="let image of roomTypes.images">
+              <ng-container *ngIf="image.type == 'MEDIUM'">
+                <img src="{{image.uri}}" style="width: 100%; height: 100%;">
+              </ng-container>
+            </ng-container>
           </div>
-          <div class="col-md-6"><h5><a style="cursor: pointer;">Airy Rooms London Family <i
-            class="fas fa-angle-down"></i></a></h5>
+          <div class="col-md-6">
+            <h5>
+              <a (click)="hotelDetailsAllCollapsed([i]); hotelDetailsCollapsed[i] = !hotelDetailsCollapsed[i]"
+                 [attr.aria-expanded]="!hotelDetailsCollapsed" style="cursor: pointer;">
+                {{roomTypes.room_type_name}}
+                <i class="fas fa-angle-down"></i>
+              </a>
+            </h5>
             <ul style="padding: 0px; margin: 0px; list-style: none;">
-              <li>Maks: 10 tamu/kamar</li>
+              <ng-container *ngFor="let facilities of roomTypes.facilities; let facilitiesIndex = index">
+                <li *ngIf="facilities == 'BREAKFAST';">Sudah termasuk Sarapan</li>
+              </ng-container>
+              <li>Maks: {{roomTypes.capacity}} tamu/kamar</li>
+              <li *ngIf="roomTypes.cancellation_policy.description.toLowerCase() == 'free'">
+                Dapat dibatalkan
+              </li>
+              <li *ngIf="roomTypes.cancellation_policy.description.toLowerCase() != 'free'">
+                Tidak dapat dibatalkan
+              </li>
             </ul>
           </div>
-          <div class="col-md-3 text-center"><h5>Rp 200,000</h5>
-            <button class="btn btn-success btn-sm px-4" type="button">Pilih</button>
-            <small class="d-block mt-2">Sisa 0 kamar</small></div>
+          <div class="col-md-3 text-center">
+            <h5>
+              {{roomTypes.rates[0].chargeable_rate.average_rate | currency:'Rp ':'symbol':'3.0'}}
+            </h5>
+            <ng-container *ngIf="roomTypes.available_allotments == 0;else availableBook">
+              <button class="btn btn-success btn-sm px-4" disabled style="cursor: not-allowed" type="button">Kamar
+                Habis
+              </button>
+            </ng-container>
+            <ng-template #availableBook>
+              <button class="btn btn-success btn-sm px-4" type="button">Pilih</button>
+            </ng-template>
+            <small class="d-block mt-2">Sisa {{roomTypes.available_allotments}} kamar</small>
+          </div>
+        </div>
+        <div [ngbCollapse]="!hotelDetailsCollapsed[i]" class="card mt-2">
+          <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+              <h5 class="airy-card-title">Info Tambahan</h5>
+              <ul class="airy-list">
+                <li *ngFor="let notes of roomTypes.notes">
+                  {{notes}}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-12 mt-3">
+              <div class="row">
+                <div *ngFor="let facilities of roomTypes.facilities" class="col-md-2"
+                     style="margin-bottom: 3px; text-align: center;">
+                  <img src="./assets/images/facilities/{{facilities}}.png" style="width: 35%; margin-bottom: 3px;">
+                  <p style="font-size: 10px;">{{facilities | underscoreToPlus}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

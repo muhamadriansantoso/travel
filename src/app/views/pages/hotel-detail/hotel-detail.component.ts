@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {APIService} from '../../../core/API';
 import * as moment from 'moment';
@@ -17,7 +17,10 @@ export class HotelDetailComponent implements OnInit {
   duration: string;
   loadingPage: boolean;
   detailHotel: any;
+
+  public hotelDetailsCollapsed: boolean[] = [];
   private unsubscribe: Subject<any>;
+  @ViewChild('scrollToMe', {static: false}) scrollToMe: ElementRef;
 
   constructor(
     private _router: ActivatedRoute,
@@ -46,6 +49,22 @@ export class HotelDetailComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  hotelDetailsAllCollapsed(value) {
+    if (!this.hotelDetailsCollapsed[value]) {
+      this.hotelDetailsCollapsed = [false];
+      this.hotelDetailsCollapsed[value] = false;
+    } else {
+      this.hotelDetailsCollapsed = [false];
+      this.hotelDetailsCollapsed[value] = true;
+    }
+  }
+
+  scroll() {
+    setTimeout(() => {
+      this.scrollToMe.nativeElement.scrollIntoView({behavior: 'smooth'});
+    }, 200);
   }
 
 }
