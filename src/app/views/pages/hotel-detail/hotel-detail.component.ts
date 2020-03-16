@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
 import * as moment from 'moment';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
@@ -35,7 +35,8 @@ export class HotelDetailComponent implements OnInit {
   constructor(
     private _router: ActivatedRoute,
     private api: APIService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private router: Router,
   ) {
     this.unsubscribe = new Subject();
   }
@@ -129,7 +130,9 @@ export class HotelDetailComponent implements OnInit {
       tap((data: any) => {
         if (data.status == 'MATCH') {
           this.api.HotelBookingInsertDB(this.sessionID, this.rooms, data.room_types).subscribe((data: any) => {
-
+            if (data.status == 1) {
+              this.router.navigate(['hotel-booking', this.sessionID]);
+            }
           });
         }
       }),

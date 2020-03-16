@@ -28,6 +28,7 @@ import {CheckorderComponent} from './views/pages/checkorder/checkorder.component
 import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-hotel-result.component';
 import {HotelDetailComponent} from './views/pages/hotel-detail/hotel-detail.component';
 import {UnderscoretoplusPipe} from './views/pages/underscoretoplus.pipe';
+import {HotelBookingComponent} from './views/pages/hotel-booking/hotel-booking.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -50,6 +51,7 @@ const ngWizardConfig: NgWizardConfig = {
     CheckorderComponent,
     SeachHotelResultComponent,
     HotelDetailComponent,
+    HotelBookingComponent,
   ],
   imports: [
     LandingpageModule.forRoot(),

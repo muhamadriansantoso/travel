@@ -7,6 +7,7 @@ import {PrebookingComponent} from './views/pages/prebooking/prebooking.component
 import {CheckorderComponent} from './views/pages/checkorder/checkorder.component';
 import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-hotel-result.component';
 import {HotelDetailComponent} from './views/pages/hotel-detail/hotel-detail.component';
+import {HotelBookingComponent} from './views/pages/hotel-booking/hotel-booking.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: 'prebooking/:sessionID',
     component: PrebookingComponent
+  },
+  {
+    path: 'hotel-booking/:sessionID',
+    component: HotelBookingComponent
   },
   {
     path: 'retrieve-booking',
