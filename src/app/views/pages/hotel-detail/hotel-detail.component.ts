@@ -17,6 +17,14 @@ export class HotelDetailComponent implements OnInit {
   duration: string;
   loadingPage: boolean;
   detailHotel: any;
+  plusMinusShow: boolean;
+  qty: any = [];
+  qtyNum: number;
+  roomTypeLength: number;
+  roomPrice: number;
+  maxGuest: number;
+  roomLeft: any = [];
+  rooms: any = [];
 
   public hotelDetailsCollapsed: boolean[] = [];
   private unsubscribe: Subject<any>;
@@ -32,15 +40,29 @@ export class HotelDetailComponent implements OnInit {
 
   ngOnInit() {
     this.loadingPage = true;
+    this.plusMinusShow = false;
     this.id = this._router.snapshot.params['hotelID'];
     this.start_date = this._router.snapshot.params['startDate'];
     this.duration = this._router.snapshot.params['duration'];
     this.end_date = moment(this.start_date).add(this.duration, 'days').format('YYYY-MM-DD');
 
+    this.qtyNum = 0;
+    this.roomPrice = 0;
+    this.maxGuest = 0;
+
     this.api.getDetailHotel(this.id, this.start_date, this.end_date)
       .pipe(
         tap((data: any) => {
           this.detailHotel = data;
+          this.roomTypeLength = data.room_types.length;
+          for (var startRoomType = 0; startRoomType < this.roomTypeLength; startRoomType++) {
+            this.qty[startRoomType] = 0;
+            this.roomLeft[startRoomType] = data.room_types[startRoomType].available_allotments;
+
+            this.rooms.push({
+              room_type_id: data.room_types[startRoomType].room_type_id
+            });
+          }
         }),
         takeUntil(this.unsubscribe),
         finalize(() => {
@@ -65,6 +87,40 @@ export class HotelDetailComponent implements OnInit {
     setTimeout(() => {
       this.scrollToMe.nativeElement.scrollIntoView({behavior: 'smooth'});
     }, 200);
+  }
+
+  plusMinus(index, roomPrice, maxGuest) {
+    this.plusMinusShow = true;
+    this.qty[index] = 1;
+    this.qtyNum = this.qty.reduce((a, b) => a + b, 0);
+    this.roomPrice = this.roomPrice + roomPrice;
+    this.maxGuest = this.maxGuest + maxGuest;
+  }
+
+  plusMinusToMinus(index, roomPrice, maxGuest) {
+    this.qty[index] = this.qty[index] - 1;
+    this.roomPrice = this.roomPrice - roomPrice;
+    this.maxGuest = this.maxGuest - maxGuest;
+    this.qtyNum = this.qty.reduce((a, b) => a + b, 0);
+  }
+
+  plusMinusToPlus(index, roomPrice, maxGuest) {
+    if (this.qty[index] < this.roomLeft[index]) {
+      this.qty[index] = this.qty[index] + 1;
+      this.roomPrice = this.roomPrice + roomPrice;
+      this.maxGuest = this.maxGuest + maxGuest;
+      this.qtyNum = this.qty.reduce((a, b) => a + b, 0);
+    }
+  }
+
+  orderHotel() {
+    for (var startRoomType = 0; startRoomType < this.roomTypeLength; startRoomType++) {
+      this.rooms[startRoomType] = Object.assign(this.rooms[startRoomType], {
+        quantity: this.qty[startRoomType],
+      });
+    }
+
+    console.log(this.rooms);
   }
 
 }
