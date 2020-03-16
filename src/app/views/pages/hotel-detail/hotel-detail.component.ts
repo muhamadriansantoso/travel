@@ -62,7 +62,8 @@ export class HotelDetailComponent implements OnInit {
             this.roomLeft[startRoomType] = data.room_types[startRoomType].available_allotments;
 
             this.rooms.push({
-              room_type_id: data.room_types[startRoomType].room_type_id
+              room_type_id: data.room_types[startRoomType].room_type_id,
+              key: data.room_types[startRoomType].rates[0].key,
             });
           }
         }),
@@ -122,7 +123,7 @@ export class HotelDetailComponent implements OnInit {
       });
     }
 
-    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', '').pipe(
+    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', this.rooms).pipe(
       tap((data: any) => {
         console.log(data);
       }),
