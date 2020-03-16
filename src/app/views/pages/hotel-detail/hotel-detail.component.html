@@ -80,9 +80,8 @@
               </a>
             </h5>
             <ul style="padding: 0px; margin: 0px; list-style: none;">
-              <ng-container *ngFor="let facilities of roomTypes.facilities; let facilitiesIndex = index">
-                <li *ngIf="facilities == 'BREAKFAST';">Sudah termasuk Sarapan</li>
-              </ng-container>
+              <li *ngIf="roomTypes.rates[0].breakfast_included;">Sudah termasuk Sarapan</li>
+              <li *ngIf="!roomTypes.rates[0].breakfast_included;">Belum termasuk Sarapan</li>
               <li>Maks: {{roomTypes.capacity}} tamu/kamar</li>
               <li *ngIf="roomTypes.cancellation_policy.type == 'FREECANCEL'">
                 Dapat dibatalkan

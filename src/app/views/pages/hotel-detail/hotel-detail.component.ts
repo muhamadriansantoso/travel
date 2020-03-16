@@ -11,6 +11,7 @@ import {Subject} from 'rxjs';
   styleUrls: ['./hotel-detail.component.scss']
 })
 export class HotelDetailComponent implements OnInit {
+  supplier: string;
   id: string;
   start_date: string;
   end_date: string;
@@ -53,6 +54,7 @@ export class HotelDetailComponent implements OnInit {
     this.api.getDetailHotel(this.id, this.start_date, this.end_date)
       .pipe(
         tap((data: any) => {
+          this.supplier = data.supplier;
           this.detailHotel = data;
           this.roomTypeLength = data.room_types.length;
           for (var startRoomType = 0; startRoomType < this.roomTypeLength; startRoomType++) {
@@ -120,7 +122,16 @@ export class HotelDetailComponent implements OnInit {
       });
     }
 
-    console.log(this.rooms);
+    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', '').pipe(
+      tap((data: any) => {
+        console.log(data);
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.cdr.markForCheck();
+      })
+    )
+      .subscribe();
   }
 
 }
