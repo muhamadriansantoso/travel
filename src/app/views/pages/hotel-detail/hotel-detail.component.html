@@ -84,10 +84,13 @@
                 <li *ngIf="facilities == 'BREAKFAST';">Sudah termasuk Sarapan</li>
               </ng-container>
               <li>Maks: {{roomTypes.capacity}} tamu/kamar</li>
-              <li *ngIf="roomTypes.cancellation_policy.description.toLowerCase() == 'free'">
+              <li *ngIf="roomTypes.cancellation_policy.type == 'FREECANCEL'">
                 Dapat dibatalkan
               </li>
-              <li *ngIf="roomTypes.cancellation_policy.description.toLowerCase() != 'free'">
+              <li *ngIf="roomTypes.cancellation_policy.type == 'PAIDCANCEL'">
+                Pembatalan akan dikenakan penalty
+              </li>
+              <li *ngIf="roomTypes.cancellation_policy.type == 'NOCANCEL'">
                 Tidak dapat dibatalkan
               </li>
             </ul>
