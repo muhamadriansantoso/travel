@@ -119,7 +119,7 @@ export class APIService {
   HotelBookingGetDataDB(sessionID: string) {
     var userData = 'sessionID=' + sessionID;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post('https://www.gohateka.com/apitravel/api/internal/flight/getSelectedBooking', userData, {headers: urlHeader});
+    return this.http.post('https://www.gohateka.com/apitravel/api/internal/hotel/getSelectedBooking', userData, {headers: urlHeader});
   }
 
   AirPricePort(sessionID: any) {
