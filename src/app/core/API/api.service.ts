@@ -98,16 +98,16 @@ export class APIService {
     return this.http.post('https://www.gohateka.com/apitravel/api/v1/hotel/checkinventory', userData, {headers: urlHeader});
   }
 
-  sendingDatatoDB(supplier, id: string, total_price: number, currency: string, roomTypeData: any) {
-    var userData = 'supplier=' + supplier + '&id=' + id + '&total_price=' + total_price + '&currency=' + currency + '&roomTypeData=' + encodeURIComponent(JSON.stringify(roomTypeData));
-    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    return this.http.post('https://www.gohateka.com/apitravel/api/v1/hotel/checkinventory', userData, {headers: urlHeader});
-  }
-
   AirBookingInsertDB(sessionID: string, data: any) {
     var userData = 'sessionID=' + sessionID + '&data=' + data;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post('https://www.gohateka.com/apitravel/api/internal/flight/insertSelectedBooking', userData, {headers: urlHeader});
+  }
+
+  HotelBookingInsertDB(sessionID: string, data: any) {
+    var userData = 'sessionID=' + sessionID + '&data=' + data;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post('https://www.gohateka.com/apitravel/api/internal/hotel/insertSelectedBooking', userData, {headers: urlHeader});
   }
 
   AirBookingGetDataDB(sessionID: string) {
