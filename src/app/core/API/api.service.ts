@@ -153,7 +153,7 @@ export class APIService {
   checkPaymentChannelEspay(bookingID) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     var userData = 'bookingID=' + bookingID;
-    return this.http.post('https://gohateka.com/apitravel/api/v1/payment/checkPaymentEspay', userData, {headers: urlHeader});
+    return this.http.post(APIURL + 'api/v1/payment/checkPaymentEspay', userData, {headers: urlHeader});
   }
 
   retrieveBooking(emailAddress, bookingID) {
