@@ -14,6 +14,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {HeaderComponent} from '../header/header.component';
+import {FooterComponent} from '../footer/footer.component';
 
 const routes: Routes = [
   {
@@ -47,7 +48,8 @@ const routes: Routes = [
     HotelsComponent,
     FlightAndHotelComponent,
     PriceNumber,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserAnimationsModule,
