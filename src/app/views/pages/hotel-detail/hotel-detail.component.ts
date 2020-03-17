@@ -126,10 +126,10 @@ export class HotelDetailComponent implements OnInit {
       });
     }
 
-    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', this.rooms, this.start_date, this.duration).pipe(
+    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', this.rooms).pipe(
       tap((data: any) => {
         if (data.status == 'MATCH') {
-          this.api.HotelBookingInsertDB(this.sessionID, this.rooms, data.room_types).subscribe((data: any) => {
+          this.api.HotelBookingInsertDB(this.sessionID, this.rooms, data.room_types, this.start_date, this.duration).subscribe((data: any) => {
             if (data.status == 1) {
               this.router.navigate(['hotel-booking', this.sessionID]);
             }
