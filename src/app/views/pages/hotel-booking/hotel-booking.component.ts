@@ -33,6 +33,7 @@ export class HotelBookingComponent implements OnInit {
   duration: number;
   data: any;
   room_data: any;
+  room_price: number;
 
   dataHotel: any;
   socket;
@@ -68,6 +69,7 @@ export class HotelBookingComponent implements OnInit {
           this.checkoutDate = moment(dataHotel.check_in).add(this.duration, 'days').format('DD MMM YYYY');
           this.data = dataHotel.data;
           this.room_data = dataHotel.room_data;
+          this.room_price = dataHotel.room_price;
           if (dataHotel.status == 1) {
             this.stepBookingDetailsComplete = false;
             this.stepPayComplete = false;
