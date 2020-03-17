@@ -105,7 +105,7 @@ export class APIService {
   }
 
   HotelBookingInsertDB(sessionID: string, data: any, room_data: any, start_date: string, duration: string) {
-    var userData = 'sessionID=' + sessionID + '&data=' + encodeURIComponent(JSON.stringify(data)) + '&room_data=' + encodeURIComponent(JSON.stringify(room_data) + '&start_date=' + start_date + '&duration=' + duration);
+    var userData = 'sessionID=' + sessionID + '&data=' + encodeURIComponent(JSON.stringify(data)) + '&room_data=' + encodeURIComponent(JSON.stringify(room_data)) + '&start_date=' + start_date + '&duration=' + duration;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post('https://www.gohateka.com/apitravel/api/internal/hotel/insertSelectedBooking', userData, {headers: urlHeader});
   }
