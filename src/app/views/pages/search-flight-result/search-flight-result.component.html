@@ -45,7 +45,7 @@
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
-                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result;">
                 <span class="result-sortby">{{result?.length}} results</span>
               </ng-container>
               <div class="flex-center-sortby">
@@ -509,7 +509,7 @@
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
-                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result;">
                 <span class="result-sortby">{{result?.length}} results</span>
               </ng-container>
               <div class="flex-center-sortby">
@@ -1187,7 +1187,7 @@
           <div class="row">
             <div class="col-12 flex-sortby">
               <ng-container
-                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result;">
                 <span class="result-sortby">{{dataFlightAdvanced[0].return?.length}} results</span>
               </ng-container>
               <div class="flex-center-sortby">
@@ -1861,7 +1861,7 @@
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
-                    *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                    *ngIf="dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result;">
                     <span class="result-sortby">{{result?.length}} results</span>
                   </ng-container>
                   <div class="flex-center-sortby">
@@ -2286,7 +2286,7 @@
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
-                    *ngIf="dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                    *ngIf="dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result;">
                     <span class="result-sortby">{{result?.length}} results</span>
                   </ng-container>
                   <div class="flex-center-sortby">
@@ -2706,7 +2706,7 @@
               <div class="row">
                 <div class="col-12 flex-sortby">
                   <ng-container
-                    *ngIf="dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() as result;">
+                    *ngIf="dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result;">
                     <span class="result-sortby">{{result?.length}} results</span>
                   </ng-container>
                   <div class="flex-center-sortby">

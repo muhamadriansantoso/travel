@@ -11,7 +11,7 @@
           <div class="content">
             <div class="inner_tab">
               <ul class="nav nav-tabs" role="tablist">
-                <li class="active" role="presentation">
+                <li (click)="activeClass('flight')" [ngClass]="{'active': flightClicked}">
                   <div class="inner_list">
                     <a routerLink="/flight">
                       <div class="image">
@@ -21,13 +21,13 @@
                     </a>
                   </div>
                 </li>
-                <!--                <li role="presentation" routerLinkActive="active">-->
+                <!--                <li (click)="activeClass('hotel')" [ngClass]="{'active': hotelClicked}">-->
                 <!--                  <div class="inner_list">-->
                 <!--                    <a routerLink="/hotel">-->
                 <!--                      <div class="image">-->
                 <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
                 <!--                      </div>-->
-                <!--                      <span>Recreation</span>-->
+                <!--                      <span>Hotel</span>-->
                 <!--                    </a>-->
                 <!--                  </div>-->
                 <!--                </li>-->
@@ -72,12 +72,11 @@
     <div class="page_right_panel">
       <div class="banner main-banner">
         <owl-carousel-o [options]="customOptions">
-          <ng-template [id]="'1'" carouselSlide>
-            <img [src]="'./assets/fixtrips/image/1.jpg'">
-          </ng-template>
-          <ng-template [id]="'2'" carouselSlide>
-            <img [src]="'./assets/fixtrips/image/2.jpg'">
-          </ng-template>
+          <ng-container *ngFor="let s of slider">
+            <ng-template [id]="s.id" carouselSlide>
+              <img [src]="'https://www.fixtrips.com/official/assets/media/slider/'+s.image">
+            </ng-template>
+          </ng-container>
         </owl-carousel-o>
       </div>
       <div class="banner_tab">
@@ -151,4 +150,4 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>
+<!--<app-footer></app-footer>-->

@@ -1,0 +1,54 @@
+<section *ngIf="loadingPage" class="loadingSearchHotel centered-loader text-center">
+  <div class="centered-loader">
+    <img src="./assets/images/loader.gif">
+    <div class="theme-loading-body">
+      <h2 class="theme-loading-title">Just a moment</h2>
+      <p class="theme-loading-subtitle">We are looking for Hotel </p>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="!loadingPage" class="ftco-section" style="padding: 0;">
+  <div class="row">
+    <div class="col-md-8">
+      <h5
+        style="font-weight: 500; margin-bottom: 10px; padding-bottom: 10px; color: rgb(85, 85, 85); border-bottom: 1px solid rgb(204, 204, 204);">
+        {{dataHotelSearch?.length}} Hasil
+      </h5>
+      <div *ngFor="let datahotel of dataHotelSearch"
+           style="background-color: rgb(255, 255, 255); border-radius: 0.25rem; margin-bottom: 20px; padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+        <div class="row">
+          <div class="col-md-3">
+            <div style="width: 100%; height: 150px; overflow: hidden;">
+              <ng-container *ngFor="let image of datahotel.images">
+                <ng-container *ngIf="image.type == 'MEDIUM'">
+                  <img src="{{image.uri}}" style="width: 100%; height: 100%;">
+                </ng-container>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">{{datahotel.name}}</div>
+            <small class="d-block mb-3">Lokasi: <strong>{{datahotel.address}}</strong></small>
+            <ul style="margin: 0px; padding: 0px; list-style: none;">
+              <li *ngIf="datahotel.eco == true"
+                  style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
+                ECO
+              </li>
+              <li *ngIf="datahotel.syariah == true"
+                style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
+                SYARIAH
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 text-center"><small class="d-inline-block mb-2">Harga Per Malam</small>
+            <a class="btn btn-success"
+               (click)="openDetail(datahotel.id, start_date, duration)">
+              <strong>{{datahotel.rates.average_rate |currency:'Rp ':'symbol':'3.0'}}</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

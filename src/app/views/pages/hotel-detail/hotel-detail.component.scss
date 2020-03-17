@@ -1,0 +1,70 @@
+.airy-card,
+.card-custom {
+  background-color: #fff;
+  border-radius: .25rem;
+  margin-bottom: 20px;
+  padding: 15px;
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06)
+}
+
+.airy-card-thumbnail {
+  width: 100%;
+  height: 130px;
+  overflow: hidden
+}
+
+.airy-card-thumbnail img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover
+}
+
+.airy-card-title {
+  color: #333
+}
+
+.airy-card-outline {
+  padding: 15px;
+  border-radius: .25rem;
+  border: 1px solid #ccc
+}
+
+.airy-list {
+  padding: 0 0 0 15px;
+  margin: 0
+}
+
+.airy-list li {
+  font-size: 15px
+}
+
+.airy-slider {
+  margin-bottom: 15px;
+  overflow: hidden;
+  border-radius: 5px
+}
+
+.plusMinusContainer {
+  background-color: #28a745;
+  border-radius: 0.2rem;
+}
+
+.plusMinusButton {
+  cursor: pointer;
+}
+
+.plusMinusTextBox {
+  align-items: center;
+  background: #ffffff;
+  border-bottom: 1px solid #28a745;
+  border-top: 1px solid #28a745;
+  color: #2b2d2e;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  height: 30px;
+  justify-content: center;
+  width: 33%;
+}

@@ -5,7 +5,7 @@ import {orderBy} from 'lodash';
   name: 'searchFligthFilter'
 })
 export class CheckboxFilterPipe implements PipeTransform {
-  transform(list: any, transitFilter: any, transitItems: Array<any>, airlineFilter: any, airlineItems: Array<any>, sortResult: string): any {
+  transform(list: any, transitFilter: any, transitItems: Array<any>, airlineFilter: any, airlineItems: Array<any>, sortResult: any): any {
     if ((transitItems.length > 0) || (airlineItems.length > 0)) {
       let temp: any[] = [];
       let tempCat: any[] = [];
