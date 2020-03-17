@@ -3569,8 +3569,8 @@ a:hover, a:focus {
   position: unset;
   display: inline-block;
   vertical-align: middle;
-  color: white;
-  background-color: #07969a !important;
+  /*color: white;*/
+  /*background-color: #07969a !important;*/
   border-radius: 50%;
   width: 24px;
   height: 24px;
