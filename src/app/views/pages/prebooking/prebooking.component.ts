@@ -84,7 +84,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.unsubscribe = new Subject();
-    this.socket = io('http://gohateka.com:3000/');
+    this.socket = io('http://fixtrips.com:3000/');
   }
 
   ngOnInit() {
@@ -209,11 +209,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                 Validators.required,
               ])
               ],
-              firstname: ['Muhamad', Validators.compose([
+              firstname: ['', Validators.compose([
                 Validators.required,
               ])
               ],
-              lastname: ['Rian', Validators.compose([
+              lastname: ['', Validators.compose([
                 Validators.required,
               ])
               ],
@@ -221,12 +221,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                 Validators.required,
               ])
               ],
-              email: ['rian_santoso@ymail.com', Validators.compose([
+              email: ['', Validators.compose([
                 Validators.required,
                 Validators.email
               ])
               ],
-              phone: ['085783126998', Validators.compose([
+              phone: ['', Validators.compose([
                 Validators.required,
               ])
               ],
@@ -242,11 +242,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_firstname: ['Deva', Validators.compose([
+                  passenger_firstname: ['', Validators.compose([
                     Validators.required,
                   ])
                   ],
-                  passenger_lastname: ['Darwin', Validators.compose([
+                  passenger_lastname: ['', Validators.compose([
                     Validators.required,
                   ])
                   ],
@@ -254,7 +254,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_passport: ['1234567890', Validators.compose([
+                  passenger_passport: ['', Validators.compose([
                     Validators.required,
                   ])
                   ],
