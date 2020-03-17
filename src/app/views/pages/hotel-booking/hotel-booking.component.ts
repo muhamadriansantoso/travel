@@ -34,6 +34,7 @@ export class HotelBookingComponent implements OnInit {
   data: any;
   room_data: any;
   room_price: number;
+  master_data: any;
 
   dataHotel: any;
   socket;
@@ -70,6 +71,7 @@ export class HotelBookingComponent implements OnInit {
           this.data = dataHotel.data;
           this.room_data = dataHotel.room_data;
           this.room_price = dataHotel.room_price;
+          this.master_data = dataHotel.master_data;
           if (dataHotel.status == 1) {
             this.stepBookingDetailsComplete = false;
             this.stepPayComplete = false;

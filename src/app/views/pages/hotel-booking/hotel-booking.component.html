@@ -78,7 +78,7 @@
               </button>
             </div>
           </div>
-          <div class="col-md-5">
+          <div *ngIf="master_data as md" class="col-md-5">
             <div class="card">
               <div class="card-header">
                 <h5 class="box-title">Detail Hotel</h5>
@@ -86,12 +86,16 @@
               <div class="card-body pt-2 pb-3">
                 <div class="row">
                   <div class="col-md-2">
-                    <img alt="" class="rounded-circle img-fluid"
-                         src="https://s3-ap-southeast-1.amazonaws.com/airy-beeld/stg/72/4046fff3/20c4/4998/8827/eddabe579ee3.png">
+                    <ng-container *ngFor="let image of md.images">
+                      <ng-container *ngIf="image.type == 'MEDIUM'">
+                        <img alt="" class="rounded-circle img-fluid"
+                             src="{{image.uri}}">
+                      </ng-container>
+                    </ng-container>
                   </div>
                   <div class="col-md-10">
-                    <h5>Airy Staging Exuberant Lamprotornis Nitens Coblong</h5>
-                    <p style="margin-bottom: unset;">Jl. Properti Percontohan</p>
+                    <h5>{{md.name}}</h5>
+                    <p style="margin-bottom: unset;">{{md.address}}</p>
                   </div>
                 </div>
                 <br>
