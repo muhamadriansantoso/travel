@@ -126,7 +126,7 @@ export class HotelDetailComponent implements OnInit {
       });
     }
 
-    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', this.rooms).pipe(
+    this.api.checkInventoryHotel(this.supplier, this.id, this.roomPrice, 'IDR', this.rooms, this.start_date, this.duration).pipe(
       tap((data: any) => {
         if (data.status == 'MATCH') {
           this.api.HotelBookingInsertDB(this.sessionID, this.rooms, data.room_types).subscribe((data: any) => {
