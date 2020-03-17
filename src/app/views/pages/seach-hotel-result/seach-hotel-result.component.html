@@ -44,7 +44,7 @@
           <div class="col-md-3 text-center"><small class="d-inline-block mb-2">Harga Per Malam</small>
             <a class="btn btn-success"
                (click)="openDetail(datahotel.id, start_date, duration)">
-              <strong>{{datahotel.rates.total_base_rate |currency:'Rp ':'symbol':'3.0'}}</strong>
+              <strong>{{datahotel.rates.average_rate |currency:'Rp ':'symbol':'3.0'}}</strong>
             </a>
           </div>
         </div>

@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import {Subject} from 'rxjs';
 import * as io from 'socket.io-client';
+import {finalize, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-hotel-booking',
@@ -13,7 +14,20 @@ import * as io from 'socket.io-client';
 })
 export class HotelBookingComponent implements OnInit {
   sessionID: string;
+  bookingID: any;
   loadingPage: boolean;
+
+  bookingInfoForm: FormGroup;
+  paymentChannel: FormGroup;
+
+  isLinear: boolean;
+  stepBookingDetailsComplete: boolean;
+  stepperIndex: any;
+  stepPayComplete: boolean;
+  stepProcessComplete: boolean;
+  paymentSuccess: boolean;
+
+  dataHotel: any;
   socket;
   private unsubscribe: Subject<any>;
 
@@ -31,13 +45,98 @@ export class HotelBookingComponent implements OnInit {
 
   ngOnInit() {
     this.loadingPage = true;
+    this.isLinear = true;
+
+    this.initBookingForm();
+    this.paymentChannelForm();
+  }
+
+  initBookingForm() {
     this.route.params.subscribe(sessionID => {
       this.sessionID = sessionID.sessionID;
-      console.log(this.sessionID);
-      this.api.HotelBookingGetDataDB(this.sessionID).subscribe((HotelBookingGetDataDB: any) => {
+      this.api.HotelBookingGetDataDB(this.sessionID).pipe(
+        tap((dataHotel: any) => {
+          if (dataHotel.status == 1) {
+            this.stepBookingDetailsComplete = false;
+            this.stepPayComplete = false;
+            this.stepProcessComplete = false;
+            this.stepperIndex = 0;
+          } else if (dataHotel.status == 2) {
+            this.stepBookingDetailsComplete = true;
+            this.stepPayComplete = true;
+            this.stepProcessComplete = false;
+            this.stepperIndex = 1;
+            this.isLinear = false;
+            this.bookingID = dataHotel.bookingID;
+            // this.hitAPICheckPayment();
+          } else if (dataHotel.status == 3) {
+            this.stepBookingDetailsComplete = true;
+            this.stepPayComplete = true;
+            this.stepProcessComplete = true;
+            this.paymentSuccess = true;
+            this.bookingID = dataHotel.bookingID;
+            this.stepperIndex = 2;
+          }
+          this.dataHotel = dataHotel;
 
-      });
+          //bookingInfoForm
+          this.bookingInfoForm = this.fb.group({
+            guestname: ['', Validators.compose([
+              Validators.required,
+            ])
+            ],
+            contactname: ['', Validators.compose([
+              Validators.required,
+            ])
+            ],
+            email: ['', Validators.compose([
+              Validators.required,
+              Validators.email
+            ])
+            ],
+            phone: ['', Validators.compose([
+              Validators.required
+            ])
+            ]
+          });
+          //endbookinginfoform
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.loadingPage = false;
+          this.cdr.markForCheck();
+        })
+      ).subscribe();
     });
+  }
+
+  paymentChannelForm() {
+    this.paymentChannel = this.fb.group({
+      bankCode: ['', Validators.compose([
+        Validators.required,
+      ])
+      ]
+    });
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.bookingInfoForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
+  }
+
+  isControlHasErrorPayment(controlName: string, validationType: string): boolean {
+    const control = this.paymentChannel.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 
 }
