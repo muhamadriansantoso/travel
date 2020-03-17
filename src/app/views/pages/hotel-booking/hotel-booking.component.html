@@ -100,29 +100,34 @@
                   <tr>
                     <td>Check-in</td>
                     <td class="text-right">
-                      <p style="margin-bottom: unset;">Monday, 16 Mar 2020</p>
+                      <p style="margin-bottom: unset;">{{bookingDate}}</p>
                     </td>
                   </tr>
                   <tr>
                     <td>Durasi Menginap</td>
                     <td class="text-right">
-                      <p style="margin-bottom: unset;">1 Malam</p>
-                      (Check-out: 17 Mar 2020)
+                      <p style="margin-bottom: unset;">{{duration}} Malam</p>
+                      (Check-out: {{checkoutDate}})
                     </td>
                   </tr>
                   </tbody>
                 </table>
                 <h5>Rincian Pembayaran</h5>
                 <table class="table">
-                  <tbody>
-                  <tr>
-                    <td>
-                      Airy Rooms Superior Twin<br>
-                      (1 kamar, 2 tamu)
-                    </td>
-                    <td class="text-right">Rp. 200,000</td>
-                  </tr>
-                  </tbody>
+                  <ng-container *ngFor="let d of data">
+                    <ng-container *ngFor="let rd of room_data">
+                      <tbody *ngIf="rd.room_type_id == d.room_type_id">
+                      <tr>
+                        <td>
+                          {{rd.room_type_name}}<br>
+                          ({{d.quantity}} kamar, {{d.quantity * rd.capacity}} tamu)
+                        </td>
+                        <td
+                          class="text-right">{{d.quantity * rd.rates[0].total_rate | currency:'Rp ':'symbol':'3.0'}}</td>
+                      </tr>
+                      </tbody>
+                    </ng-container>
+                  </ng-container>
                 </table>
                 <p class="total" style="margin-bottom: unset;">Total yang harus dibayar <span>Rp. 200,000</span></p>
               </div>

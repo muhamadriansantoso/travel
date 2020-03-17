@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatSnackBar} from '@angular/material';
 import {Subject} from 'rxjs';
 import * as io from 'socket.io-client';
+import * as moment from 'moment';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 
 @Component({
@@ -26,6 +27,12 @@ export class HotelBookingComponent implements OnInit {
   stepPayComplete: boolean;
   stepProcessComplete: boolean;
   paymentSuccess: boolean;
+
+  bookingDate: string;
+  checkoutDate: string;
+  duration: number;
+  data: any;
+  room_data: any;
 
   dataHotel: any;
   socket;
@@ -56,6 +63,11 @@ export class HotelBookingComponent implements OnInit {
       this.sessionID = sessionID.sessionID;
       this.api.HotelBookingGetDataDB(this.sessionID).pipe(
         tap((dataHotel: any) => {
+          this.bookingDate = moment(dataHotel.check_in).format('dddd, DD MMM YYYY');
+          this.duration = dataHotel.duration;
+          this.checkoutDate = moment(dataHotel.check_in).add(this.duration, 'days').format('DD MMM YYYY');
+          this.data = dataHotel.data;
+          this.room_data = dataHotel.room_data;
           if (dataHotel.status == 1) {
             this.stepBookingDetailsComplete = false;
             this.stepPayComplete = false;
