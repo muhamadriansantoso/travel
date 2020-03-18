@@ -419,7 +419,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           this.stepPayComplete = true;
           this.hitAPICheckPayment();
         } else {
-          this.paymentFailed = true;
+          // this.paymentFailed = true;
         }
       }),
       takeUntil(this.unsubscribe),
