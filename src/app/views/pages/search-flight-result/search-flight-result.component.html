@@ -78,12 +78,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -122,12 +122,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -137,12 +137,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -184,12 +184,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -199,12 +199,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -254,12 +254,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -316,10 +316,10 @@
                         <li>
                           <i class="fa fa-plane flight-details-schedule-icon"></i>
                           <p class="flight-details-schedule-date">
-                            {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY' }}</p>
                           <div class="flight-details-schedule-time">
-                            {{dataflightTrans.departureTime | date: 'HH:MM'}} -
-                            {{dataflightTrans.arrivalTime | date: 'HH:MM'}}
+                            {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
                             ({{dataflightTrans.flightTime | minuteToHour}})
                           </div>
                           <div class="flight-details-schedule-destination">
@@ -542,12 +542,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -586,12 +586,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -601,12 +601,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -648,12 +648,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -663,12 +663,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -718,12 +718,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -780,10 +780,10 @@
                         <li>
                           <i class="fa fa-plane flight-details-schedule-icon"></i>
                           <p class="flight-details-schedule-date">
-                            {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, YYYY' }}</p>
                           <div class="flight-details-schedule-time">
-                            {{dataflightTrans.departureTime | date: 'HH:MM'}} -
-                            {{dataflightTrans.arrivalTime | date: 'HH:MM'}}
+                            {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
                             ({{dataflightTrans.flightTime | minuteToHour}})
                           </div>
                           <div class="flight-details-schedule-destination">
@@ -949,12 +949,12 @@
               <div class="col-md-10">
                 <div class="row">
                   <div class="col-md-3">
-                    <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                        'HH:MM'}}</p>
+                    <p
+                      class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].origin_city_name}}</p>
-                    <p class="destination-date">{{dataflight.transData[0].departureTime |
-                      date: 'MMM dd, yyyy'}}</p>
+                    <p
+                      class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                   </div>
 
                   <div class="col-md-6 text-center">
@@ -993,12 +993,12 @@
                   </div>
 
                   <div class="col-md-3">
-                    <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                        'HH:MM'}}</p>
+                    <p
+                      class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].destination_city_name}}</p>
-                    <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                      date: 'MMM dd, yyyy'}}</p>
+                    <p
+                      class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                   </div>
                 </div>
               </div>
@@ -1008,12 +1008,12 @@
               <div class="col-md-10">
                 <div class="row">
                   <div class="col-md-3">
-                    <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                        'HH:MM'}}</p>
+                    <p
+                      class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].origin_city_name}}</p>
-                    <p class="destination-date">{{dataflight.transData[0].departureTime |
-                      date: 'MMM dd, yyyy'}}</p>
+                    <p
+                      class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                   </div>
 
                   <div class="col-md-6 text-center">
@@ -1055,12 +1055,12 @@
                   </div>
 
                   <div class="col-md-3">
-                    <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                        'HH:MM'}}</p>
+                    <p
+                      class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                     <p class="destination-title">
                       {{dataflight.transData[1].destination_city_name}}</p>
-                    <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                      date: 'MMM dd, yyyy'}}</p>
+                    <p
+                      class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                   </div>
                 </div>
               </div>
@@ -1070,12 +1070,12 @@
               <div class="col-md-10">
                 <div class="row">
                   <div class="col-md-3">
-                    <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                        'HH:MM'}}</p>
+                    <p
+                      class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                     <p class="destination-title">
                       {{dataflight.transData[0].origin_city_name}}</p>
-                    <p class="destination-date">{{dataflight.transData[0].departureTime |
-                      date: 'MMM dd, yyyy'}}</p>
+                    <p
+                      class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                   </div>
 
                   <div class="col-md-6 text-center">
@@ -1125,12 +1125,12 @@
                   </div>
 
                   <div class="col-md-3">
-                    <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                        'HH:MM'}}</p>
+                    <p
+                      class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                     <p class="destination-title">
                       {{dataflight.transData[1].destination_city_name}}</p>
-                    <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                      date: 'MMM dd, yyyy'}}</p>
+                    <p
+                      class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                   </div>
                 </div>
               </div>
@@ -1220,12 +1220,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -1264,12 +1264,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -1279,12 +1279,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -1326,12 +1326,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -1341,12 +1341,12 @@
                   <div class="col-md-10">
                     <div class="row">
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[0].origin_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[0].departureTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
 
                       <div class="col-md-6 text-center">
@@ -1396,12 +1396,12 @@
                       </div>
 
                       <div class="col-md-3">
-                        <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                            'HH:MM'}}</p>
+                        <p
+                          class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                         <p class="destination-title">
                           {{dataflight.transData[1].destination_city_name}}</p>
-                        <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                          date: 'MMM dd, yyyy'}}</p>
+                        <p
+                          class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                       </div>
                     </div>
                   </div>
@@ -1456,10 +1456,10 @@
                         <li>
                           <i class="fa fa-plane flight-details-schedule-icon"></i>
                           <p class="flight-details-schedule-date">
-                            {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, YYYY' }}</p>
                           <div class="flight-details-schedule-time">
-                            {{dataflightTrans.departureTime | date: 'HH:MM'}} -
-                            {{dataflightTrans.arrivalTime | date: 'HH:MM'}}
+                            {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
                             ({{dataflightTrans.flightTime | minuteToHour}})
                           </div>
                           <div class="flight-details-schedule-destination">
@@ -1627,12 +1627,12 @@
                 <div class="col-md-10">
                   <div class="row">
                     <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'HH:MM'}}</p>
+                      <p
+                        class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].origin_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].departureTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      <p
+                        class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                     </div>
 
                     <div class="col-md-6 text-center">
@@ -1671,12 +1671,12 @@
                     </div>
 
                     <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                          'HH:MM'}}</p>
+                      <p
+                        class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].destination_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      <p
+                        class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                     </div>
                   </div>
                 </div>
@@ -1686,12 +1686,12 @@
                 <div class="col-md-10">
                   <div class="row">
                     <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'HH:MM'}}</p>
+                      <p
+                        class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].origin_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].departureTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      <p
+                        class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                     </div>
 
                     <div class="col-md-6 text-center">
@@ -1733,12 +1733,12 @@
                     </div>
 
                     <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                          'HH:MM'}}</p>
+                      <p
+                        class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                       <p class="destination-title">
                         {{dataflight.transData[1].destination_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      <p
+                        class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                     </div>
                   </div>
                 </div>
@@ -1748,12 +1748,12 @@
                 <div class="col-md-10">
                   <div class="row">
                     <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                          'HH:MM'}}</p>
+                      <p
+                        class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                       <p class="destination-title">
                         {{dataflight.transData[0].origin_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[0].departureTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      <p
+                        class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                     </div>
 
                     <div class="col-md-6 text-center">
@@ -1803,12 +1803,12 @@
                     </div>
 
                     <div class="col-md-3">
-                      <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                          'HH:MM'}}</p>
+                      <p
+                        class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                       <p class="destination-title">
                         {{dataflight.transData[1].destination_city_name}}</p>
-                      <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                        date: 'MMM dd, yyyy'}}</p>
+                      <p
+                        class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                     </div>
                   </div>
                 </div>
@@ -1894,12 +1894,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -1938,12 +1938,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -1953,12 +1953,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2000,12 +2000,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2015,12 +2015,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2070,12 +2070,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2131,10 +2131,10 @@
                             <li>
                               <i class="fa fa-plane flight-details-schedule-icon"></i>
                               <p class="flight-details-schedule-date">
-                                {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, YYYY' }}</p>
                               <div class="flight-details-schedule-time">
-                                {{dataflightTrans.departureTime | date: 'HH:MM'}} -
-                                {{dataflightTrans.arrivalTime | date: 'HH:MM'}}
+                                {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
                                 ({{dataflightTrans.flightTime | minuteToHour}})
                               </div>
                               <div class="flight-details-schedule-destination">
@@ -2319,12 +2319,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2363,12 +2363,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2378,12 +2378,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2425,12 +2425,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2440,12 +2440,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2495,12 +2495,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2554,10 +2554,10 @@
                             <li>
                               <i class="fa fa-plane flight-details-schedule-icon"></i>
                               <p class="flight-details-schedule-date">
-                                {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, yyyy' }}</p>
                               <div class="flight-details-schedule-time">
-                                {{dataflightTrans.departureTime | date: 'HH:MM'}} -
-                                {{dataflightTrans.arrivalTime | date: 'HH:MM'}}
+                                {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
                                 ({{dataflightTrans.flightTime | minuteToHour}})
                               </div>
                               <div class="flight-details-schedule-destination">
@@ -2739,12 +2739,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2783,12 +2783,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2798,12 +2798,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2845,12 +2845,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2860,12 +2860,12 @@
                       <div class="col-md-10">
                         <div class="row">
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[0].departureTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[0].origin_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[0].departureTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
 
                           <div class="col-md-6 text-center">
@@ -2915,12 +2915,12 @@
                           </div>
 
                           <div class="col-md-3">
-                            <p class="title-ticket">{{dataflight.transData[1].arrivalTime | date:
-                                'HH:MM'}}</p>
+                            <p
+                              class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
                             <p class="destination-title">
                               {{dataflight.transData[1].destination_city_name}}</p>
-                            <p class="destination-date">{{dataflight.transData[1].arrivalTime |
-                              date: 'MMM dd, yyyy'}}</p>
+                            <p
+                              class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
                           </div>
                         </div>
                       </div>
@@ -2973,10 +2973,10 @@
                             <li>
                               <i class="fa fa-plane flight-details-schedule-icon"></i>
                               <p class="flight-details-schedule-date">
-                                {{dataflightTrans.arrivalTime | date: 'MMM dd, yyyy'}}</p>
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, yyyy' }}</p>
                               <div class="flight-details-schedule-time">
-                                {{dataflightTrans.departureTime | date: 'HH:MM'}} -
-                                {{dataflightTrans.arrivalTime | date: 'HH:MM'}}
+                                {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
                                 ({{dataflightTrans.flightTime | minuteToHour}})
                               </div>
                               <div class="flight-details-schedule-destination">

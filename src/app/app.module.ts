@@ -29,6 +29,7 @@ import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-
 import {HotelDetailComponent} from './views/pages/hotel-detail/hotel-detail.component';
 import {UnderscoretoplusPipe} from './views/pages/underscoretoplus.pipe';
 import {HotelBookingComponent} from './views/pages/hotel-booking/hotel-booking.component';
+import {MomentModule} from 'ngx-moment';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -72,6 +73,7 @@ const ngWizardConfig: NgWizardConfig = {
     MatSnackBarModule,
     CountdownModule,
     NgbModule,
+    MomentModule,
     NgWizardModule.forRoot(ngWizardConfig),
   ],
   providers: [
