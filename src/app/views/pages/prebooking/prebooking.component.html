@@ -284,6 +284,7 @@
                     <div class="col-sm-8">
                       <input #d="ngbDatepicker"
                              (click)="d.toggle()"
+                             (blur)="d.toggle()"
                              [maxDate]="maxDateAdult"
                              [minDate]="minDateAdult"
                              [ngClass]="{ 'is-invalid': isControlHasError('dob','required') }"
@@ -450,6 +451,7 @@
                         <ng-container *ngIf="bookingForm[i].value[j].passengerType == 'ADT'">
                           <input #d="ngbDatepicker"
                                  (click)="d.toggle()"
+                                 (blur)="d.toggle()"
                                  [maxDate]="maxDateAdult"
                                  [minDate]="minDateAdult"
                                  [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j)}"
@@ -462,6 +464,7 @@
                           *ngIf="bookingForm[i].value[j].passengerType == 'CHD' || bookingForm[i].value[j].passengerType == 'CNN'">
                           <input #d="ngbDatepicker"
                                  (click)="d.toggle()"
+                                 (blur)="d.toggle()"
                                  [maxDate]="maxDateChild"
                                  [minDate]="minDateChild"
                                  [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j)}"
@@ -474,6 +477,7 @@
                           *ngIf="bookingForm[i].value[j].passengerType == 'INF'">
                           <input #d="ngbDatepicker"
                                  (click)="d.toggle()"
+                                 (blur)="d.toggle()"
                                  [maxDate]="maxDateInfant"
                                  [minDate]="minDateInfant"
                                  [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_dob','required', i, j)}"
@@ -508,6 +512,7 @@
                       <div class="col-sm-8">
                         <input #d="ngbDatepicker"
                                (click)="d.toggle()"
+                               (blur)="d.toggle()"
                                [maxDate]="passportExpiredMaxDate"
                                [minDate]="passportExpiredMinDate"
                                [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_passportexpiry','required', i, j)}"
@@ -612,15 +617,17 @@
                   Payment Channel harus dipilih
                 </div>
                 <ng-container *ngFor="let lpc of listPaymentChannel">
-                  <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
-                         [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
-                         class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
-                    <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
-                    <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
-                    <img class="float-right" height="22"
-                         src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
-                    <div class="clearfix"></div>
-                  </label>
+                  <ng-container *ngIf="lpc.productCode != 'CREDITCARD' && lpc.bankCode != '016'">
+                    <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
+                           [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
+                           class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
+                      <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
+                      <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
+                      <img class="float-right" height="22"
+                           src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
+                      <div class="clearfix"></div>
+                    </label>
+                  </ng-container>
                 </ng-container>
                 <div class="row">
                   <div class="col-md-6">
