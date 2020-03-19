@@ -3318,6 +3318,11 @@ a:hover, a:focus {
   font-weight: 500;
 }
 
+.detail-price-float {
+  position: fixed !important;
+  width: 23%;
+}
+
 .menu-filter-pc .card {
   padding: 5px 23px 23px 23px;
 }
@@ -3556,6 +3561,21 @@ a:hover, a:focus {
 
 .plane-destination {
   transform: rotate(40deg);
+}
+
+.reverse-destination {
+  cursor: pointer;
+  margin: 28px 4px 0 4px;
+  position: unset;
+  display: inline-block;
+  vertical-align: middle;
+  /*color: white;*/
+  /*background-color: #07969a !important;*/
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .flight-section-path-icon {
