@@ -234,6 +234,7 @@
                       <label>Departure</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
                       <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultDepatureDate"
+                             (ngModelChange)="changeOriginDateDate()"
                              [minDate]="minDate"
                              class="form-control"
                              formControlName="departure" maxlength="0"
@@ -252,7 +253,8 @@
                     <div class="form-group">
                       <label>Return</label>
                       <span class="icon"><i class="fa fa-calendar"></i></span>
-                      <input #r="ngbDatepicker" (click)="r.toggle()" [(ngModel)]="defaultReturnDate" [minDate]="minDate"
+                      <input #r="ngbDatepicker" (click)="r.toggle()" [(ngModel)]="defaultReturnDate"
+                             [minDate]="minDateReturn"
                              class="form-control"
                              formControlName="return" maxlength="0"
                              ngbDatepicker

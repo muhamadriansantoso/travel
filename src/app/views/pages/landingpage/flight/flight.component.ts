@@ -31,6 +31,7 @@ export class FlightComponent implements OnInit {
   returnDate: string;
   cabin: string;
   minDate: any;
+  minDateReturn: any;
   defaultDepatureDate: any;
   defaultDepatureDateArray: any = [];
   defaultReturnDate: any;
@@ -76,6 +77,9 @@ export class FlightComponent implements OnInit {
       'day': parseInt(moment(todayPlusOne).format('DD'), 0)
     };
 
+    var defaultDepatureDateFormatted = moment(this.defaultDepatureDate.year + '-' + this.defaultDepatureDate.month + '-' + this.defaultDepatureDate.day).format('YYYY-MM-DD');
+    var defaultDepatureDateFormattedToDate = moment(defaultDepatureDateFormatted).add(0, 'days').toDate();
+
     this.defaultDepatureDateArray[0] = {
       'year': todayPlusOne.getFullYear(),
       'month': parseInt(moment(todayPlusOne).format('MM'), 0),
@@ -98,6 +102,12 @@ export class FlightComponent implements OnInit {
       'year': today.getFullYear(),
       'month': parseInt(moment(today).format('MM'), 0),
       'day': parseInt(moment(today).format('DD'), 0)
+    };
+
+    this.minDateReturn = {
+      'year': defaultDepatureDateFormattedToDate.getFullYear(),
+      'month': parseInt(moment(defaultDepatureDateFormattedToDate).format('MM'), 0),
+      'day': parseInt(moment(defaultDepatureDateFormattedToDate).format('DD'), 0)
     };
 
     this.api.airportList().subscribe((data: any) => {
@@ -138,6 +148,23 @@ export class FlightComponent implements OnInit {
         this.toCityValue = '';
       }
     }
+  }
+
+  changeOriginDateDate() {
+    var defaultCheckInDateFormatted = moment(this.defaultDepatureDate.year + '-' + this.defaultDepatureDate.month + '-' + this.defaultDepatureDate.day).format('YYYY-MM-DD');
+    var defaultCheckInDateFormattedPlusFour = moment(defaultCheckInDateFormatted).add(4, 'days').toDate();
+    var defaultCheckInDateFormattedPlusZero = moment(defaultCheckInDateFormatted).add(0, 'days').toDate();
+    this.defaultReturnDate = {
+      'year': defaultCheckInDateFormattedPlusFour.getFullYear(),
+      'month': parseInt(moment(defaultCheckInDateFormattedPlusFour).format('MM'), 0),
+      'day': parseInt(moment(defaultCheckInDateFormattedPlusFour).format('DD'), 0)
+    };
+
+    this.minDateReturn = {
+      'year': defaultCheckInDateFormattedPlusZero.getFullYear(),
+      'month': parseInt(moment(defaultCheckInDateFormattedPlusZero).format('MM'), 0),
+      'day': parseInt(moment(defaultCheckInDateFormattedPlusZero).format('DD'), 0)
+    };
   }
 
   initSearchFlightForm() {
