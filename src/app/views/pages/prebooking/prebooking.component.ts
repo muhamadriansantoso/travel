@@ -84,7 +84,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.unsubscribe = new Subject();
-    this.socket = io('http://fixtrips.com:3000/');
+    this.socket = io('https://fixtrips.com:3000/');
   }
 
   ngOnInit() {
