@@ -11,3 +11,17 @@
   white-space: nowrap;
   max-width: 100%;
 }
+
+.reverseClickedClicked1 {
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  -webkit-transform: rotate(-270deg);
+  transform: rotate(-270deg);
+}
+
+.reverseClickedClicked2 {
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}

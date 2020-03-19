@@ -35,6 +35,8 @@ export class FlightComponent implements OnInit {
   defaultDepatureDateArray: any = [];
   defaultReturnDate: any;
   multipleTripLength: number;
+  reverseClicked: boolean;
+  reverseClickedArray: any = [];
 
   searchFlightFormInvalid: boolean;
 
@@ -240,6 +242,33 @@ export class FlightComponent implements OnInit {
       this.infantPassenger = this.infantPassenger + 1;
     } else {
       return false;
+    }
+  }
+
+  reverseDestination(from, to, formValue, toValue) {
+    this.reverseClicked = !this.reverseClicked;
+    this.fromCity = to;
+    this.toCity = from;
+    this.formCityValue = toValue;
+    this.toCityValue = formValue;
+  }
+
+  reverseDestinationMulti(index, from, to, formValue, toValue) {
+
+    if (this.reverseClickedArray[index]) {
+      this.reverseClickedArray[index] = true;
+    } else {
+      this.reverseClickedArray[index] = false;
+    }
+
+    for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+      if (index == startFormArray) {
+        this.reverseClickedArray[index] = !this.reverseClickedArray[index];
+        this.fromCityArray[index] = to;
+        this.toCityArray[index] = from;
+        this.formCityValueArray[index] = toValue;
+        this.toCityValueArray[index] = formValue;
+      }
     }
   }
 

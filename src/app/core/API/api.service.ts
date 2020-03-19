@@ -103,7 +103,7 @@ export class APIService {
   }
 
   AirBookingInsertDB(sessionID: string, data: any) {
-    var userData = 'sessionID=' + sessionID + '&data=' + data;
+    var userData = 'sessionID=' + sessionID + '&data=' + encodeURIComponent(data);
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     return this.http.post(APIURL + 'api/internal/flight/insertSelectedBooking', userData, {headers: urlHeader});
   }

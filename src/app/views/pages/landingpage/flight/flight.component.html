@@ -32,9 +32,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="reverse-destination">
-                  <svg fill="#FFFFFF" stroke="currentColor" stroke-linecap="round" style="
-" viewBox="0 0 24 28"
+                <div (click)="reverseDestination(this.fromCity, this.toCity, this.formCityValue, this.toCityValue)"
+                     [ngClass]="{'reverseClickedClicked1': reverseClicked, 'reverseClickedClicked2': !reverseClicked}"
+                     class="reverse-destination">
+                  <svg fill="#FFFFFF" stroke="currentColor" stroke-linecap="round" style="" viewBox="0 0 24 28"
                        xmlns="http://www.w3.org/2000/svg">
                     <g>
                       <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
@@ -191,9 +192,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="reverse-destination">
-                  <svg fill="#FFFFFF" stroke="currentColor" stroke-linecap="round" style="
-" viewBox="0 0 24 28"
+                <div (click)="reverseDestination(this.fromCity, this.toCity, this.formCityValue, this.toCityValue)"
+                     [ngClass]="{'reverseClickedClicked1': reverseClicked, 'reverseClickedClicked2': !reverseClicked}"
+                     class="reverse-destination">
+                  <svg fill="#FFFFFF" stroke="currentColor" stroke-linecap="round" style="" viewBox="0 0 24 28"
                        xmlns="http://www.w3.org/2000/svg">
                     <g>
                       <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
@@ -371,9 +373,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="reverse-destination">
-                    <svg fill="#FFFFFF" stroke="currentColor" stroke-linecap="round" style="
-"
+                  <div
+                    (click)="reverseDestinationMulti(pointIndex, this.fromCityArray[pointIndex], this.toCityArray[pointIndex], this.formCityValueArray[pointIndex], this.toCityValueArray[pointIndex])"
+                    [ngClass]="{'reverseClickedClicked1': reverseClickedArray[pointIndex], 'reverseClickedClicked2': !reverseClickedArray[pointIndex]}"
+                    class="reverse-destination">
+                    <svg fill="#FFFFFF" stroke="currentColor" stroke-linecap="round" style=""
                          viewBox="0 0 24 28"
                          xmlns="http://www.w3.org/2000/svg">
                       <g>
