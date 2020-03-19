@@ -32,6 +32,7 @@ export class FlightComponent implements OnInit {
   cabin: string;
   minDate: any;
   minDateReturn: any;
+  minDateArray: any = [];
   defaultDepatureDate: any;
   defaultDepatureDateArray: any = [];
   defaultReturnDate: any;
@@ -90,6 +91,18 @@ export class FlightComponent implements OnInit {
       'year': todayPlusTwo.getFullYear(),
       'month': parseInt(moment(todayPlusTwo).format('MM'), 0),
       'day': parseInt(moment(todayPlusTwo).format('DD'), 0)
+    };
+
+    this.minDateArray[0] = {
+      'year': today.getFullYear(),
+      'month': parseInt(moment(today).format('MM'), 0),
+      'day': parseInt(moment(today).format('DD'), 0)
+    };
+
+    this.minDateArray[1] = {
+      'year': todayPlusOne.getFullYear(),
+      'month': parseInt(moment(todayPlusOne).format('MM'), 0),
+      'day': parseInt(moment(todayPlusOne).format('DD'), 0)
     };
 
     this.defaultReturnDate = {
@@ -165,6 +178,31 @@ export class FlightComponent implements OnInit {
       'month': parseInt(moment(defaultCheckInDateFormattedPlusZero).format('MM'), 0),
       'day': parseInt(moment(defaultCheckInDateFormattedPlusZero).format('DD'), 0)
     };
+  }
+
+  changeOriginDateDateMulti(index) {
+    for (var startFormArray = 0; startFormArray < this.multipleTrip.controls.length; startFormArray++) {
+      if (index == startFormArray) {
+        var defaultCheckInDateFormatted = [];
+        defaultCheckInDateFormatted[index] = moment(this.defaultDepatureDateArray[index].year + '-' + this.defaultDepatureDateArray[index].month + '-' + this.defaultDepatureDateArray[index].day).format('YYYY-MM-DD');
+        var defaultCheckInDateFormattedPlusOne = [];
+        defaultCheckInDateFormattedPlusOne[index] = moment(defaultCheckInDateFormatted[index]).add(1, 'days').toDate();
+        var defaultCheckInDateFormattedPlusZero = [];
+        defaultCheckInDateFormattedPlusZero[index] = moment(defaultCheckInDateFormatted[index]).add(0, 'days').toDate();
+
+        this.minDateArray[index + 1] = {
+          'year': defaultCheckInDateFormattedPlusZero[index].getFullYear(),
+          'month': parseInt(moment(defaultCheckInDateFormattedPlusZero[index]).format('MM'), 0),
+          'day': parseInt(moment(defaultCheckInDateFormattedPlusZero[index]).format('DD'), 0)
+        };
+
+        this.defaultDepatureDateArray[index + 1] = {
+          'year': defaultCheckInDateFormattedPlusOne[index].getFullYear(),
+          'month': parseInt(moment(defaultCheckInDateFormattedPlusOne[index]).format('MM'), 0),
+          'day': parseInt(moment(defaultCheckInDateFormattedPlusOne[index]).format('DD'), 0)
+        };
+      }
+    }
   }
 
   initSearchFlightForm() {
@@ -513,8 +551,9 @@ export class FlightComponent implements OnInit {
       ],
     }));
 
-    var today = new Date();
-    var todayPlusLength = moment(today).add(this.multipleTripLength + 1, 'days').toDate();
+    var defaultCheckInDateFormatted = [];
+    defaultCheckInDateFormatted[this.multipleTripLength - 1] = moment(this.defaultDepatureDateArray[this.multipleTripLength - 1].year + '-' + this.defaultDepatureDateArray[this.multipleTripLength - 1].month + '-' + this.defaultDepatureDateArray[this.multipleTripLength - 1].day).format('YYYY-MM-DD');
+    var todayPlusLength = moment(defaultCheckInDateFormatted[this.multipleTripLength]).add(this.multipleTripLength + 1, 'days').toDate();
     this.defaultDepatureDateArray[this.multipleTripLength] = {
       'year': todayPlusLength.getFullYear(),
       'month': parseInt(moment(todayPlusLength).format('MM'), 0),

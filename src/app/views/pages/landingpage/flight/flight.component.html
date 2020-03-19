@@ -422,7 +422,8 @@
                         <span class="icon"><i class="fa fa-calendar"></i></span>
                         <input #d="ngbDatepicker" (click)="d.toggle()"
                                [(ngModel)]="defaultDepatureDateArray[pointIndex]"
-                               [minDate]="minDate"
+                               (ngModelChange)="changeOriginDateDateMulti(pointIndex)"
+                               [minDate]="minDateArray[pointIndex]"
                                class="form-control"
                                formControlName="departureArray"
                                maxlength="0" ngbDatepicker
