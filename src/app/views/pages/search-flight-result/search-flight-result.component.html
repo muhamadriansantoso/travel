@@ -149,7 +149,7 @@
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                                dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -211,7 +211,7 @@
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                                dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -278,7 +278,7 @@
             </div>
             <div class="col-md-2 text-center">
               <p class="text-price"><strong>{{dataflight.totalPrice |
-                currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                  currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
               <button (click)="navigateToBooking(sessionID, dataflight)"
                       class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
@@ -358,8 +358,8 @@
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                           <span>Operated By</span> :
                           <span style="color: #8F8F8F;">
-                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}{{dataflightTrans.codeShareInfo.operatingCarrier}}
-                            -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                           </span>
                         </li>
                         <li>
@@ -621,7 +621,7 @@
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                                dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -683,7 +683,7 @@
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                                dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -750,7 +750,7 @@
             </div>
             <div class="col-md-2 text-center">
               <p class="text-price"><strong>{{dataflight.totalPrice |
-                currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                  currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
               <button (click)="returnShow(dataflight)"
                       class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                 class="fas fa-arrow-right"></i></button>
@@ -826,10 +826,9 @@
                         </li>
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                           <span>Operated By</span> :
-                          <span style="color: #8F8F8F">
+                          <span style="color: #8F8F8F;">
                             {{dataflightTrans.codeShareInfo.operatingCarrierName}}
-                            {{dataflightTrans.codeShareInfo.operatingCarrier}}
-                            -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                           </span>
                         </li>
                         <li>
@@ -1036,7 +1035,7 @@
                     <div class="flight-section-path">
                       <div class="flight-section-fly-time">
                         <p>{{(dataflight.transData[0].flightTime +
-                          dataflight.transData[1].flightTime) | minuteToHour}},
+                            dataflight.transData[1].flightTime) | minuteToHour}},
                           {{(dataflight.stop) - 1}} Transit</p>
                       </div>
                       <div class="flight-section-path-line"></div>
@@ -1098,7 +1097,7 @@
                     <div class="flight-section-path">
                       <div class="flight-section-fly-time">
                         <p>{{(dataflight.transData[0].flightTime +
-                          dataflight.transData[1].flightTime) | minuteToHour}},
+                            dataflight.transData[1].flightTime) | minuteToHour}},
                           {{(dataflight.stop) - 1}} Transit</p>
                       </div>
                       <div class="flight-section-path-line"></div>
@@ -1307,7 +1306,7 @@
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                                dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -1369,7 +1368,7 @@
                         <div class="flight-section-path">
                           <div class="flight-section-fly-time">
                             <p>{{(dataflight.transData[0].flightTime +
-                              dataflight.transData[1].flightTime) | minuteToHour}},
+                                dataflight.transData[1].flightTime) | minuteToHour}},
                               {{(dataflight.stop) - 1}} Transit</p>
                           </div>
                           <div class="flight-section-path-line"></div>
@@ -1510,10 +1509,9 @@
                         </li>
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                           <span>Operated By</span> :
-                          <span style="color: #8F8F8F">
+                          <span style="color: #8F8F8F;">
                             {{dataflightTrans.codeShareInfo.operatingCarrierName}}
-                            {{dataflightTrans.codeShareInfo.operatingCarrier}}
-                            -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                           </span>
                         </li>
                         <li>
@@ -1722,7 +1720,7 @@
                       <div class="flight-section-path">
                         <div class="flight-section-fly-time">
                           <p>{{(dataflight.transData[0].flightTime +
-                            dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                             {{(dataflight.stop) - 1}} Transit</p>
                         </div>
                         <div class="flight-section-path-line"></div>
@@ -1784,7 +1782,7 @@
                       <div class="flight-section-path">
                         <div class="flight-section-fly-time">
                           <p>{{(dataflight.transData[0].flightTime +
-                            dataflight.transData[1].flightTime) | minuteToHour}},
+                              dataflight.transData[1].flightTime) | minuteToHour}},
                             {{(dataflight.stop) - 1}} Transit</p>
                         </div>
                         <div class="flight-section-path-line"></div>
@@ -1989,7 +1987,7 @@
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                    dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2051,7 +2049,7 @@
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                    dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2117,7 +2115,7 @@
                 </div>
                 <div class="col-md-2 text-center">
                   <p class="text-price"><strong>{{dataflight.totalPrice |
-                    currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                      currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn btn-warning btn-block rounded button-search-flight-ticket">Select <i
                     class="fas fa-arrow-right"></i></button>
@@ -2193,10 +2191,9 @@
                             </li>
                             <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                               <span>Operated By</span> :
-                              <span style="color: #8F8F8F">
+                              <span style="color: #8F8F8F;">
                                 {{dataflightTrans.codeShareInfo.operatingCarrierName}}
-                                {{dataflightTrans.codeShareInfo.operatingCarrier}}
-                                -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                                {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                               </span>
                             </li>
                             <li>
@@ -2422,7 +2419,7 @@
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                    dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2484,7 +2481,7 @@
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                    dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2624,10 +2621,9 @@
                             </li>
                             <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                               <span>Operated By</span> :
-                              <span style="color: #8F8F8F">
+                              <span style="color: #8F8F8F;">
                                 {{dataflightTrans.codeShareInfo.operatingCarrierName}}
-                                {{dataflightTrans.codeShareInfo.operatingCarrier}}
-                                -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                                {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                               </span>
                             </li>
                             <li>
@@ -2850,7 +2846,7 @@
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                    dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -2912,7 +2908,7 @@
                             <div class="flight-section-path">
                               <div class="flight-section-fly-time">
                                 <p>{{(dataflight.transData[0].flightTime +
-                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                    dataflight.transData[1].flightTime) | minuteToHour}},
                                   {{(dataflight.stop) - 1}} Transit</p>
                               </div>
                               <div class="flight-section-path-line"></div>
@@ -3051,10 +3047,9 @@
                             </li>
                             <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                               <span>Operated By</span> :
-                              <span style="color: #8F8F8F">
+                              <span style="color: #8F8F8F;">
                                 {{dataflightTrans.codeShareInfo.operatingCarrierName}}
-                                {{dataflightTrans.codeShareInfo.operatingCarrier}}
-                                -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                                {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                               </span>
                             </li>
                             <li>
