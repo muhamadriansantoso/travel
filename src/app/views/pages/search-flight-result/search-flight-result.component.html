@@ -347,12 +347,20 @@
                       </ul>
                     </div>
                     <div class="col-md-6">
-                      <ul class="flight-details-feature-list">
+                      <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                         <li>
-                          <span>Aircraft</span> :
+                          <span>Airplane</span> :
                           <span
-                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}
-                            -{{dataflightTrans.flightNumber}}</span>
+                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                        </li>
+                        <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
+                          <span>Operated By</span> :
+                          <span style="color: #8F8F8F">
+                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrier}}
+                            -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                          </span>
                         </li>
                         <li>
                           <span>Cabin Class</span> : <span
@@ -809,12 +817,20 @@
                       </ul>
                     </div>
                     <div class="col-md-6">
-                      <ul class="flight-details-feature-list">
+                      <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                         <li>
-                          <span>Aircraft</span> :
+                          <span>Airplane</span> :
                           <span
-                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}
-                            -{{dataflightTrans.flightNumber}}</span>
+                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                        </li>
+                        <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
+                          <span>Operated By</span> :
+                          <span style="color: #8F8F8F">
+                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrier}}
+                            -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                          </span>
                         </li>
                         <li>
                           <span>Cabin Class</span> : <span
@@ -1485,12 +1501,20 @@
                       </ul>
                     </div>
                     <div class="col-md-6">
-                      <ul class="flight-details-feature-list">
+                      <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                         <li>
-                          <span>Aircraft</span> :
+                          <span>Airplane</span> :
                           <span
-                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}
-                            -{{dataflightTrans.flightNumber}}</span>
+                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                        </li>
+                        <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
+                          <span>Operated By</span> :
+                          <span style="color: #8F8F8F">
+                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                            {{dataflightTrans.codeShareInfo.operatingCarrier}}
+                            -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                          </span>
                         </li>
                         <li>
                           <span>Cabin Class</span> : <span
@@ -2160,12 +2184,20 @@
                           </ul>
                         </div>
                         <div class="col-md-6">
-                          <ul class="flight-details-feature-list">
+                          <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                             <li>
-                              <span>Aircraft</span> :
+                              <span>Airplane</span> :
                               <span
-                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}
-                                -{{dataflightTrans.flightNumber}}</span>
+                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                            </li>
+                            <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
+                              <span>Operated By</span> :
+                              <span style="color: #8F8F8F">
+                                {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                                {{dataflightTrans.codeShareInfo.operatingCarrier}}
+                                -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                              </span>
                             </li>
                             <li>
                               <span>Cabin Class</span> : <span
@@ -2583,12 +2615,20 @@
                           </ul>
                         </div>
                         <div class="col-md-6">
-                          <ul class="flight-details-feature-list">
+                          <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                             <li>
-                              <span>Aircraft</span> :
+                              <span>Airplane</span> :
                               <span
-                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}
-                                -{{dataflightTrans.flightNumber}}</span>
+                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                            </li>
+                            <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
+                              <span>Operated By</span> :
+                              <span style="color: #8F8F8F">
+                                {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                                {{dataflightTrans.codeShareInfo.operatingCarrier}}
+                                -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                              </span>
                             </li>
                             <li>
                               <span>Cabin Class</span> : <span
@@ -3002,12 +3042,20 @@
                           </ul>
                         </div>
                         <div class="col-md-6">
-                          <ul class="flight-details-feature-list">
+                          <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                             <li>
-                              <span>Aircraft</span> :
+                              <span>Airplane</span> :
                               <span
-                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}} {{dataflightTrans.platingCarrier}}
-                                -{{dataflightTrans.flightNumber}}</span>
+                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                            </li>
+                            <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
+                              <span>Operated By</span> :
+                              <span style="color: #8F8F8F">
+                                {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                                {{dataflightTrans.codeShareInfo.operatingCarrier}}
+                                -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
+                              </span>
                             </li>
                             <li>
                               <span>Cabin Class</span> : <span
