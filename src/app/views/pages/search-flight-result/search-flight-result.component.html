@@ -352,11 +352,12 @@
                           <span>Airplane</span> :
                           <span
                             style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
-                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                          </span>
                         </li>
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                           <span>Operated By</span> :
-                          <span style="color: #8F8F8F">
+                          <span style="color: #8F8F8F; white-space: nowrap">
                             {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                             {{dataflightTrans.codeShareInfo.operatingCarrier}}
                             -{{dataflightTrans.codeShareInfo.operatingFlightNumber}}
