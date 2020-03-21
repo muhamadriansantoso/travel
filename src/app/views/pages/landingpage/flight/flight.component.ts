@@ -39,8 +39,11 @@ export class FlightComponent implements OnInit {
   multipleTripLength: number;
   reverseClicked: boolean;
   reverseClickedArray: any = [];
+  test: any;
 
   searchFlightFormInvalid: boolean;
+
+  apiUrl = 'https://www.techiediaries.com/api/data.json';
 
   public passengersCollapsed: boolean = false;
 
@@ -66,6 +69,8 @@ export class FlightComponent implements OnInit {
     this.returnDate = '';
     this.cabin = 'Economy';
     this.multipleTripLength = 1;
+
+    this.fetchData();
 
     var today = new Date();
     var todayPlusOne = moment(today).add(1, 'days').toDate();
@@ -129,6 +134,16 @@ export class FlightComponent implements OnInit {
     });
 
     this.initSearchFlightForm();
+  }
+
+  private fetchData() {
+    const promise = this.api.AirLowFareSearchPort('', '', '', '', '', '', '', '', '').toPromise();
+    console.log(promise);
+    promise.then((data) => {
+      this.test = data;
+    }).catch((error) => {
+      console.log("Promise rejected with " + JSON.stringify(error));
+    });
   }
 
   autocompleListFormatter = (data: any): SafeHtml => {
