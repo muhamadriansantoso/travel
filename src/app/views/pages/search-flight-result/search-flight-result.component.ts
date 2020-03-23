@@ -40,8 +40,7 @@ export class SearchFlightResultComponent implements OnInit {
   currentPercent: any;
   progressPercent: any;
   hideProgressBar: boolean;
-
-  apiTestLink: string = "https://www.fixtrips.com/dev/api/v1/test/async";
+  supplierData: any;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -52,7 +51,6 @@ export class SearchFlightResultComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient
   ) {
     this.unsubscribe = new Subject();
   }
@@ -74,25 +72,22 @@ export class SearchFlightResultComponent implements OnInit {
       this.cabin = params.cabin;
       this.roundType = params.type;
 
-      this.http.get(this.apiTestLink).toPromise().then((data: any) => {
-        this.getAPIFromSupplier();
+      this.api.getFlightSupplier().toPromise().then((data: any) => {
+        this.supplierData = data;
+        this.getAPIFromSupplier(data.length);
       });
     });
   }
 
-  async getAPIFromSupplier() {
+  async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
-      for (var abc = 1; abc <= 1; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
+      for (var abc = 1; abc <= length + 1; abc++) {
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc - 1].code)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataFlightSearch = data.data;
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
-
-              if (abc == 2) {
-                this.dataFlightSearch = [];
-              }
 
               data.data.forEach((dataPesawat: any) => {
                 dataPesawat.transData.forEach((transData: any) => {
@@ -123,7 +118,7 @@ export class SearchFlightResultComponent implements OnInit {
         }
       }
     } else if (this.roundType == 'round-trip') {
-      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
+      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
         .pipe(
           tap((data: any) => {
             if (data.data.length > 0) {
@@ -169,7 +164,7 @@ export class SearchFlightResultComponent implements OnInit {
         )
         .subscribe();
     } else if (this.roundType == 'multiple-trip') {
-      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
+      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
         .pipe(
           tap((data: any) => {
             if (data.data.length > 0) {
