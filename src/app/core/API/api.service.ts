@@ -51,7 +51,7 @@ export class APIService {
         'infant': infant,
         'cabin': cabin,
         'type': type,
-        'supplierData': supplierData
+        'supplier': supplierData
       }
     };
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
@@ -76,7 +76,7 @@ export class APIService {
         'infant': infant,
         'cabin': cabin,
         'type': type,
-        'supplierData': supplierData,
+        'supplier': supplierData,
       }
     };
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
