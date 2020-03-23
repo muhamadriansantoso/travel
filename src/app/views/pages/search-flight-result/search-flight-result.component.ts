@@ -40,7 +40,6 @@ export class SearchFlightResultComponent implements OnInit {
   progressPercent: any;
   hideProgressBar: boolean;
   supplierData: any;
-  before_data: any;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -82,10 +81,17 @@ export class SearchFlightResultComponent implements OnInit {
   async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
       for (var abc = 0; abc < length; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code, this.dataFlightSearch)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
-              this.dataFlightSearch = data.data;
+              if (abc == 0) {
+                this.dataFlightSearch = data.data;
+              } else if (abc > 0) {
+                data.data.forEach((dataPesawat: any) => {
+                  this.dataFlightSearch.push(dataPesawat)
+                });
+              }
+
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
@@ -118,7 +124,7 @@ export class SearchFlightResultComponent implements OnInit {
         }
       }
     } else if (this.roundType == 'round-trip') {
-      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code, this.dataFlightSearch)
+      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
         .pipe(
           tap((data: any) => {
             if (data.data.length > 0) {
@@ -211,6 +217,20 @@ export class SearchFlightResultComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+
+  getUnique(arr, comp) {
+
+    const unique = arr
+      .map(e => e[comp])
+
+      // store the keys of the unique objects
+      .map((e, i, final) => final.indexOf(e) === i && i)
+
+      // eliminate the dead keys & store unique objects
+      .filter(e => arr[e]).map(e => arr[e]);
+
+    return unique;
   }
 
   flightDetailsAllCollapsed(value) {

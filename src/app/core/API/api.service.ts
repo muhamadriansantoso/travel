@@ -36,7 +36,7 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
-  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string, beforeData: any) {
+  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
     const httpOptions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -52,7 +52,6 @@ export class APIService {
         'cabin': cabin,
         'type': type,
         'supplier': supplierData,
-        'before_data': JSON.stringify(beforeData),
       }
     };
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
