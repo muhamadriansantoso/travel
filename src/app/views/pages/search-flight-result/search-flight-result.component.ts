@@ -88,9 +88,10 @@ export class SearchFlightResultComponent implements OnInit {
                 this.dataFlightSearch = data.data;
               } else if (abc > 0) {
                 data.data.forEach((dataPesawat: any) => {
-                  this.dataFlightSearch.push(dataPesawat);
+                  this.dataFlightSearch.push(dataPesawat)
                 });
               }
+
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
@@ -216,6 +217,20 @@ export class SearchFlightResultComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+
+  getUnique(arr, comp) {
+
+    const unique = arr
+      .map(e => e[comp])
+
+      // store the keys of the unique objects
+      .map((e, i, final) => final.indexOf(e) === i && i)
+
+      // eliminate the dead keys & store unique objects
+      .filter(e => arr[e]).map(e => arr[e]);
+
+    return unique;
   }
 
   flightDetailsAllCollapsed(value) {
