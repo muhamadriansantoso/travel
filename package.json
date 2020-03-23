@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.3.0",
     "@ngui/auto-complete": "^2.0.0",
     "angular-ng-autocomplete": "^1.1.16",
+    "angular-progress-bar": "^1.0.11",
     "bootstrap": "^4.4.1",
     "buffer": "^5.4.3",
     "concat-stream": "^2.0.0",

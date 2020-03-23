@@ -3,6 +3,7 @@ import {APIService} from '../../../core/API';
 import {ActivatedRoute, Router} from '@angular/router';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-search-flight-result',
@@ -27,9 +28,20 @@ export class SearchFlightResultComponent implements OnInit {
   multiplePhaseIndex: number;
   origin: string;
   destination: string;
+  departureDate: string;
+  returnDate: string;
+  adult: string;
+  child: string;
+  infant: string;
+  cabin: string;
   dataMultiTrip: any = [];
   dataMultiTripStep: number;
   sortByWhat: number;
+  currentPercent: any;
+  progressPercent: any;
+  hideProgressBar: boolean;
+
+  apiTestLink: string = "https://www.fixtrips.com/dev/api/v1/test/async";
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -40,6 +52,7 @@ export class SearchFlightResultComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router,
+    private http: HttpClient
   ) {
     this.unsubscribe = new Subject();
   }
@@ -49,137 +62,160 @@ export class SearchFlightResultComponent implements OnInit {
     this.phase = false;
     this.multiplePhase = 0;
     this.sortByWhat = 0;
+    this.progressPercent = 0;
+    this.hideProgressBar = false;
     this.route.queryParams.subscribe(params => {
-      this.roundType = params.type;
       this.origin = params.d;
       this.destination = params.a;
-      if (this.roundType == 'one-way') {
-        this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
-          .pipe(
-            tap((data: any) => {
-              if (data.data.length > 0) {
-                this.dataFlightSearch = data.data;
-                this.sessionID = data.sessionID;
-                this.airLine = data.data[0].transData[0].platingCarrierName;
+      this.departureDate = params.date;
+      this.returnDate = params.r_date;
+      this.adult = params.adult;
+      this.child = params.child;
+      this.cabin = params.cabin;
+      this.roundType = params.type;
 
-                data.data.forEach((dataPesawat: any) => {
-                  dataPesawat.transData.forEach((transData: any) => {
-                    this.airLineListUnique.push({
-                      value: transData.platingCarrierName
-                    });
-                  });
-
-                  this.transitListUnique.push({
-                    value: dataPesawat.stop
-                  });
-                });
-              } else {
-                this.searchFlightError = true;
-                this.searchFlightErrorMessage = data.data.error;
-              }
-            }),
-            takeUntil(this.unsubscribe),
-            finalize(() => {
-              this.loadingPage = false;
-              this.cdr.markForCheck();
-            })
-          )
-          .subscribe();
-      } else if (this.roundType == 'round-trip') {
-        this.api.AirLowFareSearchPort(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
-          .pipe(
-            tap((data: any) => {
-              if (data.data.length > 0) {
-                this.dataMultiTrip = data.data;
-                var ABC = 0;
-                data.data.forEach((globalData: any) => {
-                  globalData.departure.forEach((dataFlightSearch: any) => {
-                    this.dataFlightSearch.push(dataFlightSearch);
-
-                    globalData.departure.forEach((dataPesawat: any) => {
-                      dataPesawat.transData.forEach((transData: any) => {
-                        this.airLineListUnique.push({
-                          value: transData.platingCarrierName
-                        });
-                      });
-
-                      this.transitListUnique.push({
-                        value: dataPesawat.stop
-                      });
-                    });
-
-                    for (var i = 0; i < globalData.departure.length; i++) {
-                      globalData.departure[i] = Object.assign(globalData.departure[i], {
-                        return: data.data[ABC].return,
-                      });
-                    }
-                  });
-
-                  ABC = ABC + 1;
-                });
-                this.sessionID = data.sessionID;
-                this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
-              } else {
-                this.searchFlightError = true;
-                this.searchFlightErrorMessage = data.data.error;
-              }
-            }),
-            takeUntil(this.unsubscribe),
-            finalize(() => {
-              this.loadingPage = false;
-              this.cdr.markForCheck();
-            })
-          )
-          .subscribe();
-      } else if (this.roundType == 'multiple-trip') {
-        this.api.AirLowFareSearchPortArray(params.d, params.a, params.date, params.r_date, params.adult, params.child, params.infant, params.cabin, params.type)
-          .pipe(
-            tap((data: any) => {
-              if (data.data.length > 0) {
-                var ABC = 0;
-                this.dataMultiTripStep = data.data[0].flightSession.length;
-                this.dataMultiTrip = data.data;
-                data.data.forEach((globalData: any) => {
-                  globalData.departure.forEach((dataFlightSearch: any) => {
-                    this.dataFlightSearch.push(dataFlightSearch);
-
-                    globalData.departure.forEach((dataPesawat: any) => {
-                      dataPesawat.transData.forEach((transData: any) => {
-                        this.airLineListUnique.push({
-                          value: transData.platingCarrierName
-                        });
-                      });
-
-                      this.transitListUnique.push({
-                        value: dataPesawat.stop
-                      });
-                    });
-
-                    for (var i = 0; i < globalData.departure.length; i++) {
-                      globalData.departure[i] = Object.assign(globalData.departure[i], {
-                        index: ABC
-                      });
-                    }
-                  });
-
-                  ABC = ABC + 1;
-                });
-                this.sessionID = data.sessionID;
-                this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
-              } else {
-                this.searchFlightError = true;
-                this.searchFlightErrorMessage = data.data.error;
-              }
-            }),
-            takeUntil(this.unsubscribe),
-            finalize(() => {
-              this.loadingPage = false;
-              this.cdr.markForCheck();
-            })
-          )
-          .subscribe();
-      }
+      this.http.get(this.apiTestLink).toPromise().then((data: any) => {
+        this.getAPIFromSupplier();
+      });
     });
+  }
+
+  async getAPIFromSupplier() {
+    if (this.roundType == 'one-way') {
+      for (var abc = 1; abc <= 1; abc++) {
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
+          .toPromise().then((data: any) => {
+            if (data.data.length > 0) {
+              this.dataFlightSearch = data.data;
+              this.sessionID = data.sessionID;
+              this.airLine = data.data[0].transData[0].platingCarrierName;
+
+              if (abc == 2) {
+                this.dataFlightSearch = [];
+              }
+
+              data.data.forEach((dataPesawat: any) => {
+                dataPesawat.transData.forEach((transData: any) => {
+                  this.airLineListUnique.push({
+                    value: transData.platingCarrierName
+                  });
+                });
+
+                this.transitListUnique.push({
+                  value: dataPesawat.stop
+                });
+              });
+            } else {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = data.data.error;
+            }
+          });
+
+        this.loadingPage = false;
+        this.currentPercent = abc;
+        var totalPercent = 1;
+        this.progressPercent = (this.currentPercent / totalPercent) * 100;
+
+        if (this.progressPercent == 100) {
+          setTimeout(() => {
+            this.hideProgressBar = true;
+          }, 1000);
+        }
+      }
+    } else if (this.roundType == 'round-trip') {
+      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
+        .pipe(
+          tap((data: any) => {
+            if (data.data.length > 0) {
+              this.dataMultiTrip = data.data;
+              var ABC = 0;
+              data.data.forEach((globalData: any) => {
+                globalData.departure.forEach((dataFlightSearch: any) => {
+                  this.dataFlightSearch.push(dataFlightSearch);
+
+                  globalData.departure.forEach((dataPesawat: any) => {
+                    dataPesawat.transData.forEach((transData: any) => {
+                      this.airLineListUnique.push({
+                        value: transData.platingCarrierName
+                      });
+                    });
+
+                    this.transitListUnique.push({
+                      value: dataPesawat.stop
+                    });
+                  });
+
+                  for (var i = 0; i < globalData.departure.length; i++) {
+                    globalData.departure[i] = Object.assign(globalData.departure[i], {
+                      return: data.data[ABC].return,
+                    });
+                  }
+                });
+
+                ABC = ABC + 1;
+              });
+              this.sessionID = data.sessionID;
+              this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
+            } else {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = data.data.error;
+            }
+          }),
+          takeUntil(this.unsubscribe),
+          finalize(() => {
+            this.loadingPage = false;
+            this.cdr.markForCheck();
+          })
+        )
+        .subscribe();
+    } else if (this.roundType == 'multiple-trip') {
+      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
+        .pipe(
+          tap((data: any) => {
+            if (data.data.length > 0) {
+              var ABC = 0;
+              this.dataMultiTripStep = data.data[0].flightSession.length;
+              this.dataMultiTrip = data.data;
+              data.data.forEach((globalData: any) => {
+                globalData.departure.forEach((dataFlightSearch: any) => {
+                  this.dataFlightSearch.push(dataFlightSearch);
+
+                  globalData.departure.forEach((dataPesawat: any) => {
+                    dataPesawat.transData.forEach((transData: any) => {
+                      this.airLineListUnique.push({
+                        value: transData.platingCarrierName
+                      });
+                    });
+
+                    this.transitListUnique.push({
+                      value: dataPesawat.stop
+                    });
+                  });
+
+                  for (var i = 0; i < globalData.departure.length; i++) {
+                    globalData.departure[i] = Object.assign(globalData.departure[i], {
+                      index: ABC
+                    });
+                  }
+                });
+
+                ABC = ABC + 1;
+              });
+              this.sessionID = data.sessionID;
+              this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
+            } else {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = data.data.error;
+            }
+          }),
+          takeUntil(this.unsubscribe),
+          finalize(() => {
+            this.loadingPage = false;
+            this.cdr.markForCheck();
+          })
+        )
+        .subscribe();
+    }
   }
 
   flightDetailsAllCollapsed(value) {
