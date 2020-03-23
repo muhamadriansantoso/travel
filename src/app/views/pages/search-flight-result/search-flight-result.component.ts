@@ -82,7 +82,7 @@ export class SearchFlightResultComponent implements OnInit {
   async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
       for (var abc = 1; abc <= length + 1; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].name)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc - 1].code)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataFlightSearch = data.data;
@@ -118,7 +118,7 @@ export class SearchFlightResultComponent implements OnInit {
         }
       }
     } else if (this.roundType == 'round-trip') {
-      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].name)
+      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
         .pipe(
           tap((data: any) => {
             if (data.data.length > 0) {
@@ -164,7 +164,7 @@ export class SearchFlightResultComponent implements OnInit {
         )
         .subscribe();
     } else if (this.roundType == 'multiple-trip') {
-      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].name)
+      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
         .pipe(
           tap((data: any) => {
             if (data.data.length > 0) {
