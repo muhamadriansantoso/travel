@@ -56,6 +56,10 @@ export class APIService {
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
   }
 
+  getFlightSupplier() {
+    return this.http.get(APIURL + 'api/v1/flight/supplier');
+  }
+
   AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
     const httpOptions = {
       headers: {
