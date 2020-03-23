@@ -68,6 +68,7 @@ export class SearchFlightResultComponent implements OnInit {
       this.returnDate = params.r_date;
       this.adult = params.adult;
       this.child = params.child;
+      this.infant = params.infant;
       this.cabin = params.cabin;
       this.roundType = params.type;
 
