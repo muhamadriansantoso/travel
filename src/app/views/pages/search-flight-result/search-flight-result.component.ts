@@ -41,8 +41,6 @@ export class SearchFlightResultComponent implements OnInit {
   progressPercent: any;
   hideProgressBar: boolean;
 
-  apiTestLink: string = "https://www.fixtrips.com/dev/api/v1/test/async";
-
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
   private unsubscribe: Subject<any>;
@@ -74,25 +72,21 @@ export class SearchFlightResultComponent implements OnInit {
       this.cabin = params.cabin;
       this.roundType = params.type;
 
-      this.http.get(this.apiTestLink).toPromise().then((data: any) => {
-        this.getAPIFromSupplier();
+      this.api.getFlightSupplier().toPromise().then((data: any) => {
+        this.getAPIFromSupplier(data.length);
       });
     });
   }
 
-  async getAPIFromSupplier() {
+  async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
-      for (var abc = 1; abc <= 1; abc++) {
+      for (var abc = 1; abc <= length; abc++) {
         await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataFlightSearch = data.data;
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
-
-              if (abc == 2) {
-                this.dataFlightSearch = [];
-              }
 
               data.data.forEach((dataPesawat: any) => {
                 dataPesawat.transData.forEach((transData: any) => {
