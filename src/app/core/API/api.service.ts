@@ -52,7 +52,7 @@ export class APIService {
         'cabin': cabin,
         'type': type,
         'supplier': supplierData,
-        'before_data': encodeURIComponent(JSON.stringify(beforeData)),
+        'before_data': JSON.stringify(beforeData),
       }
     };
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
