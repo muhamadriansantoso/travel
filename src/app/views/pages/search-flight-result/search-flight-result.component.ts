@@ -3,7 +3,6 @@ import {APIService} from '../../../core/API';
 import {ActivatedRoute, Router} from '@angular/router';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-search-flight-result',
@@ -81,11 +80,17 @@ export class SearchFlightResultComponent implements OnInit {
 
   async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
-      for (var abc = 1; abc <= length + 1; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc - 1].code)
+      for (var abc = 0; abc < length; abc++) {
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
-              this.dataFlightSearch = data.data;
+              if (abc == 0) {
+                this.dataFlightSearch = data.data;
+              } else if (abc > 0) {
+                data.data.forEach((dataPesawat: any) => {
+                  this.dataFlightSearch.push(dataPesawat);
+                });
+              }
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
@@ -107,8 +112,8 @@ export class SearchFlightResultComponent implements OnInit {
           });
 
         this.loadingPage = false;
-        this.currentPercent = abc;
-        var totalPercent = 1;
+        this.currentPercent = abc + 1;
+        var totalPercent = length;
         this.progressPercent = (this.currentPercent / totalPercent) * 100;
 
         if (this.progressPercent == 100) {
