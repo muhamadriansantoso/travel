@@ -48,11 +48,7 @@
             </div>
           </div>
         </div>
-        <!--Loading Bar Progress-->
-        <div *ngIf="hideProgressBar == false" class="container">
-          <progress-bar [color]="'#ffc107'" [progress]="progressPercent"></progress-bar>
-        </div>
-        <!--Loading Bar Progress-->
+        <progress-bar *ngIf="hideProgressBar == false" [color]="'#ffc107'" [progress]="progressPercent"></progress-bar>
         <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
           <div class="centered-loader">
             <img src="./assets/images/loader.gif">
