@@ -36,7 +36,7 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
-  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
+  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
     const httpOptions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -51,6 +51,7 @@ export class APIService {
         'infant': infant,
         'cabin': cabin,
         'type': type,
+        'supplierData': supplierData
       }
     };
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
@@ -60,7 +61,7 @@ export class APIService {
     return this.http.get(APIURL + 'api/v1/flight/supplier');
   }
 
-  AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string) {
+  AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
     const httpOptions = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -75,6 +76,7 @@ export class APIService {
         'infant': infant,
         'cabin': cabin,
         'type': type,
+        'supplierData': supplierData,
       }
     };
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
