@@ -478,8 +478,7 @@
 
 <!--  Begin Round Trip Function  -->
 
-<section *ngIf="!loadingPage && roundType=='round-trip' && !phase" class="ftco-section"
-         style="padding: 0;">
+<section *ngIf="roundType=='round-trip' && !phase" class="ftco-section" style="padding: 0;">
   <div class="container pd-t118">
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
@@ -533,7 +532,18 @@
             </div>
           </div>
         </div>
-        <div
+        <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
+        <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
+          <div class="centered-loader">
+            <img src="./assets/images/loader.gif">
+            <div class="theme-loading-body">
+              <h2 class="theme-loading-title">Just a moment</h2>
+              <p class="theme-loading-subtitle">We are looking for flights </p>
+            </div>
+          </div>
+        </section>
+        <section *ngIf="!loadingPage">
+          <div
           *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
           class="card card-ticket">
           <div class="row">
@@ -940,6 +950,7 @@
             </div>
           </div>
         </div>
+        </section>
       </div>
     </div>
   </div>
@@ -1218,7 +1229,18 @@
             </div>
           </div>
         </div>
-        <div
+        <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
+        <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
+          <div class="centered-loader">
+            <img src="./assets/images/loader.gif">
+            <div class="theme-loading-body">
+              <h2 class="theme-loading-title">Just a moment</h2>
+              <p class="theme-loading-subtitle">We are looking for flights </p>
+            </div>
+          </div>
+        </section>
+        <section *ngIf="!loadingPage">
+          <div
           *ngFor="let dataflight of dataFlightAdvanced[0].return | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
           class="card card-ticket">
           <div class="row">
@@ -1623,6 +1645,7 @@
             </div>
           </div>
         </div>
+        </section>
       </div>
     </div>
   </div>

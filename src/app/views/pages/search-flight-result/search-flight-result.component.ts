@@ -68,6 +68,7 @@ export class SearchFlightResultComponent implements OnInit {
       this.returnDate = params.r_date;
       this.adult = params.adult;
       this.child = params.child;
+      this.infant = params.infant;
       this.cabin = params.cabin;
       this.roundType = params.type;
 
@@ -88,14 +89,26 @@ export class SearchFlightResultComponent implements OnInit {
                 this.dataFlightSearch = data.data;
               } else if (abc > 0) {
                 data.data.forEach((dataPesawat: any) => {
-                  this.dataFlightSearch.push(dataPesawat)
+                  this.dataFlightSearch.push(dataPesawat);
                 });
               }
+
+              var result = Object.values(this.dataFlightSearch.reduce((r, o) => {
+                if (o.transData[0].flightNumber in r && o.transData[0].platingCarrier in r) {
+                  if (o.totalPrice > r[o.transData[0].flightNumber].totalPrice)
+                    r[o.transData[0].flightNumber] = Object.assign({}, o);
+                } else {
+                  r[o.transData[0].flightNumber] = Object.assign({}, o);
+                }
+                return r;
+              }, {}));
+
+              this.dataFlightSearch = result;
 
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
-              data.data.forEach((dataPesawat: any) => {
+              this.dataFlightSearch.forEach((dataPesawat: any) => {
                 dataPesawat.transData.forEach((transData: any) => {
                   this.airLineListUnique.push({
                     value: transData.platingCarrierName
@@ -124,9 +137,9 @@ export class SearchFlightResultComponent implements OnInit {
         }
       }
     } else if (this.roundType == 'round-trip') {
-      this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
-        .pipe(
-          tap((data: any) => {
+      for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code)
+          .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataMultiTrip = data.data;
               var ABC = 0;
@@ -161,14 +174,19 @@ export class SearchFlightResultComponent implements OnInit {
               this.searchFlightError = true;
               this.searchFlightErrorMessage = data.data.error;
             }
-          }),
-          takeUntil(this.unsubscribe),
-          finalize(() => {
-            this.loadingPage = false;
-            this.cdr.markForCheck();
-          })
-        )
-        .subscribe();
+          });
+
+        this.loadingPage = false;
+        this.currentPercent = indexSupplier + 1;
+        var totalPercent = length;
+        this.progressPercent = (this.currentPercent / totalPercent) * 100;
+
+        if (this.progressPercent == 100) {
+          setTimeout(() => {
+            this.hideProgressBar = true;
+          }, 1000);
+        }
+      }
     } else if (this.roundType == 'multiple-trip') {
       this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
         .pipe(
