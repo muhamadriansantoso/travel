@@ -120,9 +120,6 @@ export class SearchFlightResultComponent implements OnInit {
                   value: dataPesawat.stop
                 });
               });
-            } else {
-              this.searchFlightError = true;
-              this.searchFlightErrorMessage = data.data.error;
             }
           });
 
@@ -134,6 +131,10 @@ export class SearchFlightResultComponent implements OnInit {
         if (this.progressPercent == 100) {
           setTimeout(() => {
             this.hideProgressBar = true;
+            if (this.dataFlightSearch.length == 0) {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = 'NO AVAILABILITY FOR THIS REQUEST';
+            }
           }, 1000);
         }
       }
@@ -258,7 +259,6 @@ export class SearchFlightResultComponent implements OnInit {
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = false;
       console.log(supplier);
-
       if (supplier == 'babylon') {
         this.api.getBaggageDataBabylon(index1, this.roundType, index2)
           .subscribe((data: any) => {
@@ -274,6 +274,7 @@ export class SearchFlightResultComponent implements OnInit {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = true;
+      this.babylonBaggageDate = undefined;
     }
   }
 

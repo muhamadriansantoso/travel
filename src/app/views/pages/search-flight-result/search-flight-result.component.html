@@ -315,7 +315,7 @@
 
             <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
               <div class="col-md-12">
-                <div *ngFor="let dataflightTrans of dataflight.transData; let i = index;" class="row mb-3"
+                <div *ngFor="let dataflightTrans of dataflight.transData; let segmentIndex = index;" class="row mb-3"
                      style="margin-top: 25px">
                   <div class="col-md-2 mb-3">
                     <div class="flight-section-airline-logo-wrap">
@@ -408,8 +408,8 @@
                           </ng-container>
 
                           <ng-container *ngIf="dataflight.supplier=='babylon' && this.babylonBaggageDate != undefined">
-                            <ng-container *ngIf="babylonBaggageDate[i].baggageData?.length > 0">
-                              <li *ngFor="let baggageDatas of babylonBaggageDate[i].baggageData">
+                            <ng-container *ngIf="babylonBaggageDate[segmentIndex].baggageData?.length > 0">
+                              <li *ngFor="let baggageDatas of babylonBaggageDate[segmentIndex].baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
                                   <span>Adult Baggage</span> : <span
                                   style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
@@ -426,7 +426,7 @@
                               </li>
                             </ng-container>
 
-                            <ng-container *ngIf="babylonBaggageDate[i].baggageData?.length == 0">
+                            <ng-container *ngIf="babylonBaggageDate[segmentIndex].baggageData?.length == 0">
                               <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
                             </ng-container>
                           </ng-container>
