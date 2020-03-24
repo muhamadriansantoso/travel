@@ -89,14 +89,26 @@ export class SearchFlightResultComponent implements OnInit {
                 this.dataFlightSearch = data.data;
               } else if (abc > 0) {
                 data.data.forEach((dataPesawat: any) => {
-                  this.dataFlightSearch.push(dataPesawat)
+                  this.dataFlightSearch.push(dataPesawat);
                 });
               }
+
+              var result = Object.values(this.dataFlightSearch.reduce((r, o) => {
+                if (o.transData[0].flightNumber in r && o.transData[0].platingCarrier in r) {
+                  if (o.totalPrice > r[o.transData[0].flightNumber].totalPrice)
+                    r[o.transData[0].flightNumber] = Object.assign({}, o);
+                } else {
+                  r[o.transData[0].flightNumber] = Object.assign({}, o);
+                }
+                return r;
+              }, {}));
+
+              this.dataFlightSearch = result;
 
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
-              data.data.forEach((dataPesawat: any) => {
+              this.dataFlightSearch.forEach((dataPesawat: any) => {
                 dataPesawat.transData.forEach((transData: any) => {
                   this.airLineListUnique.push({
                     value: transData.platingCarrierName
