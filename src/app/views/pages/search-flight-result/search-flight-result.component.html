@@ -291,11 +291,21 @@
 
             <hr class="mb-0" style="border-color: #f5f7fa!important;">
             <div class="row mt-3" style="text-align: left">
-              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                   [attr.aria-expanded]="!flightDetailsCollapsed"
-                   class="col-md-2 col-sm-2 col-xs-2">
-                Flight Details
-              </div>
+              <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                     [attr.aria-expanded]="!flightDetailsCollapsed"
+                     class="col-md-2 col-sm-2 col-xs-2">
+                  Flight Details
+                </div>
+              </ng-container>
+              <ng-template #elseFlightDetails>
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                     [attr.aria-expanded]="!flightDetailsCollapsed"
+                     class="col-md-2 col-sm-2 col-xs-2">
+                  Flight Details
+                </div>
+              </ng-template>
+
               <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                    [attr.aria-expanded]="!priceDetailsCollapsed"
                    class="col-md-2 col-sm-2 col-xs-2">
