@@ -405,9 +405,10 @@
                             </ng-container>
                           </ng-container>
 
-                          <ng-container *ngIf="dataflight.supplier=='babylon' && this.babylonBaggageDate != undefined">
-                            <ng-container *ngIf="babylonBaggageDate[segmentIndex].baggageData?.length > 0">
-                              <li *ngFor="let baggageDatas of babylonBaggageDate[segmentIndex].baggageData">
+                          <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                            <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
+                              <ng-container *ngIf="bbIndex == segmentIndex">
+                                <li *ngFor="let baggageDatas of bb.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
                                   <span>Adult Baggage</span> : <span
                                   style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
@@ -422,11 +423,12 @@
                                   style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
                                 </ng-container>
                               </li>
+                              </ng-container>
                             </ng-container>
 
-                            <ng-container *ngIf="babylonBaggageDate[segmentIndex].baggageData?.length == 0">
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
-                            </ng-container>
+                            <!--                            <ng-container *ngIf="babylonBaggageDate[0]?.length == 0">-->
+                            <!--                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>-->
+                            <!--                            </ng-container>-->
                           </ng-container>
                         </ul>
                       </div>

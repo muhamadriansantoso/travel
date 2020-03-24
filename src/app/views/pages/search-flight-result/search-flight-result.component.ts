@@ -63,6 +63,7 @@ export class SearchFlightResultComponent implements OnInit {
     this.sortByWhat = 0;
     this.progressPercent = 0;
     this.hideProgressBar = false;
+    this.babylonBaggageDate = '';
     this.route.queryParams.subscribe(params => {
       this.origin = params.d;
       this.destination = params.a;
@@ -97,11 +98,14 @@ export class SearchFlightResultComponent implements OnInit {
               }
 
               var result = Object.values(this.dataFlightSearch.reduce((r, o) => {
-                if (o.transData[0].flightNumber in r && o.transData[0].platingCarrier in r) {
-                  if (o.totalPrice > r[o.transData[0].flightNumber].totalPrice)
+                if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r) {
+                  if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
                     r[o.transData[0].flightNumber] = Object.assign({}, o);
+                    r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+                  }
                 } else {
                   r[o.transData[0].flightNumber] = Object.assign({}, o);
+                  r[o.transData[0].plattingCarrier] = Object.assign({}, o);
                 }
                 return r;
               }, {}));
@@ -241,26 +245,11 @@ export class SearchFlightResultComponent implements OnInit {
     }
   }
 
-  getUnique(arr, comp) {
-
-    const unique = arr
-      .map(e => e[comp])
-
-      // store the keys of the unique objects
-      .map((e, i, final) => final.indexOf(e) === i && i)
-
-      // eliminate the dead keys & store unique objects
-      .filter(e => arr[e]).map(e => arr[e]);
-
-    return unique;
-  }
-
   flightDetailsAllCollapsed(value, supplier, index1, index2) {
     if (!this.flightDetailsCollapsed[value]) {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = false;
-      console.log(supplier);
       if (supplier == 'babylon') {
         this.pleaseWaitLoader = true;
         this.babylonBaggageDate = '';
@@ -268,6 +257,7 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               this.babylonBaggageDate = data;
+              console.log(this.babylonBaggageDate);
             }),
             takeUntil(this.unsubscribe),
             finalize(() => {
