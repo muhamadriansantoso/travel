@@ -407,7 +407,7 @@
 
                           <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
                             <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
-                              <ng-container *ngIf="bbIndex == segmentIndex">
+                              <ng-container *ngIf="bbIndex == segmentIndex; else segmentNotMatch">
                                 <li *ngFor="let baggageDatas of bb.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
                                   <span>Adult Baggage</span> : <span
@@ -426,9 +426,9 @@
                               </ng-container>
                             </ng-container>
 
-                            <!--                            <ng-container *ngIf="babylonBaggageDate[0]?.length == 0">-->
-                            <!--                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>-->
-                            <!--                            </ng-container>-->
+                            <ng-container #segmentNotMatch>
+                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                            </ng-container>
                           </ng-container>
                         </ul>
                       </div>

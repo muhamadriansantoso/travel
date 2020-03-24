@@ -257,7 +257,6 @@ export class SearchFlightResultComponent implements OnInit {
           .pipe(
             tap((data: any) => {
               this.babylonBaggageDate = data;
-              console.log(this.babylonBaggageDate);
             }),
             takeUntil(this.unsubscribe),
             finalize(() => {
