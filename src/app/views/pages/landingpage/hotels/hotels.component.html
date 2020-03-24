@@ -7,12 +7,12 @@
             <div class="form_full">
               <div class="form-group">
                 <label>City or Destination</label>
-                <span class="icon"><i class="fa fa-map-marker"></i></span>
+                <span class="icon"><i class="fa fa-building"></i></span>
                 <input (valueChanged)="getGeoID($event)" [(ngModel)]="geoName"
                        [list-formatter]="autocompleListFormatter"
                        [max-num-list]="8" [min-chars]="2" [source]="geoList"
                        auto-complete class="form-control origin-typeahead" formControlName="destination"
-                       placeholder="Destination"
+                       placeholder="Where are you going?"
                 />
                 <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
                      style="display: block">
@@ -26,7 +26,7 @@
             <div class="form_full">
               <div class="form-group">
                 <label>Check In</label>
-                <span class="icon"><i class="fa fa-calendar"></i></span>
+                <span class="icon"><i class="fa fa-calendar-check"></i></span>
                 <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultCheckInDate"
                        (ngModelChange)="changeCheckInDate()"
                        [minDate]="minDate"
@@ -43,7 +43,7 @@
             <div class="form_full">
               <div class="form-group">
                 <label>Duration - Checkout</label>
-                <span class="icon"><i class="fa fa-calendar"></i></span>
+                <span class="icon"><i class="fa fa-bed"></i></span>
                 <select class="form-control" formControlName="duration">
                   <option *ngFor="let di of durationIndex; let i = index" value="{{di}}">
                     {{di}} Night - {{durationStayDate[i]}}
