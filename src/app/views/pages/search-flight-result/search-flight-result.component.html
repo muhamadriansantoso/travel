@@ -407,27 +407,26 @@
 
                           <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
                             <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
-                              <ng-container *ngIf="bbIndex == segmentIndex; else segmentNotMatch">
+                              <ng-container *ngIf="bbIndex == segmentIndex">
                                 <li *ngFor="let baggageDatas of bb.baggageData">
-                                <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
-                                </ng-container>
-                                <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
-                                </ng-container>
+                                  <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                    <span>Adult Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  </ng-container>
+                                  <ng-container
+                                    *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                    <span>Child Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  </ng-container>
+                                  <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                    <span>Infant Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  </ng-container>
+                                  <ng-container *ngIf="baggageDatas == undefined">
+                                    <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                  </ng-container>
                               </li>
                               </ng-container>
-                            </ng-container>
-
-                            <ng-container #segmentNotMatch>
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
                             </ng-container>
                           </ng-container>
                         </ul>
