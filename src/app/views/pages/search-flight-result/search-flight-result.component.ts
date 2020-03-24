@@ -263,6 +263,11 @@ export class SearchFlightResultComponent implements OnInit {
           .subscribe((data: any) => {
 
           });
+
+        this.api.getRulesDataBabylon(index1, this.roundType, index2)
+          .subscribe((data: any) => {
+
+          });
       }
     } else {
       this.flightDetailsCollapsed = [false];

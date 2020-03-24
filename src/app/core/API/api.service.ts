@@ -88,6 +88,12 @@ export class APIService {
     return this.http.post(APIURL + 'api/v1/flight/baggageBabylon', userData, {headers: urlHeader});
   }
 
+  getRulesDataBabylon(babylonSeasonID: string, babylonSearchType: string, babylonSelIndex: string) {
+    var userData = 'babylonSeasonID=' + babylonSeasonID + '&babylonSearchType=' + babylonSearchType + '&babylonSelIndex=' + babylonSelIndex;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post(APIURL + 'api/v1/flight/rulesBabylon', userData, {headers: urlHeader});
+  }
+
   searchHotel(geo: string, start_date: string, end_date: string) {
     const httpOptions = {
       headers: {
