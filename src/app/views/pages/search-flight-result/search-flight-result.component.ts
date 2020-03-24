@@ -40,6 +40,7 @@ export class SearchFlightResultComponent implements OnInit {
   progressPercent: any;
   hideProgressBar: boolean;
   supplierData: any;
+  babylonBaggageDate: any;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -261,7 +262,7 @@ export class SearchFlightResultComponent implements OnInit {
       if (supplier == 'babylon') {
         this.api.getBaggageDataBabylon(index1, this.roundType, index2)
           .subscribe((data: any) => {
-
+            this.babylonBaggageDate = data;
           });
 
         this.api.getRulesDataBabylon(index1, this.roundType, index2)
