@@ -64,9 +64,7 @@
             *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
             class="card card-ticket">
             <div class="row">
-              <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                   [attr.aria-expanded]="!flightDetailsCollapsed"
-                   class="col-md-10 text-center">
+              <div class="col-md-10 text-center">
                 <div class="row">
                   <div class="col-md-2 mb-3">
                     <div class="flight-section-airline-logo-wrap">
@@ -3298,6 +3296,21 @@
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">Pilih penerbangan lainnya
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="pleaseWaitLoader" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Please Wait..
+        </div>
       </div>
     </div>
   </div>

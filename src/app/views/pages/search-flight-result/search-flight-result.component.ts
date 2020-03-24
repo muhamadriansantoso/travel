@@ -39,6 +39,7 @@ export class SearchFlightResultComponent implements OnInit {
   currentPercent: any;
   progressPercent: any;
   hideProgressBar: boolean;
+  pleaseWaitLoader: boolean;
   supplierData: any;
   babylonBaggageDate: any;
 
@@ -260,15 +261,20 @@ export class SearchFlightResultComponent implements OnInit {
       this.flightDetailsCollapsed[value] = false;
       console.log(supplier);
       if (supplier == 'babylon') {
+        this.pleaseWaitLoader = true;
+        this.babylonBaggageDate = '';
         this.api.getBaggageDataBabylon(index1, this.roundType, index2)
-          .subscribe((data: any) => {
-            this.babylonBaggageDate = data;
-          });
-
-        this.api.getRulesDataBabylon(index1, this.roundType, index2)
-          .subscribe((data: any) => {
-
-          });
+          .pipe(
+            tap((data: any) => {
+              this.babylonBaggageDate = data;
+            }),
+            takeUntil(this.unsubscribe),
+            finalize(() => {
+              this.pleaseWaitLoader = false;
+              this.cdr.markForCheck();
+            })
+          )
+          .subscribe();
       }
     } else {
       this.flightDetailsCollapsed = [false];
