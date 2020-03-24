@@ -17,6 +17,7 @@ export class SearchFlightResultComponent implements OnInit {
   airLineListUnique: any = [];
   transitListUnique: any = [];
   sessionID: string;
+  babylonSeasonID: string;
   loadingButton: boolean;
   loadingPage: boolean;
   searchFlightError: boolean;
@@ -106,6 +107,9 @@ export class SearchFlightResultComponent implements OnInit {
               this.dataFlightSearch = result;
 
               this.sessionID = data.sessionID;
+              if (data.supplier == 'babylon') {
+                this.babylonSeasonID = data.babylonID;
+              }
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
               this.dataFlightSearch.forEach((dataPesawat: any) => {
@@ -259,7 +263,10 @@ export class SearchFlightResultComponent implements OnInit {
       console.log(supplier);
 
       if (supplier == 'babylon') {
-        this.api.getBaggageData()
+        this.api.getBaggageDataBabylon(this.babylonSeasonID, this.roundType, '01AMP1')
+          .subscribe((data: any) => {
+
+          });
       }
     } else {
       this.flightDetailsCollapsed = [false];
