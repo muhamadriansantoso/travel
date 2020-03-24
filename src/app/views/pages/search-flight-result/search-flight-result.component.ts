@@ -91,6 +91,7 @@ export class SearchFlightResultComponent implements OnInit {
                 this.dataFlightSearch = data.data;
               } else if (abc > 0) {
                 data.data.forEach((dataPesawat: any) => {
+                  this.flightDetailsCollapsed = [false];
                   this.dataFlightSearch.push(dataPesawat);
                 });
               }
