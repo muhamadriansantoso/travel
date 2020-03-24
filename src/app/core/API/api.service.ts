@@ -82,6 +82,12 @@ export class APIService {
     return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
   }
 
+  getBaggageData(id: string, startDate: string, endDate: string) {
+    var userData = 'id=' + id + '&start_date=' + startDate + '&end_date=' + endDate;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post(APIURL + 'api/v1/flight/baggage', userData, {headers: urlHeader});
+  }
+
   searchHotel(geo: string, start_date: string, end_date: string) {
     const httpOptions = {
       headers: {

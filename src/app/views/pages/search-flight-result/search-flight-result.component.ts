@@ -251,11 +251,16 @@ export class SearchFlightResultComponent implements OnInit {
     return unique;
   }
 
-  flightDetailsAllCollapsed(value) {
+  flightDetailsAllCollapsed(value, supplier) {
     if (!this.flightDetailsCollapsed[value]) {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = false;
+      console.log(supplier);
+
+      if (supplier == 'babylon') {
+        this.api.getBaggageData()
+      }
     } else {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
