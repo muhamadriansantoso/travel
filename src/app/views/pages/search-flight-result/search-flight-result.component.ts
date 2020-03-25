@@ -88,14 +88,8 @@ export class SearchFlightResultComponent implements OnInit {
         await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code, this.dataFlightSearch)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
-              if (abc == 0) {
-                this.dataFlightSearch = data.data;
-              } else if (abc > 0) {
-                data.data.forEach((dataPesawat: any) => {
-                  this.flightDetailsCollapsed = [false];
-                  this.dataFlightSearch.push(dataPesawat);
-                });
-              }
+              this.dataFlightSearch = data.data;
+              this.flightDetailsCollapsed = [false];
 
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
