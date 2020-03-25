@@ -128,7 +128,7 @@ export class SearchFlightResultComponent implements OnInit {
         await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
-              this.dataMultiTrip = data.data;
+              this.dataMultiTrip = this.getUniqueWithLowestPrice(data.data);
               if (indexSupplier > 0) {
                 this.dataFlightSearch = [];
               }
