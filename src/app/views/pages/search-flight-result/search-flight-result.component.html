@@ -1042,8 +1042,7 @@
   </div>
 </section>
 
-<section *ngIf="!loadingPage && roundType=='round-trip' && phase" class="ftco-section"
-         style="padding: 0;">
+<section *ngIf="roundType=='round-trip' && phase" class="ftco-section" style="padding: 0;">
   <div class="container">
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
@@ -1786,8 +1785,7 @@
 
 <!--  Begin Multi Trip Function  -->
 
-<section *ngIf="!loadingPage && roundType=='multiple-trip'" class="ftco-section"
-         style="padding: 0;">
+<section *ngIf="roundType=='multiple-trip'" class="ftco-section" style="padding: 0;">
   <ng-container *ngIf="multiplePhase <= dataMultiTripStep">
     <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
       <div *ngFor="let dataflight of dataFlightAdvanced"
