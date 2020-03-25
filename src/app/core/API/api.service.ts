@@ -80,9 +80,9 @@ export class APIService {
 
   AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string, dataBefore: any) {
     var userData = JSON.stringify({
-      'departure[]': d,
-      'arrival[]': a,
-      'departure_date[]': date,
+      'departure': d,
+      'arrival': a,
+      'departure_date': date,
       'return_date': r_date,
       'adult': adult,
       'child': child,
