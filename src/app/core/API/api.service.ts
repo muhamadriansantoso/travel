@@ -70,7 +70,8 @@ export class APIService {
       'type': type,
       'supplier': supplierData,
     });
-    return this.http.post(APIURL + 'api/v1/flight/search', userData);
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.http.post(APIURL + 'api/v1/flight/search', userData, {headers: urlHeader});
   }
 
   getFlightSupplier() {
