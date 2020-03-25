@@ -125,12 +125,12 @@ export class SearchFlightResultComponent implements OnInit {
       }
     } else if (this.roundType == 'round-trip') {
       for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataFlightSearch)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataMultiTrip = data.data;
               var ABC = 0;
-              data.data.forEach((globalData: any) => {
+              this.dataMultiTrip.forEach((globalData: any) => {
                 globalData.departure.forEach((dataFlightSearch: any) => {
                   this.flightDetailsCollapsed = [false];
                   this.dataFlightSearch.push(dataFlightSearch);
