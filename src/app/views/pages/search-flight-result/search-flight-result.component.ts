@@ -97,8 +97,6 @@ export class SearchFlightResultComponent implements OnInit {
                 });
               }
 
-              this.dataFlightSearch = this.getUniqueWithLowestPrice(this.dataFlightSearch);
-
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
 
