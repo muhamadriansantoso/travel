@@ -71,9 +71,6 @@ export class APIService {
       'supplier': supplierData,
       'dataBefore': dataBefore,
     });
-    var urlHeader = new HttpHeaders({
-      'Process-Data': 'false',
-    });
     return this.http.post(APIURL + 'api/v1/flight/search', userData);
   }
 
@@ -81,25 +78,21 @@ export class APIService {
     return this.http.get(APIURL + 'api/v1/flight/supplier');
   }
 
-  AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      params: {
-        'departure[]': d,
-        'arrival[]': a,
-        'departure_date[]': date,
-        'return_date': r_date,
-        'adult': adult,
-        'child': child,
-        'infant': infant,
-        'cabin': cabin,
-        'type': type,
-        'supplier': supplierData,
-      }
-    };
-    return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
+  AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string, dataBefore: any) {
+    var userData = JSON.stringify({
+      'departure[]': d,
+      'arrival[]': a,
+      'departure_date[]': date,
+      'return_date': r_date,
+      'adult': adult,
+      'child': child,
+      'infant': infant,
+      'cabin': cabin,
+      'type': type,
+      'supplier': supplierData,
+      'dataBefore': dataBefore,
+    });
+    return this.http.post(APIURL + 'api/v1/flight/search', userData);
   }
 
   getBaggageDataBabylon(babylonSeasonID: string, babylonSearchType: string, babylonSelIndex: string) {

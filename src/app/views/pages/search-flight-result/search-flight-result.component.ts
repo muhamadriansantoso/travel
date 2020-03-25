@@ -179,9 +179,9 @@ export class SearchFlightResultComponent implements OnInit {
         }
       }
     } else if (this.roundType == 'multiple-trip') {
-      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
-        .pipe(
-          tap((data: any) => {
+      for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
+        await this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
+          .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               var ABC = 0;
               this.dataMultiTripStep = data.data[0].flightSession.length;
@@ -217,14 +217,8 @@ export class SearchFlightResultComponent implements OnInit {
               this.searchFlightError = true;
               this.searchFlightErrorMessage = data.data.error;
             }
-          }),
-          takeUntil(this.unsubscribe),
-          finalize(() => {
-            this.loadingPage = false;
-            this.cdr.markForCheck();
-          })
-        )
-        .subscribe();
+          });
+      }
     }
   }
 
