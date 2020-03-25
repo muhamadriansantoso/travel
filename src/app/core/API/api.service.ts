@@ -36,25 +36,41 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
+  // AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
+  //   const httpOptions = {
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //     },
+  //     params: {
+  //       'departure': d,
+  //       'arrival': a,
+  //       'departure_date': date,
+  //       'return_date': r_date,
+  //       'adult': adult,
+  //       'child': child,
+  //       'infant': infant,
+  //       'cabin': cabin,
+  //       'type': type,
+  //       'supplier': supplierData,
+  //     }
+  //   };
+  //   return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
+  // }
+
   AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
-    const httpOptions = {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      params: {
-        'departure': d,
-        'arrival': a,
-        'departure_date': date,
-        'return_date': r_date,
-        'adult': adult,
-        'child': child,
-        'infant': infant,
-        'cabin': cabin,
-        'type': type,
-        'supplier': supplierData,
-      }
-    };
-    return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
+    var userData = JSON.stringify({
+      'departure': d,
+      'arrival': a,
+      'departure_date': date,
+      'return_date': r_date,
+      'adult': adult,
+      'child': child,
+      'infant': infant,
+      'cabin': cabin,
+      'type': type,
+      'supplier': supplierData,
+    });
+    return this.http.post(APIURL + 'api/v1/flight/search', userData);
   }
 
   getFlightSupplier() {

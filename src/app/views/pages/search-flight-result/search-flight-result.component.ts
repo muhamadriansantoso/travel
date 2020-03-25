@@ -97,20 +97,7 @@ export class SearchFlightResultComponent implements OnInit {
                 });
               }
 
-              var result = Object.values(this.dataFlightSearch.reduce((r, o) => {
-                if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r) {
-                  if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
-                    r[o.transData[0].flightNumber] = Object.assign({}, o);
-                    r[o.transData[0].plattingCarrier] = Object.assign({}, o);
-                  }
-                } else {
-                  r[o.transData[0].flightNumber] = Object.assign({}, o);
-                  r[o.transData[0].plattingCarrier] = Object.assign({}, o);
-                }
-                return r;
-              }, {}));
-
-              this.dataFlightSearch = result;
+              this.dataFlightSearch = this.getUniqueWithLowestPrice(this.dataFlightSearch);
 
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
@@ -153,6 +140,7 @@ export class SearchFlightResultComponent implements OnInit {
               var ABC = 0;
               data.data.forEach((globalData: any) => {
                 globalData.departure.forEach((dataFlightSearch: any) => {
+                  this.flightDetailsCollapsed = [false];
                   this.dataFlightSearch.push(dataFlightSearch);
 
                   globalData.departure.forEach((dataPesawat: any) => {
@@ -243,6 +231,59 @@ export class SearchFlightResultComponent implements OnInit {
         )
         .subscribe();
     }
+  }
+
+  getUniqueWithLowestPrice(array) {
+    var result = Object.values(array.reduce((r, o) => {
+      if (o.stop == 1) {
+        if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r) {
+          if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
+            r[o.transData[0].flightNumber] = Object.assign({}, o);
+            r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+          }
+        } else {
+          r[o.transData[0].flightNumber] = Object.assign({}, o);
+          r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+        }
+      }
+      if (o.stop == 2) {
+        if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r && o.transData[1].flightNumber in r && o.transData[1].plattingCarrier in r) {
+          if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
+            r[o.transData[0].flightNumber] = Object.assign({}, o);
+            r[o.transData[1].flightNumber] = Object.assign({}, o);
+            r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+            r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+          }
+        } else {
+          r[o.transData[0].flightNumber] = Object.assign({}, o);
+          r[o.transData[1].flightNumber] = Object.assign({}, o);
+          r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+          r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+        }
+      }
+      if (o.stop == 3) {
+        if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r && o.transData[1].flightNumber in r && o.transData[1].plattingCarrier in r && o.transData[2].flightNumber in r && o.transData[2].plattingCarrier in r) {
+          if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
+            r[o.transData[0].flightNumber] = Object.assign({}, o);
+            r[o.transData[1].flightNumber] = Object.assign({}, o);
+            r[o.transData[2].flightNumber] = Object.assign({}, o);
+            r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+            r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+            r[o.transData[2].plattingCarrier] = Object.assign({}, o);
+          }
+        } else {
+          r[o.transData[0].flightNumber] = Object.assign({}, o);
+          r[o.transData[1].flightNumber] = Object.assign({}, o);
+          r[o.transData[2].flightNumber] = Object.assign({}, o);
+          r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+          r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+          r[o.transData[2].plattingCarrier] = Object.assign({}, o);
+        }
+      }
+      return r;
+    }, {}));
+
+    return result;
   }
 
   flightDetailsAllCollapsed(value, supplier, index1, index2) {
