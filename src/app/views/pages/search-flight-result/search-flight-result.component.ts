@@ -85,7 +85,7 @@ export class SearchFlightResultComponent implements OnInit {
   async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
       for (var abc = 0; abc < length; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code, this.dataFlightSearch)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               if (abc == 0) {
@@ -131,7 +131,7 @@ export class SearchFlightResultComponent implements OnInit {
       }
     } else if (this.roundType == 'round-trip') {
       for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataFlightSearch)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataMultiTrip = data.data;

@@ -57,7 +57,7 @@ export class APIService {
   //   return this.http.get(APIURL + 'api/v1/flight/search', httpOptions);
   // }
 
-  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
+  AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string, dataBefore: any) {
     var userData = JSON.stringify({
       'departure': d,
       'arrival': a,
@@ -69,6 +69,7 @@ export class APIService {
       'cabin': cabin,
       'type': type,
       'supplier': supplierData,
+      'dataBefore': dataBefore,
     });
     var urlHeader = new HttpHeaders({
       'Process-Data': 'false',
