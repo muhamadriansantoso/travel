@@ -60,6 +60,7 @@ export class SearchFlightResultComponent implements OnInit {
     this.loadingPage = true;
     this.phase = false;
     this.multiplePhase = 0;
+    this.dataMultiTripStep = 0;
     this.sortByWhat = 0;
     this.progressPercent = 0;
     this.hideProgressBar = false;
@@ -218,6 +219,17 @@ export class SearchFlightResultComponent implements OnInit {
               this.searchFlightErrorMessage = data.data.error;
             }
           });
+
+        this.loadingPage = false;
+        this.currentPercent = indexSupplier + 1;
+        var totalPercent = length;
+        this.progressPercent = (this.currentPercent / totalPercent) * 100;
+
+        if (this.progressPercent == 100) {
+          setTimeout(() => {
+            this.hideProgressBar = true;
+          }, 1000);
+        }
       }
     }
   }
