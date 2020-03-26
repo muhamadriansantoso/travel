@@ -27,9 +27,12 @@
                         <div class="row">
                           <div class="col-md-2">
                             <div class="flight-section-airline-logo-wrap">
-                              <img
-                                class="img-fluid img-circle airline-logo"
-                                src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                              <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                                   class="img-fluid img-circle airline-logo"
+                                   src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                              <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                                   class="img-fluid img-circle airline-logo"
+                                   src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                             </div>
                           </div>
                           <ng-container *ngIf="dataflight.stop == 1">
