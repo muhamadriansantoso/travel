@@ -16,7 +16,10 @@
 }
 
 .active {
-  border-left: solid 10px #81898a;
+  border-top: 4px solid #ab8104;
+  background-color: #ffc107;
+  border-color: #ab8104;
+  border-radius: 15px 0;
 }
 
 .blinking {
