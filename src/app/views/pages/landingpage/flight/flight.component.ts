@@ -131,7 +131,7 @@ export class FlightComponent implements OnInit {
     this.initSearchFlightForm();
   }
 
-  autocompleListFormatter = (data: any): SafeHtml => {
+  autocompleListFormatter1 = (data: any): SafeHtml => {
     let html = `
 <div style="margin-bottom: 4px;">
 <span style="font-size: 14px; line-height: 20px; font-weight: 500" class="">${data.city}, ${data.country}</span>
@@ -139,6 +139,19 @@ export class FlightComponent implements OnInit {
 <div>
 <span style="color: #8f8f8f; font-size: 12px; line-height: 16px; white-space: normal; font-weight: 400">${data.iata} - ${data.name}</span>
 </div>`;
+    return this._sanitizer.bypassSecurityTrustHtml(html);
+  };
+
+  autocompleListFormatter = (data: any): SafeHtml => {
+    let html = `
+    <div class="iconContainer">
+        <img src="https://d1s5saizp11buw.cloudfront.net/airy-web/icon/flight/ic-airport.png">
+    </div>
+    <div class="autoCompleteResultText">
+      <h4>${data.city}</h4>
+      <h5>${data.iata} - ${data.name}</h5>
+    </div>
+`;
     return this._sanitizer.bypassSecurityTrustHtml(html);
   };
 

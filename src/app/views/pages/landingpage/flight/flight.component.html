@@ -29,6 +29,22 @@
                            style="display: block">
                         Origin is required
                       </div>
+
+                      <div style="display: none; top: 100%; z-index: 99999">
+                        <div class="resultWrapper">
+                          <div class="autoCompleteSubTitle">Airport List</div>
+                          <div *ngFor="let apl of airportList | slice:0:5" class="autoCompleteWrapper">
+                            <div class="iconContainer">
+                              <img src="https://d1s5saizp11buw.cloudfront.net/airy-web/icon/flight/ic-airport.png">
+                            </div>
+                            <div class="autoCompleteResultText">
+                              <h4>{{apl.city}}</h4>
+                              <h5>{{apl.iata}} - {{apl.name}}</h5>
+                            </div>
+                          </div>
+                          <div class="styles-autoCompleteWrapper-1hXAc"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
