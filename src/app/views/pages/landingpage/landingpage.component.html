@@ -21,16 +21,16 @@
                     </a>
                   </div>
                 </li>
-                <!--                <li (click)="activeClass('hotel')" [ngClass]="{'active': hotelClicked}">-->
-                <!--                  <div class="inner_list">-->
-                <!--                    <a routerLink="/hotel">-->
-                <!--                      <div class="image">-->
-                <!--                        <img src="./assets/fixtrips/image/hotel_icon.png">-->
-                <!--                      </div>-->
-                <!--                      <span>Hotel</span>-->
-                <!--                    </a>-->
-                <!--                  </div>-->
-                <!--                </li>-->
+                <li (click)="activeClass('hotel')" [ngClass]="{'active': hotelClicked}">
+                  <div class="inner_list">
+                    <a routerLink="/hotel">
+                      <div class="image">
+                        <img src="./assets/fixtrips/image/hotel_icon.png">
+                      </div>
+                      <span>Hotel</span>
+                    </a>
+                  </div>
+                </li>
                 <!--                <li role="presentation">-->
                 <!--                  <div class="inner_list">-->
                 <!--                    <a routerLink="/recreation">-->
@@ -90,63 +90,360 @@
           </div>
         </div>
       </div>
-      <!--      <div class="flight">-->
-      <!--        <div class="row">-->
-      <!--          <div class="col-md-6">-->
-      <!--            <div class="content">-->
-      <!--              <div class="image">-->
-      <!--                <img src="./assets/fixtrips/image/1(1).jpg">-->
-      <!--              </div>-->
-      <!--              <div class="inner_content">-->
-      <!--                <h2>Jakarta - Jeddah</h2>-->
-      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
-      <!--                <h4>1 Stop . 12 h 10 m</h4>-->
-      <!--                <h5>Rp3.000.000</h5>-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--            <div class="content">-->
-      <!--              <div class="image">-->
-      <!--                <img src="./assets/fixtrips/image/2(1).jpg">-->
-      <!--              </div>-->
-      <!--              <div class="inner_content">-->
-      <!--                <h2>Madinah Pullman</h2>-->
-      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
-      <!--                <h4>Non-stop . 45 m</h4>-->
-      <!--                <h5>Rp3.000.000</h5>-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--          </div>-->
-      <!--          <div class="col-md-6">-->
-      <!--            <div class="content">-->
-      <!--              <div class="image">-->
-      <!--                <img src="./assets/fixtrips/image/1(1).jpg">-->
-      <!--              </div>-->
-      <!--              <div class="inner_content">-->
-      <!--                <h2>Jambi</h2>-->
-      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
-      <!--                <h4>1 stop . 12 h 10 m</h4>-->
-      <!--                <h5>Rp3.000.000</h5>-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--            <div class="content">-->
-      <!--              <div class="image">-->
-      <!--                <img src="./assets/fixtrips/image/2(1).jpg">-->
-      <!--              </div>-->
-      <!--              <div class="inner_content">-->
-      <!--                <h2>Penang</h2>-->
-      <!--                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>-->
-      <!--                <h4>Non-stop . 45 m</h4>-->
-      <!--                <h5>Rp3.000.000</h5>-->
-      <!--              </div>-->
-      <!--            </div>-->
-      <!--          </div>-->
-      <!--          <div class="col-md-12">-->
-      <!--            <div class="view_all">-->
-      <!--              <a href="#">View All</a>-->
-      <!--            </div>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
+      <div class="flight">
+        <div class="row">
+          <div class="col-md-12 float-left">
+            <div class="title-section">Flight Promo
+            </div>
+            <div class="title-line"></div>
+          </div>
+          <div class="col-md-6">
+            <div class="content bg-white">
+              <div class="image">
+                <img src="https://source.unsplash.com/200x200/?Plane">
+              </div>
+              <div class="inner_content">
+                <h2>Jakarta - Jeddah</h2>
+                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>
+                <h4>1 Stop . 12 h 10 m</h4>
+                <h5>Rp3.000.000</h5>
+              </div>
+            </div>
+            <div class="content bg-white">
+              <div class="image">
+                <img src="https://source.unsplash.com/200x200/?flight">
+              </div>
+              <div class="inner_content">
+                <h2>Madinah Pullman</h2>
+                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>
+                <h4>Non-stop . 45 m</h4>
+                <h5>Rp3.000.000</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="content bg-white">
+              <div class="image">
+                <img src="https://source.unsplash.com/200x200/?airways">
+              </div>
+              <div class="inner_content">
+                <h2>Jambi</h2>
+                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>
+                <h4>1 stop . 12 h 10 m</h4>
+                <h5>Rp3.000.000</h5>
+              </div>
+            </div>
+            <div class="content bg-white">
+              <div class="image">
+                <img src="https://source.unsplash.com/200x200/?airlines">
+              </div>
+              <div class="inner_content">
+                <h2>Penang</h2>
+                <h3>Sat, 28 Sep - Wed, 2 Oct</h3>
+                <h4>Non-stop . 45 m</h4>
+                <h5>Rp3.000.000</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="view_all">
+              <button class="btn btn-info rounded-pill" href="#">View All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="float-left">
+            <div class="title-section">Popular Destination in Indonesia
+            </div>
+            <div class="title-line"></div>
+          </div>
+          <div _ngcontent-ont-c1="" class="text-center">
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1="" src="https://source.unsplash.com/200x200/?bali"
+                                               width="195"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">Bali</h3>
+                  </div>
+                </div>
+              </a></div>
+            </div>
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1="" src="https://source.unsplash.com/200x200/?jakarta"
+                                               width="195"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">
+                    Jakarta</h3></div>
+                </div>
+              </a></div>
+            </div>
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1="" src="https://source.unsplash.com/200x200/?bandung"
+                                               width="195"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">
+                    Bandung</h3></div>
+                </div>
+              </a></div>
+            </div>
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1="" src="https://source.unsplash.com/200x200/?bogor"
+                                               width="195"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">Bogor</h3>
+                  </div>
+                </div>
+              </a></div>
+            </div>
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1=""
+                                               src="https://source.unsplash.com/200x200/?yogyakarta" width="195"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">
+                    Yogyakarta</h3></div>
+                </div>
+              </a></div>
+            </div>
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1="" height="175"
+                                               src="https://source.unsplash.com/400x175/?lombok" width="525"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">Lombok</h3>
+                  </div>
+                </div>
+              </a></div>
+            </div>
+            <div _ngcontent-ont-c1="" class="country img-hover mb-4 mt-0">
+              <div _ngcontent-ont-c1="" class="country2"><a _ngcontent-ont-c1="" href="#">
+                <div _ngcontent-ont-c1=""><img _ngcontent-ont-c1="" height="175"
+                                               src="https://source.unsplash.com/400x175/?bromo" width="525"></div>
+                <div _ngcontent-ont-c1="" class="sub-country">
+                  <div _ngcontent-ont-c1="" class="country-text"><h3 _ngcontent-ont-c1="" class="h3-country">Bromo</h3>
+                  </div>
+                </div>
+              </a></div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <!--Flight Pricing-->
+          <div class="float-left mt-5">
+            <div class="title-section">Special Deal
+            </div>
+            <div class="title-line"></div>
+          </div>
+          <div class="col-md-12 popular-row">
+            <a
+              href="https://www.pergi.com/searchflight?ori=JKTA&amp;des=DPS&amp;ddate=2020-03-25&amp;rdate=2020-03-25&amp;adt=1&amp;chd=0&amp;inf=0&amp;isround=0"
+              tabindex="0">
+              <div class="item2 type2">
+                <div class="bg-container">
+
+
+                  <div class="bg-img" style="background-image: url(https://source.unsplash.com/300x300/?mountain);">
+                  </div>
+                  <div class="aligning-left text-left"
+                       style="left:30px !important; transform: translate(0,0) !important;">
+                    <div class="fa-2x font-weight-bold text-white" style="text-shadow: 1px 1px 2px #000;">Bali</div>
+                  </div>
+                </div>
+                <div class="bg-container2">
+                  <div class="price_favorit pv05 bt">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt="" class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_citilink.png"></td>
+                        <td class="pl05" style="width: 131px;">Citilink</td>
+                        <td class="fz13 light" style="width: 37px; color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          686.800</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="price_favorit pv05 bt">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt=""
+                          class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_singapore_airlines.png">
+                        </td>
+                        <td class="pl05" style="width: 131px;">Singapore Airlines</td>
+                        <td class="fz13 light" style="width: 37px;color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          4.980.900</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="price_favorit pv05">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt="" class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_garuda.png"></td>
+                        <td class="pl05" style="width: 131px;">Garuda Indonesia</td>
+                        <td class="fz13 light" style="width: 37px;color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          12.515.200</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </a>
+            <a
+              href="https://www.pergi.com/searchflight?ori=JKTA&amp;des=DPS&amp;ddate=2020-03-25&amp;rdate=2020-03-25&amp;adt=1&amp;chd=0&amp;inf=0&amp;isround=0"
+              tabindex="0">
+              <div class="item2 type2">
+                <div class="bg-container">
+
+
+                  <div class="bg-img" style="background-image: url(https://source.unsplash.com/300x300/?jungle);">
+                  </div>
+                  <div class="aligning-left text-left"
+                       style="left:30px !important; transform: translate(0,0) !important;">
+                    <div class="fa-2x font-weight-bold text-white" style="text-shadow: 1px 1px 2px #000;">Makassar</div>
+                  </div>
+                </div>
+                <div class="bg-container2">
+                  <div class="price_favorit pv05 bt">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt="" class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_citilink.png"></td>
+                        <td class="pl05" style="width: 131px;">Citilink</td>
+                        <td class="fz13 light" style="width: 37px; color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          686.800</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="price_favorit pv05 bt">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt=""
+                          class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_singapore_airlines.png">
+                        </td>
+                        <td class="pl05" style="width: 131px;">Singapore Airlines</td>
+                        <td class="fz13 light" style="width: 37px;color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          4.980.900</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="price_favorit pv05">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt="" class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_garuda.png"></td>
+                        <td class="pl05" style="width: 131px;">Garuda Indonesia</td>
+                        <td class="fz13 light" style="width: 37px;color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          12.515.200</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </a>
+            <a
+              href="https://www.pergi.com/searchflight?ori=JKTA&amp;des=DPS&amp;ddate=2020-03-25&amp;rdate=2020-03-25&amp;adt=1&amp;chd=0&amp;inf=0&amp;isround=0"
+              tabindex="0">
+              <div class="item2 type2">
+                <div class="bg-container">
+                  <div class="bg-img" style="background-image: url(https://source.unsplash.com/300x300/?sea);">
+                    <div class="promo-right">
+                      <div class="text-promo">
+                        -20%
+                      </div>
+                    </div>
+                  </div>
+                  <div class="aligning-left text-left"
+                       style="left:30px !important; transform: translate(0,0) !important;">
+                    <div class="fa-2x font-weight-bold text-white" style="text-shadow: 1px 1px 2px #000;">Banyuwangi
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-container2">
+                  <div class="price_favorit pv05 bt">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt="" class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_citilink.png"></td>
+                        <td class="pl05" style="width: 131px;">Citilink</td>
+                        <td class="fz13 light" style="width: 37px; color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          686.800</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="price_favorit pv05 bt">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt=""
+                          class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_singapore_airlines.png">
+                        </td>
+                        <td class="pl05" style="width: 131px;">Singapore Airlines</td>
+                        <td class="fz13 light" style="width: 37px;color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          4.980.900</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="price_favorit pv05">
+                    <table class="" id="">
+                      <tbody>
+                      <tr>
+                        <td class="pl05" style="width: 40px;"><img
+                          alt="" class="logo-airline ic-logo-airline"
+                          src="https://static01.cdnpergi.com/assets/desktop/img/airline/logo_garuda.png"></td>
+                        <td class="pl05" style="width: 131px;">Garuda Indonesia</td>
+                        <td class="fz13 light" style="width: 37px;color: #909090;">Dari</td>
+                        <td class="text-right pr20" style="width: 134px;"><h6 class="semibold purple mb0 clearfix">Rp
+                          12.515.200</h6></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
