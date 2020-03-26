@@ -322,18 +322,6 @@
     'autoclose': true
   });
 
-  function displayModalTiket() {
-    $('.modal-tiket').show();
-    $('.content-booking-ticket').css({zIndex: 1051});
-    $('.datepicker').css({zIndex: 1052});
-  }
-
-  function removeModalTiket() {
-    $('.modal-tiket').hide();
-    $('.content-booking-ticket').css({zIndex: 0});
-    $('.datepicker').css({zIndex: 0});
-  }
-
 
 })(jQuery);
 
