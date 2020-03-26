@@ -1,4 +1,3 @@
-<app-header></app-header>
 <section *ngIf="loadingPage" class="loadingValidatingPrice centered-loader text-center">
   <div class="centered-loader">
     <img src="./assets/images/loader.gif">
@@ -244,32 +243,32 @@
                 <div *ngFor="let passengerDetails of app.passengerType" class="mt-1">
                   <ng-container *ngIf="passengerDetails.code == 'ADT'">
                     <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
-                    <div class="float-right text-info">
+                    <div class="float-right">
                       <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                   <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
                     <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
-                    <div class="float-right text-info">
+                    <div class="float-right">
                       <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                   <ng-container *ngIf="passengerDetails.code == 'INF'">
                     <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
-                    <div class="float-right text-info">
+                    <div class="float-right">
                       <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                 </div>
                 <div class="mt-1">
                   <div class="float-left">Tax And Fees</div>
-                  <div class="float-right text-info">
+                  <div class="float-right">
                     <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>
                   </div>
                   <div class="clearfix"></div>
                 </div>
               </div>
-              <div class="card-footer" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
+              <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                 <div class="float-left">Total</div>
                 <div class="float-right text-info h4"><span>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
                 </div>
@@ -543,7 +542,7 @@
           </div>
           <div class="col-md-3 text-right">
 
-            <button (click)="submitBook()" class="btn btn-warning btn-lg rounded-pill" type="submit">Continue to Payment
+            <button (click)="submitBook()" class="btn-lg btn-warning rounded-pill" type="submit">Continue to Payment
             </button>
           </div>
         </div>
@@ -553,12 +552,51 @@
       <ng-template matStepLabel>Pay</ng-template>
       <ng-container *ngIf="!paymentData as pd">
         <div class="row">
-          <div class="col-md-12" style="text-align: right">
-            <h4>Select Payment Channel</h4>
+          <div class="col-md-12">
+            <div class="title-section">Select Payment Channel
+            </div>
+            <div class="title-line"></div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-8">
+            <form [formGroup]="paymentChannel">
+              <div
+                *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"
+                class="invalid-feedback"
+                style="display: block">
+                Payment Channel must be choosen
+              </div>
+              <ng-container *ngFor="let lpc of listPaymentChannel">
+                <ng-container *ngIf="lpc.productCode != 'CREDITCARD' && lpc.bankCode != '016'">
+                  <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
+                         [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
+                         class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
+                    <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
+                    <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
+                    <img class="float-right" height="22"
+                         src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
+                    <div class="clearfix"></div>
+                  </label>
+                </ng-container>
+              </ng-container>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="text-left">
+                    <span class="btn-lg btn-outline-warning" matStepperPrevious type="submit"><i
+                      class="fa fa-arrow-left"></i> Edit Details</span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="text-right">
+                    <button (click)="submitPayment()" class="btn-lg btn-warning" type="submit">Pay Now <i
+                      class="fa fa-arrow-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-4">
             <div class="col-md-12 mb-3">
-              <div class="card">
+              <div class="card alert alert-info ">
                 <div class="card-body pt-2 pb-3">
                   <div class="mt-1">
                     <div class="float-left">Order ID</div>
@@ -580,21 +618,21 @@
                     <ng-container *ngIf="passengerDetails.code == 'ADT'">
                       <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
                     <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
                       <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
                     <ng-container *ngIf="passengerDetails.code == 'INF'">
                       <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <strong>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</strong>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
@@ -602,53 +640,18 @@
                   <div class="mt-1">
                     <div class="float-left">Tax And Fees</div>
                     <div class="float-right">
-                      <strong>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</strong>
+                      <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>
                     </div>
                     <div class="clearfix"></div>
                   </div>
                 </div>
-                <div class="card-footer">
+                <div class="border-fix-left card-footer bg-white">
                   <div class="float-left">Total</div>
-                  <div class="float-right"><strong>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</strong></div>
+                  <div class="float-right text-info"><h4>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</h4></div>
                   <div class="clearfix"></div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-9">
-            <form [formGroup]="paymentChannel">
-              <div
-                *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"
-                class="invalid-feedback"
-                style="display: block">
-                Payment Channel harus dipilih
-              </div>
-              <ng-container *ngFor="let lpc of listPaymentChannel">
-                <ng-container *ngIf="lpc.productCode != 'CREDITCARD' && lpc.bankCode != '016'">
-                  <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"
-                         [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"
-                         class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">
-                    <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">
-                    <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>
-                    <img class="float-right" height="22"
-                         src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>
-                    <div class="clearfix"></div>
-                  </label>
-                </ng-container>
-              </ng-container>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="text-left">
-                    <button class="btn btn-success btn-lg" matStepperPrevious type="submit">Go Back</button>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="text-right">
-                    <button (click)="submitPayment()" class="btn btn-success btn-lg" type="submit">Pay</button>
-                  </div>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
       </ng-container>
@@ -856,7 +859,7 @@
       </ng-container>
     </mat-step>
     <mat-step [completed]="stepProcessComplete">
-      <ng-template matStepLabel>Selesai</ng-template>
+      <ng-template matStepLabel>Complete</ng-template>
     </mat-step>
   </mat-horizontal-stepper>
 </div>
