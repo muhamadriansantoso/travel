@@ -1,3 +1,4 @@
+<app-header></app-header>
 <section *ngIf="loadingPage" class="loadingSearchHotel centered-loader text-center">
   <div class="centered-loader">
     <img src="./assets/images/loader.gif">
@@ -9,43 +10,71 @@
 </section>
 
 <section *ngIf="!loadingPage" class="ftco-section" style="padding: 0;">
-  <div class="row">
-    <div class="col-md-8">
-      <h5
-        style="font-weight: 500; margin-bottom: 10px; padding-bottom: 10px; color: rgb(85, 85, 85); border-bottom: 1px solid rgb(204, 204, 204);">
-        {{dataHotelSearch?.length}} Hasil
-      </h5>
-      <div *ngFor="let datahotel of dataHotelSearch"
-           style="background-color: rgb(255, 255, 255); border-radius: 0.25rem; margin-bottom: 20px; padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
-        <div class="row">
-          <div class="col-md-3">
-            <div style="width: 100%; height: 150px; overflow: hidden;">
-              <ng-container *ngFor="let image of datahotel.images">
-                <ng-container *ngIf="image.type == 'MEDIUM'">
-                  <img src="{{image.uri}}" style="width: 100%; height: 100%;">
+  <div class="container pd-t118">
+    <div class="row">
+      <div class="col-sm-4 col-md-4  menu-filter-pc">
+        <div class="card">
+          <h5 class="filter-left">Filter</h5>
+          <hr class="m-0 mb-2">
+          <h6 class="filter-left">Nearby Location</h6>
+          <!--        <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">-->
+          <!--          <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"-->
+          <!--                 id="checkbox-{{allu.value}}"-->
+          <!--                 name="airlines" type="checkbox">-->
+          <!--          <label class="custom-control-label pointer text-secondary"-->
+          <!--                 for="checkbox-{{allu.value}}">{{allu.value}}</label>-->
+          <!--        </div>-->
+          <hr class="m-0 mb-2 mt-3">
+          <h6 class="filter-left">Room Type</h6>
+          <!--        <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">-->
+          <!--          <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"-->
+          <!--                 name="Transit" type="checkbox">-->
+          <!--          <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"-->
+          <!--                 for="transit-{{tlu.value}}">Direct</label>-->
+          <!--          <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"-->
+          <!--                 for="transit-{{tlu.value}}">{{tlu.value - 1}}-->
+          <!--            Transit</label>-->
+          <!--        </div>-->
+        </div>
+        <br>
+      </div>
+      <div class="col-md-8">
+        <h5
+          style="font-weight: 500; margin-bottom: 10px; padding-bottom: 10px; color: rgb(85, 85, 85); border-bottom: 1px solid rgb(204, 204, 204);">
+          {{dataHotelSearch?.length}} Hasil
+        </h5>
+        <div *ngFor="let datahotel of dataHotelSearch"
+             style="background-color: rgb(255, 255, 255); border-radius: 0.25rem; margin-bottom: 20px; padding: 10px; box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;">
+          <div class="row">
+            <div class="col-md-3">
+              <div style="width: 100%; height: 150px; overflow: hidden;">
+                <ng-container *ngFor="let image of datahotel.images">
+                  <ng-container *ngIf="image.type == 'MEDIUM'">
+                    <img src="{{image.uri}}" style="width: 100%; height: 100%;">
+                  </ng-container>
                 </ng-container>
-              </ng-container>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="mb-3">{{datahotel.name}}</div>
-            <small class="d-block mb-3">Lokasi: <strong>{{datahotel.address}}</strong></small>
-            <ul style="margin: 0px; padding: 0px; list-style: none;">
-              <li *ngIf="datahotel.eco == true"
-                  style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
-                ECO
-              </li>
-              <li *ngIf="datahotel.syariah == true"
-                style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
-                SYARIAH
-              </li>
-            </ul>
-          </div>
-          <div class="col-md-3 text-center"><small class="d-inline-block mb-2">Harga Per Malam</small>
-            <a class="btn btn-success"
-               (click)="openDetail(datahotel.id, start_date, duration)">
-              <strong>{{datahotel.rates.average_rate |currency:'Rp ':'symbol':'3.0'}}</strong>
-            </a>
+            <div class="col-md-6">
+              <div class="mb-3">{{datahotel.name}}</div>
+              <small class="d-block mb-3">Lokasi: <strong>{{datahotel.address}}</strong></small>
+              <ul style="margin: 0px; padding: 0px; list-style: none;">
+                <li *ngIf="datahotel.eco == true"
+                    style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
+                  ECO
+                </li>
+                <li *ngIf="datahotel.syariah == true"
+                    style="font-size: 11px; float: left; padding: 5px 10px; border: 1px solid gray; border-radius: 9999px; margin-right: 10px;">
+                  SYARIAH
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-3 text-center"><small class="d-inline-block mb-2">Harga Per Malam</small>
+              <a class="btn btn-warning rounded button-search-flight-ticket"
+                 (click)="openDetail(datahotel.id, start_date, duration)">
+                <strong>{{datahotel.rates.average_rate |currency:'Rp ':'symbol':'3.0'}}</strong>
+              </a>
+            </div>
           </div>
         </div>
       </div>

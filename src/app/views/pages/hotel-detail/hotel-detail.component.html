@@ -5,7 +5,7 @@
         <h3>{{dh.name}}</h3>
         <p>{{dh.address}}</p></div>
       <div (click)="scroll()" class="col-md-3 text-right">
-        <div class="btn btn-success rounded-pill">
+        <div class="btn btn-warning rounded-pill">
           <small class="d-block">Pesan mulai dari</small>
           <strong>
             {{dh.rates.total_base_rate |currency:'Rp ':'symbol':'3.0'}}
@@ -99,13 +99,14 @@
               {{roomTypes.rates[0].total_rate | currency:'Rp ':'symbol':'3.0'}}
             </h5>
             <ng-container *ngIf="roomTypes.available_allotments == 0;else availableBook">
-              <button class="btn btn-success btn-sm px-4" disabled style="cursor: not-allowed" type="button">Kamar
+              <button class="btn btn-warning rounded btn-sm px-4" disabled style="cursor: not-allowed" type="button">
+                Kamar
                 Habis
               </button>
             </ng-container>
             <ng-template #availableBook>
               <button (click)="plusMinus([i], roomTypes.rates[0].total_rate, roomTypes.capacity)" *ngIf="qty[i] == 0"
-                      class="btn btn-success btn-sm px-4" type="button">Pilih
+                      class="btn btn-warning rounded btn-sm px-4" type="button">Pilih
               </button>
               <ng-container *ngIf="plusMinusShow && qty[i] > 0">
                 <div class="plusMinusContainer col-md-12">
