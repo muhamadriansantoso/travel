@@ -405,8 +405,9 @@ export class FlightComponent implements OnInit {
         return: controls['return'].value,
       };
 
-      for (var dateArrayStart = 0; dateArrayStart < this.defaultDepatureDateArray.length; dateArrayStart++) {
-        this.defaultDepatureDateArray[dateArrayStart] = moment(this.defaultDepatureDateArray[dateArrayStart].year + '-' + this.defaultDepatureDateArray[dateArrayStart].month + '-' + this.defaultDepatureDateArray[dateArrayStart].day).format('YYYY-MM-DD');
+      var depatureDate = [];
+      for (var dateArrayStart = 0; dateArrayStart < this.formCityValueArray.filter(item => item).length; dateArrayStart++) {
+        depatureDate.push(this.defaultDepatureDateArray[dateArrayStart] = moment(this.defaultDepatureDateArray[dateArrayStart].year + '-' + this.defaultDepatureDateArray[dateArrayStart].month + '-' + this.defaultDepatureDateArray[dateArrayStart].day).format('YYYY-MM-DD'));
       }
 
       this.returnDate = '';
@@ -416,7 +417,7 @@ export class FlightComponent implements OnInit {
           {
             d: this.formCityValueArray.filter(item => item),
             a: this.toCityValueArray.filter(item => item),
-            date: this.defaultDepatureDateArray,
+            date: depatureDate,
             r_date: this.returnDate,
             adult: authData.adult,
             child: authData.child,

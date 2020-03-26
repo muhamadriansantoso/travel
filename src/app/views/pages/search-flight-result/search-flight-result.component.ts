@@ -39,7 +39,9 @@ export class SearchFlightResultComponent implements OnInit {
   currentPercent: any;
   progressPercent: any;
   hideProgressBar: boolean;
+  pleaseWaitLoader: boolean;
   supplierData: any;
+  babylonBaggageDate: any;
 
   public flightDetailsCollapsed: boolean[] = [];
   public priceDetailsCollapsed: boolean[] = [];
@@ -58,9 +60,11 @@ export class SearchFlightResultComponent implements OnInit {
     this.loadingPage = true;
     this.phase = false;
     this.multiplePhase = 0;
+    this.dataMultiTripStep = 0;
     this.sortByWhat = 0;
     this.progressPercent = 0;
     this.hideProgressBar = false;
+    this.babylonBaggageDate = '';
     this.route.queryParams.subscribe(params => {
       this.origin = params.d;
       this.destination = params.a;
@@ -82,28 +86,11 @@ export class SearchFlightResultComponent implements OnInit {
   async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
       for (var abc = 0; abc < length; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code, this.dataFlightSearch)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
-              if (abc == 0) {
-                this.dataFlightSearch = data.data;
-              } else if (abc > 0) {
-                data.data.forEach((dataPesawat: any) => {
-                  this.dataFlightSearch.push(dataPesawat);
-                });
-              }
-
-              var result = Object.values(this.dataFlightSearch.reduce((r, o) => {
-                if (o.transData[0].flightNumber in r && o.transData[0].platingCarrier in r) {
-                  if (o.totalPrice > r[o.transData[0].flightNumber].totalPrice)
-                    r[o.transData[0].flightNumber] = Object.assign({}, o);
-                } else {
-                  r[o.transData[0].flightNumber] = Object.assign({}, o);
-                }
-                return r;
-              }, {}));
-
-              this.dataFlightSearch = result;
+              this.dataFlightSearch = data.data;
+              this.flightDetailsCollapsed = [false];
 
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
@@ -119,9 +106,6 @@ export class SearchFlightResultComponent implements OnInit {
                   value: dataPesawat.stop
                 });
               });
-            } else {
-              this.searchFlightError = true;
-              this.searchFlightErrorMessage = data.data.error;
             }
           });
 
@@ -133,18 +117,26 @@ export class SearchFlightResultComponent implements OnInit {
         if (this.progressPercent == 100) {
           setTimeout(() => {
             this.hideProgressBar = true;
+            if (this.dataFlightSearch.length == 0) {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = 'NO AVAILABILITY FOR THIS REQUEST';
+            }
           }, 1000);
         }
       }
     } else if (this.roundType == 'round-trip') {
       for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataMultiTrip = data.data;
+              if (indexSupplier > 0) {
+                this.dataFlightSearch = [];
+              }
               var ABC = 0;
-              data.data.forEach((globalData: any) => {
+              this.dataMultiTrip.forEach((globalData: any) => {
                 globalData.departure.forEach((dataFlightSearch: any) => {
+                  this.flightDetailsCollapsed = [false];
                   this.dataFlightSearch.push(dataFlightSearch);
 
                   globalData.departure.forEach((dataPesawat: any) => {
@@ -188,9 +180,9 @@ export class SearchFlightResultComponent implements OnInit {
         }
       }
     } else if (this.roundType == 'multiple-trip') {
-      this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code)
-        .pipe(
-          tap((data: any) => {
+      for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
+        await this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
+          .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               var ABC = 0;
               this.dataMultiTripStep = data.data[0].flightSession.length;
@@ -226,40 +218,101 @@ export class SearchFlightResultComponent implements OnInit {
               this.searchFlightError = true;
               this.searchFlightErrorMessage = data.data.error;
             }
-          }),
-          takeUntil(this.unsubscribe),
-          finalize(() => {
-            this.loadingPage = false;
-            this.cdr.markForCheck();
-          })
-        )
-        .subscribe();
+          });
+
+        this.loadingPage = false;
+        this.currentPercent = indexSupplier + 1;
+        var totalPercent = length;
+        this.progressPercent = (this.currentPercent / totalPercent) * 100;
+
+        if (this.progressPercent == 100) {
+          setTimeout(() => {
+            this.hideProgressBar = true;
+          }, 1000);
+        }
+      }
     }
   }
 
-  getUnique(arr, comp) {
+  getUniqueWithLowestPrice(array) {
+    var result = Object.values(array.reduce((r, o) => {
+      if (o.stop == 1) {
+        if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r) {
+          if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
+            r[o.transData[0].flightNumber] = Object.assign({}, o);
+            r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+          }
+        } else {
+          r[o.transData[0].flightNumber] = Object.assign({}, o);
+          r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+        }
+      }
+      if (o.stop == 2) {
+        if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r && o.transData[1].flightNumber in r && o.transData[1].plattingCarrier in r) {
+          if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
+            r[o.transData[0].flightNumber] = Object.assign({}, o);
+            r[o.transData[1].flightNumber] = Object.assign({}, o);
+            r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+            r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+          }
+        } else {
+          r[o.transData[0].flightNumber] = Object.assign({}, o);
+          r[o.transData[1].flightNumber] = Object.assign({}, o);
+          r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+          r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+        }
+      }
+      if (o.stop == 3) {
+        if (o.transData[0].flightNumber in r && o.transData[0].plattingCarrier in r && o.transData[1].flightNumber in r && o.transData[1].plattingCarrier in r && o.transData[2].flightNumber in r && o.transData[2].plattingCarrier in r) {
+          if (o.totalPrice < r[o.transData[0].flightNumber].totalPrice) {
+            r[o.transData[0].flightNumber] = Object.assign({}, o);
+            r[o.transData[1].flightNumber] = Object.assign({}, o);
+            r[o.transData[2].flightNumber] = Object.assign({}, o);
+            r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+            r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+            r[o.transData[2].plattingCarrier] = Object.assign({}, o);
+          }
+        } else {
+          r[o.transData[0].flightNumber] = Object.assign({}, o);
+          r[o.transData[1].flightNumber] = Object.assign({}, o);
+          r[o.transData[2].flightNumber] = Object.assign({}, o);
+          r[o.transData[0].plattingCarrier] = Object.assign({}, o);
+          r[o.transData[1].plattingCarrier] = Object.assign({}, o);
+          r[o.transData[2].plattingCarrier] = Object.assign({}, o);
+        }
+      }
+      return r;
+    }, {}));
 
-    const unique = arr
-      .map(e => e[comp])
-
-      // store the keys of the unique objects
-      .map((e, i, final) => final.indexOf(e) === i && i)
-
-      // eliminate the dead keys & store unique objects
-      .filter(e => arr[e]).map(e => arr[e]);
-
-    return unique;
+    return result;
   }
 
-  flightDetailsAllCollapsed(value) {
+  flightDetailsAllCollapsed(value, supplier, index1, index2) {
     if (!this.flightDetailsCollapsed[value]) {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = false;
+      if (supplier == 'babylon') {
+        this.pleaseWaitLoader = true;
+        this.babylonBaggageDate = '';
+        this.api.getBaggageDataBabylon(index1, this.roundType, index2)
+          .pipe(
+            tap((data: any) => {
+              this.babylonBaggageDate = data;
+            }),
+            takeUntil(this.unsubscribe),
+            finalize(() => {
+              this.pleaseWaitLoader = false;
+              this.cdr.markForCheck();
+            })
+          )
+          .subscribe();
+      }
     } else {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = true;
+      this.babylonBaggageDate = undefined;
     }
   }
 

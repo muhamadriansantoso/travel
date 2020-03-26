@@ -64,15 +64,16 @@
             *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
             class="card card-ticket">
             <div class="row">
-              <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                   [attr.aria-expanded]="!flightDetailsCollapsed"
-                   class="col-md-10 text-center">
+              <div class="col-md-10 text-center">
                 <div class="row">
                   <div class="col-md-2 mb-3">
                     <div class="flight-section-airline-logo-wrap">
-                      <img
-                        class="img-fluid img-circle airline-logo"
-                        src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                      <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                      <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                     </div>
                   </div>
                   <ng-container *ngIf="dataflight.stop == 1">
@@ -288,11 +289,21 @@
 
             <hr class="mb-0" style="border-color: #f5f7fa!important;">
             <div class="row mt-3" style="text-align: left">
-              <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                   [attr.aria-expanded]="!flightDetailsCollapsed"
-                   class="col-md-2 col-sm-2 col-xs-2">
-                Flight Details
-              </div>
+              <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                     [attr.aria-expanded]="!flightDetailsCollapsed"
+                     class="col-md-2 col-sm-2 col-xs-2">
+                  Flight Details
+                </div>
+              </ng-container>
+              <ng-template #elseFlightDetails>
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                     [attr.aria-expanded]="!flightDetailsCollapsed"
+                     class="col-md-2 col-sm-2 col-xs-2">
+                  Flight Details
+                </div>
+              </ng-template>
+
               <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                    [attr.aria-expanded]="!priceDetailsCollapsed"
                    class="col-md-2 col-sm-2 col-xs-2">
@@ -302,12 +313,16 @@
 
             <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
               <div class="col-md-12">
-                <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
+                <div *ngFor="let dataflightTrans of dataflight.transData; let segmentIndex = index;" class="row mb-3"
                      style="margin-top: 25px">
                   <div class="col-md-2 mb-3">
                     <div class="flight-section-airline-logo-wrap">
-                      <img class="img-fluid img-circle airline-logo"
-                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png">
+                      <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                      <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
                     </div>
                   </div>
                   <div class="col-md-10">
@@ -367,25 +382,52 @@
                             <span>Cabin Class</span> : <span
                             style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                           </li>
-                          <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
-                            <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
-                              <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                <span>Adult Baggage</span> : <span
-                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                              </ng-container>
-                              <ng-container
-                                *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                <span>Child Baggage</span> : <span
-                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                              </ng-container>
-                              <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                <span>Infant Baggage</span> : <span
-                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                              </ng-container>
-                            </li>
+                          <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                            <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
+                              <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
+                                <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                  <span>Adult Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                  <span>Child Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                  <span>Infant Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                </ng-container>
+                              </li>
+                            </ng-container>
+                            <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                            </ng-container>
                           </ng-container>
-                          <ng-container *ngIf="dataflightTrans.baggageData?.length == 0">
-                            <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+
+                          <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                            <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
+                              <ng-container *ngIf="bbIndex == segmentIndex">
+                                <li *ngFor="let baggageDatas of bb.baggageData">
+                                  <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                    <span>Adult Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  </ng-container>
+                                  <ng-container
+                                    *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                    <span>Child Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  </ng-container>
+                                  <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                    <span>Infant Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  </ng-container>
+                                  <ng-container *ngIf="baggageDatas == undefined">
+                                    <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                  </ng-container>
+                              </li>
+                              </ng-container>
+                            </ng-container>
                           </ng-container>
                         </ul>
                       </div>
@@ -512,7 +554,7 @@
 
       <div class="col-sm-9 col-md-9">
         <div class="alert alert-warning">
-          <p class="mb-0 text-center">Pilih pesawat untuk keberangkatan</p>
+          <p class="mb-0 text-center">Select plane for departure</p>
         </div>
         <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
@@ -547,13 +589,14 @@
           *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
           class="card card-ticket">
           <div class="row">
-            <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                 [attr.aria-expanded]="!flightDetailsCollapsed"
-                 class="col-md-10 text-center">
+            <div class="col-md-10 text-center">
               <div class="row">
                 <div class="col-md-2 mb-3">
                   <div class="flight-section-airline-logo-wrap">
-                    <img
+                    <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                       class="img-fluid img-circle airline-logo"
                       src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                   </div>
@@ -771,11 +814,20 @@
 
           <hr class="mb-0" style="border-color: #f5f7fa!important;">
           <div class="row mt-3" style="text-align: left">
-            <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                 [attr.aria-expanded]="!flightDetailsCollapsed"
-                 class="col-md-2 col-sm-2 col-xs-2">
-              Flight Details
-            </div>
+            <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                   [attr.aria-expanded]="!flightDetailsCollapsed"
+                   class="col-md-2 col-sm-2 col-xs-2">
+                Flight Details
+              </div>
+            </ng-container>
+            <ng-template #elseFlightDetails>
+              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                   [attr.aria-expanded]="!flightDetailsCollapsed"
+                   class="col-md-2 col-sm-2 col-xs-2">
+                Flight Details
+              </div>
+            </ng-template>
             <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                  [attr.aria-expanded]="!priceDetailsCollapsed"
                  class="col-md-2 col-sm-2 col-xs-2">
@@ -785,12 +837,16 @@
 
           <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
             <div class="col-md-12">
-              <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
+              <div *ngFor="let dataflightTrans of dataflight.transData; let segmentIndex = index;" class="row mb-3"
                    style="margin-top: 25px">
                 <div class="col-md-2 mb-3">
                   <div class="flight-section-airline-logo-wrap">
-                    <img class="img-fluid img-circle airline-logo"
-                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                   </div>
                 </div>
                 <div class="col-md-10">
@@ -800,7 +856,7 @@
                         <li>
                           <i class="fa fa-plane flight-details-schedule-icon"></i>
                           <p class="flight-details-schedule-date">
-                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, YYYY' }}</p>
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY' }}</p>
                           <div class="flight-details-schedule-time">
                             {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
                             {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
@@ -834,38 +890,66 @@
                           <span>Airplane</span> :
                           <span
                             style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
-                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                            </span>
                         </li>
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                           <span>Operated By</span> :
                           <span style="color: #8F8F8F;">
-                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                              {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                             {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                          </span>
+                            </span>
                         </li>
                         <li>
                           <span>Cabin Class</span> : <span
                           style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                         </li>
-                        <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
-                          <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
-                            <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                              <span>Adult Baggage</span> : <span
-                              style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                            </ng-container>
-                            <ng-container
-                              *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                              <span>Child Baggage</span> : <span
-                              style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                            </ng-container>
-                            <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                              <span>Infant Baggage</span> : <span
-                              style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                            </ng-container>
-                          </li>
+                        <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                          <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
+                            <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
+                              <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                <span>Adult Baggage</span> : <span
+                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                              </ng-container>
+                              <ng-container
+                                *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                <span>Child Baggage</span> : <span
+                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                              </ng-container>
+                              <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                <span>Infant Baggage</span> : <span
+                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                              </ng-container>
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                            <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                          </ng-container>
                         </ng-container>
-                        <ng-container *ngIf="dataflightTrans.baggageData?.length == 0">
-                          <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+
+                        <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                          <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
+                            <ng-container *ngIf="bbIndex == segmentIndex">
+                              <li *ngFor="let baggageDatas of bb.baggageData">
+                                <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                  <span>Adult Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                  <span>Child Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                  <span>Infant Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="baggageDatas == undefined">
+                                  <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                </ng-container>
+                              </li>
+                            </ng-container>
+                          </ng-container>
                         </ng-container>
                       </ul>
                     </div>
@@ -956,227 +1040,7 @@
   </div>
 </section>
 
-<section *ngIf="!loadingPage && roundType=='round-trip' && phase" class="ftco-section"
-         style="padding: 0;">
-  <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
-    <div
-      *ngFor="let dataflight of dataFlightAdvanced"
-      class="card card-ticket">
-      <div class="row">
-        <div (click)="returnPrevious(dataflight)"
-             class="col-md-10 text-center">
-          <div class="row">
-            <div class="col-md-2 mb-3">
-              <div class="flight-section-airline-logo-wrap">
-                <img
-                  class="img-fluid img-circle airline-logo"
-                  src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
-              </div>
-            </div>
-            <ng-container *ngIf="dataflight.stop == 1">
-              <div class="col-md-10">
-                <div class="row">
-                  <div class="col-md-3">
-                    <p
-                      class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                    <p class="destination-title">
-                      {{dataflight.transData[0].origin_city_name}}</p>
-                    <p
-                      class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                  </div>
-
-                  <div class="col-md-6 text-center">
-                    <div class="flight-section-path">
-                      <div class="flight-section-fly-time">
-                        <p>{{dataflight.transData[0].flightTime | minuteToHour}}</p>
-                      </div>
-                      <div class="flight-section-path-line"></div>
-                      <div>
-                        <div class="flight-section-path-line-start">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"></div>
-                          <div class="flight-section-path-line-title">
-                            {{dataflight.transData[0].origin}}
-                          </div>
-                        </div>
-
-                        <div class="flight-section-path-line-middle">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"
-                               style="visibility: hidden"></div>
-                          <div class="flight-section-path-line-title">Direct</div>
-                        </div>
-
-                        <div>
-                          <div class="flight-section-path-line-end">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].destination}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <p
-                      class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                    <p class="destination-title">
-                      {{dataflight.transData[0].destination_city_name}}</p>
-                    <p
-                      class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="dataflight.stop == 2">
-              <div class="col-md-10">
-                <div class="row">
-                  <div class="col-md-3">
-                    <p
-                      class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                    <p class="destination-title">
-                      {{dataflight.transData[0].origin_city_name}}</p>
-                    <p
-                      class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                  </div>
-
-                  <div class="col-md-6 text-center">
-                    <div class="flight-section-path">
-                      <div class="flight-section-fly-time">
-                        <p>{{(dataflight.transData[0].flightTime +
-                          dataflight.transData[1].flightTime) | minuteToHour}},
-                          {{(dataflight.stop) - 1}} Transit</p>
-                      </div>
-                      <div class="flight-section-path-line"></div>
-                      <div>
-                        <div class="flight-section-path-line-start">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"></div>
-                          <div class="flight-section-path-line-title">
-                            {{dataflight.transData[0].origin}}
-                          </div>
-                        </div>
-
-                        <div class="flight-section-path-line-middle">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"></div>
-                          <div class="flight-section-path-line-title">
-                            {{dataflight.transData[0].destination}}
-                          </div>
-                        </div>
-
-                        <div>
-                          <div class="flight-section-path-line-end">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[1].destination}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <p
-                      class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                    <p class="destination-title">
-                      {{dataflight.transData[1].destination_city_name}}</p>
-                    <p
-                      class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="dataflight.stop == 3">
-              <div class="col-md-10">
-                <div class="row">
-                  <div class="col-md-3">
-                    <p
-                      class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                    <p class="destination-title">
-                      {{dataflight.transData[0].origin_city_name}}</p>
-                    <p
-                      class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                  </div>
-
-                  <div class="col-md-6 text-center">
-                    <div class="flight-section-path">
-                      <div class="flight-section-fly-time">
-                        <p>{{(dataflight.transData[0].flightTime +
-                          dataflight.transData[1].flightTime) | minuteToHour}},
-                          {{(dataflight.stop) - 1}} Transit</p>
-                      </div>
-                      <div class="flight-section-path-line"></div>
-                      <div>
-                        <div class="flight-section-path-line-start">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"></div>
-                          <div class="flight-section-path-line-title">
-                            {{dataflight.transData[0].origin}}
-                          </div>
-                        </div>
-
-                        <div class="flight-section-path-line-middle-1">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"></div>
-                          <div class="flight-section-path-line-title">
-                            {{dataflight.transData[1].origin}}
-                          </div>
-                        </div>
-
-                        <div class="flight-section-path-line-middle-2">
-                          <i class="fa fa-plane flight-section-path-icon"></i>
-                          <div class="flight-section-path-line-dot"></div>
-                          <div class="flight-section-path-line-title">
-                            {{dataflight.transData[1].destination}}
-                          </div>
-                        </div>
-
-                        <div>
-                          <div class="flight-section-path-line-end">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[2].destination}}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-3">
-                    <p
-                      class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                    <p class="destination-title">
-                      {{dataflight.transData[1].destination_city_name}}</p>
-                    <p
-                      class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                  </div>
-                </div>
-              </div>
-            </ng-container>
-
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-6 col-xs-12">
-              <div class="title-maskapai">
-                {{dataflight.transData[0].platingCarrierName}}
-                <span>{{dataflight.transData[0].flightNumber}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section *ngIf="roundType=='round-trip' && phase" class="ftco-section" style="padding: 0;">
   <div class="container">
     <div class="row">
       <div class="col-sm-3 col-md-3  menu-filter-pc">
@@ -1206,10 +1070,231 @@
         <br>
       </div>
       <br>
-
       <div class="col-sm-9 col-md-9">
         <div class="alert alert-warning">
-          <p class="mb-0 text-center">Pilih pesawat untuk kepulangan</p>
+          <p class="mb-0 text-center">Select plane for return</p>
+        </div>
+        <div class="col-sm-12 col-md-12" style="margin: auto; float: none">
+          <div
+            *ngFor="let dataflight of dataFlightAdvanced"
+            class="card card-ticket">
+            <div class="row">
+              <div (click)="returnPrevious(dataflight)"
+                   class="col-md-10 text-center">
+                <div class="row">
+                  <div class="col-md-2 mb-3">
+                    <div class="flight-section-airline-logo-wrap">
+                      <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                      <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                    </div>
+                  </div>
+                  <ng-container *ngIf="dataflight.stop == 1">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].origin_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <div class="flight-section-path">
+                            <div class="flight-section-fly-time">
+                              <p>{{dataflight.transData[0].flightTime | minuteToHour}}</p>
+                            </div>
+                            <div class="flight-section-path-line"></div>
+                            <div>
+                              <div class="flight-section-path-line-start">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"
+                                     style="visibility: hidden"></div>
+                                <div class="flight-section-path-line-title">Direct</div>
+                              </div>
+
+                              <div>
+                                <div class="flight-section-path-line-end">
+                                  <i class="fa fa-plane flight-section-path-icon"></i>
+                                  <div class="flight-section-path-line-dot"></div>
+                                  <div class="flight-section-path-line-title">
+                                    {{dataflight.transData[0].destination}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].destination_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="dataflight.stop == 2">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].origin_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <div class="flight-section-path">
+                            <div class="flight-section-fly-time">
+                              <p>{{(dataflight.transData[0].flightTime +
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                {{(dataflight.stop) - 1}} Transit</p>
+                            </div>
+                            <div class="flight-section-path-line"></div>
+                            <div>
+                              <div class="flight-section-path-line-start">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].destination}}
+                                </div>
+                              </div>
+
+                              <div>
+                                <div class="flight-section-path-line-end">
+                                  <i class="fa fa-plane flight-section-path-icon"></i>
+                                  <div class="flight-section-path-line-dot"></div>
+                                  <div class="flight-section-path-line-title">
+                                    {{dataflight.transData[1].destination}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[1].destination_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="dataflight.stop == 3">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].origin_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <div class="flight-section-path">
+                            <div class="flight-section-fly-time">
+                              <p>{{(dataflight.transData[0].flightTime +
+                                  dataflight.transData[1].flightTime) | minuteToHour}},
+                                {{(dataflight.stop) - 1}} Transit</p>
+                            </div>
+                            <div class="flight-section-path-line"></div>
+                            <div>
+                              <div class="flight-section-path-line-start">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle-1">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[1].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle-2">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[1].destination}}
+                                </div>
+                              </div>
+
+                              <div>
+                                <div class="flight-section-path-line-end">
+                                  <i class="fa fa-plane flight-section-path-icon"></i>
+                                  <div class="flight-section-path-line-dot"></div>
+                                  <div class="flight-section-path-line-title">
+                                    {{dataflight.transData[2].destination}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[1].destination_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-6 col-xs-12">
+                    <div class="title-maskapai">
+                      {{dataflight.transData[0].platingCarrierName}}
+                      <span>{{dataflight.transData[0].flightNumber}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="mb-3 p-2 rounded border-bottom">
           <div class="row">
@@ -1244,15 +1329,16 @@
           *ngFor="let dataflight of dataFlightAdvanced[0].return | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
           class="card card-ticket">
           <div class="row">
-            <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                 [attr.aria-expanded]="!flightDetailsCollapsed"
-                 class="col-md-10 text-center">
+            <div class="col-md-10 text-center">
               <div class="row">
                 <div class="col-md-2 mb-3">
                   <div class="flight-section-airline-logo-wrap">
-                    <img
-                      class="img-fluid img-circle airline-logo"
-                      src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                   </div>
                 </div>
                 <ng-container *ngIf="dataflight.stop == 1">
@@ -1466,11 +1552,20 @@
 
           <hr class="mb-0" style="border-color: #f5f7fa!important;">
           <div class="row mt-3" style="text-align: left">
-            <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                 [attr.aria-expanded]="!flightDetailsCollapsed"
-                 class="col-md-2 col-sm-2 col-xs-2">
-              Flight Details
-            </div>
+            <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                   [attr.aria-expanded]="!flightDetailsCollapsed"
+                   class="col-md-2 col-sm-2 col-xs-2">
+                Flight Details
+              </div>
+            </ng-container>
+            <ng-template #elseFlightDetails>
+              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                   [attr.aria-expanded]="!flightDetailsCollapsed"
+                   class="col-md-2 col-sm-2 col-xs-2">
+                Flight Details
+              </div>
+            </ng-template>
             <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                  [attr.aria-expanded]="!priceDetailsCollapsed"
                  class="col-md-2 col-sm-2 col-xs-2">
@@ -1480,12 +1575,16 @@
 
           <div [ngbCollapse]="!flightDetailsCollapsed[i]" class="card mt-2" style="background: #f2f8ff;">
             <div class="col-md-12">
-              <div *ngFor="let dataflightTrans of dataflight.transData" class="row mb-3"
+              <div *ngFor="let dataflightTrans of dataflight.transData; let segmentIndex = index" class="row mb-3"
                    style="margin-top: 25px">
                 <div class="col-md-2 mb-3">
                   <div class="flight-section-airline-logo-wrap">
-                    <img class="img-fluid img-circle airline-logo"
-                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                    <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                         class="img-fluid img-circle airline-logo"
+                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                   </div>
                 </div>
                 <div class="col-md-10">
@@ -1495,7 +1594,7 @@
                         <li>
                           <i class="fa fa-plane flight-details-schedule-icon"></i>
                           <p class="flight-details-schedule-date">
-                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, YYYY' }}</p>
+                            {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY' }}</p>
                           <div class="flight-details-schedule-time">
                             {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
                             {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}
@@ -1529,38 +1628,66 @@
                           <span>Airplane</span> :
                           <span
                             style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
-                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                            {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
+                            </span>
                         </li>
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
                           <span>Operated By</span> :
                           <span style="color: #8F8F8F;">
-                            {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                              {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                             {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                          </span>
+                            </span>
                         </li>
                         <li>
                           <span>Cabin Class</span> : <span
                           style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                         </li>
-                        <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
-                          <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
-                            <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                              <span>Adult Baggage</span> : <span
-                              style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                            </ng-container>
-                            <ng-container
-                              *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                              <span>Child Baggage</span> : <span
-                              style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                            </ng-container>
-                            <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                              <span>Infant Baggage</span> : <span
-                              style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                            </ng-container>
-                          </li>
+                        <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                          <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
+                            <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
+                              <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                <span>Adult Baggage</span> : <span
+                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                              </ng-container>
+                              <ng-container
+                                *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                <span>Child Baggage</span> : <span
+                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                              </ng-container>
+                              <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                <span>Infant Baggage</span> : <span
+                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                              </ng-container>
+                            </li>
+                          </ng-container>
+                          <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                            <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                          </ng-container>
                         </ng-container>
-                        <ng-container *ngIf="dataflightTrans.baggageData?.length == 0">
-                          <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+
+                        <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                          <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
+                            <ng-container *ngIf="bbIndex == segmentIndex">
+                              <li *ngFor="let baggageDatas of bb.baggageData">
+                                <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                  <span>Adult Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                </ng-container>
+                                <ng-container
+                                  *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                  <span>Child Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                  <span>Infant Baggage</span> : <span
+                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                </ng-container>
+                                <ng-container *ngIf="baggageDatas == undefined">
+                                  <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                </ng-container>
+                              </li>
+                            </ng-container>
+                          </ng-container>
                         </ng-container>
                       </ul>
                     </div>
@@ -1653,8 +1780,7 @@
 
 <!--  Begin Multi Trip Function  -->
 
-<section *ngIf="!loadingPage && roundType=='multiple-trip'" class="ftco-section"
-         style="padding: 0;">
+<section *ngIf="roundType=='multiple-trip'" class="ftco-section" style="padding: 0;">
   <ng-container *ngIf="multiplePhase <= dataMultiTripStep">
     <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
       <div *ngFor="let dataflight of dataFlightAdvanced"
@@ -1665,9 +1791,12 @@
             <div class="row">
               <div class="col-md-2 mb-3">
                 <div class="flight-section-airline-logo-wrap">
-                  <img
-                    class="img-fluid img-circle airline-logo"
-                    src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                  <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                       class="img-fluid img-circle airline-logo"
+                       src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                  <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                       class="img-fluid img-circle airline-logo"
+                       src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                 </div>
               </div>
               <ng-container *ngIf="dataflight.stop == 1">
@@ -1922,19 +2051,31 @@
                 </div>
               </div>
             </div>
-            <div
+            <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
+            <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
+              <div class="centered-loader">
+                <img src="./assets/images/loader.gif">
+                <div class="theme-loading-body">
+                  <h2 class="theme-loading-title">Just a moment</h2>
+                  <p class="theme-loading-subtitle">We are looking for flights </p>
+                </div>
+              </div>
+            </section>
+            <section *ngIf="!loadingPage">
+              <div
               *ngFor="let dataflight of dataFlightSearch | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
               class="card card-ticket">
               <div class="row">
-                <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                     [attr.aria-expanded]="!flightDetailsCollapsed"
-                     class="col-md-10 text-center">
+                <div class="col-md-10 text-center">
                   <div class="row">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
-                        <img
-                          class="img-fluid img-circle airline-logo"
-                          src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                       </div>
                     </div>
                     <ng-container *ngIf="dataflight.stop == 1">
@@ -2149,11 +2290,20 @@
 
               <hr class="mb-0" style="border-color: #f5f7fa!important;">
               <div class="row mt-3" style="text-align: left">
-                <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                     [attr.aria-expanded]="!flightDetailsCollapsed"
-                     class="col-md-2 col-sm-2 col-xs-2">
-                  Flight Details
-                </div>
+                <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                       [attr.aria-expanded]="!flightDetailsCollapsed"
+                       class="col-md-2 col-sm-2 col-xs-2">
+                    Flight Details
+                  </div>
+                </ng-container>
+                <ng-template #elseFlightDetails>
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                       [attr.aria-expanded]="!flightDetailsCollapsed"
+                       class="col-md-2 col-sm-2 col-xs-2">
+                    Flight Details
+                  </div>
+                </ng-template>
                 <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                      [attr.aria-expanded]="!priceDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
@@ -2167,8 +2317,12 @@
                        style="margin-top: 25px">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
-                        <img class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                       </div>
                     </div>
                     <div class="col-md-10">
@@ -2225,25 +2379,52 @@
                               <span>Cabin Class</span> : <span
                               style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                             </li>
-                            <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
-                              <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
-                                <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                                </ng-container>
-                                <ng-container
-                                  *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                                </ng-container>
-                                <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
-                                </ng-container>
-                              </li>
+                            <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                              <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
+                                <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
+                                  <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                    <span>Adult Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  </ng-container>
+                                  <ng-container
+                                    *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                    <span>Child Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  </ng-container>
+                                  <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                    <span>Infant Baggage</span> : <span
+                                    style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  </ng-container>
+                                </li>
+                              </ng-container>
+                              <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                                <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                              </ng-container>
                             </ng-container>
-                            <ng-container *ngIf="dataflightTrans.baggageData?.length == 0">
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+
+                            <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                              <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
+                                <ng-container *ngIf="bbIndex == segmentIndex">
+                                  <li *ngFor="let baggageDatas of bb.baggageData">
+                                    <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
+                                      <span>Adult Baggage</span> : <span
+                                      style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    </ng-container>
+                                    <ng-container
+                                      *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
+                                      <span>Child Baggage</span> : <span
+                                      style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
+                                      <span>Infant Baggage</span> : <span
+                                      style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    </ng-container>
+                                    <ng-container *ngIf="baggageDatas == undefined">
+                                      <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                    </ng-container>
+                                  </li>
+                                </ng-container>
+                              </ng-container>
                             </ng-container>
                           </ul>
                         </div>
@@ -2328,6 +2509,7 @@
                 </div>
               </div>
             </div>
+            </section>
           </div>
         </ng-container>
 
@@ -2364,9 +2546,12 @@
                   <div class="row">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
-                        <img
-                          class="img-fluid img-circle airline-logo"
-                          src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                       </div>
                     </div>
                     <ng-container *ngIf="dataflight.stop == 1">
@@ -2579,11 +2764,20 @@
 
               <hr class="mb-0" style="border-color: #f5f7fa!important;">
               <div class="row mt-3" style="text-align: left">
-                <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                     [attr.aria-expanded]="!flightDetailsCollapsed"
-                     class="col-md-2 col-sm-2 col-xs-2">
-                  Flight Details
-                </div>
+                <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                       [attr.aria-expanded]="!flightDetailsCollapsed"
+                       class="col-md-2 col-sm-2 col-xs-2">
+                    Flight Details
+                  </div>
+                </ng-container>
+                <ng-template #elseFlightDetails>
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                       [attr.aria-expanded]="!flightDetailsCollapsed"
+                       class="col-md-2 col-sm-2 col-xs-2">
+                    Flight Details
+                  </div>
+                </ng-template>
                 <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                      [attr.aria-expanded]="!priceDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
@@ -2597,8 +2791,12 @@
                        style="margin-top: 25px">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
-                        <img class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                       </div>
                     </div>
                     <div class="col-md-10">
@@ -2761,7 +2959,7 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="multiplePhase == dataMultiTripStep ">
+        <ng-container *ngIf="multiplePhase != 0 && multiplePhase == dataMultiTripStep ">
           <div class="col-sm-9 col-md-9">
             <div class="mb-3 p-2 rounded border-bottom">
               <div class="row">
@@ -2791,9 +2989,12 @@
                   <div class="row">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
-                        <img
-                          class="img-fluid img-circle airline-logo"
-                          src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                       </div>
                     </div>
                     <ng-container *ngIf="dataflight.stop == 1">
@@ -3005,11 +3206,20 @@
               </div>
 
               <div class="row mt-3" style="text-align: left">
-                <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                     [attr.aria-expanded]="!flightDetailsCollapsed"
-                     class="col-md-2 col-sm-2 col-xs-2">
-                  Flight Details
-                </div>
+                <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                       [attr.aria-expanded]="!flightDetailsCollapsed"
+                       class="col-md-2 col-sm-2 col-xs-2">
+                    Flight Details
+                  </div>
+                </ng-container>
+                <ng-template #elseFlightDetails>
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                       [attr.aria-expanded]="!flightDetailsCollapsed"
+                       class="col-md-2 col-sm-2 col-xs-2">
+                    Flight Details
+                  </div>
+                </ng-template>
                 <div (click)="priceDetailsAllCollapsed([i]); priceDetailsCollapsed[i] = !priceDetailsCollapsed[i]"
                      [attr.aria-expanded]="!priceDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
@@ -3023,8 +3233,12 @@
                        style="margin-top: 25px">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
-                        <img class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflightTrans.platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                        <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                             class="img-fluid img-circle airline-logo"
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                       </div>
                     </div>
                     <div class="col-md-10">
@@ -3214,6 +3428,21 @@
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">Pilih penerbangan lainnya
         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="pleaseWaitLoader" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Please Wait..
+        </div>
       </div>
     </div>
   </div>
