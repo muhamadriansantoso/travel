@@ -12,6 +12,78 @@
 <section *ngIf="!loadingPage" class="ftco-section" style="padding: 0;">
   <div class="container pd-t118">
     <div class="row">
+      <div class="col-md-12">
+        <form autocomplete="off" class="search-destination" novalidate="">
+          <div class="row m-0">
+            <div class="col-md-4 no-padding">
+              <div class="form_full">
+                <div class="form-group"><label>City or Destination</label>
+                  <div class="ngui-auto-complete-wrapper" style="position: relative;"><input auto-complete=""
+                                                                                             autocomplete="off"
+                                                                                             class="form-control h45"
+                                                                                             formcontrolname="destination"
+                                                                                             placeholder="Where are you going?"
+                                                                                             style="border-right: white;border-radius: 50px 0 0 50px;">
+                  </div>
+                  <!---->
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 no-padding">
+              <div class="form_full">
+                <div class="form-group"><label>Check In</label><input class="form-control h45"
+                                                                      formcontrolname="checkindate" maxlength="0"
+                                                                      ngbdatepicker=""
+                                                                      style="cursor: pointer;border-right: white;">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 no-padding">
+              <div class="form_full">
+                <div class="form-group"><label>Duration -
+                  Checkout</label><select class="form-control h45"
+                                          formcontrolname="duration">
+                  <!---->
+                  <option value="1"> 1 Night - 2020-03-28
+                  </option>
+                  <option value="2"> 2 Night - 2020-03-29
+                  </option>
+                  <option value="3"> 3 Night - 2020-03-30
+                  </option>
+                  <option value="4"> 4 Night - 2020-03-31
+                  </option>
+                  <option value="5"> 5 Night - 2020-04-01
+                  </option>
+                  <option value="6"> 6 Night - 2020-04-02
+                  </option>
+                  <option value="7"> 7 Night - 2020-04-03
+                  </option>
+                  <option value="8"> 8 Night - 2020-04-04
+                  </option>
+                  <option value="9"> 9 Night - 2020-04-05
+                  </option>
+                  <option value="10"> 10 Night - 2020-04-06
+                  </option>
+                  <option value="11"> 11 Night - 2020-04-07
+                  </option>
+                  <option value="12"> 12 Night - 2020-04-08
+                  </option>
+                  <option value="13"> 13 Night - 2020-04-09
+                  </option>
+                  <option value="14"> 14 Night - 2020-04-10
+                  </option>
+                </select></div>
+              </div>
+            </div>
+            <div class="col-md-1 no-padding">
+              <div class="form_full">
+                <div class="form-group"><label>Results</label><a class="form-control h45 btn btn-warning" style="border-radius: 0 50px 50px 0;
+"><strong>Search</strong></a></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="col-sm-4 col-md-4  menu-filter-pc">
         <div class="card">
           <h5 class="filter-left">Filter</h5>

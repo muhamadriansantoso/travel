@@ -3567,6 +3567,10 @@ a:hover, a:focus {
   padding-top: 118px;
 }
 
+.h45 {
+  height: 45px !important;
+}
+
 .reverse-destination {
   cursor: pointer;
   margin: 28px 4px 0 4px;
