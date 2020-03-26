@@ -50,6 +50,7 @@
               "node_modules/popper.js/dist/popper.js",
               "node_modules/sweetalert2/dist/sweetalert2.js",
               "src/assets/js/bootstrap.js"
+              "src/assets/js/custom.js"
             ]
           },
           "configurations": {
