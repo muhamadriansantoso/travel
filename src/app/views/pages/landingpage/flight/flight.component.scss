@@ -14,16 +14,16 @@
 
 .reverseClickedClicked1 {
   -webkit-transition: all ease 0.5s;
-  transition: all ease 0.5s;
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
+  transition: .15s ease;
+  transform: scaleX(-1) rotate(90deg);
+  -webkit-transform: scaleX(-1) rotate(90deg);
 }
 
 .reverseClickedClicked2 {
   -webkit-transition: all ease 0.5s;
-  transition: all ease 0.5s;
-  -webkit-transform: rotate(270deg);
-  transform: rotate(270deg);
+  transition: .15s ease;
+  -webkit-transform: scaleX(1) rotate(270deg);
+  transform: scaleX(1) rotate(270deg);
 }
 
 :host {

@@ -145,10 +145,10 @@ export class FlightComponent implements OnInit {
   autocompleListFormatter = (data: any): SafeHtml => {
     let html = `
     <div class="iconContainer">
-        <img src="https://d1s5saizp11buw.cloudfront.net/airy-web/icon/flight/ic-airport.png">
+        <img width="30" src="./assets/fixtrips/image/pesawat_icon.png">
     </div>
     <div class="autoCompleteResultText">
-      <h4>${data.city}</h4>
+      <h4 style="letter-spacing: 0.5px;">${data.city}</h4>
       <h5>${data.iata} - ${data.name}</h5>
     </div>
 `;
