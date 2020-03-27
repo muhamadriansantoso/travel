@@ -80,11 +80,13 @@ export class HotelsComponent implements OnInit {
 
   autocompleListFormatter = (data: any): SafeHtml => {
     let html = `
-<div style="margin-bottom: 4px;">
-<span style="font-size: 14px; line-height: 20px; font-weight: 500" class="">${data.name}</span>
-</div>
-<div>
-</div>`;
+    <div class="iconContainer">
+        <img src="https://d1s5saizp11buw.cloudfront.net/airy-web/icon/flight/ic-airport.png">
+    </div>
+    <div class="autoCompleteResultText">
+      <h4>${data.name}</h4>
+    </div>
+`;
     return this._sanitizer.bypassSecurityTrustHtml(html);
   };
 

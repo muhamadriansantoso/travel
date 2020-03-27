@@ -1,0 +1,54 @@
+:host {
+  ::ng-deep {
+    .resultWrapper {
+      background-color: #fff;
+      position: absolute;
+      top: 10px;
+      width: 500px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.32);
+      border: solid 1px #ecf0f1;
+    }
+
+    .autoCompleteSubTitle {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #7f8c8d;
+      border-bottom: 1px solid #ecf0f1;
+    }
+
+    .autoCompleteWrapper {
+      cursor: pointer;
+      background-color: #fff;
+      position: relative;
+    }
+
+    .iconContainer {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+    }
+
+    .autoCompleteResultText {
+      margin-left: 56px;
+      border-bottom: solid 1px #ecf0f1;
+      padding: 4px 0 0px;
+
+      h4 {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #161616;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      h5 {
+        font-size: 12px;
+        font-weight: 300;
+        color: #7f8c8d;
+        line-height: 1.5;
+      }
+    }
+  }
+}

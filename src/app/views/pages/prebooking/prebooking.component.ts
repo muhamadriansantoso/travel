@@ -5,6 +5,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
 import {MatSnackBar, MatStepper} from '@angular/material';
+import {Location} from '@angular/common';
 import * as moment from 'moment';
 import * as io from 'socket.io-client';
 
@@ -63,6 +64,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   stepPayComplete: boolean;
   stepProcessComplete: boolean;
 
+  flightNotAvailable: boolean;
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
   bookingDataFormInvalid: boolean;
@@ -81,7 +83,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private _location: Location
   ) {
     this.unsubscribe = new Subject();
     this.socket = io('https://fixtrips.com:3000/');
@@ -137,6 +140,9 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         }
         this.api.AirPricePort(this.sessionID).pipe(
           tap((AirPricePort: any) => {
+            if (AirPricePort.data.error != undefined) {
+              this.flightNotAvailable = true;
+            }
             this.airPricePort = AirPricePort.data[0];
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
@@ -509,6 +515,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     if (value == 'redirectkehome') {
       this.bookingFailurePopUP = false;
       this.router.navigate(['/']);
+    } else if (value == 'redirectback') {
+      this._location.back();
     }
     this.bookingDataFormInvalid = false;
     this.priceUpdatedInformation = false;

@@ -32,9 +32,12 @@
                       <div class="row">
                         <div class="col-md-2">
                           <div class="flight-section-airline-logo-wrap">
-                            <img
-                              class="img-fluid img-circle airline-logo"
-                              src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                            <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                                 class="img-fluid img-circle airline-logo"
+                                 src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                            <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                                 class="img-fluid img-circle airline-logo"
+                                 src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
                           </div>
                         </div>
                         <ng-container *ngIf="dataflight.stop == 1">
@@ -581,8 +584,10 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="text-left">
-                    <span class="btn-lg btn-outline-warning" matStepperPrevious type="submit"><i
-                      class="fa fa-arrow-left"></i> Edit Details</span>
+                    <button class="btn-lg btn-outline-warning" matStepperPrevious type="submit">
+                      <i
+                        class="fa fa-arrow-left"></i> Edit Details
+                    </button>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -906,6 +911,35 @@
       </div>
       <div class="swal2-actions">
         <button (click)="bookingFailurePopUPHide('redirectkehome')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="flightNotAvailable" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          The flight you have selected has no more seats available now!! Kindly select another flight
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('redirectback')" aria-label="" class="swal2-confirm swal2-styled"
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
