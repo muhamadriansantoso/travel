@@ -3625,8 +3625,6 @@ a:hover, a:focus {
   border-radius: 50%;
   width: 24px;
   height: 24px;
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
 }
 
 .flight-section-path-icon {
