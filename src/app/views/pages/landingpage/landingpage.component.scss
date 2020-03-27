@@ -16,7 +16,7 @@
   vertical-align: top;
   box-sizing: border-box;
   border-radius: 10px;
-  margin: 13px;
+  margin: 10px;
 }
 
 .country2 {
@@ -90,17 +90,16 @@
 
 .bg-img {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
   width: 100%;
   height: 100%;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  transform: scale(1);
-  transition: transform .3s;
-  -webkit-transform: translateZ(0) scale(1, 1);
+  transition: all .2s ease-in-out;
+}
+
+.bg-img:hover {
+  transform: scale(1.1);
 }
 
 .aligning-left {
