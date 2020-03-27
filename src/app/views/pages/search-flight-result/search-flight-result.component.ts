@@ -162,9 +162,6 @@ export class SearchFlightResultComponent implements OnInit {
               });
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
-            } else {
-              this.searchFlightError = true;
-              this.searchFlightErrorMessage = data.data.error;
             }
           });
 
