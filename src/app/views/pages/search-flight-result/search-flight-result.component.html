@@ -3,7 +3,7 @@
 <section *ngIf="roundType=='one-way'" class="ftco-section" style="padding: 0;">
   <div class="container pd-t118">
     <div class="row">
-      <div class="col-sm-3 col-md-3  menu-filter-pc">
+      <div (click)="collapseAllDetails()" class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
           <h5 class="filter-left">Filter</h5>
           <hr class="m-0 mb-2">
@@ -523,7 +523,7 @@
 <section *ngIf="roundType=='round-trip' && !phase" class="ftco-section" style="padding: 0;">
   <div class="container pd-t118">
     <div class="row">
-      <div class="col-sm-3 col-md-3  menu-filter-pc">
+      <div (click)="collapseAllDetails()" class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
           <h5 class="filter-left">Filter</h5>
           <hr class="m-0 mb-2">
@@ -1043,7 +1043,7 @@
 <section *ngIf="roundType=='round-trip' && phase" class="ftco-section" style="padding: 0;">
   <div class="container">
     <div class="row">
-      <div class="col-sm-3 col-md-3  menu-filter-pc">
+      <div (click)="collapseAllDetails()" class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
           <h5 class="filter-left">Filter</h5>
           <hr class="m-0 mb-2">
@@ -2006,7 +2006,7 @@
     <div class="container pd-t118">
       <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
       <div class="row">
-        <div class="col-sm-3 col-md-3  menu-filter-pc">
+        <div (click)="collapseAllDetails()" class="col-sm-3 col-md-3  menu-filter-pc">
           <div class="card">
             <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Airlines</h4>
             <ul style="list-style:none;float: left;">
@@ -2806,7 +2806,7 @@
                             <li>
                               <i class="fa fa-plane flight-details-schedule-icon"></i>
                               <p class="flight-details-schedule-date">
-                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM dd, yyyy' }}</p>
+                                {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY' }}</p>
                               <div class="flight-details-schedule-time">
                                 {{dataflightTrans.departureTime | amParseZone | amDateFormat:'HH:mm' }} -
                                 {{dataflightTrans.arrivalTime | amParseZone | amDateFormat:'HH:mm' }}

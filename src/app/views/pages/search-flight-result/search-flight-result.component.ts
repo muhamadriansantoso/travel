@@ -90,7 +90,6 @@ export class SearchFlightResultComponent implements OnInit {
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataFlightSearch = data.data;
-              this.flightDetailsCollapsed = [false];
 
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].transData[0].platingCarrierName;
@@ -108,7 +107,7 @@ export class SearchFlightResultComponent implements OnInit {
               });
             }
           });
-
+        this.collapseAllDetails();
         this.loadingPage = false;
         this.currentPercent = abc + 1;
         var totalPercent = length;
@@ -165,6 +164,7 @@ export class SearchFlightResultComponent implements OnInit {
             }
           });
 
+        this.collapseAllDetails();
         this.loadingPage = false;
         this.currentPercent = indexSupplier + 1;
         var totalPercent = length;
@@ -173,6 +173,10 @@ export class SearchFlightResultComponent implements OnInit {
         if (this.progressPercent == 100) {
           setTimeout(() => {
             this.hideProgressBar = true;
+            if (this.dataFlightSearch.length == 0) {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = 'NO AVAILABILITY FOR THIS REQUEST';
+            }
           }, 1000);
         }
       }
@@ -211,12 +215,10 @@ export class SearchFlightResultComponent implements OnInit {
               });
               this.sessionID = data.sessionID;
               this.airLine = data.data[0].departure[0].transData[0].platingCarrierName;
-            } else {
-              this.searchFlightError = true;
-              this.searchFlightErrorMessage = data.data.error;
             }
           });
 
+        this.collapseAllDetails();
         this.loadingPage = false;
         this.currentPercent = indexSupplier + 1;
         var totalPercent = length;
@@ -225,6 +227,10 @@ export class SearchFlightResultComponent implements OnInit {
         if (this.progressPercent == 100) {
           setTimeout(() => {
             this.hideProgressBar = true;
+            if (this.dataFlightSearch.length == 0) {
+              this.searchFlightError = true;
+              this.searchFlightErrorMessage = 'NO AVAILABILITY FOR THIS REQUEST';
+            }
           }, 1000);
         }
       }
@@ -325,7 +331,13 @@ export class SearchFlightResultComponent implements OnInit {
     }
   }
 
+  collapseAllDetails() {
+    this.flightDetailsCollapsed = [false];
+    this.priceDetailsCollapsed = [false];
+  }
+
   returnShow(data) {
+    this.collapseAllDetails();
     this.phase = true;
     this.airLineListUnique = [];
     this.transitListUnique = [];
@@ -344,6 +356,7 @@ export class SearchFlightResultComponent implements OnInit {
   }
 
   returnShowMultiple(data, index) {
+    this.collapseAllDetails();
     this.dataFlightAdvanced.push(data);
     this.multiplePhase = this.multiplePhase + 1;
     if (index == undefined) {
@@ -367,6 +380,7 @@ export class SearchFlightResultComponent implements OnInit {
   }
 
   returnPrevious(data) {
+    this.collapseAllDetails();
     if (this.roundType == 'round-trip') {
       this.dataFlightAdvanced = [];
       this.dataFlightSearch = [];
@@ -457,6 +471,7 @@ export class SearchFlightResultComponent implements OnInit {
 
   sortingSearchResult(value) {
     this.sortByWhat = value;
+    this.collapseAllDetails();
   }
 
   searchInvalidPopUPHide(value) {

@@ -316,7 +316,7 @@ export class FlightComponent implements OnInit {
   }
 
   infantPassengerPlus() {
-    if (this.infantPassenger < 9) {
+    if (this.infantPassenger < this.adultPassenger) {
       this.infantPassenger = this.infantPassenger + 1;
     } else {
       return false;
