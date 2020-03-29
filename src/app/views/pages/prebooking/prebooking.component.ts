@@ -23,6 +23,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   airPricePort: any;
   passengerType: any;
   passengerLength: number;
+  internationalRoute: number;
   nonUpdatedPrice: any;
   updatedPrice: any;
   roundType: string;
@@ -109,6 +110,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(sessionID => {
       this.sessionID = sessionID.sessionID;
       this.api.AirBookingGetDataDB(this.sessionID).subscribe((AirBookingGetDataDB: any) => {
+        this.internationalRoute = AirBookingGetDataDB.international_route;
         this.nonUpdatedPrice = AirBookingGetDataDB.data[0].totalPrice;
         this.origin = AirBookingGetDataDB.data[0].origin;
         this.destination = AirBookingGetDataDB.data[0].destination;
@@ -273,6 +275,17 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               }
             }
             //end looping passenger form dynamically
+
+            if (this.internationalRoute == 0) {
+              for (var awal = 0; awal < this.passengerLength; awal++) {
+                for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+                  this.bookingForm[awal].controls[awal2].get('passenger_passport').setValidators([]);
+                  this.bookingForm[awal].controls[awal2].get('passenger_passport').updateValueAndValidity();
+                  this.bookingForm[awal].controls[awal2].get('passenger_passportexpiry').setValidators([]);
+                  this.bookingForm[awal].controls[awal2].get('passenger_passportexpiry').updateValueAndValidity();
+                }
+              }
+            }
           }),
           takeUntil(this.unsubscribe),
           finalize(() => {
@@ -342,7 +355,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     for (var awal = 0; awal < this.passengerLength; awal++) {
       for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
         var passengerDob = moment(this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.year + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.month + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_dob'].value.day).format('YYYY-MM-DD');
-        var passengerPassportExpiry = moment(this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.year + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.month + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.day).format('YYYY-MM-DD');
+        var passengerPassportExpiry: any;
+        if (this.internationalRoute == 0) {
+          passengerPassportExpiry = null;
+        } else {
+          passengerPassportExpiry = moment(this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.year + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.month + '-' + this.bookingForm[awal].controls[awal2].controls['passenger_passportexpiry'].value.day).format('YYYY-MM-DD');
+        }
         this.submitedPassengerData.push({
           passengerType: this.bookingForm[awal].controls[awal2].controls['passengerType'].value,
           passengerTitle: this.bookingForm[awal].controls[awal2].controls['passenger_title'].value,
