@@ -1,7 +1,44 @@
 <app-header></app-header>
 <!--  Begin One Way Function  -->
 <section *ngIf="roundType=='one-way'" class="ftco-section" style="padding: 0;">
-  <div class="container pd-t118">
+  <!-- Change Flight Start -->
+  <div class="bg-info header pd-t97 mb-3 pb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10">
+          <div class="row">
+            <div class="col-md-3 text-right">
+              <div class="country-code">CGK</div>
+              <div class="airport-full">Jakarta Soekarno Hatta</div>
+            </div>
+            <div class="col-sm-1 mt-4" style="max-width: 5%;">
+              <i class="fa fa-lg fa-plane text-white" style="transform: rotate(317deg);"></i>
+            </div>
+            <div class="col-md-3">
+              <div>
+                <div class="country-code">SIN</div>
+                <div class="airport-full">Singapore Changi Intl Airport</div>
+              </div>
+            </div>
+            <div class="col-md-4 ml-4 ml-lg-5 pl-lg-5" style="border-left: 1px dashed #e5e5e5;">
+              <div>
+                <h5 class="mb-1 age-pass">1 Adult</h5>
+                <div class="text-white">
+                  <h5 class="mb-1">Economy</h5>
+                  <span>Date</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-2 pt-2 text-right">
+          <button class="btn-warning p-3 rounded-pill">Change Flight</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Change Flight Finish -->
+  <div class="container">
     <div class="row">
       <div (click)="collapseAllDetails()" class="col-sm-3 col-md-3  menu-filter-pc">
         <div class="card">
@@ -1049,7 +1086,7 @@
       <!--Begin Selected Card for return flight-->
       <div class="col-sm-12 col-md-12" style="margin: auto; float: none">
         <div class="col-md-12 float-left">
-          <div class="title-section">Departure Flight</div>
+          <div class="title-section">Round Trip</div>
           <div class="mb-2 title-line"></div>
         </div>
         <div
@@ -2014,6 +2051,7 @@
         </div>
       </div>
     </div>
+
     <div class="container pd-t118">
       <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
       <div class="row">
