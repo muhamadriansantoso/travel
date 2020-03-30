@@ -3608,6 +3608,11 @@ a:hover, a:focus {
   padding-left: 0;
 }
 
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #06969a !important;
+  color: white !important;
+}
+
 .form-control-custom:focus {
   transition: .3s width ease-in-out;
   box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075), 0 0 0px rgba(102, 175, 233, .6);
