@@ -662,52 +662,58 @@
         </div>
       </ng-container>
       <ng-container *ngIf="paymentData as pd">
-        <div style="font-size: 16px;color: #666; padding: 4%">
-          <div class="text-center">
-            <img src="./assets/images/banklogo/{{pd.debit_from_bank}}.png" width="200px"/>
+        <div class="row bg-white">
+          <div class="col-md-12 head-pay-det">
+            <h4 class="text-white title-section">Payment Details - {{bookingID}}</h4>
           </div>
-          <br/>
-          <div class="ttl3 text-center">Terima kasih telah menggunakan {{pd.bank_name}} Virtual Account</div>
-          <ng-container *ngIf="leftTimePayment > 0">
-            <div class="ttl3 text-center mb-2">Nomor {{pd.bank_name}} Virtual Account Anda adalah :</div>
-            <div class="ttl1 text-center" style="color:#ed1942" style="font-weight: bold; font-size: 1.3rem">
-              {{pd.va_number}}
+          <div class="col-md-12 container-payment">
+            <div class="col-md-12 text-center mt-4 mb-3">
+              <img src="./assets/images/banklogo/{{pd.debit_from_bank}}.png" width="155px"/>
             </div>
-            <div class="text-center mb-3"
-                 style="cursor: pointer; color: blue; text-decoration: underline; font-size: 12px">
-              <span (click)="coppied()" [cbContent]="pd.va_number" ngxClipboard>Salin Nomor Virtual Account</span>
+            <div class="col-md-12 ttl3 text-center">Terima kasih telah menggunakan {{pd.bank_name}} Virtual Account
             </div>
-          </ng-container>
-
-          <div class="text-center" style="font-weight:bold; color:#666">
-            <ng-container *ngIf="leftTimePayment == 0">
-              Batas waktu pembayaran Anda telah
-              <span class="blinking">Expired</span>
-            </ng-container>
             <ng-container *ngIf="leftTimePayment > 0">
-              Batas waktu pembayaran Anda adalah
-              <countdown [config]="{leftTime: leftTimePayment}">$!h! Jam $!m! Menit $!s! Detik</countdown>
+              <div class="col-md-12 ttl3 text-center mb-2">Nomor {{pd.bank_name}} Virtual Account Anda adalah :</div>
+              <div class="col-md-12 ttl1 text-center" style="font-weight: bold; font-size: 1.3rem">
+                {{pd.va_number}}
+              </div>
+              <div class="col-md-12 text-center mb-3"
+                   style="cursor: pointer; color: blue; text-decoration: underline; font-size: 12px">
+                <span (click)="coppied()" [cbContent]="pd.va_number" ngxClipboard>Salin Nomor Virtual Account</span>
+              </div>
             </ng-container>
-          </div>
 
-          <ng-container *ngIf="leftTimePayment > 0">
-            <div class="ttl3 text-center" style="padding:10px 30px">Silahkan lakukan pembayaran ke rekening virtual
-              account diatas sejumlah <strong>Rp {{pd.amount | number:'1.0-0'}}</strong>.
+            <div class="col-md-12 text-center font-weight-bold">
+              <ng-container *ngIf="leftTimePayment == 0">
+                Batas waktu pembayaran Anda telah
+                <span class="blinking">Expired</span>
+              </ng-container>
+              <ng-container *ngIf="leftTimePayment > 0">
+                Batas waktu pembayaran Anda adalah
+                <countdown [config]="{leftTime: leftTimePayment}">$!h! Jam $!m! Menit $!s! Detik</countdown>
+              </ng-container>
             </div>
-            <br/>
-            <div class="row">
-              <h3>CARA PEMBAYARAN</h3>
-              <div class="col-md-12">
-                <ng-container *ngIf="pd.debit_from_bank == '008'">
-                  <div class="ttl3 mb-1"><b>Transfer Melalui ATM MANDIRI</b></div>
-                  <div>
-                    <ol>
-                      <li>Gunakan mesin ATM BANK MANDIRI</li>
-                      <li>Setelah itu silahkan <b>pilih bahasa</b> yang ingin Anda gunakan</li>
-                      <li>Silahkan masukkan PIN ATM Anda, lalu tekan <b>ENTER</b></li>
-                      <li>Piih <b>BAYAR / BELI</b></li>
-                      <li>Piih <b>Lainnya</b></li>
-                      <li>Piih <b>lainnya sekali lagi</b></li>
+            <ng-container *ngIf="leftTimePayment > 0">
+              <div class="col-md-12 ttl3 text-center" style="padding:10px 30px">Silahkan melakukan pembayaran sejumlah
+                <strong style="color: #fe6300;">Rp {{pd.amount | number:'1.0-0'}}</strong>.
+              </div>
+              <hr>
+              <div class="col-md-12" style="color: #484848!important;">
+                <div class="mt-3">
+                  <div class="title-section">Cara Pembayaran</div>
+                  <div class="title-line"></div>
+                </div>
+                <div class="col-md-12">
+                  <ng-container *ngIf="pd.debit_from_bank == '008'">
+                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM MANDIRI</b></div>
+                    <div>
+                      <ol>
+                        <li>Gunakan mesin ATM BANK MANDIRI</li>
+                        <li>Setelah itu silahkan <b>pilih bahasa</b> yang ingin Anda gunakan</li>
+                        <li>Silahkan masukkan PIN ATM Anda, lalu tekan <b>ENTER</b></li>
+                        <li>Piih <b>BAYAR / BELI</b></li>
+                        <li>Piih <b>Lainnya</b></li>
+                        <li>Piih <b>lainnya sekali lagi</b></li>
                       <li>Piih <b>Multipayment</b></li>
                       <li>Masukkan Kode Perusahaan / Institusi <b>89208</b>. Setelah itu pilih <b>Benar</b></li>
                       <li>Masukkan 16 digit Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu pilih <b>Benar</b></li>
@@ -858,9 +864,10 @@
                     </li>
                   </ol>
                 </div>
+                </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
       </ng-container>
     </mat-step>

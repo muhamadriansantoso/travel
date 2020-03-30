@@ -8,6 +8,26 @@
   background: white;
 }
 
+.head-pay-det {
+  text-align: center;
+  background: #06969a;
+  line-height: 24px;
+  font-size: 24px !important;
+  margin: 0;
+  padding: 8px 16px;
+  border-color: #dee2ee;
+  border-style: solid;
+  border-width: 1px 1px 1px;
+  border-radius: 8px 8px 0 0;
+}
+
+.container-payment {
+  border-color: #dee2ee;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  border-radius: 0 0 8px 8px;
+}
+
 .centered-loader {
   display: flex;
   flex-direction: column;
