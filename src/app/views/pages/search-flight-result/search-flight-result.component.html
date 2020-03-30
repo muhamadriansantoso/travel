@@ -8,31 +8,52 @@
         <div class="col-md-10">
           <div class="row">
             <div class="col-md-3 text-right">
-              <div class="country-code">CGK</div>
-              <div class="airport-full">Jakarta Soekarno Hatta</div>
+              <div class="country-code">{{origin}}</div>
+              <div class="airport-full">{{originAirportName}}</div>
             </div>
             <div class="col-sm-1 mt-4" style="max-width: 5%;">
               <i class="fa fa-lg fa-plane text-white" style="transform: rotate(317deg);"></i>
             </div>
             <div class="col-md-3">
               <div>
-                <div class="country-code">SIN</div>
-                <div class="airport-full">Singapore Changi Intl Airport</div>
+                <div class="country-code">{{destination}}</div>
+                <div class="airport-full">{{destinationAirportName}}</div>
               </div>
             </div>
             <div class="col-md-4 ml-4 ml-lg-5 pl-lg-5" style="border-left: 1px dashed #e5e5e5;">
               <div>
-                <h5 class="mb-1 age-pass">1 Adult</h5>
+                <h3 class="mb-1 age-pass">
+                  <span>{{adult}} Adult</span>
+                  <span *ngIf="child > 0">, {{child}} Child</span>
+                  <span *ngIf="infant > 0">, {{infant}} Infant</span>
+                </h3>
                 <div class="text-white">
-                  <h5 class="mb-1">Economy</h5>
-                  <span>Date</span>
+                  <div class="age-pass mb-1">{{cabin}}</div>
+                  <span>{{departureDate | amParseZone | amDateFormat:'MMM DD, YYYY'}}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="col-md-2 pt-2 text-right">
-          <button class="btn-warning p-3 rounded-pill">Change Flight</button>
+          <button (click)="searchFlight()" class="btn-warning p-3 rounded-pill">Change Flight</button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="searchFlightShow" class="main_content mb-3" style="margin-top: unset">
+      <div class="container div_container">
+        <div class="page_right_panel">
+          <div class="banner_tab" style="margin-top: unset; padding: unset">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content border-fix-left">
+                  <div class="inner_content">
+                    <app-flight></app-flight>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

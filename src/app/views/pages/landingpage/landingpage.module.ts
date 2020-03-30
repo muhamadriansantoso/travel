@@ -65,7 +65,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FlightComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -26,7 +26,10 @@ export class SearchFlightResultComponent implements OnInit {
   multiplePhase: number;
   multiplePhaseIndex: number;
   origin: string;
+  originAirportName: string;
   destination: string;
+  destinationAirportName: string;
+  searchFlightShow: boolean;
   departureDate: string;
   returnDate: string;
   adult: string;
@@ -76,11 +79,21 @@ export class SearchFlightResultComponent implements OnInit {
       this.cabin = params.cabin;
       this.roundType = params.type;
 
+      this.api.getAirportCode(this.origin, this.destination).subscribe((data: any) => {
+        this.originAirportName = data.origin_airport_name;
+        this.destinationAirportName = data.destination_airport_name;
+        this.cdr.detectChanges();
+      });
+
       this.api.getFlightSupplier().toPromise().then((data: any) => {
         this.supplierData = data;
         this.getAPIFromSupplier(data.length);
       });
     });
+  }
+
+  searchFlight() {
+    this.searchFlightShow = !this.searchFlightShow;
   }
 
   async getAPIFromSupplier(length) {

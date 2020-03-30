@@ -36,6 +36,14 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
+  getAirportCode(origin, destination) {
+    var userData = JSON.stringify({
+      'origin': origin,
+      'destination': destination,
+    });
+    return this.http.post(APIURL + 'api/v1/flight/getAirportCode', userData);
+  }
+
   // AirLowFareSearchPort(d: string, a: string, date: string, r_date: string, adult: string, child: string, infant: string, cabin: string, type: string, supplierData: string) {
   //   const httpOptions = {
   //     headers: {
