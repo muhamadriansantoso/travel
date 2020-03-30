@@ -66,9 +66,9 @@
 
 :host {
   ::ng-deep {
-    //.mat-horizontal-stepper-header {
-    //  pointer-events: none !important;
-    //}
+    .mat-horizontal-stepper-header {
+      pointer-events: none !important;
+    }
 
     .mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {
       background-color: transparent !important;
