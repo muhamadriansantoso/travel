@@ -2725,9 +2725,7 @@
               *ngFor="let dataflight of this.dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
               class="card card-ticket">
               <div class="row">
-                <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                     [attr.aria-expanded]="!flightDetailsCollapsed"
-                     class="col-md-10 text-center">
+                <div class="col-md-10 text-center">
                   <div class="row">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">
@@ -3168,9 +3166,7 @@
               *ngFor="let dataflight of this.dataMultiTrip[multiplePhaseIndex].flightSession[multiplePhase - 1] | searchFligthFilter: { stops: ''} : checkedTransit() : { airline: ''} : checkedAirline() : sortByWhat as result; let i = index"
               class="card card-ticket">
               <div class="row">
-                <div (click)="flightDetailsAllCollapsed([i]); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
-                     [attr.aria-expanded]="!flightDetailsCollapsed"
-                     class="col-md-10 text-center">
+                <div class="col-md-10 text-center">
                   <div class="row">
                     <div class="col-md-2 mb-3">
                       <div class="flight-section-airline-logo-wrap">

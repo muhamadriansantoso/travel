@@ -32,9 +32,9 @@ export class SearchFlightResultComponent implements OnInit {
   searchFlightShow: boolean;
   departureDate: string;
   returnDate: string;
-  adult: string;
-  child: string;
-  infant: string;
+  adult: number;
+  child: number;
+  infant: number;
   cabin: string;
   dataMultiTrip: any = [];
   dataMultiTripStep: number;
