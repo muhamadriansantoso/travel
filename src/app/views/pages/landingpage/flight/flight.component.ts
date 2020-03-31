@@ -129,18 +129,24 @@ export class FlightComponent implements OnInit {
     });
 
     this.initSearchFlightForm();
-  }
 
-  autocompleListFormatter1 = (data: any): SafeHtml => {
-    let html = `
-<div style="margin-bottom: 4px;">
-<span style="font-size: 14px; line-height: 20px; font-weight: 500" class="">${data.city}, ${data.country}</span>
-</div>
-<div>
-<span style="color: #8f8f8f; font-size: 12px; line-height: 16px; white-space: normal; font-weight: 400">${data.iata} - ${data.name}</span>
-</div>`;
-    return this._sanitizer.bypassSecurityTrustHtml(html);
-  };
+    if (localStorage.getItem('oneway') != null) {
+      var oneWayData = JSON.parse(localStorage.getItem("oneway"));
+      this.fromCity = oneWayData.destination;
+      this.toCity = oneWayData.arrival;
+      this.searchFlightForm.patchValue({
+        origin: {
+          fromCity: this.fromCity
+        },
+        destination: {
+          toCity: this.toCity
+        }
+      });
+    } else {
+      this.fromCity = '';
+      this.toCity = '';
+    }
+  }
 
   autocompleListFormatter = (data: any): SafeHtml => {
     let html = `
@@ -380,20 +386,53 @@ export class FlightComponent implements OnInit {
         this.returnDate = moment(authData.return.year + '-' + authData.return.month + '-' + authData.return.day).format('YYYY-MM-DD');
       }
 
-      this.router.navigate(['/search-flight'], {
-        queryParams:
-          {
-            d: this.formCityValue,
-            a: this.toCityValue,
-            date: this.departureDate,
-            r_date: this.returnDate,
-            adult: authData.adult,
-            child: authData.child,
-            infant: authData.infant,
-            cabin: authData.cabin,
-            type: this.roundType
-          },
-      });
+      localStorage.setItem('oneway', JSON.stringify({
+        destination: this.fromCity,
+        arrival: this.toCity,
+        d: this.formCityValue,
+        a: this.toCityValue,
+        date: this.departureDate,
+        r_date: this.returnDate,
+        adult: authData.adult,
+        child: authData.child,
+        infant: authData.infant,
+        cabin: authData.cabin,
+        type: this.roundType
+      }));
+
+      if (this.router.url == '/flight' || this.router.url == '/') {
+        this.router.navigate(['/search-flight'], {
+          queryParams:
+            {
+              d: this.formCityValue,
+              a: this.toCityValue,
+              date: this.departureDate,
+              r_date: this.returnDate,
+              adult: authData.adult,
+              child: authData.child,
+              infant: authData.infant,
+              cabin: authData.cabin,
+              type: this.roundType
+            },
+        });
+      } else {
+        this.router.navigate(['/search-flight'], {
+          queryParams:
+            {
+              d: this.formCityValue,
+              a: this.toCityValue,
+              date: this.departureDate,
+              r_date: this.returnDate,
+              adult: authData.adult,
+              child: authData.child,
+              infant: authData.infant,
+              cabin: authData.cabin,
+              type: this.roundType
+            },
+        }).then(() => {
+          window.location.reload();
+        });
+      }
     } else if (this.roundType == 'multiple-trip') {
       const controls = this.searchFlightForm.controls;
 
@@ -425,20 +464,39 @@ export class FlightComponent implements OnInit {
 
       this.returnDate = '';
 
-      this.router.navigate(['/search-flight'], {
-        queryParams:
-          {
-            d: this.formCityValueArray.filter(item => item),
-            a: this.toCityValueArray.filter(item => item),
-            date: depatureDate,
-            r_date: this.returnDate,
-            adult: authData.adult,
-            child: authData.child,
-            infant: authData.infant,
-            cabin: authData.cabin,
-            type: this.roundType
-          },
-      });
+      if (this.router.url != '/flight') {
+        this.router.navigate(['/search-flight'], {
+          queryParams:
+            {
+              d: this.formCityValueArray.filter(item => item),
+              a: this.toCityValueArray.filter(item => item),
+              date: depatureDate,
+              r_date: this.returnDate,
+              adult: authData.adult,
+              child: authData.child,
+              infant: authData.infant,
+              cabin: authData.cabin,
+              type: this.roundType
+            },
+        }).then(() => {
+          window.location.reload();
+        });
+      } else {
+        this.router.navigate(['/search-flight'], {
+          queryParams:
+            {
+              d: this.formCityValueArray.filter(item => item),
+              a: this.toCityValueArray.filter(item => item),
+              date: depatureDate,
+              r_date: this.returnDate,
+              adult: authData.adult,
+              child: authData.child,
+              infant: authData.infant,
+              cabin: authData.cabin,
+              type: this.roundType
+            },
+        });
+      }
     }
   }
 
