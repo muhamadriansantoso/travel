@@ -63,7 +63,7 @@
                           <span>
                               <div class="card-row-base bottom bordered">
                                 <div class="col-md-6">
-                                  <div class="call-to-action">
+                                  <div (click)="navigateToBooking(operator)" class="call-to-action">
                                     Buy Now
                                   </div>
                                 </div>
@@ -155,7 +155,7 @@
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <div class="call-to-action light mt-2" style="width: 21rem">
+                              <div (click)="navigateToBooking(operator)" class="call-to-action light mt-2" style="width: 21rem">
                                 {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
                               </div>
                             </div>
@@ -238,7 +238,7 @@
                           <span>
                               <div class="card-row-base bottom bordered">
                                 <div class="col-md-6">
-                                  <div class="call-to-action">
+                                  <div (click)="navigateToBooking(operator)" class="call-to-action">
                                     Buy Now
                                   </div>
                                 </div>
@@ -330,7 +330,7 @@
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <div class="call-to-action light mt-2" style="width: 21rem">
+                              <div (click)="navigateToBooking(operator)" class="call-to-action light mt-2" style="width: 21rem">
                                 {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
                               </div>
                             </div>

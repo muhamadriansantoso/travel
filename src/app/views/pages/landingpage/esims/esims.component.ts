@@ -6,6 +6,7 @@ import {NgbTabChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 import {finalize, takeUntil, tap} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-esims',
@@ -15,6 +16,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 export class EsimsComponent implements OnInit {
   eSIMsData: any;
   type: string;
+  sessionID: string;
   pleaseWaitLoader: boolean;
   modalRef: BsModalRef;
 
@@ -25,7 +27,8 @@ export class EsimsComponent implements OnInit {
     private api: APIService,
     private fb: FormBuilder,
     private cdr: ChangeDetectorRef,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private router: Router,
   ) {
     this.unsubscribe = new Subject();
   }
@@ -37,6 +40,7 @@ export class EsimsComponent implements OnInit {
       .pipe(
         tap((data: any) => {
           if (data.data.status == 1) {
+            this.sessionID = data.sessionID;
             this.eSIMsData = data.data.data;
           }
         }),
@@ -57,6 +61,7 @@ export class EsimsComponent implements OnInit {
       .pipe(
         tap((data: any) => {
           if (data.data.status == 1) {
+            this.sessionID = data.sessionID;
             this.eSIMsData = data.data.data;
           }
         }),
@@ -71,6 +76,20 @@ export class EsimsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+  }
+
+  navigateToBooking(data) {
+    this.api.AirBookingInsertDB(this.sessionID, JSON.stringify(data))
+      .pipe(
+        tap((data: any) => {
+          this.router.navigate(['esims-booking', data.sessionID]);
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.cdr.markForCheck();
+        })
+      )
+      .subscribe();
   }
 
 }

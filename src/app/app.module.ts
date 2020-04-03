@@ -8,13 +8,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MatNativeDateModule,
-  MatProgressBarModule,
-  MatSnackBarModule
-} from '@angular/material';
+import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule, MatSnackBarModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_DATE_FORMATS, AppDateAdapter} from './views/pages/format-datepicker';
 import {NgxSoapModule} from 'ngx-soap';
@@ -37,6 +31,7 @@ import {UnderscoretoplusPipe} from './views/pages/underscoretoplus.pipe';
 import {HotelBookingComponent} from './views/pages/hotel-booking/hotel-booking.component';
 import {MomentModule} from 'ngx-moment';
 import {ProgressBarModule} from "angular-progress-bar";
+import {ESIMsBookingComponent} from './views/pages/e-sims-booking/e-sims-booking.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -60,6 +55,7 @@ const ngWizardConfig: NgWizardConfig = {
     SeachHotelResultComponent,
     HotelDetailComponent,
     HotelBookingComponent,
+    ESIMsBookingComponent,
   ],
   imports: [
     LandingpageModule.forRoot(),
