@@ -493,35 +493,6 @@
   </div>
 </div>
 
-<div *ngIf="flightNotAvailable" style="z-index: 999999;">
-  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
-    <div aria-busy="true" aria-describedby="swal2-content"
-         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
-         class="swal2-popup swal2-modal swal2-show swal2-loading"
-         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
-      <div class="swal2-header">
-        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
-          <span class="swal2-x-mark">
-            <span class="swal2-x-mark-line-left"></span>
-            <span class="swal2-x-mark-line-right"></span>
-          </span>
-        </div>
-      </div>
-      <div class="swal2-content">
-        <div class="swal2-html-container" id="swal2-content" style="display: block;">
-          The flight you have selected has no more seats available now!! Kindly select another flight
-        </div>
-      </div>
-      <div class="swal2-actions">
-        <button (click)="bookingFailurePopUPHide('redirectback')" aria-label="" class="swal2-confirm swal2-styled"
-                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
-                type="button">OK
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div *ngIf="bookingDataFormInvalid" style="z-index: 999999;">
   <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
     <div aria-busy="true" aria-describedby="swal2-content"
@@ -543,38 +514,6 @@
       </div>
       <div class="swal2-actions">
         <button (click)="bookingFailurePopUPHide('default')" aria-label="" class="swal2-confirm swal2-styled"
-                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
-                type="button">OK
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="priceUpdatedInformation" style="z-index: 999999;">
-  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
-    <div aria-busy="true" aria-describedby="swal2-content"
-         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
-         class="swal2-popup swal2-modal swal2-show swal2-loading"
-         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
-      <div class="swal2-header">
-        <div class="swal2-icon swal2-info swal2-icon-show" style="display: flex;">
-          <div class="swal2-icon-content">i</div>
-        </div>
-      </div>
-      <div class="swal2-content">
-        <div class="swal2-html-container" id="swal2-content" style="display: block;">
-          Harga pesawat yang Anda ingin pesan telah berubah.
-          <br>
-          <br>
-          Harga pesawat di waktu sebelumnya : <b>{{nonUpdatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
-          <br>
-          <br>
-          Harga pesawat di waktu sekarang : <b>{{updatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
-        </div>
-      </div>
-      <div class="swal2-actions">
-        <button (click)="bookingFailurePopUPHide('none')" aria-label="" class="swal2-confirm swal2-styled"
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
