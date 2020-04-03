@@ -14,7 +14,7 @@
 .sim-base {
   display: inline-block;
   width: 100%;
-  margin: 2.875rem 0;
+  margin: 1rem 0;
   border-radius: .6em;
   position: relative;
   box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .08);
@@ -84,6 +84,13 @@
   justify-content: flex-start;
 }
 
+.card-row-base .key-text {
+  min-width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .card-header-main {
   display: block;
   font-size: 1.1875rem;
@@ -108,4 +115,40 @@
   justify-content: space-between;
   align-items: center;
   min-height: 58px;
+}
+
+.esim-header {
+  height: auto;
+  padding: 2rem 2.2rem 30px;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.esim-header .sim-img {
+  border-radius: 1.4rem;
+  box-shadow: -15px 25px 98px -33px rgba(0, 0, 0, .75);
+  width: 336px;
+  height: 212px;
+  overflow: hidden;
+}
+
+.esim-header .sim-img img {
+  width: 100%;
+}
+
+.esim-header .card-row-base {
+  min-height: 50px;
+}
+
+.header-sim-name {
+  margin: 0 0 24px .1rem;
+  font-weight: 600;
+  font-size: 1.6875rem;
+  letter-spacing: -.3px;
+  line-height: 1.185;
+}
+
+.padd-horizontal-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

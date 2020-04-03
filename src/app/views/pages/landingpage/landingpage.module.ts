@@ -17,6 +17,7 @@ import {HeaderComponent} from '../header/header.component';
 import {FooterComponent} from '../footer/footer.component';
 import {EsimsComponent} from './esims/esims.component';
 import {MatExpansionModule} from '@angular/material/expansion'
+import {ModalModule} from "ngx-bootstrap";
 
 const routes: Routes = [
   {
@@ -70,6 +71,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     CarouselModule,
     MatExpansionModule,
+    ModalModule.forChild(),
     RouterModule.forChild(routes),
   ],
   exports: [

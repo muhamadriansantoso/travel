@@ -1,6 +1,6 @@
 <div class="tab-pane DivTabFlight">
   <ngb-tabset (tabChange)="beforeChange($event)">
-    <ngb-tab id="regional-esims">
+    <ngb-tab id="local">
       <ng-template ngbTabTitle>
         Local eSIMs
       </ng-template>
@@ -12,8 +12,8 @@
           </div>
           <div style="clear: both;"></div>
           <div class="col-12 col-sm-12 mt-3">
-            <div *ngFor="let esims of eSIMsData" class="col-12 col-sm-12 mb-2">
-              <mat-expansion-panel>
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let esims of eSIMsData" class="mb-2">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     <img class="country-flag" src="{{esims.countryImage}}"/>
@@ -52,58 +52,205 @@
                                 </div>
                                 <div class="value-text">{{packages.day}} Days</div>
                               </div>
+                              <div class="card-row-base bordered">
+                                <div class="key-text">
+                                  <span class="v-middle Validity-Dark"></span>
+                                  <span class="key-text-title">PRICE</span>
+                                </div>
+                                <div class="value-text">{{packages.price | currency:'IDR ':'symbol':'3.0'}}</div>
+                              </div>
                             </span>
                           <span>
                               <div class="card-row-base bottom bordered">
-                                <div class="call-to-action">
-                                  ${{packages.price}} - BUY NOW
+                                <div class="col-md-6">
+                                  <div class="call-to-action">
+                                    Buy Now
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div (click)="openModal(modalShow)" class="call-to-action">
+                                      Details
+                                    </div>
                                 </div>
                               </div>
                             </span>
                         </div>
+                        <ng-template #modalShow>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left">Modal</h4>
+                            <button (click)="modalRef.hide()" aria-label="Close" class="close pull-right" type="button">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div [ngStyle]="
+                             {
+                                'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
+                             }" class="esim-header light-text">
+                              <div class="row header-sim-name">
+                                {{operator.title}}
+                              </div>
+                              <div class="row">
+                                <div class="col-xs-6">
+                                  <div class="sim-img">
+                                    <img src="{{operator.image}}">
+                                  </div>
+                                </div>
+                                <div class="col-xs-6">
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="key-text">
+                                      <span>eSIM TYPE</span>
+                                    </div>
+                                    <div>{{operator.esim_type}}</div>
+                                  </div>
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="key-text">
+                                      <span>DATA</span>
+                                    </div>
+                                    <div>{{packages.data}}</div>
+                                  </div>
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="key-text">
+                                      <span></span>
+                                      <span>VALIDITY</span>
+                                    </div>
+                                    <div>{{packages.day}} Days</div>
+                                  </div>
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="alert-warning">
+                                      <span>{{operator.warning}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
                       </div>
                     </div>
                   </div>
                 </div>
               </mat-expansion-panel>
-            </div>
+            </mat-accordion>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
+    <ngb-tab id="global">
+      <ng-template ngbTabTitle>
+        Regional eSIMs
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div style="clear: both;"></div>
+          <div class="col-sm-12">
+            <div class="search-destination-separator"></div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="col-12 col-sm-12 mt-3">
+            <mat-accordion>
+              <mat-expansion-panel *ngFor="let esims of eSIMsData" class="mb-2">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <img class="country-flag" src="{{esims.countryImage}}"/>
+                    <span class="country-name">{{esims.country}}</span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div *ngFor="let operator of esims.operators" class="col-md-12">
+                    <div class="row">
+                      <div *ngFor="let packages of operator.packages" class="col-md-6">
+                        <div [ngStyle]="
+                             {
+                                'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
+                             }
+                          "
+                             class="sim-base light-text">
+                          <div class="sim-img">
+                            <img src="{{operator.image}}">
+                          </div>
+                          <div class="card-row-base header">
+                            <div class="card-header-main">{{operator.title}}</div>
+                            <div class="card-header-sub">{{operator.esim_type}}</div>
+                            <div class="card-header-sub mt-2">Supported {{operator.countries?.length}} Countries</div>
+                          </div>
+                          <span>
+                              <div class="card-row-base bordered">
+                                <div class="key-text">
+                                  <span class="v-middle Data-Dark"></span>
+                                  <span class="key-text-title">DATA</span>
+                                </div>
+                                <div class="value-text">{{packages.data}}</div>
+                              </div>
+                              <div class="card-row-base bordered">
+                                <div class="key-text">
+                                  <span class="v-middle Validity-Dark"></span>
+                                  <span class="key-text-title">VALIDITY</span>
+                                </div>
+                                <div class="value-text">{{packages.day}} Days</div>
+                              </div>
+                              <div class="card-row-base bordered">
+                                <div class="key-text">
+                                  <span class="v-middle Validity-Dark"></span>
+                                  <span class="key-text-title">PRICE</span>
+                                </div>
+                                <div class="value-text">{{packages.price | currency:'IDR ':'symbol':'3.0'}}</div>
+                              </div>
+                            </span>
+                          <span>
+                              <div class="card-row-base bottom bordered">
+                                <div class="col-md-6">
+                                  <div class="call-to-action">
+                                    Buy Now
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div (click)="openModal(modalShow)" class="call-to-action">
+                                      Details
+                                    </div>
+                                </div>
+                              </div>
+                            </span>
+                        </div>
+                        <ng-template #modalShow>
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left">Modal</h4>
+                            <button (click)="modalRef.hide()" aria-label="Close" class="close pull-right" type="button">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            This is a modal.
+                          </div>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
           </div>
         </div>
       </ng-template>
     </ngb-tab>
   </ngb-tabset>
-
-  <div class="row-custom">
-    <div class="width_extra_large">
-      <div class="inner_button">
-        <input (click)="searchFlight()" type="submit" value="Search">
-      </div>
-    </div>
-  </div>
 </div>
 
-<div *ngIf="searchFlightFormInvalid" style="z-index: 999999;">
+<div *ngIf="pleaseWaitLoader" style="z-index: 999999;">
   <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
     <div aria-busy="true" aria-describedby="swal2-content"
          aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
          class="swal2-popup swal2-modal swal2-show swal2-loading"
          data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
-      <div class="swal2-header">
-        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
-          <span class="swal2-x-mark">
-            <span class="swal2-x-mark-line-left"></span>
-            <span class="swal2-x-mark-line-right"></span>
-          </span>
-        </div>
-      </div>
       <div class="swal2-content">
-        <div class="swal2-html-container" id="swal2-content" style="display: block;">Silahkan lengkapi form yang
-          tersedia
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Please wait...
         </div>
       </div>
-      <div class="swal2-actions">
-        <button (click)="searchFlightFormFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
-                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+      <div class="swal2-actions swal2-loading" style="display: flex;">
+        <button aria-label="" class="swal2-confirm swal2-styled" disabled=""
+                style="display: inline-block; border-left-color: #ed1942; border-right-color: #ed1942;"
                 type="button">OK
         </button>
       </div>

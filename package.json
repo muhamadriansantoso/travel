@@ -40,6 +40,7 @@
     "moment": "^2.24.0",
     "ng-click-outside": "^5.3.0",
     "ng-wizard": "^1.0.0",
+    "ngx-bootstrap": "^5.5.0",
     "ngx-clipboard": "^12.3.1",
     "ngx-countdown": "^8.0.3",
     "ngx-daterangepicker-material": "^2.1.11",

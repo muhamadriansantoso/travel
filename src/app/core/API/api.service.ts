@@ -203,7 +203,7 @@ export class APIService {
 
   geteSIMs(type: string) {
     var userData = JSON.stringify({
-      'type:': type,
+      'type': type,
     });
     return this.http.post(APIURL + 'api/v1/esims/listpackage', userData);
   }
