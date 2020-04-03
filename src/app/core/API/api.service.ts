@@ -177,6 +177,12 @@ export class APIService {
     return this.http.post(APIURL + 'api/v1/booking/insertBookingData', userData, {headers: urlHeader});
   }
 
+  eSIMsInsertBooking(sessionID, title, firstname, lastname, email, supplier) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&email=' + email + '&supplier=' + supplier;
+    return this.http.post(APIURL + 'api/v1/booking/insertBookingData', userData, {headers: urlHeader});
+  }
+
   paymentChannelEspay(sessionID) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     var userData = 'sessionID=' + sessionID;

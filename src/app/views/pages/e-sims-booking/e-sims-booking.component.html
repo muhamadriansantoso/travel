@@ -1,1 +1,616 @@
-<p>e-sims-booking works!</p>
+<section *ngIf="loadingPage" class="loadingValidatingPrice centered-loader text-center">
+  <div class="centered-loader">
+    <img src="./assets/images/loader.gif">
+    <div class="theme-loading-body">
+      <h2 class="theme-loading-title">Just a moment</h2>
+      <p class="theme-loading-subtitle">We are validating for eSIMs price </p>
+    </div>
+  </div>
+</section>
+<div *ngIf="!loadingPage" class="container pd-t118">
+  <mat-horizontal-stepper #stepper [linear]="isLinear" [selectedIndex]=stepperIndex class="bg-unset">
+    <mat-step [completed]="stepBookingDetailsComplete" [stepControl]="bookingInfoForm">
+      <form [formGroup]="bookingInfoForm">
+        <ng-template matStepLabel>Book</ng-template>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card mb-4">
+              <div class="card-header">
+                <div class="float-left">
+                  <h5 class="box-title">Account Information Details</h5>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label" for="title">Title</label>
+                  <div class="col-sm-8">
+                    <select [ngClass]="{ 'is-invalid': isControlHasError('title','required') }"
+                            class="form-control-custom" formControlName="title" id="title">
+                      <option value="Mr">Mr</option>
+                      <option value="Ms">Ms</option>
+                      <option value="Miss">Miss</option>
+                    </select>
+                    <div *ngIf="isControlHasError('title','required')" class="invalid-feedback"
+                         style="display: block">
+                      Title is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label" for="firstname">First Name</label>
+                  <div class="col-sm-8">
+                    <input [ngClass]="{ 'is-invalid': isControlHasError('firstname','required') }"
+                           class="form-control-custom" formControlName="firstname" id="firstname" type="text">
+                    <div *ngIf="isControlHasError('firstname','required')" class="invalid-feedback"
+                         style="display: block">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label" for="lastname">Last Name</label>
+                  <div class="col-sm-8">
+                    <input [ngClass]="{ 'is-invalid': isControlHasError('lastname','required') }"
+                           class="form-control-custom" formControlName="lastname" id="lastname" type="text">
+                    <div *ngIf="isControlHasError('lastname','required')" class="invalid-feedback"
+                         style="display: block">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label" for="email">Email address</label>
+                  <div class="col-sm-8">
+                    <input
+                      [ngClass]="{ 'is-invalid': isControlHasError('email','required') ||  isControlHasError('email','email')}"
+                      class="form-control-custom" formControlName="email" id="email" type="text">
+                    <div *ngIf="isControlHasError('email','required')" class="invalid-feedback"
+                         style="display: block">
+                      Email Address is required
+                    </div>
+                    <div *ngIf="isControlHasError('email','email')" class="invalid-feedback"
+                         style="display: block">
+                      Email Address must be a valid email address
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="align-self-sm-center col-md-5">
+          </div>
+          <div class="col-md-3 text-right">
+            <button (click)="submitBook()" class="btn-lg btn-warning rounded-pill" type="submit">Continue to Payment
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-step>
+    <!--    <mat-step [completed]="stepPayComplete">-->
+    <!--      <ng-template matStepLabel>Pay</ng-template>-->
+    <!--      <ng-container *ngIf="!paymentData as pd">-->
+    <!--        <div class="row">-->
+    <!--          <div class="col-md-12">-->
+    <!--            <div class="title-section">Select Payment Channel-->
+    <!--            </div>-->
+    <!--            <div class="title-line"></div>-->
+    <!--          </div>-->
+    <!--          <div class="col-md-8">-->
+    <!--            <form [formGroup]="paymentChannel">-->
+    <!--              <div-->
+    <!--                *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"-->
+    <!--                class="invalid-feedback"-->
+    <!--                style="display: block">-->
+    <!--                Payment Channel must be choosen-->
+    <!--              </div>-->
+    <!--              <ng-container *ngFor="let lpc of listPaymentChannel">-->
+    <!--                <ng-container *ngIf="lpc.productCode != 'CREDITCARD' && lpc.bankCode != '016'">-->
+    <!--                  <label (click)="paymentChannelSelected(lpc.bankCode, lpc.productCode)"-->
+    <!--                         [ngClass]="this.productCode == lpc.productCode ? 'active' : ''"-->
+    <!--                         class="card card-body d-block p-3 mb-3 pointer" style="cursor: pointer">-->
+    <!--                    <input [(ngModel)]="this.bankCode" formControlName="bankCode" type="hidden">-->
+    <!--                    <div class="d-inline-block ml-2 mb-0 product-name">{{lpc.productName}}</div>-->
+    <!--                    <img class="float-right" height="22"-->
+    <!--                         src="https://kit.espay.id/images/products/{{lpc.productCode}}.png"/>-->
+    <!--                    <div class="clearfix"></div>-->
+    <!--                  </label>-->
+    <!--                </ng-container>-->
+    <!--              </ng-container>-->
+    <!--              <div class="row">-->
+    <!--                <div class="col-md-6">-->
+    <!--                  <div class="text-left">-->
+    <!--                    <button class="btn-lg btn-outline-warning" matStepperPrevious type="submit">-->
+    <!--                      <i-->
+    <!--                        class="fa fa-arrow-left"></i> Edit Details-->
+    <!--                    </button>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--                <div class="col-md-6">-->
+    <!--                  <div class="text-right">-->
+    <!--                    <button (click)="submitPayment()" class="btn-lg btn-warning" type="submit">Pay Now <i-->
+    <!--                      class="fa fa-arrow-right"></i></button>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--            </form>-->
+    <!--          </div>-->
+    <!--          <div class="col-md-4">-->
+    <!--            <div class="col-md-12 mb-3">-->
+    <!--              <div class="card alert alert-info ">-->
+    <!--                <div class="card-body pt-2 pb-3">-->
+    <!--                  <div class="mt-1">-->
+    <!--                    <div class="float-left">Booking ID</div>-->
+    <!--                    <div class="float-right">-->
+    <!--                      <strong>{{bookingID}}</strong>-->
+    <!--                    </div>-->
+    <!--                    <div class="clearfix"></div>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--            <div class="col-md-12">-->
+    <!--              <div class="card">-->
+    <!--                <div class="card-header">-->
+    <!--                  <h5 class="box-title">Detail Price</h5>-->
+    <!--                </div>-->
+    <!--                <div class="card-body pt-2 pb-3">-->
+    <!--                  <div *ngFor="let passengerDetails of app.passengerType" class="mt-1">-->
+    <!--                    <ng-container *ngIf="passengerDetails.code == 'ADT'">-->
+    <!--                      <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>-->
+    <!--                      <div class="float-right">-->
+    <!--                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>-->
+    <!--                      </div>-->
+    <!--                      <div class="clearfix"></div>-->
+    <!--                    </ng-container>-->
+    <!--                    <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">-->
+    <!--                      <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>-->
+    <!--                      <div class="float-right">-->
+    <!--                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>-->
+    <!--                      </div>-->
+    <!--                      <div class="clearfix"></div>-->
+    <!--                    </ng-container>-->
+    <!--                    <ng-container *ngIf="passengerDetails.code == 'INF'">-->
+    <!--                      <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>-->
+    <!--                      <div class="float-right">-->
+    <!--                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>-->
+    <!--                      </div>-->
+    <!--                      <div class="clearfix"></div>-->
+    <!--                    </ng-container>-->
+    <!--                  </div>-->
+    <!--                  <div class="mt-1">-->
+    <!--                    <div class="float-left">Tax And Fees</div>-->
+    <!--                    <div class="float-right">-->
+    <!--                      <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>-->
+    <!--                    </div>-->
+    <!--                    <div class="clearfix"></div>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--                <div class="border-fix-left card-footer bg-white">-->
+    <!--                  <div class="float-left">Total</div>-->
+    <!--                  <div class="float-right text-info"><h4>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</h4></div>-->
+    <!--                  <div class="clearfix"></div>-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </ng-container>-->
+    <!--      <ng-container *ngIf="paymentData as pd">-->
+    <!--        <div class="row bg-white">-->
+    <!--          <div class="col-md-12 head-pay-det">-->
+    <!--            <h4 class="text-white title-section">Payment Details - {{bookingID}}</h4>-->
+    <!--          </div>-->
+    <!--          <div class="col-md-12 container-payment">-->
+    <!--            <div class="col-md-12 text-center mt-4 mb-3">-->
+    <!--              <img src="./assets/images/banklogo/{{pd.debit_from_bank}}.png" width="155px"/>-->
+    <!--            </div>-->
+    <!--            <div class="col-md-12 ttl3 text-center">Terima kasih telah menggunakan {{pd.bank_name}} Virtual Account-->
+    <!--            </div>-->
+    <!--            <ng-container *ngIf="leftTimePayment > 0">-->
+    <!--              <div class="col-md-12 ttl3 text-center mb-2">Nomor {{pd.bank_name}} Virtual Account Anda adalah :</div>-->
+    <!--              <div class="col-md-12 ttl1 text-center" style="font-weight: bold; font-size: 1.3rem">-->
+    <!--                {{pd.va_number}}-->
+    <!--              </div>-->
+    <!--              <div class="col-md-12 text-center mb-3"-->
+    <!--                   style="cursor: pointer; color: blue; text-decoration: underline; font-size: 12px">-->
+    <!--                <span (click)="coppied()" [cbContent]="pd.va_number" ngxClipboard>Salin Nomor Virtual Account</span>-->
+    <!--              </div>-->
+    <!--            </ng-container>-->
+
+    <!--            <div class="col-md-12 text-center font-weight-bold">-->
+    <!--              <ng-container *ngIf="leftTimePayment == 0">-->
+    <!--                Batas waktu pembayaran Anda telah-->
+    <!--                <span class="blinking">Expired</span>-->
+    <!--              </ng-container>-->
+    <!--              <ng-container *ngIf="leftTimePayment > 0">-->
+    <!--                Batas waktu pembayaran Anda adalah-->
+    <!--                <countdown [config]="{leftTime: leftTimePayment}">$!h! Jam $!m! Menit $!s! Detik</countdown>-->
+    <!--              </ng-container>-->
+    <!--            </div>-->
+    <!--            <ng-container *ngIf="leftTimePayment > 0">-->
+    <!--              <div class="col-md-12 ttl3 text-center" style="padding:10px 30px">Silahkan melakukan pembayaran sejumlah-->
+    <!--                <strong style="color: #fe6300;">Rp {{pd.amount | number:'1.0-0'}}</strong>.-->
+    <!--              </div>-->
+    <!--              <hr>-->
+    <!--              <div class="col-md-12" style="color: #484848!important;">-->
+    <!--                <div class="mt-3">-->
+    <!--                  <div class="title-section">Cara Pembayaran</div>-->
+    <!--                  <div class="title-line"></div>-->
+    <!--                </div>-->
+    <!--                <div class="col-md-12">-->
+    <!--                  <ng-container *ngIf="pd.debit_from_bank == '008'">-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM MANDIRI</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Gunakan mesin ATM BANK MANDIRI</li>-->
+    <!--                        <li>Setelah itu silahkan <b>pilih bahasa</b> yang ingin Anda gunakan</li>-->
+    <!--                        <li>Silahkan masukkan PIN ATM Anda, lalu tekan <b>ENTER</b></li>-->
+    <!--                        <li>Piih <b>BAYAR / BELI</b></li>-->
+    <!--                        <li>Piih <b>Lainnya</b></li>-->
+    <!--                        <li>Piih <b>lainnya sekali lagi</b></li>-->
+    <!--                        <li>Piih <b>Multipayment</b></li>-->
+    <!--                        <li>Masukkan Kode Perusahaan / Institusi <b>89208</b>. Setelah itu pilih <b>Benar</b></li>-->
+    <!--                        <li>Masukkan 16 digit Nomor Pembayaran <b>{{pd.va_number}}</b>, lalu pilih <b>Benar</b></li>-->
+    <!--                        <li>Masukkan nominal sejumlah yang ditagihkan, lalu <b>pilih Benar</b></li>-->
+    <!--                        <li>Akan muncul informasi transaksi Anda dan jumlah yang ditagihkan. Jika sudah Benar, <b>Pilih-->
+    <!--                          Benar untuk membayar</b></li>-->
+    <!--                        <li>Transaksi pembayaran via ATM MANDIRI telah <b>selesai</b> dilakukan</li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                  </ng-container>-->
+
+    <!--                  <ng-container *ngIf="pd.debit_from_bank == '009'">-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM BNI</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Masukkan kartu ATM BNI dan PIN Anda</li>-->
+    <!--                        <li>Pilih <b>Menu Lain</b></li>-->
+    <!--                        <li>Pilih menu <b>Transfer</b></li>-->
+    <!--                        <li>Pilih sumber rekening dan pilih tujuan rekening <b>Ke Rekening BNI</b></li>-->
+    <!--                        <li>Masukkan 16 digit <b>Nomor Virtual Account ({{pd.va_number}})</b></li>-->
+    <!--                        <li>Masukkan <b>jumlah</b> sesuai dengan tagihan Anda dan <b>pilih Benar</b></li>-->
+    <!--                        <li>Transaksi selesai</li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui BNI INTERNET BANKING</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Masuk ke situs <a href="https://ibank.bni.co.id" target="_blank">https://ibank.bni.co.id</a>-->
+    <!--                        </li>-->
+    <!--                        <li>Lakukan <b>Log in</b> dengan akun <b>BNI Internet Banking</b> Anda</li>-->
+    <!--                        <li>Pilih menu <b>Transaksi > Info dan Administrasi Transfer > Atur Rekening Tujuan</b> dan klik-->
+    <!--                          <b>OK</b></li>-->
+    <!--                        <li>Pada Menu <b>Atur Rekening tujuan</b>, pilih <b>Tambah Rekening Tujuan</b> dan Klik-->
+    <!--                          <b>OK</b></li>-->
+    <!--                        <li>Masukkan Nama singkat, pilih kode Network & Bank Transfer Antar Rek. BNI</li>-->
+    <!--                        <li>Masukkan Nomor Rekening dengan 16 digit Nomor Virtual Account, kemudian klik tombol Lanjut-->
+    <!--                        </li>-->
+    <!--                        <li>Isikan kembali konfirmasi Nomor Rekening dan informasi lainnya, lalu Lanjutkan</li>-->
+    <!--                        <li>Setelah rekening tujuan berhasil ditambahkkan, pilih menu Transfer, Kemudian pilih Transfer-->
+    <!--                          Antar Rek. BNI-->
+    <!--                        </li>-->
+    <!--                        <li>Pilih rekening tujuan sesuai dengan Nomor Virtual Account yang telah disimpan dan lanjutkan-->
+    <!--                          Transaksi-->
+    <!--                        </li>-->
+    <!--                        <li>Transaksi Selesai</li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui BNI MOBILE BANKING</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Buka Aplikasi <b>Mobile Banking BNI</b></li>-->
+    <!--                        <li>Lakukan <b>Log in</b> pada Mobile Banking BNI Anda</li>-->
+    <!--                        <li>Pilih menu <b>Transfer > Antar Rekening BNI > Rekening Tujuan > Input rekening Baru</b></li>-->
+    <!--                        <li>Isi Informasi detailnya dan masukkan 16 digit <b>Nomor Virtual Account</b> pada Nomor-->
+    <!--                          Rekening, Lalu <b>klik Lanjut</b>, kemudian <b>Klik Lanjut lagi</b></li>-->
+    <!--                        <li>Setelah ditambahkan, isi Kolom <b>Nominal tagihan</b> sesuai dengan jumlah tagihan Anda dan-->
+    <!--                          <b>klik Lanjut</b></li>-->
+    <!--                        <li>Pada layar konfirmasi, isikan password transaksi dan Klik <b>Lanjut</b></li>-->
+    <!--                        <li>Transaksi Selesai</li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                  </ng-container>-->
+
+    <!--                  <ng-container *ngIf="pd.debit_from_bank == '011'">-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM DANAMON</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Masukkan kartu ATM DANAMON dan PIN Anda</li>-->
+    <!--                        <li>Pilih <b>Menu Pembayaran</b></li>-->
+    <!--                        <li>Pilih menu <b>Lainnya > Menu Virtual Account</b></li>-->
+    <!--                        <li>Masukkan Kode Perusahaan</li>-->
+    <!--                        <li>Masukkan 16 digit <b>Nomor Virtual Account ({{pd.va_number}})</b></li>-->
+    <!--                        <li>Pada layar konfirmasi, pastikan tagihan Anda sudah sesuai</li>-->
+    <!--                        <li>Pilih “YA” untuk memproses transaksi</li>-->
+    <!--                        <li>Transaksi selesai</li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui DANAMON INTERNET & MOBILE BANKING</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Akses D-Mobile melalui Handphone / PC</li>-->
+    <!--                        <li>Masukkan <b>User ID</b> dan <b>Password</b></li>-->
+    <!--                        <li>Pilih menu <b>Pembayaran > Virtual Account</b></li>-->
+    <!--                        <li>Masukkan <b>Kode Perusahaan</b></li>-->
+    <!--                        <li>Masukkan 16 digit Nomor Virtual Account <b>({{pd.va_number}})</b></li>-->
+    <!--                        <li>Akan muncul rincian pembayaran Anda, Jika sudah benar, masukkan <b>PIN</b> Transaksi Anda.-->
+    <!--                        </li>-->
+    <!--                        <li>Transaksi <b>Selesai</b></li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                  </ng-container>-->
+
+    <!--                  <ng-container *ngIf="pd.debit_from_bank == '013'">-->
+    <!--                    <div class="ttl3 mb-1"><b>Transfer Melalui ATM PERMATA</b></div>-->
+    <!--                    <div>-->
+    <!--                      <ol>-->
+    <!--                        <li>Gunakan mesin ATM BANK PERMATA</li>-->
+    <!--                        <li>Pilih <b>Other Transaction</b></li>-->
+    <!--                        <li>Pilih <b>Payment</b></li>-->
+    <!--                        <li>Pilih <b>Other Payment</b></li>-->
+    <!--                        <li>Masukkan 16 digit Nomor pembayaran <b>{{pd.va_number}}</b>, Lalu tekan <b>Benar</b></li>-->
+    <!--                        <li>Informasi pembayaran akan tertera dan pilih <b>Correct</b></li>-->
+    <!--                        <li>Pilih Akun pembayaran dan pilih <b>Correct</b></li>-->
+    <!--                        <li>Transaksi pembayaran via ATM PERMATA telah selesai dilakukan</li>-->
+    <!--                      </ol>-->
+    <!--                    </div>-->
+    <!--                    <br/>-->
+    <!--                  </ng-container>-->
+
+    <!--                  <div class="ttl3 mb-1"><b>Transfer Melalui ATM BERSAMA / ALTO</b></div>-->
+    <!--                  <div>-->
+    <!--                    <ol>-->
+    <!--                      <li>Gunakan mesin ATM BANK MANDIRI atau berlogo ATM BERSAMA / Alto</li>-->
+    <!--                      <li>Pada menu utama, pilih <b>Transaksi lainnya</b></li>-->
+    <!--                      <li>Pilih <b>Transfer</b></li>-->
+    <!--                      <li>Pilih <b>Antar Bank Online</b></li>-->
+    <!--                      <li>Masukkan No. <b>{{pd.debit_from_bank}}</b> dan <b>{{pd.va_number}}</b></li>-->
+    <!--                      <li>Masukkan jumlah tagihan yang akan Anda bayar secara lengkap (Pembayaran dengan jumlah tidak-->
+    <!--                        sesuai akan otomatis ditolak)-->
+    <!--                      </li>-->
+    <!--                      <li>Kosongkan No. Referensi, lalu tekan <b>Benar</b></li>-->
+    <!--                      <li>Pada halaman konfirmasi transfer akan muncul jumlah yang dibayarkan, nomor rekening & nama-->
+    <!--                        Merchant. Jika informasi telah sesuai tekan Benar-->
+    <!--                      </li>-->
+    <!--                    </ol>-->
+    <!--                  </div>-->
+    <!--                  <br/>-->
+    <!--                  <div class="ttl3 mb-1"><b>Transfer Melalui ATM BCA / PRIMA</b></div>-->
+    <!--                  <div>-->
+    <!--                    <ol>-->
+    <!--                      <li>Gunakan mesin ATM BCA atau yang berlogo PRIMA</li>-->
+    <!--                      <li>Pada menu utama, pilih <b>Transaksi lainnya</b></li>-->
+    <!--                      <li>Pilih <b>Transfer</b></li>-->
+    <!--                      <li>Pilih <b>Rekening Bank Online</b></li>-->
+    <!--                      <li>Masukkan kode Bank <b>{{pd.debit_from_bank}}</b> lalu tekan <b>Lanjut / Benar</b></li>-->
+    <!--                      <li>Masukkan jumlah tagihan yang akan Anda bayar secara lengkap (Pembayaran dengan jumlah tidak-->
+    <!--                        sesuai akan otomatis ditolak)-->
+    <!--                      </li>-->
+    <!--                      <li>Masukkan 16 digit No. Rekening pembayaran <b>{{pd.va_number}}</b> lalu tekan <b>Benar</b></li>-->
+    <!--                      <li>Pada halaman konfirmasi transfer akan muncul jumlah yang dibayarkan, nomor rekening & nama-->
+    <!--                        Merchant. Jika informasi sesuai tekan Benar-->
+    <!--                      </li>-->
+    <!--                    </ol>-->
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--            </ng-container>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </ng-container>-->
+    <!--    </mat-step>-->
+    <mat-step [completed]="stepProcessComplete">
+      <ng-template matStepLabel>Complete</ng-template>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
+
+<div *ngIf="validateBookingLoader" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Kami sedang memproses pemesanan Anda. Ini mungkin memakan waktu beberapa menit.
+        </div>
+      </div>
+      <div class="swal2-actions swal2-loading" style="display: flex;">
+        <button aria-label="" class="swal2-confirm swal2-styled" disabled=""
+                style="display: inline-block; border-left-color: #ed1942; border-right-color: #ed1942;"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="bookingFailurePopUP" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Booking tidak dapat kami proses,
+          karena transaksi sudah tidak berlaku. Silahkan melakukan booking kembali
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('redirectkehome')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="flightNotAvailable" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          The flight you have selected has no more seats available now!! Kindly select another flight
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('redirectback')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="bookingDataFormInvalid" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Silahkan lengkapi form yang
+          tersedia
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('default')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="priceUpdatedInformation" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-info swal2-icon-show" style="display: flex;">
+          <div class="swal2-icon-content">i</div>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Harga pesawat yang Anda ingin pesan telah berubah.
+          <br>
+          <br>
+          Harga pesawat di waktu sebelumnya : <b>{{nonUpdatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
+          <br>
+          <br>
+          Harga pesawat di waktu sekarang : <b>{{updatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('none')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="paymentFailed" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Proses pembayaran tidak dapat
+          dilakukan karena
+          transaksi sudah tidak berlaku. Silahkan melakukan booking kembali
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('redirectkehome')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="paymentSuccess" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-success swal2-icon-show" style="display: flex;">
+          <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+          <span class="swal2-success-line-tip"></span> <span class="swal2-success-line-long"></span>
+          <div class="swal2-success-ring"></div>
+          <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+          <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Proses pembayaran telah berhasil.
+          <br>
+          <br>
+          Tiket telah kami kirimkan ke alamat e-mail yang Anda isikan saat melakukan pemesanan.
+          <br>
+          <br>
+          Silahkan periksa inbox maupun folder spam di e-mail Anda.
+          <br>
+          <br>
+          Jika Anda tidak merasa menerima tiket di dalam e-mail Anda, Anda dapat menghubungi customer service kami
+          dengan menginformasikan kode booking.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

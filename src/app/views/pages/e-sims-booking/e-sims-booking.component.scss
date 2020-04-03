@@ -1,0 +1,83 @@
+.loadingValidatingPrice {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: white;
+}
+
+.head-pay-det {
+  text-align: center;
+  background: #06969a;
+  line-height: 24px;
+  font-size: 24px !important;
+  margin: 0;
+  padding: 8px 16px;
+  border-color: #dee2ee;
+  border-style: solid;
+  border-width: 1px 1px 1px;
+  border-radius: 8px 8px 0 0;
+}
+
+.container-payment {
+  border-color: #dee2ee;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  border-radius: 0 0 8px 8px;
+}
+
+.centered-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.active {
+  border-top: 4px solid #ab8104;
+  background-color: #ffc107;
+  border-color: #ab8104;
+  border-radius: 15px 0;
+}
+
+b, strong {
+  font-weight: bolder;
+  color: #06969a;
+  letter-spacing: 0.3px;
+}
+
+.blinking {
+  animation: blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: red;
+  }
+  49% {
+    color: red;
+  }
+  60% {
+    color: transparent;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: red;
+  }
+}
+
+:host {
+  ::ng-deep {
+    .mat-horizontal-stepper-header {
+      pointer-events: none !important;
+    }
+
+    .mat-step-header.cdk-keyboard-focused, .mat-step-header.cdk-program-focused, .mat-step-header:hover {
+      background-color: transparent !important;
+    }
+  }
+}
