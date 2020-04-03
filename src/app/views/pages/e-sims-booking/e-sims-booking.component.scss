@@ -70,6 +70,275 @@ b, strong {
   }
 }
 
+.country-name {
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+  letter-spacing: -.1px;
+  line-height: 24px;
+}
+
+.country-flag {
+  max-width: 44px;
+  vertical-align: middle;
+}
+
+.country-list-container {
+  position: relative;
+  z-index: 22;
+}
+
+.country-list {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  width: calc(100% + 20px);
+}
+
+.country-list li {
+  padding: .9rem 1.2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.country-list li:last-child {
+  border-bottom: none;
+}
+
+.country-list .country-name {
+  font-weight: 400;
+  font-size: .8125rem;
+  color: #4a4a4a;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.sim-base {
+  display: inline-block;
+  width: 100%;
+  margin: 1rem 0;
+  border-radius: .6em;
+  position: relative;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, .08);
+  vertical-align: top;
+}
+
+.call-to-action {
+  width: 80%;
+  padding: .6rem;
+  text-align: center;
+  border: 1px solid transparent;
+  margin: 0 auto;
+  border-radius: .4rem;
+  font-size: .6875rem;
+  letter-spacing: 1px;
+  transition: all .2s;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.call-to-action.dark {
+  line-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: bold;
+  background: #4a4a4a;
+  border: 1px solid #4a4a4a;
+  font-size: 16px;
+  color: #07969A;
+}
+
+.call-to-action.light {
+  line-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: bold;
+  background: #fff;
+  border: 1px solid #07969A;
+  font-size: 16px;
+  color: #07969A;
+}
+
+.dark-text {
+  color: #07969A !important;
+}
+
+.light-text {
+  color: #fff !important;
+}
+
+.dark-text .card-row-base.bordered {
+  border-top: 1px solid rgba(0, 0, 0, .08);
+}
+
+.light-text .card-row-base.bordered {
+  border-top: 1px solid hsla(0, 0%, 100%, .1)
+}
+
+.dark-text .call-to-action {
+  width: 100% !important;
+  border-color: #07969A;
+}
+
+.light-text .call-to-action {
+  width: 100% !important;
+  border-color: #fff;
+}
+
+.sim-img {
+  position: absolute;
+  top: -1rem;
+  right: 1.5rem;
+  width: 140px;
+  height: 88px;
+  border-radius: .5rem;
+  box-shadow: 0 28px 42px -26px rgba(0, 0, 0, .39);
+}
+
+.sim-base .sim-img img {
+  max-width: 140px;
+  max-height: 90px;
+}
+
+.card-row-base.header {
+  padding-top: 19px;
+  padding-bottom: 25px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.card-row-base .key-text {
+  min-width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.card-header-main {
+  display: block;
+  font-size: 1.1875rem;
+  width: calc(100% - 9rem);
+  letter-spacing: -.2px;
+  line-height: 1.421;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.card-header-sub {
+  display: block;
+  font-size: .6875rem;
+  font-weight: 300;
+  letter-spacing: .07rem;
+  line-height: 1;
+}
+
+.card-row-base {
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 58px;
+}
+
+.esim-header {
+  height: auto;
+  padding: 2rem 2.2rem 30px;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.esim-header .sim-img {
+  border-radius: 1.4rem;
+  box-shadow: -15px 25px 98px -33px rgba(0, 0, 0, .75);
+  width: 336px;
+  height: 212px;
+  overflow: hidden;
+}
+
+.esim-header .sim-img img {
+  width: 100%;
+}
+
+.esim-header .card-row-base {
+  min-height: 50px;
+}
+
+.header-sim-name {
+  margin: 0 0 24px .1rem;
+  font-weight: 600;
+  font-size: 1.6875rem;
+  letter-spacing: -.3px;
+  line-height: 1.185;
+}
+
+.avail-packs {
+  font-weight: 600;
+  font-size: 21px;
+  color: #4a4a4a;
+  letter-spacing: -.25px;
+  line-height: 25px;
+  margin: 25px 0;
+}
+
+.sub-section-container {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  height: calc(100% - 83px);
+  border-radius: .5rem;
+}
+
+.additional-info {
+  list-style: none;
+  padding: 0;
+  opacity: 1;
+  font-size: .9rem;
+  font-weight: 400;
+  margin: 0 4px 9px;
+}
+
+.additional-info li span {
+  position: relative;
+  color: #8a8a8a;
+  font-size: .9375rem;
+  line-height: 1.4;
+}
+
+.additional-info li span:after {
+  content: "";
+  position: absolute;
+  left: -25px;
+  height: 4px;
+  width: 4px;
+  top: calc(50% - 2px);
+  display: block;
+  background: #8a8a8a;
+  border-radius: 50%;
+}
+
+.additional-info li {
+  padding-left: 25px;
+}
+
+
+.padd-horizontal-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.padding-top-0 {
+  padding-top: 0;
+}
+
+.overflow-y-scroll {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.mh-300 {
+  max-height: 300px;
+}
+
 :host {
   ::ng-deep {
     .mat-horizontal-stepper-header {

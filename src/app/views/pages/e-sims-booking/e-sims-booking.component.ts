@@ -19,11 +19,15 @@ export class ESIMsBookingComponent implements OnInit {
   loadingPage: boolean;
   sessionID: any;
 
+  bankCode: any;
+  productCode: any;
+
   stepBookingDetailsComplete: boolean;
   stepPayComplete: boolean;
   stepProcessComplete: boolean;
   stepperIndex: number;
   bookingID: string;
+  packageData: string;
 
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
@@ -65,6 +69,7 @@ export class ESIMsBookingComponent implements OnInit {
     this.loadingPage = true;
     this.isLinear = true;
     this.initBookingForm();
+    this.paymentChannelForm();
   }
 
   initBookingForm() {
@@ -94,6 +99,8 @@ export class ESIMsBookingComponent implements OnInit {
             this.stepperIndex = 2;
           }
 
+          this.packageData = eSIMsGetDataDB.data;
+
           this.bookingInfoForm = this.fb.group({
             title: ['Mr', Validators.compose([
               Validators.required,
@@ -121,6 +128,20 @@ export class ESIMsBookingComponent implements OnInit {
         })
       ).subscribe();
     });
+  }
+
+  paymentChannelForm() {
+    this.paymentChannel = this.fb.group({
+      bankCode: ['', Validators.compose([
+        Validators.required,
+      ])
+      ]
+    });
+  }
+
+  paymentChannelSelected(bankCode, productCode) {
+    this.bankCode = bankCode;
+    this.productCode = productCode;
   }
 
   hitAPICheckPayment() {
@@ -206,8 +227,54 @@ export class ESIMsBookingComponent implements OnInit {
     ).subscribe();
   }
 
+  submitPayment() {
+    const controls = this.paymentChannel.controls;
+    if (this.paymentChannel.invalid) {
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+
+      this.bookingDataFormInvalid = true;
+      //di retrun biar kalo kondisi invalid ga lanjut ke tahap berikutnya
+      return;
+    }
+
+    const dataBooking = {
+      bankCode: controls['bankCode'].value
+    };
+
+    this.validateBookingLoader = true;
+
+    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, '', '', '', 'esims', '').pipe(
+      tap((data: any) => {
+        if (data.status == 1) {
+          this.stepPayComplete = true;
+          this.hitAPICheckPayment();
+        } else {
+          // this.paymentFailed = true;
+        }
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.validateBookingLoader = false;
+        this.myStepper.next();
+        this.cdr.markForCheck();
+      })
+    ).subscribe();
+  }
+
   isControlHasError(controlName: string, validationType: string): boolean {
     const control = this.bookingInfoForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
+  }
+
+  isControlHasErrorPayment(controlName: string, validationType: string): boolean {
+    const control = this.paymentChannel.controls[controlName];
     if (!control) {
       return false;
     }
