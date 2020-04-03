@@ -33,6 +33,7 @@ export class LandingpageComponent implements OnInit {
   slider: any;
   flightClicked: boolean;
   hotelClicked: boolean;
+  eSIMsClicked: boolean;
 
   message: string;
   client: Client;
@@ -48,9 +49,15 @@ export class LandingpageComponent implements OnInit {
     if (this.router.url == '/flight' || this.router.url == '/') {
       this.flightClicked = true;
       this.hotelClicked = false;
+      this.eSIMsClicked = false;
     } else if (this.router.url == '/hotel') {
       this.flightClicked = false;
+      this.eSIMsClicked = false;
       this.hotelClicked = true;
+    } else if (this.router.url == '/eSIMs') {
+      this.flightClicked = false;
+      this.hotelClicked = false;
+      this.eSIMsClicked = true;
     }
 
     this.isCollapsed = true;
@@ -72,9 +79,15 @@ export class LandingpageComponent implements OnInit {
     if (value == 'flight') {
       this.flightClicked = true;
       this.hotelClicked = false;
+      this.eSIMsClicked = false;
     } else if (value == 'hotel') {
       this.flightClicked = false;
+      this.eSIMsClicked = false;
       this.hotelClicked = true;
+    } else if (value == 'eSIMs') {
+      this.flightClicked = false;
+      this.hotelClicked = false;
+      this.eSIMsClicked = true;
     }
   }
 

@@ -31,6 +31,16 @@
                     </a>
                   </div>
                 </li>
+                <li (click)="activeClass('eSIMs')" [ngClass]="{'active': eSIMsClicked}">
+                  <div class="inner_list">
+                    <a routerLink="/eSIMs">
+                      <div class="image">
+                        <img src="./assets/fixtrips/image/hotel_icon.png">
+                      </div>
+                      <span>eSIMs</span>
+                    </a>
+                  </div>
+                </li>
                 <!--                <li role="presentation">-->
                 <!--                  <div class="inner_list">-->
                 <!--                    <a routerLink="/recreation">-->

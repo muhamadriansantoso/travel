@@ -201,6 +201,13 @@ export class APIService {
     return this.http.post(APIURL + 'api/v1/flight/retrieveBooking', userData, {headers: urlHeader});
   }
 
+  geteSIMs(type: string) {
+    var userData = JSON.stringify({
+      'type:': type,
+    });
+    return this.http.post(APIURL + 'api/v1/esims/listpackage', userData);
+  }
+
   // AirPricePort(data:any) {
   //   var userData = 'data=' + data;
   //   var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});

@@ -15,6 +15,8 @@ import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {HeaderComponent} from '../header/header.component';
 import {FooterComponent} from '../footer/footer.component';
+import {EsimsComponent} from './esims/esims.component';
+import {MatExpansionModule} from '@angular/material/expansion'
 
 const routes: Routes = [
   {
@@ -37,6 +39,10 @@ const routes: Routes = [
         path: 'hotel',
         component: HotelsComponent,
       },
+      {
+        path: 'eSIMs',
+        component: EsimsComponent,
+      },
     ]
   }
 ];
@@ -49,7 +55,8 @@ const routes: Routes = [
     FlightAndHotelComponent,
     PriceNumber,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    EsimsComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -62,6 +69,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
+    MatExpansionModule,
     RouterModule.forChild(routes),
   ],
   exports: [

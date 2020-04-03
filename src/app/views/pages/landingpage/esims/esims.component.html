@@ -1,0 +1,112 @@
+<div class="tab-pane DivTabFlight">
+  <ngb-tabset (tabChange)="beforeChange($event)">
+    <ngb-tab id="regional-esims">
+      <ng-template ngbTabTitle>
+        Local eSIMs
+      </ng-template>
+      <ng-template ngbTabContent>
+        <div class="row">
+          <div style="clear: both;"></div>
+          <div class="col-sm-12">
+            <div class="search-destination-separator"></div>
+          </div>
+          <div style="clear: both;"></div>
+          <div class="col-12 col-sm-12 mt-3">
+            <div *ngFor="let esims of eSIMsData" class="col-12 col-sm-12 mb-2">
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <img class="country-flag" src="{{esims.countryImage}}"/>
+                    <span class="country-name">{{esims.country}}</span>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row">
+                  <div *ngFor="let operator of esims.operators" class="col-md-12">
+                    <div class="row">
+                      <div *ngFor="let packages of operator.packages" class="col-md-6">
+                        <div [ngStyle]="
+                             {
+                                'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
+                             }
+                          "
+                             class="sim-base light-text">
+                          <div class="sim-img">
+                            <img src="{{operator.image}}">
+                          </div>
+                          <div class="card-row-base header">
+                            <div class="card-header-main">{{operator.title}}</div>
+                            <div class="card-header-sub">{{operator.esim_type}}</div>
+                          </div>
+                          <span>
+                              <div class="card-row-base bordered">
+                                <div class="key-text">
+                                  <span class="v-middle Data-Dark"></span>
+                                  <span class="key-text-title">DATA</span>
+                                </div>
+                                <div class="value-text">{{packages.data}}</div>
+                              </div>
+                              <div class="card-row-base bordered">
+                                <div class="key-text">
+                                  <span class="v-middle Validity-Dark"></span>
+                                  <span class="key-text-title">VALIDITY</span>
+                                </div>
+                                <div class="value-text">{{packages.day}} Days</div>
+                              </div>
+                            </span>
+                          <span>
+                              <div class="card-row-base bottom bordered">
+                                <div class="call-to-action">
+                                  ${{packages.price}} - BUY NOW
+                                </div>
+                              </div>
+                            </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-expansion-panel>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+  <div class="row-custom">
+    <div class="width_extra_large">
+      <div class="inner_button">
+        <input (click)="searchFlight()" type="submit" value="Search">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="searchFlightFormInvalid" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">Silahkan lengkapi form yang
+          tersedia
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="searchFlightFormFailurePopUPHide()" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
