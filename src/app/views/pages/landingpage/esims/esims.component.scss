@@ -11,6 +11,36 @@
   vertical-align: middle;
 }
 
+.country-list-container {
+  position: relative;
+  z-index: 22;
+}
+
+.country-list {
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  width: calc(100% + 20px);
+}
+
+.country-list li {
+  padding: .9rem 1.2rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.country-list li:last-child {
+  border-bottom: none;
+}
+
+.country-list .country-name {
+  font-weight: 400;
+  font-size: .8125rem;
+  color: #4a4a4a;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
 .sim-base {
   display: inline-block;
   width: 100%;
@@ -33,6 +63,28 @@
   transition: all .2s;
   cursor: pointer;
   font-weight: 600;
+}
+
+.call-to-action.dark {
+  line-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: bold;
+  background: #4a4a4a;
+  border: 1px solid #4a4a4a;
+  font-size: 16px;
+  color: #07969A;
+}
+
+.call-to-action.light {
+  line-height: 42px;
+  padding-top: 0;
+  padding-bottom: 0;
+  font-weight: bold;
+  background: #fff;
+  border: 1px solid #07969A;
+  font-size: 16px;
+  color: #07969A;
 }
 
 .dark-text {
@@ -148,7 +200,69 @@
   line-height: 1.185;
 }
 
+.avail-packs {
+  font-weight: 600;
+  font-size: 21px;
+  color: #4a4a4a;
+  letter-spacing: -.25px;
+  line-height: 25px;
+  margin: 25px 0;
+}
+
+.sub-section-container {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  height: calc(100% - 83px);
+  border-radius: .5rem;
+}
+
+.additional-info {
+  list-style: none;
+  padding: 0;
+  opacity: 1;
+  font-size: .9rem;
+  font-weight: 400;
+  margin: 0 4px 9px;
+}
+
+.additional-info li span {
+  position: relative;
+  color: #8a8a8a;
+  font-size: .9375rem;
+  line-height: 1.4;
+}
+
+.additional-info li span:after {
+  content: "";
+  position: absolute;
+  left: -25px;
+  height: 4px;
+  width: 4px;
+  top: calc(50% - 2px);
+  display: block;
+  background: #8a8a8a;
+  border-radius: 50%;
+}
+
+.additional-info li {
+  padding-left: 25px;
+}
+
+
 .padd-horizontal-0 {
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+.padding-top-0 {
+  padding-top: 0;
+}
+
+.overflow-y-scroll {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.mh-300 {
+  max-height: 300px;
 }

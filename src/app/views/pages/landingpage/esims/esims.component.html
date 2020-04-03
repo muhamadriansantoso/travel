@@ -77,7 +77,6 @@
                         </div>
                         <ng-template #modalShow>
                           <div class="modal-header">
-                            <h4 class="modal-title pull-left">Modal</h4>
                             <button (click)="modalRef.hide()" aria-label="Close" class="close pull-right" type="button">
                               <span aria-hidden="true">&times;</span>
                             </button>
@@ -91,12 +90,12 @@
                                 {{operator.title}}
                               </div>
                               <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-md-6">
                                   <div class="sim-img">
                                     <img src="{{operator.image}}">
                                   </div>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-md-6">
                                   <div class="card-row-base bordered padd-horizontal-0">
                                     <div class="key-text">
                                       <span>eSIM TYPE</span>
@@ -122,6 +121,42 @@
                                     </div>
                                   </div>
                                 </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="avail-packs">
+                                  Supported Countries
+                                </div>
+                                <div class="sub-section-container pd-">
+                                  <div class="country-list-container" style="overflow: hidden;">
+                                    <ul class="country-list mh-300">
+                                      <li *ngFor="let countries of operator.countries" class="d-flex justify-content-between align-items-center position-relative">
+                                        <span class="country-name">{{countries.title}}</span>
+                                        <img class="country-flag" src="{{countries.image}}">
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="tp-2 avail-packs">
+                                  Additional Information
+                                </div>
+                                <div class="sub-section-container pr-0 pt-9 pb-16">
+                                  <div class="overflow-y-scroll">
+                                    <ul class="mh-300 additional-info">
+                                      <li *ngFor="let info of operator.info">
+                                        <span>{{info}}</span>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="call-to-action light mt-2" style="width: 21rem">
+                                {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
                               </div>
                             </div>
                           </div>
@@ -173,7 +208,9 @@
                           <div class="card-row-base header">
                             <div class="card-header-main">{{operator.title}}</div>
                             <div class="card-header-sub">{{operator.esim_type}}</div>
-                            <div class="card-header-sub mt-2">Supported {{operator.countries?.length}} Countries</div>
+                            <div class="card-header-sub mt-2" style="text-decoration: underline;">
+                              Supported {{operator.countries?.length}} Countries
+                            </div>
                           </div>
                           <span>
                               <div class="card-row-base bordered">
@@ -215,13 +252,88 @@
                         </div>
                         <ng-template #modalShow>
                           <div class="modal-header">
-                            <h4 class="modal-title pull-left">Modal</h4>
                             <button (click)="modalRef.hide()" aria-label="Close" class="close pull-right" type="button">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
                           <div class="modal-body">
-                            This is a modal.
+                            <div [ngStyle]="
+                             {
+                                'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
+                             }" class="esim-header light-text">
+                              <div class="row header-sim-name">
+                                {{operator.title}}
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="sim-img">
+                                    <img src="{{operator.image}}">
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="key-text">
+                                      <span>eSIM TYPE</span>
+                                    </div>
+                                    <div>{{operator.esim_type}}</div>
+                                  </div>
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="key-text">
+                                      <span>DATA</span>
+                                    </div>
+                                    <div>{{packages.data}}</div>
+                                  </div>
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="key-text">
+                                      <span></span>
+                                      <span>VALIDITY</span>
+                                    </div>
+                                    <div>{{packages.day}} Days</div>
+                                  </div>
+                                  <div class="card-row-base bordered padd-horizontal-0">
+                                    <div class="alert-warning">
+                                      <span>{{operator.warning}}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="avail-packs">
+                                  Supported Countries
+                                </div>
+                                <div class="sub-section-container pd-">
+                                  <div class="country-list-container" style="overflow: hidden;">
+                                    <ul class="country-list mh-300">
+                                      <li *ngFor="let countries of operator.countries" class="d-flex justify-content-between align-items-center position-relative">
+                                        <span class="country-name">{{countries.title}}</span>
+                                        <img class="country-flag" src="{{countries.image}}">
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="tp-2 avail-packs">
+                                  Additional Information
+                                </div>
+                                <div class="sub-section-container pr-0 pt-9 pb-16">
+                                  <div class="overflow-y-scroll">
+                                    <ul class="mh-300 additional-info">
+                                      <li *ngFor="let info of operator.info">
+                                        <span>{{info}}</span>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="call-to-action light mt-2" style="width: 21rem">
+                                {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
+                              </div>
+                            </div>
                           </div>
                         </ng-template>
                       </div>
