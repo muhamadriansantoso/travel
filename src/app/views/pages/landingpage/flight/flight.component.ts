@@ -134,14 +134,8 @@ export class FlightComponent implements OnInit {
       var oneWayData = JSON.parse(localStorage.getItem("oneway"));
       this.fromCity = oneWayData.destination;
       this.toCity = oneWayData.arrival;
-      this.searchFlightForm.patchValue({
-        origin: {
-          fromCity: this.fromCity
-        },
-        destination: {
-          toCity: this.toCity
-        }
-      });
+      this.formCityValue = oneWayData.d;
+      this.toCityValue = oneWayData.a;
     } else {
       this.fromCity = '';
       this.toCity = '';
