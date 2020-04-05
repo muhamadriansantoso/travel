@@ -1,5 +1,4 @@
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
 import {LandingpageComponent} from './landingpage.component';
@@ -10,14 +9,14 @@ import {PriceNumber} from '../pricenumber.pipe';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ClickOutsideModule} from 'ng-click-outside';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
-import {NguiAutoCompleteModule} from '@ngui/auto-complete';
 import {CarouselModule} from 'ngx-owl-carousel-o';
 import {HeaderComponent} from '../header/header.component';
 import {FooterComponent} from '../footer/footer.component';
 import {EsimsComponent} from './esims/esims.component';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
 import {ModalModule} from "ngx-bootstrap";
+import {HttpClientModule} from "@angular/common/http";
+import {NguiAutoCompleteModule} from "@ngui/auto-complete";
 
 const routes: Routes = [
   {
@@ -60,32 +59,28 @@ const routes: Routes = [
     EsimsComponent
   ],
   imports: [
-    BrowserAnimationsModule,
     CommonModule,
     NgbModule,
     FormsModule,
     ClickOutsideModule,
-    AutocompleteLibModule,
-    NguiAutoCompleteModule,
     FormsModule,
     ReactiveFormsModule,
     CarouselModule,
     MatExpansionModule,
+    NgbModule,
+    HttpClientModule,
+    NguiAutoCompleteModule,
     ModalModule.forChild(),
     RouterModule.forChild(routes),
   ],
   exports: [
     HeaderComponent,
-    FlightComponent
+    FlightComponent,
+    RouterModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
 })
 export class LandingpageModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: LandingpageModule,
-    };
-  }
 }

@@ -17,7 +17,7 @@ export class CheckorderComponent implements OnInit {
   loading: boolean;
   submitClicked: boolean;
 
-  @ViewChild('scrollToMe', {static: false}) scrollToMe: ElementRef;
+  @ViewChild('scrollToMe') scrollToMe: ElementRef;
   private unsubscribe: Subject<any>;
   constructor(
     private api: APIService,

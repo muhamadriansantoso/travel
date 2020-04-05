@@ -4,10 +4,11 @@ import {APIService} from '../../../core/API';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
-import {MatSnackBar, MatStepper} from '@angular/material';
 import {Location} from '@angular/common';
 import * as moment from 'moment';
 import * as io from 'socket.io-client';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatStepper} from "@angular/material/stepper";
 
 @Component({
   selector: 'app-prebooking',
@@ -76,7 +77,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   socket;
 
   private unsubscribe: Subject<any>;
-  @ViewChild('stepper', {static: false}) private myStepper: MatStepper;
+  @ViewChild('stepper') private myStepper: MatStepper;
 
   constructor(
     private route: ActivatedRoute,

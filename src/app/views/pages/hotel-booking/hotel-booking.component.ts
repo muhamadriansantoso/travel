@@ -2,11 +2,11 @@ import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {APIService} from '../../../core/API';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material';
 import {Subject} from 'rxjs';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
 import {finalize, takeUntil, tap} from 'rxjs/operators';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-hotel-booking',

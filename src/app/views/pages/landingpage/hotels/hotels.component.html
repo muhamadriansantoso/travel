@@ -1,66 +1,66 @@
-<div class="tab-pane DivTabHotel">
-  <div class="row">
-    <div class="col-12 col-sm-12">
-      <form [formGroup]="searchHotelForm" autocomplete="off" class="search-destination">
-        <div class="row" style="margin: 10px;">
-          <div class="col-md-4 no-padding">
-            <div class="form_full">
-              <div class="form-group">
-                <label>City or Destination</label>
-                <span class="icon"><i class="fa fa-building"></i></span>
-                <input (valueChanged)="getGeoID($event)" [(ngModel)]="geoName"
-                       [list-formatter]="autocompleListFormatter"
-                       [max-num-list]="8" [min-chars]="2" [source]="geoList"
-                       auto-complete class="form-control origin-typeahead" formControlName="destination"
-                       placeholder="Where are you going?"
-                />
-                <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"
-                     style="display: block">
-                  Destination is required
-                </div>
-              </div>
-            </div>
-          </div>
+<!--<div class="tab-pane DivTabHotel">-->
+<!--  <div class="row">-->
+<!--    <div class="col-12 col-sm-12">-->
+<!--      <form [formGroup]="searchHotelForm" autocomplete="off" class="search-destination">-->
+<!--        <div class="row" style="margin: 10px;">-->
+<!--          <div class="col-md-4 no-padding">-->
+<!--            <div class="form_full">-->
+<!--              <div class="form-group">-->
+<!--                <label>City or Destination</label>-->
+<!--                <span class="icon"><i class="fa fa-building"></i></span>-->
+<!--                <input (valueChanged)="getGeoID($event)" [(ngModel)]="geoName"-->
+<!--                       [list-formatter]="autocompleListFormatter"-->
+<!--                       [max-num-list]="8" [min-chars]="2" [source]="geoList"-->
+<!--                       auto-complete class="form-control origin-typeahead" formControlName="destination"-->
+<!--                       placeholder="Where are you going?"-->
+<!--                />-->
+<!--                <div *ngIf="isControlHasError('destination','required')" class="invalid-feedback"-->
+<!--                     style="display: block">-->
+<!--                  Destination is required-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="col-md-4 no-padding">
-            <div class="form_full">
-              <div class="form-group">
-                <label>Check In</label>
-                <span class="icon"><i class="fa fa-calendar-check"></i></span>
-                <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultCheckInDate"
-                       (ngModelChange)="changeCheckInDate()"
-                       [minDate]="minDate"
-                       class="form-control"
-                       formControlName="checkindate"
-                       maxlength="0" ngbDatepicker
-                       style="cursor: pointer;"
-                />
-              </div>
-            </div>
-          </div>
+<!--          <div class="col-md-4 no-padding">-->
+<!--            <div class="form_full">-->
+<!--              <div class="form-group">-->
+<!--                <label>Check In</label>-->
+<!--                <span class="icon"><i class="fa fa-calendar-check"></i></span>-->
+<!--                <input #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="defaultCheckInDate"-->
+<!--                       (ngModelChange)="changeCheckInDate()"-->
+<!--                       [minDate]="minDate"-->
+<!--                       class="form-control"-->
+<!--                       formControlName="checkindate"-->
+<!--                       maxlength="0" ngbDatepicker-->
+<!--                       style="cursor: pointer;"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
 
-          <div class="col-md-4 no-padding">
-            <div class="form_full">
-              <div class="form-group">
-                <label>Duration - Checkout</label>
-                <span class="icon"><i class="fa fa-bed"></i></span>
-                <select class="form-control" formControlName="duration">
-                  <option *ngFor="let di of durationIndex; let i = index" value="{{di}}">
-                    {{di}} Night - {{durationStayDate[i]}}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="row-custom">
-    <div class="width_extra_large">
-      <div class="inner_button">
-        <input (click)="searchHotel()" type="submit" value="Search">
-      </div>
-    </div>
-  </div>
-</div>
+<!--          <div class="col-md-4 no-padding">-->
+<!--            <div class="form_full">-->
+<!--              <div class="form-group">-->
+<!--                <label>Duration - Checkout</label>-->
+<!--                <span class="icon"><i class="fa fa-bed"></i></span>-->
+<!--                <select class="form-control" formControlName="duration">-->
+<!--                  <option *ngFor="let di of durationIndex; let i = index" value="{{di}}">-->
+<!--                    {{di}} Night - {{durationStayDate[i]}}-->
+<!--                  </option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </form>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="row-custom">-->
+<!--    <div class="width_extra_large">-->
+<!--      <div class="inner_button">-->
+<!--        <input (click)="searchHotel()" type="submit" value="Search">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

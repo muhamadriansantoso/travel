@@ -30,7 +30,7 @@ export class HotelDetailComponent implements OnInit {
 
   public hotelDetailsCollapsed: boolean[] = [];
   private unsubscribe: Subject<any>;
-  @ViewChild('scrollToMe', {static: false}) scrollToMe: ElementRef;
+  @ViewChild('scrollToMe') scrollToMe: ElementRef;
 
   constructor(
     private _router: ActivatedRoute,
