@@ -347,15 +347,15 @@
 
             <hr class="mb-0" style="border-color: #f5f7fa!important;">
             <div class="row mt-3" style="text-align: left">
-              <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
-                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+              <ng-container *ngIf="dataflight.id == '2'; else elseFlightDetails">
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.id, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                      [attr.aria-expanded]="!flightDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
                   Flight Details
                 </div>
               </ng-container>
               <ng-template #elseFlightDetails>
-                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.id, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                      [attr.aria-expanded]="!flightDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
                   Flight Details
@@ -440,7 +440,7 @@
                             <span>Cabin Class</span> : <span
                             style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                           </li>
-                          <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                          <ng-container *ngIf="dataflight.id!='2'">
                             <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                               <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
@@ -458,12 +458,13 @@
                                 </ng-container>
                               </li>
                             </ng-container>
-                            <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                            <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
+                              <span>Baggage </span> : <span style="c
+                              olor: #8F8F8F">Not Include</span>
                             </ng-container>
                           </ng-container>
 
-                          <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                          <ng-container *ngIf="dataflight.id=='2' && babylonBaggageDate != ''">
                             <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
                               <ng-container *ngIf="bbIndex == segmentIndex">
                                 <li *ngFor="let baggageDatas of bb.baggageData">
@@ -932,15 +933,15 @@
 
           <hr class="mb-0" style="border-color: #f5f7fa!important;">
           <div class="row mt-3" style="text-align: left">
-            <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
-              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+            <ng-container *ngIf="dataflight.id == '2'; else elseFlightDetails">
+              <div (click)="flightDetailsAllCollapsed([i], dataflight.id, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                    [attr.aria-expanded]="!flightDetailsCollapsed"
                    class="col-md-2 col-sm-2 col-xs-2">
                 Flight Details
               </div>
             </ng-container>
             <ng-template #elseFlightDetails>
-              <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+              <div (click)="flightDetailsAllCollapsed([i], dataflight.id, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                    [attr.aria-expanded]="!flightDetailsCollapsed"
                    class="col-md-2 col-sm-2 col-xs-2">
                 Flight Details
@@ -1022,7 +1023,7 @@
                           <span>Cabin Class</span> : <span
                           style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                         </li>
-                        <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                        <ng-container *ngIf="dataflight.id!='2'">
                           <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                             <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                               <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
@@ -1040,12 +1041,12 @@
                               </ng-container>
                             </li>
                           </ng-container>
-                          <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                          <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
                             <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
                           </ng-container>
                         </ng-container>
 
-                        <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                        <ng-container *ngIf="dataflight.id=='2' && babylonBaggageDate != ''">
                           <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
                             <ng-container *ngIf="bbIndex == segmentIndex">
                               <li *ngFor="let baggageDatas of bb.baggageData">
@@ -1727,6 +1728,8 @@
 
               </div>
               <div class="col-md-2 text-center">
+                <p class="text-price"><strong>{{dataflight.totalPrice |
+                    currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
                 <button (click)="navigateToBooking(sessionID, dataflight)"
                         class="btn-warning font-weight-bold btn-block rounded button-search-flight-ticket"
                         title="Select Return">Select Return <i
@@ -1736,15 +1739,15 @@
 
             <hr class="mb-0" style="border-color: #f5f7fa!important;">
             <div class="row mt-3" style="text-align: left">
-              <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
-                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+              <ng-container *ngIf="dataflight.id == '2'; else elseFlightDetails">
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.id, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                      [attr.aria-expanded]="!flightDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
                   Flight Details
                 </div>
               </ng-container>
               <ng-template #elseFlightDetails>
-                <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                <div (click)="flightDetailsAllCollapsed([i], dataflight.id, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                      [attr.aria-expanded]="!flightDetailsCollapsed"
                      class="col-md-2 col-sm-2 col-xs-2">
                   Flight Details
@@ -1826,7 +1829,7 @@
                             <span>Cabin Class</span> : <span
                             style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                           </li>
-                          <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                          <ng-container *ngIf="dataflight.id!='2'">
                             <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                               <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
@@ -1844,12 +1847,12 @@
                                 </ng-container>
                               </li>
                             </ng-container>
-                            <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                            <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
                               <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
                             </ng-container>
                           </ng-container>
 
-                          <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                          <ng-container *ngIf="dataflight.id=='2' && babylonBaggageDate != ''">
                             <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
                               <ng-container *ngIf="bbIndex == segmentIndex">
                                 <li *ngFor="let baggageDatas of bb.baggageData">
@@ -2475,15 +2478,15 @@
 
               <hr class="mb-0" style="border-color: #f5f7fa!important;">
               <div class="row mt-3" style="text-align: left">
-                <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
-                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                <ng-container *ngIf="dataflight.id == '2'; else elseFlightDetails">
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.id, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                        [attr.aria-expanded]="!flightDetailsCollapsed"
                        class="col-md-2 col-sm-2 col-xs-2">
                     Flight Details
                   </div>
                 </ng-container>
                 <ng-template #elseFlightDetails>
-                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.id, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                        [attr.aria-expanded]="!flightDetailsCollapsed"
                        class="col-md-2 col-sm-2 col-xs-2">
                     Flight Details
@@ -2564,7 +2567,7 @@
                               <span>Cabin Class</span> : <span
                               style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
                             </li>
-                            <ng-container *ngIf="dataflight.supplier=='travelport1g'">
+                            <ng-container *ngIf="dataflight.id!='2'">
                               <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                                 <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
@@ -2582,12 +2585,12 @@
                                   </ng-container>
                                 </li>
                               </ng-container>
-                              <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.supplier=='travelport1g'">
+                              <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
                                 <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
                               </ng-container>
                             </ng-container>
 
-                            <ng-container *ngIf="dataflight.supplier=='babylon' && babylonBaggageDate != ''">
+                            <ng-container *ngIf="dataflight.id=='2' && babylonBaggageDate != ''">
                               <ng-container *ngFor="let bb of babylonBaggageDate; let bbIndex = index">
                                 <ng-container *ngIf="bbIndex == segmentIndex">
                                   <li *ngFor="let baggageDatas of bb.baggageData">
@@ -2947,15 +2950,15 @@
 
               <hr class="mb-0" style="border-color: #f5f7fa!important;">
               <div class="row mt-3" style="text-align: left">
-                <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
-                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                <ng-container *ngIf="dataflight.id == '2'; else elseFlightDetails">
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.id, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                        [attr.aria-expanded]="!flightDetailsCollapsed"
                        class="col-md-2 col-sm-2 col-xs-2">
                     Flight Details
                   </div>
                 </ng-container>
                 <ng-template #elseFlightDetails>
-                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.id, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                        [attr.aria-expanded]="!flightDetailsCollapsed"
                        class="col-md-2 col-sm-2 col-xs-2">
                     Flight Details
@@ -3387,15 +3390,15 @@
               </div>
 
               <div class="row mt-3" style="text-align: left">
-                <ng-container *ngIf="dataflight.supplier == 'babylon'; else elseFlightDetails">
-                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                <ng-container *ngIf="dataflight.id == '2'; else elseFlightDetails">
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.id, dataflight.babylonID, dataflight.babylonIndex); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                        [attr.aria-expanded]="!flightDetailsCollapsed"
                        class="col-md-2 col-sm-2 col-xs-2">
                     Flight Details
                   </div>
                 </ng-container>
                 <ng-template #elseFlightDetails>
-                  <div (click)="flightDetailsAllCollapsed([i], dataflight.supplier, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
+                  <div (click)="flightDetailsAllCollapsed([i], dataflight.id, '', ''); flightDetailsCollapsed[i] = !flightDetailsCollapsed[i]"
                        [attr.aria-expanded]="!flightDetailsCollapsed"
                        class="col-md-2 col-sm-2 col-xs-2">
                     Flight Details

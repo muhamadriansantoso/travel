@@ -237,7 +237,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" style="position: fixed; right: 0; top: 190px;">
             <div class="card mb-4">
               <div class="card-header">
                 <h5 class="box-title">Detail Price</h5>
@@ -270,10 +270,19 @@
                   </div>
                   <div class="clearfix"></div>
                 </div>
+                <div *ngIf="baggageDataSSR.length > 0" class="mt-1">
+                  <div class="float-left">Extra Baggage</div>
+                  <div class="float-right">
+                    <span *ngIf="baggageDataSSRPrice == 0">{{baggageDataSSRPrice | currency:'IDR ':'symbol':'1.0'}}</span>
+                    <span *ngIf="baggageDataSSRPrice > 0">{{baggageDataSSRPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
               </div>
               <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                 <div class="float-left">Total</div>
-                <div class="float-right text-info h4"><span>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                <div class="float-right text-info h4">
+                  <span>{{totalPrice + baggageDataSSRPrice |currency:'IDR ':'symbol':'3.0'}}</span>
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -536,6 +545,22 @@
                         Passenger Passport Expiry is required
                       </div>
                     </div>
+                  </div>
+                  <div *ngIf="baggageDataSSR.length > 0" class="form-group row">
+                    <ng-container *ngFor="let bds of baggageDataSSR">
+                      <label class="col-sm-4 col-form-label">Extra Baggage {{bds.departure}} - {{bds.arrival}}</label>
+                      <div class="col-sm-8">
+                        <select
+                          (change)="updateBaggageSSRData($event.target.value)"
+                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_baggageSSR','required', i, j)}"
+                          class="form-control-custom"
+                          formControlName="passenger_baggageSSR">
+                          <option value="">0 Kilograms - {{0.00 | currency:'IDR ':'symbol':'1.0'}}</option>
+                          <option *ngFor="let bdssr of bds.ssrData; let baggageIndex = index" value="{{baggageIndex}}">{{bdssr.Value}}
+                            Kilograms - {{bdssr.Amount | currency:'IDR ':'symbol':'3.0'}}</option>
+                        </select>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
               </div>

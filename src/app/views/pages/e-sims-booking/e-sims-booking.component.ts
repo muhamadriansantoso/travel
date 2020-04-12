@@ -29,6 +29,7 @@ export class ESIMsBookingComponent implements OnInit {
   stepperIndex: number;
   bookingID: string;
   packageData: string;
+  operatorID: number;
 
   validateBookingLoader: boolean;
   bookingFailurePopUP: boolean;
@@ -76,7 +77,7 @@ export class ESIMsBookingComponent implements OnInit {
   initBookingForm() {
     this.route.params.subscribe(sessionID => {
       this.sessionID = sessionID.sessionID;
-      this.api.AirBookingGetDataDB(this.sessionID).pipe(
+      this.api.EsimsBookingGetDataDB(this.sessionID).pipe(
         tap((eSIMsGetDataDB: any) => {
           if (eSIMsGetDataDB.status == 1) {
             this.stepBookingDetailsComplete = false;
@@ -101,6 +102,7 @@ export class ESIMsBookingComponent implements OnInit {
           }
 
           this.packageData = eSIMsGetDataDB.data;
+          this.operatorID = eSIMsGetDataDB.data.operatorID;
 
           this.bookingInfoForm = this.fb.group({
             title: ['Mr', Validators.compose([
@@ -146,7 +148,7 @@ export class ESIMsBookingComponent implements OnInit {
   }
 
   hitAPICheckPayment() {
-    this.api.checkPaymentChannelEspay(this.bookingID).pipe(
+    this.api.checkPaymentChannelEspayEsims(this.bookingID, this.operatorID).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.paymentData = data.data;
@@ -159,7 +161,7 @@ export class ESIMsBookingComponent implements OnInit {
             this.leftTimePayment = 0;
           }
 
-          this.socket.emit('checkpaymentstatus', {
+          this.socket.emit('checkpaymentstatusesims', {
             id: this.bookingID
           });
         }
@@ -194,11 +196,11 @@ export class ESIMsBookingComponent implements OnInit {
       email: controls['email'].value,
     };
 
-    this.api.eSIMsInsertBooking(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.email, 'airalo').pipe(
+    this.api.eSIMsInsertBooking(this.sessionID, dataBooking.title, dataBooking.firstname, dataBooking.lastname, dataBooking.email, this.operatorID).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.bookingID = data.orderID;
-          this.api.paymentChannelEspay(this.sessionID).pipe(
+          this.api.paymentChannelEspayForEsims(this.sessionID).pipe(
             tap((data: any) => {
               if (data.status == 1) {
                 this.listPaymentChannel = data.data.data;
@@ -246,7 +248,7 @@ export class ESIMsBookingComponent implements OnInit {
 
     this.validateBookingLoader = true;
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, '', '', '', 'esims', '').pipe(
+    this.api.insertPaymentChannelEspayForEsims(this.bookingID, dataBooking.bankCode, 'esims').pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.stepPayComplete = true;

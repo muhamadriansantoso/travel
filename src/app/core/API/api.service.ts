@@ -76,7 +76,7 @@ export class APIService {
       'infant': infant,
       'cabin': cabin,
       'type': type,
-      'supplier': supplierData,
+      'id': supplierData,
       'dataBefore': dataBefore,
     });
     return this.http.post(APIURL + 'api/v1/flight/search', userData);
@@ -84,6 +84,10 @@ export class APIService {
 
   getFlightSupplier() {
     return this.http.get(APIURL + 'api/v1/flight/supplier');
+  }
+
+  getEsimsSupplier() {
+    return this.http.get(APIURL + 'api/v1/esims/supplier');
   }
 
   AirLowFareSearchPortArray(d: string, a: string, date: string, r_date: string, adult: number, child: number, infant: number, cabin: string, type: string, supplierData: string, dataBefore: any) {
@@ -153,6 +157,14 @@ export class APIService {
     return this.http.post(APIURL + 'api/internal/hotel/insertSelectedBooking', userData, {headers: urlHeader});
   }
 
+  EsimsBookingInsertDB(sessionID: string, data: any) {
+    var userData = JSON.stringify({
+      'sessionID': sessionID,
+      'data': data,
+    });
+    return this.http.post(APIURL + 'api/internal/esims/insertSelectedBooking', userData);
+  }
+
   AirBookingGetDataDB(sessionID: string) {
     var userData = 'sessionID=' + sessionID;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -165,6 +177,12 @@ export class APIService {
     return this.http.post(APIURL + 'api/internal/hotel/getSelectedBooking', userData, {headers: urlHeader});
   }
 
+  EsimsBookingGetDataDB(sessionID: string) {
+    var userData = 'sessionID=' + sessionID;
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    return this.http.post(APIURL + 'api/internal/esims/getSelectedBooking', userData, {headers: urlHeader});
+  }
+
   AirPricePort(sessionID: any) {
     var userData = 'sessionID=' + sessionID;
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
@@ -173,14 +191,32 @@ export class APIService {
 
   AirCreateReservationPort(sessionID, title, firstname, lastname, dob, email, phone, passengerData, supplier) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&dob=' + dob + '&email=' + email + '&phone=' + phone + '&passengerData=' + JSON.stringify(passengerData) + '&supplier=' + supplier;
-    return this.http.post(APIURL + 'api/v1/booking/insertBookingData', userData, {headers: urlHeader});
+    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&dob=' + dob + '&email=' + email + '&phone=' + phone + '&passengerData=' + JSON.stringify(passengerData) + '&id=' + supplier;
+    return this.http.post(APIURL + 'api/v1/flight/insertBookingData', userData, {headers: urlHeader});
+  }
+
+  AirCreateSSR(bookingID, ssrData, supplier) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'bookingID=' + bookingID + '&ssrData=' + encodeURIComponent(JSON.stringify(ssrData)) + '&id=' + supplier;
+    return this.http.post(APIURL + 'api/v1/flight/insertSSRData', userData, {headers: urlHeader});
   }
 
   eSIMsInsertBooking(sessionID, title, firstname, lastname, email, supplier) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&email=' + email + '&supplier=' + supplier;
-    return this.http.post(APIURL + 'api/v1/booking/insertBookingData', userData, {headers: urlHeader});
+    var userData = 'sessionID=' + sessionID + '&title=' + title + '&firstname=' + firstname + '&lastname=' + lastname + '&email=' + email + '&id=' + supplier;
+    return this.http.post(APIURL + 'api/v1/esims/insertBookingData', userData, {headers: urlHeader});
+  }
+
+  paymentChannelEspayForFlight(sessionID) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'sessionID=' + sessionID;
+    return this.http.post(APIURL + 'api/v1/flight/payment/paymentChannelEspay', userData, {headers: urlHeader});
+  }
+
+  paymentChannelEspayForEsims(sessionID) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'sessionID=' + sessionID;
+    return this.http.post(APIURL + 'api/v1/esims/payment/paymentChannelEspay', userData, {headers: urlHeader});
   }
 
   paymentChannelEspay(sessionID) {
@@ -189,15 +225,39 @@ export class APIService {
     return this.http.post(APIURL + 'api/v1/payment/paymentChannelEspay', userData, {headers: urlHeader});
   }
 
+  insertPaymentChannelEspayForFlight(bookingID, bankCode, origin, destination, departureTime, airPlane, roundType) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'bookingID=' + bookingID + '&bankCode=' + bankCode + '&origin=' + origin + '&destination=' + destination + '&departureTime=' + departureTime + '&airPlane=' + airPlane + '&roundType=' + roundType;
+    return this.http.post(APIURL + 'api/v1/flight/payment/orderPaymentEspay', userData, {headers: urlHeader});
+  }
+
+  insertPaymentChannelEspayForEsims(bookingID, bankCode, type) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'bookingID=' + bookingID + '&bankCode=' + bankCode + '&type=' + type;
+    return this.http.post(APIURL + 'api/v1/esims/payment/orderPaymentEspay', userData, {headers: urlHeader});
+  }
+
   insertPaymentChannelEspay(bookingID, bankCode, origin, destination, departureTime, airPlane, roundType) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
     var userData = 'bookingID=' + bookingID + '&bankCode=' + bankCode + '&origin=' + origin + '&destination=' + destination + '&departureTime=' + departureTime + '&airPlane=' + airPlane + '&roundType=' + roundType;
     return this.http.post(APIURL + 'api/v1/payment/orderPaymentEspay', userData, {headers: urlHeader});
   }
 
-  checkPaymentChannelEspay(bookingID) {
+  checkPaymentChannelEspayForFlight(bookingID, supplier) {
     var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
-    var userData = 'bookingID=' + bookingID;
+    var userData = 'bookingID=' + bookingID + '&supplier=' + supplier;
+    return this.http.post(APIURL + 'api/v1/flight/payment/checkPaymentEspay', userData, {headers: urlHeader});
+  }
+
+  checkPaymentChannelEspayEsims(bookingID, supplier) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'bookingID=' + bookingID + '&supplier=' + supplier;
+    return this.http.post(APIURL + 'api/v1/esims/payment/checkPaymentEspay', userData, {headers: urlHeader});
+  }
+
+  checkPaymentChannelEspay(bookingID, supplier) {
+    var urlHeader = new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'});
+    var userData = 'bookingID=' + bookingID + '&supplier=' + supplier;
     return this.http.post(APIURL + 'api/v1/payment/checkPaymentEspay', userData, {headers: urlHeader});
   }
 
@@ -207,9 +267,11 @@ export class APIService {
     return this.http.post(APIURL + 'api/v1/flight/retrieveBooking', userData, {headers: urlHeader});
   }
 
-  geteSIMs(type: string) {
+  geteSIMs(type: string, supplierData: string, dataBefore: any) {
     var userData = JSON.stringify({
-      'type': type,
+      id: supplierData,
+      type: type,
+      dataBefore: dataBefore
     });
     return this.http.post(APIURL + 'api/v1/esims/listpackage', userData);
   }

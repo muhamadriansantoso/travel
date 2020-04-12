@@ -208,7 +208,7 @@
                           <div class="card-row-base header">
                             <div class="card-header-main">{{operator.title}}</div>
                             <div class="card-header-sub">{{operator.esim_type}}</div>
-                            <div class="card-header-sub mt-2" style="text-decoration: underline;">
+                            <div (click)="openModal(modalShow)" class="card-header-sub mt-2" style="text-decoration: underline; cursor: pointer">
                               Supported {{operator.countries?.length}} Countries
                             </div>
                           </div>

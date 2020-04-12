@@ -19,6 +19,7 @@ export class EsimsComponent implements OnInit {
   sessionID: string;
   pleaseWaitLoader: boolean;
   modalRef: BsModalRef;
+  supplierData: any;
 
   private unsubscribe: Subject<any>;
 
@@ -36,42 +37,48 @@ export class EsimsComponent implements OnInit {
   ngOnInit() {
     this.pleaseWaitLoader = true;
     this.type = 'local';
-    this.api.geteSIMs(this.type)
-      .pipe(
-        tap((data: any) => {
-          if (data.data.status == 1) {
-            this.sessionID = data.sessionID;
-            this.eSIMsData = data.data.data;
-          }
-        }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.pleaseWaitLoader = false;
-          this.cdr.markForCheck();
-        })
-      )
-      .subscribe();
+
+    this.api.getEsimsSupplier().toPromise().then((data: any) => {
+      this.supplierData = data;
+      this.getAPIFromSupplier(data.length);
+    });
+  }
+
+  async getAPIFromSupplier(length) {
+    if (this.type == 'local') {
+      this.eSIMsData = [];
+      for (var abc = 0; abc < length; abc++) {
+        await this.api.geteSIMs(this.type, this.supplierData[abc].id, this.eSIMsData)
+          .toPromise().then((data: any) => {
+            if (data.data.status == 1) {
+              this.sessionID = data.sessionID;
+              this.eSIMsData = data.data.data;
+            }
+          });
+      }
+      this.pleaseWaitLoader = false;
+      this.cdr.markForCheck();
+    } else if (this.type == 'global') {
+      this.eSIMsData = [];
+      for (var abc = 0; abc < length; abc++) {
+        await this.api.geteSIMs(this.type, this.supplierData[abc].id, this.eSIMsData)
+          .toPromise().then((data: any) => {
+            if (data.data.status == 1) {
+              this.sessionID = data.sessionID;
+              this.eSIMsData = data.data.data;
+            }
+          });
+      }
+      this.pleaseWaitLoader = false;
+      this.cdr.markForCheck();
+    }
   }
 
   beforeChange($event: NgbTabChangeEvent) {
     this.type = $event.nextId;
     this.eSIMsData = '';
     this.pleaseWaitLoader = true;
-    this.api.geteSIMs(this.type)
-      .pipe(
-        tap((data: any) => {
-          if (data.data.status == 1) {
-            this.sessionID = data.sessionID;
-            this.eSIMsData = data.data.data;
-          }
-        }),
-        takeUntil(this.unsubscribe),
-        finalize(() => {
-          this.pleaseWaitLoader = false;
-          this.cdr.markForCheck();
-        })
-      )
-      .subscribe();
+    this.getAPIFromSupplier(this.supplierData.length);
   };
 
   openModal(template: TemplateRef<any>) {
@@ -79,7 +86,7 @@ export class EsimsComponent implements OnInit {
   }
 
   navigateToBooking(data) {
-    this.api.AirBookingInsertDB(this.sessionID, JSON.stringify(data))
+    this.api.EsimsBookingInsertDB(this.sessionID, JSON.stringify(data))
       .pipe(
         tap((data: any) => {
           this.router.navigate(['esims-booking', data.sessionID]);

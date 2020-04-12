@@ -99,7 +99,7 @@ export class SearchFlightResultComponent implements OnInit {
   async getAPIFromSupplier(length) {
     if (this.roundType == 'one-way') {
       for (var abc = 0; abc < length; abc++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].code, this.dataFlightSearch)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[abc].id, this.dataFlightSearch)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataFlightSearch = data.data;
@@ -138,7 +138,7 @@ export class SearchFlightResultComponent implements OnInit {
       }
     } else if (this.roundType == 'round-trip') {
       for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
-        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
+        await this.api.AirLowFareSearchPort(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].id, this.dataMultiTrip)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               this.dataMultiTrip = data.data;
@@ -195,7 +195,7 @@ export class SearchFlightResultComponent implements OnInit {
       }
     } else if (this.roundType == 'multiple-trip') {
       for (var indexSupplier = 0; indexSupplier < length; indexSupplier++) {
-        await this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].code, this.dataMultiTrip)
+        await this.api.AirLowFareSearchPortArray(this.origin, this.destination, this.departureDate, this.returnDate, this.adult, this.child, this.infant, this.cabin, this.roundType, this.supplierData[indexSupplier].id, this.dataMultiTrip)
           .toPromise().then((data: any) => {
             if (data.data.length > 0) {
               var ABC = 0;
@@ -308,7 +308,7 @@ export class SearchFlightResultComponent implements OnInit {
       this.flightDetailsCollapsed = [false];
       this.priceDetailsCollapsed = [false];
       this.flightDetailsCollapsed[value] = false;
-      if (supplier == 'babylon') {
+      if (supplier == '2') {
         this.pleaseWaitLoader = true;
         this.babylonBaggageDate = '';
         this.api.getBaggageDataBabylon(index1, this.roundType, index2)

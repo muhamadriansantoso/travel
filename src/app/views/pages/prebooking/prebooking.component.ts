@@ -10,6 +10,7 @@ import * as io from 'socket.io-client';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatStepper} from "@angular/material/stepper";
 
+
 @Component({
   selector: 'app-prebooking',
   templateUrl: './prebooking.component.html',
@@ -29,6 +30,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   updatedPrice: any;
   roundType: string;
   airSegmentData: any;
+  totalPrice: number;
+  baggageDataSSR: any;
+  baggageDataSSRChoosen: any = [];
+  baggageDataSSRCode: string;
+  baggageDataSSRPrice: number;
 
   listPaymentChannel: any;
   paymentData: any;
@@ -95,6 +101,8 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadingPage = true;
     this.isLinear = true;
+    this.baggageDataSSRCode = '';
+    this.baggageDataSSRPrice = 0;
 
     this.initBookingForm();
     this.paymentChannelForm();
@@ -150,9 +158,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.passengerType = AirPricePort.data[0].passengerType;
             this.passengerLength = AirPricePort.data[0].passengerType.length;
             this.updatedPrice = AirPricePort.data[0].totalPrice;
-            this.supplier = AirPricePort.data[0].supplier;
+            this.totalPrice = AirPricePort.data[0].totalPrice;
+            this.supplier = AirPricePort.data[0].id;
 
             this.airSegmentData = AirPricePort.data[0].airSegmentData;
+            this.baggageDataSSR = AirPricePort.data[0].baggageSSRData;
 
             var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
             var bookingminDateAdult = moment(bookingDate).subtract(100, 'years').toDate();
@@ -271,6 +281,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
+                  passenger_baggageSSR: [''],
                   passengerType: AirPricePort.data[0].passengerType[passengerTypeLength].code
                 }));
               }
@@ -389,7 +400,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       tap((data: any) => {
         if (data.status == 1) {
           this.bookingID = data.orderID;
-          this.api.paymentChannelEspay(this.sessionID).pipe(
+          this.api.paymentChannelEspayForFlight(this.sessionID).pipe(
             tap((data: any) => {
               if (data.status == 1) {
                 this.listPaymentChannel = data.data.data;
@@ -438,22 +449,53 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.validateBookingLoader = true;
     var departureTimeModified = moment(this.departureTime, 'YYYY-MM-DDhh:mm:ss').format('YYYY-MM-DD hh:mm:ss');
 
-    this.api.insertPaymentChannelEspay(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane, this.roundType).pipe(
-      tap((data: any) => {
-        if (data.status == 1) {
-          this.stepPayComplete = true;
-          this.hitAPICheckPayment();
-        } else {
-          // this.paymentFailed = true;
-        }
-      }),
-      takeUntil(this.unsubscribe),
-      finalize(() => {
-        this.validateBookingLoader = false;
-        this.myStepper.next();
-        this.cdr.markForCheck();
-      })
-    ).subscribe();
+    if (this.baggageDataSSRChoosen.length > 0) {
+      this.api.AirCreateSSR(this.bookingID, this.baggageDataSSRChoosen, this.supplier).pipe(
+        tap((data: any) => {
+          if (data.status == 1) {
+            this.api.insertPaymentChannelEspayForFlight(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane, this.roundType).pipe(
+              tap((data: any) => {
+                if (data.status == 1) {
+                  this.stepPayComplete = true;
+                  this.hitAPICheckPayment();
+                } else {
+                  // this.paymentFailed = true;
+                }
+              }),
+              takeUntil(this.unsubscribe),
+              finalize(() => {
+                this.validateBookingLoader = false;
+                this.myStepper.next();
+                this.cdr.markForCheck();
+              })
+            ).subscribe();
+          } else {
+            // this.paymentFailed = true;
+          }
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.cdr.markForCheck();
+        })
+      ).subscribe();
+    } else {
+      this.api.insertPaymentChannelEspayForFlight(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane, this.roundType).pipe(
+        tap((data: any) => {
+          if (data.status == 1) {
+            this.stepPayComplete = true;
+            this.hitAPICheckPayment();
+          } else {
+            // this.paymentFailed = true;
+          }
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.validateBookingLoader = false;
+          this.myStepper.next();
+          this.cdr.markForCheck();
+        })
+      ).subscribe();
+    }
   }
 
   checkingPaymentbySocketIO() {
@@ -474,7 +516,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   }
 
   hitAPICheckPayment() {
-    this.api.checkPaymentChannelEspay(this.bookingID).pipe(
+    this.api.checkPaymentChannelEspayForFlight(this.bookingID, this.supplier).pipe(
       tap((data: any) => {
         if (data.status == 1) {
           this.paymentData = data.data;
@@ -487,7 +529,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.leftTimePayment = 0;
           }
 
-          this.socket.emit('checkpaymentstatus', {
+          this.socket.emit('checkpaymentstatusforflight', {
             id: this.bookingID
           });
         }
@@ -546,6 +588,21 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.snackBar.open('Copied', '', {
       duration: 1000,
     });
+  }
+
+  updateBaggageSSRData(index, passengerIndex) {
+    console.log(passengerIndex);
+    if (index == '') {
+      this.baggageDataSSRPrice = 0;
+      this.baggageDataSSRChoosen = [];
+    } else {
+      this.baggageDataSSRCode = this.baggageDataSSR[index].SSRCode;
+      this.baggageDataSSRPrice = parseInt(this.baggageDataSSR[index].Amount);
+      this.baggageDataSSRChoosen = [{
+        SSRCode: this.baggageDataSSRCode,
+        PassengerNumber: passengerIndex
+      }];
+    }
   }
 
 }
