@@ -253,6 +253,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             //endbookinginfoform
 
             //start looping passenger form dynamically
+            var passengerIndex = 0;
             for (var passengerTypeLength = 0; passengerTypeLength < this.passengerLength; passengerTypeLength++) {
               this.bookingForm[passengerTypeLength] = new FormArray([]);
               for (var passengerNumLength = 0; passengerNumLength < AirPricePort.data[0].passengerType[passengerTypeLength].numPassenger; passengerNumLength++) {
@@ -282,8 +283,11 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                   ])
                   ],
                   passenger_baggageSSR: [''],
-                  passengerType: AirPricePort.data[0].passengerType[passengerTypeLength].code
+                  passengerType: AirPricePort.data[0].passengerType[passengerTypeLength].code,
+                  passengerIndex: passengerIndex
                 }));
+
+                passengerIndex += 1;
               }
             }
             //end looping passenger form dynamically
@@ -590,19 +594,44 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     });
   }
 
-  updateBaggageSSRData(index, passengerIndex) {
-    console.log(passengerIndex);
-    if (index == '') {
-      this.baggageDataSSRPrice = 0;
-      this.baggageDataSSRChoosen = [];
-    } else {
-      this.baggageDataSSRCode = this.baggageDataSSR[index].SSRCode;
-      this.baggageDataSSRPrice = parseInt(this.baggageDataSSR[index].Amount);
-      this.baggageDataSSRChoosen = [{
+  updateBaggageSSRData(index, segmentIndex, passengerIndex) {
+    var keepGoing = true;
+    console.log('passengerIndex ' + passengerIndex);
+    console.log('segmentIndex ' + segmentIndex);
+    // this.baggageDataSSRPrice += parseInt(this.baggageDataSSR[segmentIndex].ssrData[index].Amount);
+    this.baggageDataSSRChoosen.forEach((data: any, i: number) => {
+      if (passengerIndex == data.PassengerNumber && index != '') {
+        this.baggageDataSSRCode = this.baggageDataSSR[segmentIndex].ssrData[index].SSRCode;
+        this.baggageDataSSRChoosen[i] = {
+          departure: this.baggageDataSSR[segmentIndex].departure,
+          arrival: this.baggageDataSSR[segmentIndex].arrival,
+          SSRCode: this.baggageDataSSRCode,
+          PassengerNumber: passengerIndex,
+          price: this.baggageDataSSR[segmentIndex].ssrData[index].Amount
+        };
+        keepGoing = false;
+      } else if (passengerIndex == data.PassengerNumber && index == '') {
+        this.baggageDataSSRCode = '';
+        this.baggageDataSSRChoosen.splice(i, 1);
+        keepGoing = false;
+      }
+    });
+
+    if (keepGoing == true) {
+      this.baggageDataSSRCode = this.baggageDataSSR[segmentIndex].ssrData[index].SSRCode;
+      this.baggageDataSSRChoosen.push({
+        departure: this.baggageDataSSR[segmentIndex].departure,
+        arrival: this.baggageDataSSR[segmentIndex].arrival,
         SSRCode: this.baggageDataSSRCode,
-        PassengerNumber: passengerIndex
-      }];
+        PassengerNumber: passengerIndex,
+        price: this.baggageDataSSR[segmentIndex].ssrData[index].Amount
+      });
     }
+    console.log(this.baggageDataSSRChoosen);
+
+    this.baggageDataSSRPrice = this.baggageDataSSRChoosen.reduce((a, b) => a + (parseInt(b['price']) || 0), 0);
   }
+
+
 
 }
