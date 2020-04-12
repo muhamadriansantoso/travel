@@ -110,7 +110,7 @@
         <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
         <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
           <div class="centered-loader">
-            <img src="./assets/images/loader.gif">
+            <img src="./assets/images/loader.gif" alt="Loading for flights">
             <div class="theme-loading-body">
               <h2 class="theme-loading-title">Just a moment</h2>
               <p class="theme-loading-subtitle">We are looking for flights </p>
@@ -128,10 +128,10 @@
                     <div class="flight-section-airline-logo-wrap">
                       <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                     </div>
                   </div>
                   <ng-container *ngIf="dataflight.stop == 1">
@@ -377,10 +377,10 @@
                     <div class="flight-section-airline-logo-wrap">
                       <img *ngIf="dataflight.transData[segmentIndex].platingCarrier == 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                           src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                       <img *ngIf="dataflight.transData[segmentIndex].platingCarrier != 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                     </div>
                   </div>
                   <div class="col-md-10">
@@ -695,7 +695,7 @@
         <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
         <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
           <div class="centered-loader">
-            <img src="./assets/images/loader.gif">
+            <img src="./assets/images/loader.gif" alt="Loading for flights">
             <div class="theme-loading-body">
               <h2 class="theme-loading-title">Just a moment</h2>
               <p class="theme-loading-subtitle">We are looking for flights </p>
@@ -713,10 +713,10 @@
                   <div class="flight-section-airline-logo-wrap">
                     <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                          class="img-fluid img-circle airline-logo"
-                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                     <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                       class="img-fluid img-circle airline-logo"
-                      src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                      src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                   </div>
                 </div>
                 <ng-container *ngIf="dataflight.stop == 1">
@@ -962,10 +962,10 @@
                   <div class="flight-section-airline-logo-wrap">
                     <img *ngIf="dataflight.transData[segmentIndex].platingCarrier == 'ID'"
                          class="img-fluid img-circle airline-logo"
-                         src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                         src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                     <img *ngIf="dataflight.transData[segmentIndex].platingCarrier != 'ID'"
                          class="img-fluid img-circle airline-logo"
-                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                   </div>
                 </div>
                 <div class="col-md-10">
@@ -1237,10 +1237,10 @@
                   <div class="flight-section-airline-logo-wrap">
                     <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                          class="img-fluid img-circle airline-logo"
-                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                         src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                     <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                          class="img-fluid img-circle airline-logo"
-                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                         src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                   </div>
                 </div>
                 <ng-container *ngIf="dataflight.stop == 1">
@@ -1501,7 +1501,7 @@
         <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
         <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
           <div class="centered-loader">
-            <img src="./assets/images/loader.gif">
+            <img src="./assets/images/loader.gif" alt="Loading for flights">
             <div class="theme-loading-body">
               <h2 class="theme-loading-title">Just a moment</h2>
               <p class="theme-loading-subtitle">We are looking for flights </p>
@@ -1519,10 +1519,10 @@
                     <div class="flight-section-airline-logo-wrap">
                       <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                     </div>
                   </div>
                   <ng-container *ngIf="dataflight.stop == 1">
@@ -1768,10 +1768,10 @@
                     <div class="flight-section-airline-logo-wrap">
                       <img *ngIf="dataflight.transData[segmentIndex].platingCarrier == 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                           src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                       <img *ngIf="dataflight.transData[segmentIndex].platingCarrier != 'ID'"
                            class="img-fluid img-circle airline-logo"
-                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                     </div>
                   </div>
                   <div class="col-md-10">
@@ -1969,220 +1969,56 @@
 
 <section *ngIf="roundType=='multiple-trip'" class="ftco-section" style="padding: 0;">
   <ng-container *ngIf="multiplePhase <= dataMultiTripStep">
-    <div class="col-sm-9 col-md-9 mb-3" style="margin: auto; float: none">
-      <div *ngFor="let dataflight of dataFlightAdvanced"
-           class="card card-ticket">
+    <!-- Change Flight Start -->
+    <div class="bg-info header pd-t97 mb-3 pb-3">
+      <div class="container">
         <div class="row">
-          <div (click)="returnPrevious(dataflight)"
-               class="col-md-10 text-center">
+          <div class="col-md-10">
             <div class="row">
-              <div class="col-md-2 mb-3">
-                <div class="flight-section-airline-logo-wrap">
-                  <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
-                       class="img-fluid img-circle airline-logo"
-                       src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
-                  <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
-                       class="img-fluid img-circle airline-logo"
-                       src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+              <div class="col-md-3 text-right">
+                <div class="country-code">{{origin}}</div>
+                <div class="airport-full">{{originAirportName}}</div>
+              </div>
+              <div class="col-sm-1 mt-4" style="max-width: 5%;">
+                <i class="fa fa-lg fa-plane text-white" style="transform: rotate(317deg);"></i>
+              </div>
+              <div class="col-md-3">
+                <div>
+                  <div class="country-code">{{destination}}</div>
+                  <div class="airport-full">{{destinationAirportName}}</div>
                 </div>
               </div>
-              <ng-container *ngIf="dataflight.stop == 1">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p
-                        class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].origin_city_name}}</p>
-                      <p
-                        class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                      <div class="flight-section-path">
-                        <div class="flight-section-fly-time">
-                          <p>{{dataflight.transData[0].flightTime | minuteToHour}}</p>
-                        </div>
-                        <div class="flight-section-path-line"></div>
-                        <div>
-                          <div class="flight-section-path-line-start">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"
-                                 style="visibility: hidden"></div>
-                            <div class="flight-section-path-line-title">Direct</div>
-                          </div>
-
-                          <div>
-                            <div class="flight-section-path-line-end">
-                              <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
-                              <div class="flight-section-path-line-dot"></div>
-                              <div class="flight-section-path-line-title">
-                                {{dataflight.transData[0].destination}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <p
-                        class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].destination_city_name}}</p>
-                      <p
-                        class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                    </div>
+              <div class="col-md-4 ml-4 ml-lg-5 pl-lg-5" style="border-left: 1px dashed #e5e5e5;">
+                <div>
+                  <h3 class="mb-1 age-pass">
+                    <span>{{adult}} Adult</span>
+                    <span *ngIf="child > 0">, {{child}} Child</span>
+                    <span *ngIf="infant > 0">, {{infant}} Infant</span>
+                  </h3>
+                  <div class="text-white">
+                    <div class="age-pass mb-1">{{cabin}}</div>
+                    <span>{{departureDate | amParseZone | amDateFormat:'MMM DD, YYYY'}}</span>
                   </div>
                 </div>
-              </ng-container>
-
-              <ng-container *ngIf="dataflight.stop == 2">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p
-                        class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].origin_city_name}}</p>
-                      <p
-                        class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                      <div class="flight-section-path">
-                        <div class="flight-section-fly-time">
-                          <p>{{(dataflight.transData[0].flightTime +
-                            dataflight.transData[1].flightTime) | minuteToHour}},
-                            {{(dataflight.stop) - 1}} Transit</p>
-                        </div>
-                        <div class="flight-section-path-line"></div>
-                        <div>
-                          <div class="flight-section-path-line-start">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].destination}}
-                            </div>
-                          </div>
-
-                          <div>
-                            <div class="flight-section-path-line-end">
-                              <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
-                              <div class="flight-section-path-line-dot"></div>
-                              <div class="flight-section-path-line-title">
-                                {{dataflight.transData[1].destination}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <p
-                        class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[1].destination_city_name}}</p>
-                      <p
-                        class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-
-              <ng-container *ngIf="dataflight.stop == 3">
-                <div class="col-md-10">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <p
-                        class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[0].origin_city_name}}</p>
-                      <p
-                        class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                    </div>
-
-                    <div class="col-md-6 text-center">
-                      <div class="flight-section-path">
-                        <div class="flight-section-fly-time">
-                          <p>{{(dataflight.transData[0].flightTime +
-                            dataflight.transData[1].flightTime) | minuteToHour}},
-                            {{(dataflight.stop) - 1}} Transit</p>
-                        </div>
-                        <div class="flight-section-path-line"></div>
-                        <div>
-                          <div class="flight-section-path-line-start">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[0].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle-1">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[1].origin}}
-                            </div>
-                          </div>
-
-                          <div class="flight-section-path-line-middle-2">
-                            <i class="fa fa-plane flight-section-path-icon"></i>
-                            <div class="flight-section-path-line-dot"></div>
-                            <div class="flight-section-path-line-title">
-                              {{dataflight.transData[1].destination}}
-                            </div>
-                          </div>
-
-                          <div>
-                            <div class="flight-section-path-line-end">
-                              <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
-                              <div class="flight-section-path-line-dot"></div>
-                              <div class="flight-section-path-line-title">
-                                {{dataflight.transData[2].destination}}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <p
-                        class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
-                      <p class="destination-title">
-                        {{dataflight.transData[1].destination_city_name}}</p>
-                      <p
-                        class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
-                    </div>
-                  </div>
-                </div>
-              </ng-container>
-
+              </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-md-6 col-xs-12">
-                <div class="title-maskapai">
-                  {{dataflight.transData[0].platingCarrierName}}
-                  <span>{{dataflight.transData[0].flightNumber}}</span>
+          </div>
+          <div class="col-md-2 pt-2 text-right">
+            <button (click)="searchFlight()" class="btn-warning p-3 rounded-pill">Change Flight</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="searchFlightShow" class="main_content mb-5" style="margin-top: unset">
+        <div class="container div_container">
+          <div class="page_right_panel">
+            <div class="banner_tab" style="margin-top: unset; padding: unset">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="content border-fix-left">
+                    <div class="inner_content">
+                      <app-flight></app-flight>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2190,32 +2026,250 @@
         </div>
       </div>
     </div>
-
-    <div class="container pd-t118">
-      <h4 align="center" class="col-sm-3 menu-filter-pc">Filter</h4>
+    <!-- Change Flight Finish -->
+    <div class="container">
       <div class="row">
+        <div class="col-sm-12 col-md-12 mb-3" style="margin: auto; float: none" *ngFor="let dataflight of dataFlightAdvanced">
+          <div class="col-md-12 float-left">
+            <div class="title-section">Multi Trip</div>
+            <div class="mb-2 title-line"></div>
+          </div>
+          <div class="card card-ticket">
+            <div class="row">
+              <div (click)="returnPrevious(dataflight)"
+                   class="col-md-12 text-center">
+                <div class="row">
+                  <div class="col-md-2 mb-3">
+                    <div class="flight-section-airline-logo-wrap">
+                      <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
+                      <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
+                           class="img-fluid img-circle airline-logo"
+                           src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
+                    </div>
+                  </div>
+                  <ng-container *ngIf="dataflight.stop == 1">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].origin_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <div class="flight-section-path">
+                            <div class="flight-section-fly-time">
+                              <p>{{dataflight.transData[0].flightTime | minuteToHour}}</p>
+                            </div>
+                            <div class="flight-section-path-line"></div>
+                            <div>
+                              <div class="flight-section-path-line-start">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"
+                                     style="visibility: hidden"></div>
+                                <div class="flight-section-path-line-title">Direct</div>
+                              </div>
+
+                              <div>
+                                <div class="flight-section-path-line-end">
+                                  <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
+                                  <div class="flight-section-path-line-dot"></div>
+                                  <div class="flight-section-path-line-title">
+                                    {{dataflight.transData[0].destination}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].destination_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="dataflight.stop == 2">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].origin_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <div class="flight-section-path">
+                            <div class="flight-section-fly-time">
+                              <p>{{(dataflight.transData[0].flightTime +
+                                dataflight.transData[1].flightTime) | minuteToHour}},
+                                {{(dataflight.stop) - 1}} Transit</p>
+                            </div>
+                            <div class="flight-section-path-line"></div>
+                            <div>
+                              <div class="flight-section-path-line-start">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].destination}}
+                                </div>
+                              </div>
+
+                              <div>
+                                <div class="flight-section-path-line-end">
+                                  <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
+                                  <div class="flight-section-path-line-dot"></div>
+                                  <div class="flight-section-path-line-title">
+                                    {{dataflight.transData[1].destination}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[1].destination_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                  <ng-container *ngIf="dataflight.stop == 3">
+                    <div class="col-md-10">
+                      <div class="row">
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[0].origin_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[0].departureTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                          <div class="flight-section-path">
+                            <div class="flight-section-fly-time">
+                              <p>{{(dataflight.transData[0].flightTime +
+                                dataflight.transData[1].flightTime) | minuteToHour}},
+                                {{(dataflight.stop) - 1}} Transit</p>
+                            </div>
+                            <div class="flight-section-path-line"></div>
+                            <div>
+                              <div class="flight-section-path-line-start">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[0].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle-1">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[1].origin}}
+                                </div>
+                              </div>
+
+                              <div class="flight-section-path-line-middle-2">
+                                <i class="fa fa-plane flight-section-path-icon"></i>
+                                <div class="flight-section-path-line-dot"></div>
+                                <div class="flight-section-path-line-title">
+                                  {{dataflight.transData[1].destination}}
+                                </div>
+                              </div>
+
+                              <div>
+                                <div class="flight-section-path-line-end">
+                                  <i class="fa fa-plane plane-destination flight-section-path-icon"></i>
+                                  <div class="flight-section-path-line-dot"></div>
+                                  <div class="flight-section-path-line-title">
+                                    {{dataflight.transData[2].destination}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <p
+                            class="title-ticket">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'HH:mm' }}</p>
+                          <p class="destination-title">
+                            {{dataflight.transData[1].destination_city_name}}</p>
+                          <p
+                            class="destination-date">{{dataflight.transData[1].arrivalTime | amParseZone | amDateFormat:'MMM DD, YYYY'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-container>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div (click)="collapseAllDetails()" class="col-sm-3 col-md-3  menu-filter-pc">
           <div class="card">
-            <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Airlines</h4>
-            <ul style="list-style:none;float: left;">
-              <li *ngFor="let allu of airLineListUnique | unique;">
-                <input [(ngModel)]="allu.checked" [value]="allu.value" style="margin-right:5px;" type="checkbox">
-                {{allu.value}}
-              </li>
-            </ul>
+            <h5 class="filter-left">Filter</h5>
+            <hr class="m-0 mb-2">
+            <h6 class="filter-left">Airlines</h6>
+            <div *ngFor="let allu of airLineListUnique | unique;" class="custom-control custom-checkbox">
+              <input [(ngModel)]="allu.checked" [value]="allu.value" class="custom-control-input"
+                     id="checkbox-{{allu.value}}"
+                     name="airlines" type="checkbox">
+              <label class="custom-control-label pointer text-secondary"
+                     for="checkbox-{{allu.value}}">{{allu.value}}</label>
+            </div>
+            <hr class="m-0 mb-2 mt-3">
+            <h6 class="filter-left">Transit</h6>
+            <div *ngFor="let tlu of transitListUnique | unique" class="custom-control custom-checkbox">
+              <input [(ngModel)]="tlu.checked" [value]="tlu.value" class="custom-control-input" id="transit-{{tlu.value}}"
+                     name="Transit" type="checkbox">
+              <label *ngIf="tlu.value == 1" class="custom-control-label pointer text-secondary"
+                     for="transit-{{tlu.value}}">Direct</label>
+              <label *ngIf="tlu.value != 1" class="custom-control-label pointer text-secondary"
+                     for="transit-{{tlu.value}}">{{tlu.value - 1}}
+                Transit</label>
+            </div>
           </div>
           <br>
-
-          <div class="card">
-            <h4 align="center" style="margin-top: 10px;margin-bottom: 10px;">Transit</h4>
-            <ul style="list-style:none;">
-              <li *ngFor="let tlu of transitListUnique | unique">
-                <input [(ngModel)]="tlu.checked" [value]="tlu.value" style="margin-right:5px;" type="checkbox">
-                <span *ngIf="tlu.value == 1">Direct</span>
-                <span *ngIf="tlu.value != 1">{{tlu.value - 1}} Transit</span>
-              </li>
-            </ul>
-          </div>
         </div>
         <br>
 
@@ -2242,7 +2296,7 @@
             <progress-bar *ngIf="hideProgressBar == false" [color]="'#07969a'" [progress]="progressPercent"></progress-bar>
             <section *ngIf="loadingPage" class="centered-loader text-center" style="background: white">
               <div class="centered-loader">
-                <img src="./assets/images/loader.gif">
+                <img src="./assets/images/loader.gif" alt="Loading for flights">
                 <div class="theme-loading-body">
                   <h2 class="theme-loading-title">Just a moment</h2>
                   <p class="theme-loading-subtitle">We are looking for flights </p>
@@ -2257,13 +2311,13 @@
                 <div class="col-md-10 text-center">
                   <div class="row">
                     <div class="col-md-2 mb-3">
-                      <div class="flight-section-airline-logo-wrap">
+                      <div class="flight-section-airline-logo-wrap" title="{{dataflight.transData[0].platingCarrierName}} - {{dataflight.transData[0].flightNumber}}">
                         <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                         <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       </div>
                     </div>
                     <ng-container *ngIf="dataflight.stop == 1">
@@ -2458,14 +2512,6 @@
                     </ng-container>
 
                   </div>
-                  <div class="row mt-3">
-                    <div class="col-md-6 col-xs-12">
-                      <div class="title-maskapai">
-                        {{dataflight.transData[0].platingCarrierName}}
-                        <span>{{dataflight.transData[0].flightNumber}}</span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div class="col-md-2 text-center">
                   <p class="text-price"><strong>{{dataflight.totalPrice |
@@ -2507,10 +2553,10 @@
                       <div class="flight-section-airline-logo-wrap">
                         <img *ngIf="dataflight.transData[segmentIndex].platingCarrier == 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                             src="./assets/images/airlinelogo/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                         <img *ngIf="dataflight.transData[segmentIndex].platingCarrier != 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png">
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[segmentIndex].platingCarrier}}.png" alt="Airlines Logo">
                       </div>
                     </div>
                     <div class="col-md-10">
@@ -2734,10 +2780,10 @@
                       <div class="flight-section-airline-logo-wrap">
                         <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                         <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       </div>
                     </div>
                     <ng-container *ngIf="dataflight.stop == 1">
@@ -2979,10 +3025,10 @@
                       <div class="flight-section-airline-logo-wrap">
                         <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                         <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       </div>
                     </div>
                     <div class="col-md-10">
@@ -3175,10 +3221,10 @@
                       <div class="flight-section-airline-logo-wrap">
                         <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                         <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       </div>
                     </div>
                     <ng-container *ngIf="dataflight.stop == 1">
@@ -3419,10 +3465,10 @@
                       <div class="flight-section-airline-logo-wrap">
                         <img *ngIf="dataflight.transData[0].platingCarrier == 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="./assets/images/airlinelogo/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                         <img *ngIf="dataflight.transData[0].platingCarrier != 'ID'"
                              class="img-fluid img-circle airline-logo"
-                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png">
+                             src="https://s1.travix.com/global/assets/airlineLogos/{{dataflight.transData[0].platingCarrier}}.png" alt="Airlines Logo">
                       </div>
                     </div>
                     <div class="col-md-10">

@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "customWebpackConfig":{
+            "customWebpackConfig": {
               "path": "./custom-webpack.config.js",
               "replaceDuplicatePlugins": true
             },
@@ -144,6 +144,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "travel"
+    }
+  },
+  "defaultProject": "travel",
+  "cli": {
+    "analytics": "ddbff358-1ca8-457d-b368-f1a6512e2836"
+  }
 }
