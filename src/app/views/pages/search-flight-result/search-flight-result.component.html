@@ -423,44 +423,43 @@
                       <div class="col-md-6">
                         <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                           <li>
-                            <span>Airplane</span> :
-                            <span
-                              style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                            <span><i class="fa fa-plane text-info"></i> Airplane :</span>
+                            <strong>{{dataflightTrans.platingCarrierName}}
                               {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
-                            </span>
+                            </strong>
                           </li>
                           <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
-                            <span>Operated By</span> :
-                            <span style="color: #8F8F8F;">
+                            <span><i class="fa fa-plane text-info"></i> Operated By :</span>
+                            <strong>
                               {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                               {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                            </span>
+                            </strong>
                           </li>
                           <li>
-                            <span>Cabin Class</span> : <span
-                            style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
+                            <span><i class="fa fa-wallet text-info"></i> Cabin Class :</span>
+                            <strong>{{dataflightTrans.cabinClass}}</strong>
                           </li>
                           <ng-container *ngIf="dataflight.id!='2'">
                             <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                               <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Adult Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Child Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Infant Baggage</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                               </li>
                             </ng-container>
                             <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
-                              <span>Baggage </span> : <span style="c
-                              olor: #8F8F8F">Not Include</span>
+                              <span><i class="fa fa-suitcase text-info"></i> Baggage :</span>
+                              <strong>Not Include</strong>
                             </ng-container>
                           </ng-container>
 
@@ -469,20 +468,17 @@
                               <ng-container *ngIf="bbIndex == segmentIndex">
                                 <li *ngFor="let baggageDatas of bb.baggageData">
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                    <span>Adult Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    <span>Adult Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                    <span>Child Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    <span>Child Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                    <span>Infant Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    <span>Infant Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="baggageDatas == undefined">
-                                    <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                    <span>Baggage </span> : <strong>Not Include</strong>
                                   </ng-container>
                               </li>
                               </ng-container>
@@ -1006,43 +1002,43 @@
                     <div class="col-md-6">
                       <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                         <li>
-                          <span>Airplane</span> :
-                          <span
-                            style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                          <span><i class="fa fa-plane text-info"></i> Airplane :</span>
+                          <strong>{{dataflightTrans.platingCarrierName}}
                             {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
-                            </span>
+                            </strong>
                         </li>
                         <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
-                          <span>Operated By</span> :
-                          <span style="color: #8F8F8F;">
+                          <span><i class="fa fa-plane text-info"></i> Operated By :</span>
+                          <strong>
                               {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                             {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                            </span>
+                            </strong>
                         </li>
                         <li>
-                          <span>Cabin Class</span> : <span
-                          style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
+                          <span><i class="fa fa-wallet text-info"></i> Cabin Class :</span>
+                          <span>{{dataflightTrans.cabinClass}}</span>
                         </li>
                         <ng-container *ngIf="dataflight.id!='2'">
                           <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                             <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                               <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                <span>Adult Baggage</span> : <span
-                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                <span><i class="fa fa-suitcase text-info"></i> Adult Baggage :</span>
+                                <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                               </ng-container>
                               <ng-container
                                 *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                <span>Child Baggage</span> : <span
-                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                <span><i class="fa fa-suitcase text-info"></i> Child Baggage :</span>
+                                <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                               </ng-container>
                               <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                <span>Infant Baggage</span> : <span
-                                style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                <span><i class="fa fa-suitcase text-info"></i> Infant Baggage :</span>
+                                <span>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
                               </ng-container>
                             </li>
                           </ng-container>
                           <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
-                            <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                            <span><i class="fa fa-suitcase text-info"></i> Baggage :</span>
+                            <strong>Not Include</strong>
                           </ng-container>
                         </ng-container>
 
@@ -1051,20 +1047,17 @@
                             <ng-container *ngIf="bbIndex == segmentIndex">
                               <li *ngFor="let baggageDatas of bb.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  <span>Adult Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  <span>Child Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                 </ng-container>
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                  <span>Infant Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                 </ng-container>
                                 <ng-container *ngIf="baggageDatas == undefined">
-                                  <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                  <span>Baggage </span> : <strong>Not Include</strong>
                                 </ng-container>
                               </li>
                             </ng-container>
@@ -1812,43 +1805,43 @@
                       <div class="col-md-6">
                         <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                           <li>
-                            <span>Airplane</span> :
-                            <span
-                              style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
+                            <span><i class="fa fa-plane text-info"></i> Airplane :</span>
+                            <strong>{{dataflightTrans.platingCarrierName}}
                               {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}
-                            </span>
+                            </strong>
                           </li>
                           <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
-                            <span>Operated By</span> :
-                            <span style="color: #8F8F8F;">
+                            <span>Operated By :</span>
+                            <strong>
                               {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                               {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                            </span>
+                            </strong>
                           </li>
                           <li>
-                            <span>Cabin Class</span> : <span
-                            style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
+                            <span><i class="fa fa-wallet text-info"></i> Cabin Class :</span>
+                            <strong>{{dataflightTrans.cabinClass}}</strong>
                           </li>
                           <ng-container *ngIf="dataflight.id!='2'">
                             <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                               <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Adult Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Child Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Infant Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                               </li>
                             </ng-container>
                             <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                              <span><i class="fa fa-suitcase text-info"></i> Baggage :</span>
+                              <strong>Not Include</strong>
                             </ng-container>
                           </ng-container>
 
@@ -1857,20 +1850,17 @@
                               <ng-container *ngIf="bbIndex == segmentIndex">
                                 <li *ngFor="let baggageDatas of bb.baggageData">
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                    <span>Adult Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    <span>Adult Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                    <span>Child Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    <span>Child Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                    <span>Infant Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                    <span>Infant Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="baggageDatas == undefined">
-                                    <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                    <span>Baggage </span> : <strong>Not Include</strong>
                                   </ng-container>
                                 </li>
                               </ng-container>
@@ -2597,42 +2587,35 @@
                         <div class="col-md-6">
                           <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                             <li>
-                              <span>Airplane</span> :
-                              <span
-                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
-                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                              <span><i class="fa fa-plane text-info"></i> Airplane :</span>
+                              <strong>{{dataflightTrans.platingCarrierName}}
+                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</strong>
                             </li>
                             <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
-                              <span>Operated By</span> :
-                              <span style="color: #8F8F8F;">
-                                {{dataflightTrans.codeShareInfo.operatingCarrierName}}
+                              <span>Operated By</span> <span>{{dataflightTrans.codeShareInfo.operatingCarrierName}}
                                 {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
                               </span>
                             </li>
                             <li>
-                              <span>Cabin Class</span> : <span
-                              style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
+                              <span><i class="fa fa-wallet text-info"></i> Cabin Class :</span><strong>{{dataflightTrans.cabinClass}}</strong>
                             </li>
                             <ng-container *ngIf="dataflight.id!='2'">
                               <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                                 <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                    <span>Adult Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                    <span>Adult Baggage :</span><strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                    <span>Child Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                    <span><i class="fa fa-suitcase text-info"></i> Child Baggage :</span><strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                   </ng-container>
                                   <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                    <span>Infant Baggage</span> : <span
-                                    style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                    <span><i class="fa fa-suitcase text-info"></i> Infant Baggage :</span><strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                   </ng-container>
                                 </li>
                               </ng-container>
                               <ng-container *ngIf="dataflightTrans.baggageData?.length == 0 && dataflight.id!='2'">
-                                <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                <span><i class="fa fa-suitcase text-info"></i> Baggage </span><strong>Not Include</strong>
                               </ng-container>
                             </ng-container>
 
@@ -2641,20 +2624,17 @@
                                 <ng-container *ngIf="bbIndex == segmentIndex">
                                   <li *ngFor="let baggageDatas of bb.baggageData">
                                     <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                      <span>Adult Baggage</span> : <span
-                                      style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                      <span>Adult Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                     </ng-container>
                                     <ng-container
                                       *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                      <span>Child Baggage</span> : <span
-                                      style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                      <span>Child Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                     </ng-container>
                                     <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                      <span>Infant Baggage</span> : <span
-                                      style="color: #8F8F8F">{{baggageDatas.baggage}}</span>
+                                      <span>Infant Baggage</span> : <span>{{baggageDatas.baggage}}</span>
                                     </ng-container>
                                     <ng-container *ngIf="baggageDatas == undefined">
-                                      <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                                      <span>Baggage </span> : <strong>Not Include</strong>
                                     </ng-container>
                                   </li>
                                 </ng-container>
@@ -3069,41 +3049,41 @@
                         <div class="col-md-6">
                           <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                             <li>
-                              <span>Airplane</span> :
-                              <span
-                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
-                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                              <span><i class="fa fa-plane text-info"></i> Airplane :</span>
+                              <strong>{{dataflightTrans.platingCarrierName}}
+                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</strong>
                             </li>
                             <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
-                              <span>Operated By</span> :
-                              <span style="color: #8F8F8F;">
+                              <span><i class="fa fa-plane text-info"></i> Operated By :</span>
+                              <strong>
                                 {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                                 {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                              </span>
+                              </strong>
                             </li>
                             <li>
-                              <span>Cabin Class</span> : <span
-                              style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
+                              <span><i class="fa fa-wallet text-info"></i> Cabin Class :</span>
+                              <strong>{{dataflightTrans.cabinClass}}</strong>
                             </li>
                             <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                               <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Adult Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Child Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Infant Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                               </li>
                             </ng-container>
                             <ng-container *ngIf="dataflightTrans.baggageData?.length == 0">
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                              <span><i class="fa fa-suitcase text-info"></i> Baggage </span>
+                              <strong>Not Include</strong>
                             </ng-container>
                           </ul>
                         </div>
@@ -3509,41 +3489,41 @@
                         <div class="col-md-6">
                           <ul class="flight-details-feature-list" style="font-size: 0.9rem">
                             <li>
-                              <span>Airplane</span> :
-                              <span
-                                style="color: #8F8F8F">{{dataflightTrans.platingCarrierName}}
-                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</span>
+                              <span><i class="fa fa-plane text-info"></i> Airplane :</span>
+                              <strong>{{dataflightTrans.platingCarrierName}}
+                                {{dataflightTrans.platingCarrier}}-{{dataflightTrans.flightNumber}}</strong>
                             </li>
                             <li *ngIf="dataflightTrans.codeShareInfo.length != 0">
-                              <span>Operated By</span> :
-                              <span style="color: #8F8F8F;">
+                              <span><i class="fa fa-plane text-info"></i> Operated By :</span>
+                              <strong>
                                 {{dataflightTrans.codeShareInfo.operatingCarrierName}}
                                 {{dataflightTrans.codeShareInfo.operatingCarrier + '-' + dataflightTrans.codeShareInfo.operatingFlightNumber}}
-                              </span>
+                              </strong>
                             </li>
                             <li>
-                              <span>Cabin Class</span> : <span
-                              style="color: #8F8F8F">{{dataflightTrans.cabinClass}}</span>
+                              <span><i class="fa fa-wallet text-info"></i> Cabin Class :</span>
+                              <strong>{{dataflightTrans.cabinClass}}</strong>
                             </li>
                             <ng-container *ngIf="dataflightTrans.baggageData?.length >= 1">
                               <li *ngFor="let baggageDatas of dataflightTrans.baggageData">
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'ADT'">
-                                  <span>Adult Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Adult Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="baggageDatas.passengerCode == 'CHD' || baggageDatas.passengerCode == 'CNN'">
-                                  <span>Child Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Child Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                                 <ng-container *ngIf="baggageDatas.passengerCode == 'INF'">
-                                  <span>Infant Baggage</span> : <span
-                                  style="color: #8F8F8F">{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</span>
+                                  <span><i class="fa fa-suitcase text-info"></i> Infant Baggage :</span>
+                                  <strong>{{baggageDatas.baggage}} {{baggageDatas.baggageUnit}}</strong>
                                 </ng-container>
                               </li>
                             </ng-container>
                             <ng-container *ngIf="dataflightTrans.baggageData?.length == 0">
-                              <span>Baggage </span> : <span style="color: #8F8F8F">Not Include</span>
+                              <span><i class="fa fa-suitcase text-info"></i> Baggage :</span>
+                              <strong>Not Include</strong>
                             </ng-container>
                           </ul>
                         </div>
