@@ -274,8 +274,14 @@
                   <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
                     <div class="float-left">Extra Baggage {{bds.departure}} - {{bds.arrival}}</div>
                     <div class="float-right">
-                      <span *ngIf="baggageDataSSRPrice == 0">{{baggageDataSSRPrice | currency:'IDR ':'symbol':'1.0'}}</span>
-                      <span *ngIf="baggageDataSSRPrice > 0">{{baggageDataSSRPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                      <ng-container *ngIf="baggageDataSSRPrice.length > 0">
+                        <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
+                          <ng-container *ngIf="segmentBaggageIndex == bdsp.SegmentIndex">
+                            <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.0'}}</span>
+                            <span *ngIf="bdsp.price == 0">{{bdsp.price | currency:'IDR ':'symbol':'1.0'}}</span>
+                          </ng-container>
+                        </ng-container>
+                      </ng-container>
                     </div>
                     <div class="clearfix"></div>
                   </ng-container>
@@ -284,7 +290,7 @@
               <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                 <div class="float-left">Total</div>
                 <div class="float-right text-info h4">
-                  <span>{{totalPrice + baggageDataSSRPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                  <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -548,7 +554,7 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="baggageDataSSR.length > 0" class="form-group row">
+                  <div *ngIf="baggageDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'" class="form-group row">
                     <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
                       <label class="col-sm-4 col-form-label">Extra Baggage {{bds.departure}} - {{bds.arrival}}</label>
                       <div class="col-sm-8">
@@ -588,7 +594,7 @@
             </div>
             <div class="title-line"></div>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <form [formGroup]="paymentChannel">
               <div
                 *ngIf="isControlHasErrorPayment('bankCode','required') || isControlHasErrorPayment('productCode','required')"
@@ -627,7 +633,7 @@
               </div>
             </form>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-5">
             <div class="col-md-12 mb-3">
               <div class="card alert alert-info ">
                 <div class="card-body pt-2 pb-3">
@@ -677,10 +683,28 @@
                     </div>
                     <div class="clearfix"></div>
                   </div>
+                  <div *ngIf="baggageDataSSR.length > 0" class="mt-1">
+                    <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
+                      <div class="float-left">Extra Baggage {{bds.departure}} - {{bds.arrival}}</div>
+                      <div class="float-right">
+                        <ng-container *ngIf="baggageDataSSRPrice.length > 0">
+                          <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
+                            <ng-container *ngIf="segmentBaggageIndex == bdsp.SegmentIndex">
+                              <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.0'}}</span>
+                              <span *ngIf="bdsp.price == 0">{{bdsp.price | currency:'IDR ':'symbol':'1.0'}}</span>
+                            </ng-container>
+                          </ng-container>
+                        </ng-container>
+                      </div>
+                      <div class="clearfix"></div>
+                    </ng-container>
+                  </div>
                 </div>
-                <div class="border-fix-left card-footer bg-white">
+                <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                   <div class="float-left">Total</div>
-                  <div class="float-right text-info"><h4>{{app.totalPrice |currency:'IDR ':'symbol':'3.0'}}</h4></div>
+                  <div class="float-right text-info h4">
+                    <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                  </div>
                   <div class="clearfix"></div>
                 </div>
               </div>
