@@ -25,6 +25,7 @@ export class EsimsComponent implements OnInit {
   searchCountryForm: FormGroup;
   countryChoosen: string;
   countryChoosenValue: string;
+  countryLoading: boolean;
   notFound: boolean;
 
   private unsubscribe: Subject<any>;
@@ -107,9 +108,17 @@ export class EsimsComponent implements OnInit {
 
   countryCountValue(value) {
     if (value.length > 2) {
-      this.api.getCountry(value).subscribe((data: any) => {
-        this.countryList = data;
-      });
+      this.countryLoading = true;
+      this.api.getCountry(value).pipe(
+        tap((data: any) => {
+          this.countryList = data;
+        }),
+        takeUntil(this.unsubscribe),
+        finalize(() => {
+          this.countryLoading = false;
+          this.cdr.markForCheck();
+        })
+      ).subscribe();
     } else {
       this.countryList = [];
     }
@@ -148,6 +157,7 @@ export class EsimsComponent implements OnInit {
   }
 
   navigateToBooking(data) {
+    this.modalRef.hide();
     this.api.EsimsBookingInsertDB(this.sessionID, JSON.stringify(data))
       .pipe(
         tap((data: any) => {
@@ -159,6 +169,10 @@ export class EsimsComponent implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  esimsErrorPopUp() {
+    this.notFound = false;
   }
 
 }

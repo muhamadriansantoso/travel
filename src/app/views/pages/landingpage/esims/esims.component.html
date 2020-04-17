@@ -30,12 +30,12 @@
                     </div>
                     <div class="search-container">
                       <div class="inp-search-container"></div>
-                      <!--                      <div class="countires-list">-->
-                      <!--                        <div class="pt-2 pb-3">-->
-                      <!--                          <span class="spinner-border spinner-border-sm"></span>-->
-                      <!--                        </div>-->
-                      <!--                      </div>-->
-                      <ul *ngIf="countryList?.length > 0" class="countires-list">
+                      <div *ngIf="countryLoading" class="countires-list text-center">
+                        <div class="pt-2 pb-3">
+                          <span class="spinner-border spinner-border-sm"></span>
+                        </div>
+                      </div>
+                      <ul *ngIf="countryList?.length > 0 && !countryLoading" class="countires-list">
                         <li (click)="hitAPIeSIMLocal(cl.code_alpha_2, cl.title)" *ngFor="let cl of countryList">
                           <span class="country-name">{{cl.title}}</span>
                           <img class="country-flag" src="{{cl.image.url}}">
@@ -168,9 +168,9 @@
                                   <div class="sub-section-container pd-">
                                     <div class="country-list-container" style="overflow: hidden;">
                                       <ul class="country-list mh-300">
-                                        <li *ngFor="let countries of operator.countries" class="d-flex justify-content-between align-items-center position-relative">
-                                          <span class="country-name">{{countries.title}}</span>
-                                          <img class="country-flag" src="{{countries.image}}">
+                                        <li class="d-flex justify-content-between align-items-center position-relative">
+                                          <span class="country-name">{{operator.countries[0].title}}</span>
+                                          <img class="country-flag" src="{{operator.countries[0].image}}">
                                         </li>
                                       </ul>
                                     </div>
@@ -424,11 +424,11 @@
       </div>
       <div class="swal2-content">
         <div class="swal2-html-container" id="swal2-content" style="display: block;">
-          The flight you have selected has no more seats available now!! Kindly select another flight
+          The eSIMs that you have selected not available for now! Please try again.
         </div>
       </div>
       <div class="swal2-actions">
-        <button (click)="bookingFailurePopUPHide('redirectback')" aria-label="" class="swal2-confirm swal2-styled"
+        <button (click)="esimsErrorPopUp()" aria-label="" class="swal2-confirm swal2-styled"
                 style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
