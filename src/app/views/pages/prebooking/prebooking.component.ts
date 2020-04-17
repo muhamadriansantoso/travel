@@ -34,7 +34,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   baggageDataSSR: any;
   baggageDataSSRChoosen: any = [];
   baggageDataSSRCode: string;
-  baggageDataSSRPrice: number;
+  baggageDataSSRPrice: any = [];
 
   listPaymentChannel: any;
   paymentData: any;
@@ -102,7 +102,6 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.loadingPage = true;
     this.isLinear = true;
     this.baggageDataSSRCode = '';
-    this.baggageDataSSRPrice = 0;
 
     this.initBookingForm();
     this.paymentChannelForm();
@@ -163,6 +162,17 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
             this.airSegmentData = AirPricePort.data[0].airSegmentData;
             this.baggageDataSSR = AirPricePort.data[0].baggageSSRData;
+
+            this.baggageDataSSR.forEach((data: any, index: number) => {
+              this.baggageDataSSRPrice[index] = {
+                SegmentIndex: index,
+                price: 0,
+              };
+            });
+
+            this.baggageDataSSRPrice = Object.assign(this.baggageDataSSRPrice, {
+              totalPrice: 0
+            });
 
             var bookingDate = moment(AirPricePort.data[0].airSegment[0].DepartureTime).toDate();
             var bookingminDateAdult = moment(bookingDate).subtract(100, 'years').toDate();
@@ -596,21 +606,20 @@ export class PrebookingComponent implements OnInit, OnDestroy {
 
   updateBaggageSSRData(index, segmentIndex, passengerIndex) {
     var keepGoing = true;
-    console.log('passengerIndex ' + passengerIndex);
-    console.log('segmentIndex ' + segmentIndex);
-    // this.baggageDataSSRPrice += parseInt(this.baggageDataSSR[segmentIndex].ssrData[index].Amount);
     this.baggageDataSSRChoosen.forEach((data: any, i: number) => {
-      if (passengerIndex == data.PassengerNumber && index != '') {
+      if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index != '') {
         this.baggageDataSSRCode = this.baggageDataSSR[segmentIndex].ssrData[index].SSRCode;
         this.baggageDataSSRChoosen[i] = {
           departure: this.baggageDataSSR[segmentIndex].departure,
           arrival: this.baggageDataSSR[segmentIndex].arrival,
           SSRCode: this.baggageDataSSRCode,
           PassengerNumber: passengerIndex,
-          price: this.baggageDataSSR[segmentIndex].ssrData[index].Amount
+          SegmentIndex: segmentIndex,
+          price: this.baggageDataSSR[segmentIndex].ssrData[index].Amount,
+          data: this.baggageDataSSR[segmentIndex].ssrData[index].subSSRData
         };
         keepGoing = false;
-      } else if (passengerIndex == data.PassengerNumber && index == '') {
+      } else if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index == '') {
         this.baggageDataSSRCode = '';
         this.baggageDataSSRChoosen.splice(i, 1);
         keepGoing = false;
@@ -624,14 +633,46 @@ export class PrebookingComponent implements OnInit, OnDestroy {
         arrival: this.baggageDataSSR[segmentIndex].arrival,
         SSRCode: this.baggageDataSSRCode,
         PassengerNumber: passengerIndex,
-        price: this.baggageDataSSR[segmentIndex].ssrData[index].Amount
+        SegmentIndex: segmentIndex,
+        price: this.baggageDataSSR[segmentIndex].ssrData[index].Amount,
+        data: this.baggageDataSSR[segmentIndex].ssrData[index].subSSRData
       });
     }
-    console.log(this.baggageDataSSRChoosen);
 
-    this.baggageDataSSRPrice = this.baggageDataSSRChoosen.reduce((a, b) => a + (parseInt(b['price']) || 0), 0);
+    var temp = {};
+    var obj = null;
+    if (this.baggageDataSSRChoosen.length == 0) {
+      temp[segmentIndex] = {
+        SegmentIndex: segmentIndex,
+        price: 0,
+      };
+
+      this.baggageDataSSRPrice[segmentIndex] = temp[segmentIndex];
+    } else {
+      for (var i = 0; i < this.baggageDataSSRChoosen.length; i++) {
+        obj = this.baggageDataSSRChoosen[i];
+        if (!temp[obj.SegmentIndex]) {
+          temp[obj.SegmentIndex] = {
+            SegmentIndex: obj.SegmentIndex,
+            price: obj.price,
+          };
+        } else {
+          temp[obj.SegmentIndex].price += obj.price;
+        }
+
+        this.baggageDataSSRPrice[obj.SegmentIndex] = temp[obj.SegmentIndex];
+      }
+    }
+
+    var totalPrice = this.baggageDataSSRPrice.reduce((a, b) => a + (parseInt(b['price']) || 0), 0);
+
+    this.baggageDataSSRPrice = Object.assign(this.baggageDataSSRPrice, {
+      totalPrice: totalPrice
+    });
+
+    // console.log(this.baggageDataSSRChoosen);
+    // console.log(this.baggageDataSSRPrice);
   }
-
 
 
 }

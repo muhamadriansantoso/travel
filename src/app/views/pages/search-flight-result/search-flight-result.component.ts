@@ -445,11 +445,25 @@ export class SearchFlightResultComponent implements OnInit {
     this.dataFlightAdvanced.push(data);
 
     for (var i = 0; i < this.dataFlightAdvanced.length; i++) {
-      this.dataFlightAdvanced[i] = Object.assign(this.dataFlightAdvanced[i], {
-        origin: this.origin,
-        destination: this.destination,
-        roundType: this.roundType
-      });
+      if (this.roundType == 'round-trip' && i == 0) {
+        this.dataFlightAdvanced[i] = Object.assign(this.dataFlightAdvanced[i], {
+          origin: this.origin,
+          destination: this.destination,
+          roundType: this.roundType
+        });
+      } else if (this.roundType == 'round-trip' && i == 1) {
+        this.dataFlightAdvanced[i] = Object.assign(this.dataFlightAdvanced[i], {
+          origin: this.destination,
+          destination: this.origin,
+          roundType: this.roundType
+        });
+      } else {
+        this.dataFlightAdvanced[i] = Object.assign(this.dataFlightAdvanced[i], {
+          origin: this.origin,
+          destination: this.destination,
+          roundType: this.roundType
+        });
+      }
     }
 
     this.api.AirBookingInsertDB(sessionID, JSON.stringify(this.dataFlightAdvanced))
