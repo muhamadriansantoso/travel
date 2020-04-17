@@ -11,163 +11,201 @@
             <div class="search-destination-separator"></div>
           </div>
           <div style="clear: both;"></div>
-          <div class="col-12 col-sm-12 mt-3">
-            <mat-accordion>
-              <mat-expansion-panel *ngFor="let esims of eSIMsData" class="mb-2">
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    <img class="country-flag" src="{{esims.countryImage}}"/>
-                    <span class="country-name">{{esims.country}}</span>
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="row">
-                  <div *ngFor="let operator of esims.operators" class="col-md-12">
-                    <div class="row">
-                      <div *ngFor="let packages of operator.packages" class="col-md-6">
-                        <div [ngStyle]="
-                             {
-                                'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
-                             }
-                          "
-                             class="sim-base light-text">
-                          <div class="sim-img">
-                            <img src="{{operator.image}}">
-                          </div>
-                          <div class="card-row-base header">
-                            <div class="card-header-main">{{operator.title}}</div>
-                            <div class="card-header-sub">{{operator.esim_type}}</div>
-                          </div>
-                          <span>
-                              <div class="card-row-base bordered">
-                                <div class="key-text">
-                                  <span class="v-middle Data-Dark"></span>
-                                  <span class="key-text-title">DATA</span>
-                                </div>
-                                <div class="value-text">{{packages.data}}</div>
-                              </div>
-                              <div class="card-row-base bordered">
-                                <div class="key-text">
-                                  <span class="v-middle Validity-Dark"></span>
-                                  <span class="key-text-title">VALIDITY</span>
-                                </div>
-                                <div class="value-text">{{packages.day}} Days</div>
-                              </div>
-                              <div class="card-row-base bordered">
-                                <div class="key-text">
-                                  <span class="v-middle Validity-Dark"></span>
-                                  <span class="key-text-title">PRICE</span>
-                                </div>
-                                <div class="value-text">{{packages.price | currency:'IDR ':'symbol':'3.0'}}</div>
-                              </div>
-                            </span>
-                          <span>
-                              <div class="card-row-base bottom bordered">
-                                <div class="col-md-6">
-                                  <div (click)="navigateToBooking(packages)" class="call-to-action">
-                                    Buy Now
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div (click)="openModal(modalShow)" class="call-to-action">
-                                      Details
-                                    </div>
-                                </div>
-                              </div>
-                            </span>
-                        </div>
-                        <ng-template #modalShow>
-                          <div class="modal-header">
-                            <button (click)="modalRef.hide()" aria-label="Close" class="close pull-right" type="button">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <div [ngStyle]="
-                             {
-                                'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
-                             }" class="esim-header light-text">
-                              <div class="row header-sim-name">
-                                {{operator.title}}
-                              </div>
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="sim-img">
-                                    <img src="{{operator.image}}">
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="card-row-base bordered padd-horizontal-0">
-                                    <div class="key-text">
-                                      <span>eSIM TYPE</span>
-                                    </div>
-                                    <div>{{operator.esim_type}}</div>
-                                  </div>
-                                  <div class="card-row-base bordered padd-horizontal-0">
-                                    <div class="key-text">
-                                      <span>DATA</span>
-                                    </div>
-                                    <div>{{packages.data}}</div>
-                                  </div>
-                                  <div class="card-row-base bordered padd-horizontal-0">
-                                    <div class="key-text">
-                                      <span></span>
-                                      <span>VALIDITY</span>
-                                    </div>
-                                    <div>{{packages.day}} Days</div>
-                                  </div>
-                                  <div class="card-row-base bordered padd-horizontal-0">
-                                    <div class="alert-warning">
-                                      <span>{{operator.warning}}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-md-6">
-                                <div class="avail-packs">
-                                  Supported Countries
-                                </div>
-                                <div class="sub-section-container pd-">
-                                  <div class="country-list-container" style="overflow: hidden;">
-                                    <ul class="country-list mh-300">
-                                      <li *ngFor="let countries of operator.countries" class="d-flex justify-content-between align-items-center position-relative">
-                                        <span class="country-name">{{countries.title}}</span>
-                                        <img class="country-flag" src="{{countries.image}}">
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                <div class="tp-2 avail-packs">
-                                  Additional Information
-                                </div>
-                                <div class="sub-section-container pr-0 pt-9 pb-16">
-                                  <div class="overflow-y-scroll">
-                                    <ul class="mh-300 additional-info">
-                                      <li *ngFor="let info of operator.info">
-                                        <span>{{info}}</span>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-12">
-                              <div (click)="navigateToBooking(packages)" class="call-to-action light mt-2" style="width: 21rem">
-                                {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
-                              </div>
-                            </div>
-                          </div>
-                        </ng-template>
+          <div class="col-12 col-sm-12">
+            <form [formGroup]="searchCountryForm" autocomplete="off" class="search-destination">
+              <div class="row" style="margin: 10px;justify-content: center">
+                <div class="col-md-8 no-padding">
+                  <div class="form_full">
+                    <div class="form-group">
+                      <label>Country</label>
+                      <span class="icon"><i class="fa fa-search"></i></span>
+                      <input (keyup)="countryCountValue($event.target.value)" [(ngModel)]="countryChoosen"
+                             class="form-control origin-typeahead" formControlName="country"
+                             placeholder="Search data packs for 100+ countries"
+                      />
+                      <div *ngIf="isControlHasError('country','required')" class="invalid-feedback"
+                           style="display: block">
+                        Country is required
                       </div>
+                    </div>
+                    <div class="search-container">
+                      <div class="inp-search-container"></div>
+                      <!--                      <div class="countires-list">-->
+                      <!--                        <div class="pt-2 pb-3">-->
+                      <!--                          <span class="spinner-border spinner-border-sm"></span>-->
+                      <!--                        </div>-->
+                      <!--                      </div>-->
+                      <ul *ngIf="countryList?.length > 0" class="countires-list">
+                        <li (click)="hitAPIeSIMLocal(cl.code_alpha_2, cl.title)" *ngFor="let cl of countryList">
+                          <span class="country-name">{{cl.title}}</span>
+                          <img class="country-flag" src="{{cl.image.url}}">
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-              </mat-expansion-panel>
-            </mat-accordion>
+              </div>
+            </form>
           </div>
+          <ng-container *ngIf="eSIMsData?.length > 0 && notFound == false">
+            <div class="col-12 col-sm-12 mt-3">
+              <mat-accordion>
+                <mat-expansion-panel *ngFor="let esims of eSIMsData" class="mb-2">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <img class="country-flag" src="{{esims.countryImage}}"/>
+                      <span class="country-name">{{esims.country}}</span>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <div class="row">
+                    <div *ngFor="let operator of esims.operators" class="col-md-12">
+                      <div class="row">
+                        <div *ngFor="let packages of operator.packages" class="col-md-6">
+                          <div [ngStyle]="
+                               {
+                                  'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
+                               }
+                            "
+                               class="sim-base {{operator.style}}-text">
+                            <div class="sim-img">
+                              <img src="{{operator.image}}">
+                            </div>
+                            <div class="card-row-base header">
+                              <div class="card-header-main">{{operator.title}}</div>
+                              <div class="card-header-sub">{{operator.esim_type}}</div>
+                            </div>
+                            <span>
+                                <div class="card-row-base bordered">
+                                  <div class="key-text">
+                                    <span class="v-middle Data-Dark"></span>
+                                    <span class="key-text-title">DATA</span>
+                                  </div>
+                                  <div class="value-text">{{packages.data}}</div>
+                                </div>
+                                <div class="card-row-base bordered">
+                                  <div class="key-text">
+                                    <span class="v-middle Validity-Dark"></span>
+                                    <span class="key-text-title">VALIDITY</span>
+                                  </div>
+                                  <div class="value-text">{{packages.day}} Days</div>
+                                </div>
+                                <div class="card-row-base bordered">
+                                  <div class="key-text">
+                                    <span class="v-middle Validity-Dark"></span>
+                                    <span class="key-text-title">PRICE</span>
+                                  </div>
+                                  <div class="value-text">{{packages.price | currency:'IDR ':'symbol':'3.0'}}</div>
+                                </div>
+                              </span>
+                            <span>
+                                <div class="card-row-base bottom bordered">
+                                  <div class="col-md-6">
+                                    <div (click)="navigateToBooking(packages)" class="call-to-action">
+                                      Buy Now
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div (click)="openModal(modalShow)" class="call-to-action">
+                                        Details
+                                      </div>
+                                  </div>
+                                </div>
+                              </span>
+                          </div>
+                          <ng-template #modalShow>
+                            <div class="modal-header">
+                              <button (click)="modalRef.hide()" aria-label="Close" class="close pull-right" type="button">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <div [ngStyle]="
+                               {
+                                  'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
+                               }" class="esim-header {{operator.style}}-text">
+                                <div class="row header-sim-name">
+                                  {{operator.title}}
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <div class="sim-img">
+                                      <img src="{{operator.image}}">
+                                    </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <div class="card-row-base bordered padd-horizontal-0">
+                                      <div class="key-text">
+                                        <span>eSIM TYPE</span>
+                                      </div>
+                                      <div>{{operator.esim_type}}</div>
+                                    </div>
+                                    <div class="card-row-base bordered padd-horizontal-0">
+                                      <div class="key-text">
+                                        <span>DATA</span>
+                                      </div>
+                                      <div>{{packages.data}}</div>
+                                    </div>
+                                    <div class="card-row-base bordered padd-horizontal-0">
+                                      <div class="key-text">
+                                        <span></span>
+                                        <span>VALIDITY</span>
+                                      </div>
+                                      <div>{{packages.day}} Days</div>
+                                    </div>
+                                    <div class="card-row-base bordered padd-horizontal-0">
+                                      <div class="alert-warning">
+                                        <span>{{operator.warning}}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="avail-packs">
+                                    Supported Countries
+                                  </div>
+                                  <div class="sub-section-container pd-">
+                                    <div class="country-list-container" style="overflow: hidden;">
+                                      <ul class="country-list mh-300">
+                                        <li *ngFor="let countries of operator.countries" class="d-flex justify-content-between align-items-center position-relative">
+                                          <span class="country-name">{{countries.title}}</span>
+                                          <img class="country-flag" src="{{countries.image}}">
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-6">
+                                  <div class="tp-2 avail-packs">
+                                    Additional Information
+                                  </div>
+                                  <div class="sub-section-container pr-0 pt-9 pb-16">
+                                    <div class="overflow-y-scroll">
+                                      <ul class="mh-300 additional-info">
+                                        <li *ngFor="let info of operator.info">
+                                          <span>{{info}}</span>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div (click)="navigateToBooking(packages)" class="call-to-action {{operator.style}} mt-2" style="width: 21rem">
+                                  {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
+                                </div>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </ng-container>
         </div>
       </ng-template>
     </ngb-tab>
@@ -201,7 +239,7 @@
                                 'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
                              }
                           "
-                             class="sim-base light-text">
+                             class="sim-base {{operator.style}}-text">
                           <div class="sim-img">
                             <img src="{{operator.image}}">
                           </div>
@@ -260,7 +298,7 @@
                             <div [ngStyle]="
                              {
                                 'background': 'linear-gradient(90deg, '+ operator.gradient_start +' 0px, '+ operator.gradient_end +')'
-                             }" class="esim-header light-text">
+                             }" class="esim-header {{operator.style}}-text">
                               <div class="row header-sim-name">
                                 {{operator.title}}
                               </div>
@@ -330,7 +368,7 @@
                               </div>
                             </div>
                             <div class="col-md-12">
-                              <div (click)="navigateToBooking(packages)" class="call-to-action light mt-2" style="width: 21rem">
+                              <div (click)="navigateToBooking(packages)" class="call-to-action {{operator.style}} mt-2" style="width: 21rem">
                                 {{packages.price | currency:'IDR ':'symbol':'3.0'}} - BUY NOW
                               </div>
                             </div>
@@ -363,6 +401,35 @@
       <div class="swal2-actions swal2-loading" style="display: flex;">
         <button aria-label="" class="swal2-confirm swal2-styled" disabled=""
                 style="display: inline-block; border-left-color: #ed1942; border-right-color: #ed1942;"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="notFound" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-header">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+          <span class="swal2-x-mark">
+            <span class="swal2-x-mark-line-left"></span>
+            <span class="swal2-x-mark-line-right"></span>
+          </span>
+        </div>
+      </div>
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          The flight you have selected has no more seats available now!! Kindly select another flight
+        </div>
+      </div>
+      <div class="swal2-actions">
+        <button (click)="bookingFailurePopUPHide('redirectback')" aria-label="" class="swal2-confirm swal2-styled"
+                style="display: inline-block; border-left-color: rgb(48, 133, 214); border-right-color: rgb(48, 133, 214);"
                 type="button">OK
         </button>
       </div>

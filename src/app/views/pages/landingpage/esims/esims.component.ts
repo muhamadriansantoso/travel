@@ -1,12 +1,13 @@
 import {ChangeDetectorRef, Component, OnInit, TemplateRef} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {APIService} from "../../../../core/API";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgbTabChangeEvent} from "@ng-bootstrap/ng-bootstrap";
 import {finalize, takeUntil, tap} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Router} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-esims',
@@ -18,8 +19,13 @@ export class EsimsComponent implements OnInit {
   type: string;
   sessionID: string;
   pleaseWaitLoader: boolean;
+  countryList: any;
   modalRef: BsModalRef;
   supplierData: any;
+  searchCountryForm: FormGroup;
+  countryChoosen: string;
+  countryChoosenValue: string;
+  notFound: boolean;
 
   private unsubscribe: Subject<any>;
 
@@ -30,6 +36,7 @@ export class EsimsComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private modalService: BsModalService,
     private router: Router,
+    private _sanitizer: DomSanitizer,
   ) {
     this.unsubscribe = new Subject();
   }
@@ -37,35 +44,48 @@ export class EsimsComponent implements OnInit {
   ngOnInit() {
     this.pleaseWaitLoader = true;
     this.type = 'local';
-
+    this.initSearchCountryForm();
     this.api.getEsimsSupplier().toPromise().then((data: any) => {
       this.supplierData = data;
       this.getAPIFromSupplier(data.length);
     });
   }
 
+  initSearchCountryForm() {
+    this.searchCountryForm = this.fb.group({
+      country: ['', Validators.compose([
+        Validators.required,
+      ])
+      ]
+    });
+  }
+
   async getAPIFromSupplier(length) {
     if (this.type == 'local') {
-      this.eSIMsData = [];
-      for (var abc = 0; abc < length; abc++) {
-        await this.api.geteSIMs(this.type, this.supplierData[abc].id, this.eSIMsData)
-          .toPromise().then((data: any) => {
-            if (data.data.status == 1) {
-              this.sessionID = data.sessionID;
-              this.eSIMsData = data.data.data;
-            }
-          });
-      }
       this.pleaseWaitLoader = false;
-      this.cdr.markForCheck();
+      this.eSIMsData = [];
+      // for (var abc = 0; abc < length; abc++) {
+      //   await this.api.geteSIMs(this.type, this.supplierData[abc].id, this.eSIMsData)
+      //     .toPromise().then((data: any) => {
+      //       if (data.data.status == 1) {
+      //         this.sessionID = data.sessionID;
+      //         this.eSIMsData = data.data.data;
+      //       }
+      //     });
+      // }
+      // this.pleaseWaitLoader = false;
+      // this.cdr.markForCheck();
     } else if (this.type == 'global') {
       this.eSIMsData = [];
       for (var abc = 0; abc < length; abc++) {
-        await this.api.geteSIMs(this.type, this.supplierData[abc].id, this.eSIMsData)
+        await this.api.geteSIMs(this.type, this.supplierData[abc].id, this.eSIMsData, '')
           .toPromise().then((data: any) => {
             if (data.data.status == 1) {
               this.sessionID = data.sessionID;
               this.eSIMsData = data.data.data;
+              this.notFound = false;
+            } else {
+              this.notFound = true;
             }
           });
       }
@@ -83,6 +103,48 @@ export class EsimsComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+  }
+
+  countryCountValue(value) {
+    if (value.length > 2) {
+      this.api.getCountry(value).subscribe((data: any) => {
+        this.countryList = data;
+      });
+    } else {
+      this.countryList = [];
+    }
+  }
+
+  hitAPIeSIMLocal(id, country) {
+    this.pleaseWaitLoader = true;
+    this.countryList = [];
+    this.countryChoosen = country;
+    this.api.geteSIMs('local', '3', this.eSIMsData, id).pipe(
+      tap((data: any) => {
+        if (data.data.status == 1) {
+          this.sessionID = data.sessionID;
+          this.eSIMsData = data.data.data;
+          this.notFound = false;
+        } else {
+          this.notFound = true;
+        }
+      }),
+      takeUntil(this.unsubscribe),
+      finalize(() => {
+        this.pleaseWaitLoader = false;
+        this.cdr.markForCheck();
+      })
+    ).subscribe();
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.searchCountryForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 
   navigateToBooking(data) {

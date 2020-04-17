@@ -272,7 +272,7 @@
                 </div>
                 <div *ngIf="baggageDataSSR.length > 0" class="mt-1">
                   <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
-                    <div class="float-left">Extra Baggage {{bds.departure}} - {{bds.arrival}}</div>
+                    <div class="float-left">Baggage {{bds.departure}} - {{bds.arrival}}</div>
                     <div class="float-right">
                       <ng-container *ngIf="baggageDataSSRPrice.length > 0">
                         <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
@@ -556,7 +556,7 @@
                   </div>
                   <div *ngIf="baggageDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'" class="form-group row">
                     <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
-                      <label class="col-sm-4 col-form-label">Extra Baggage {{bds.departure}} - {{bds.arrival}}</label>
+                      <label class="col-sm-4 col-form-label">Baggage {{bds.departure}} - {{bds.arrival}}</label>
                       <div class="col-sm-8">
                         <select
                           [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_baggageSSR','required', i, j)}"
@@ -685,7 +685,7 @@
                   </div>
                   <div *ngIf="baggageDataSSR.length > 0" class="mt-1">
                     <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
-                      <div class="float-left">Extra Baggage {{bds.departure}} - {{bds.arrival}}</div>
+                      <div class="float-left">Baggage {{bds.departure}} - {{bds.arrival}}</div>
                       <div class="float-right">
                         <ng-container *ngIf="baggageDataSSRPrice.length > 0">
                           <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
@@ -1036,7 +1036,7 @@
   </div>
 </div>
 
-<div *ngIf="priceUpdatedInformation" style="z-index: 999999;">
+<div *ngIf="priceUpdatedInformation && supplier != 4" style="z-index: 999999;">
   <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
     <div aria-busy="true" aria-describedby="swal2-content"
          aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"

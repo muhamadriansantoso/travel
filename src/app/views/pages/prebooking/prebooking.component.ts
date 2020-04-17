@@ -161,14 +161,18 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             this.supplier = AirPricePort.data[0].id;
 
             this.airSegmentData = AirPricePort.data[0].airSegmentData;
-            this.baggageDataSSR = AirPricePort.data[0].baggageSSRData;
+            if (AirPricePort.data[0].baggageSSRData != undefined) {
+              this.baggageDataSSR = AirPricePort.data[0].baggageSSRData;
 
-            this.baggageDataSSR.forEach((data: any, index: number) => {
-              this.baggageDataSSRPrice[index] = {
-                SegmentIndex: index,
-                price: 0,
-              };
-            });
+              this.baggageDataSSR.forEach((data: any, index: number) => {
+                this.baggageDataSSRPrice[index] = {
+                  SegmentIndex: index,
+                  price: 0,
+                };
+              });
+            } else {
+              this.baggageDataSSR = [];
+            }
 
             this.baggageDataSSRPrice = Object.assign(this.baggageDataSSRPrice, {
               totalPrice: 0

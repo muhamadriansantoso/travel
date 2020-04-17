@@ -36,6 +36,11 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
+
+  getCountry(value) {
+    return this.http.get('https://www.airalo.com/api/package/autocomplete?type=local&search=' + value);
+  }
+
   getAirportCode(origin, destination) {
     var userData = JSON.stringify({
       'origin': origin,
@@ -267,11 +272,12 @@ export class APIService {
     return this.http.post(APIURL + 'api/v1/flight/retrieveBooking', userData, {headers: urlHeader});
   }
 
-  geteSIMs(type: string, supplierData: string, dataBefore: any) {
+  geteSIMs(type: string, supplierData: string, dataBefore: any, country: string) {
     var userData = JSON.stringify({
       id: supplierData,
       type: type,
-      dataBefore: dataBefore
+      dataBefore: dataBefore,
+      country: country,
     });
     return this.http.post(APIURL + 'api/v1/esims/listpackage', userData);
   }
