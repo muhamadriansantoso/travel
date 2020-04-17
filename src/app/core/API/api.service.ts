@@ -106,7 +106,7 @@ export class APIService {
       'infant': infant,
       'cabin': cabin,
       'type': type,
-      'supplier': supplierData,
+      'id': supplierData,
       'dataBefore': dataBefore,
     });
     return this.http.post(APIURL + 'api/v1/flight/search', userData);

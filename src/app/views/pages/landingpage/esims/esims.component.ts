@@ -157,7 +157,9 @@ export class EsimsComponent implements OnInit {
   }
 
   navigateToBooking(data) {
-    this.modalRef.hide();
+    if (this.modalRef != undefined) {
+      this.modalRef.hide();
+    }
     this.api.EsimsBookingInsertDB(this.sessionID, JSON.stringify(data))
       .pipe(
         tap((data: any) => {
