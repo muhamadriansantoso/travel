@@ -35,6 +35,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
   baggageDataSSRChoosen: any = [];
   baggageDataSSRCode: string;
   baggageDataSSRPrice: any = [];
+  mealDataSSR: any;
+  mealDataSSRChoosen: any = [];
+  mealDataSSRCode: string;
+  mealDataSSRPrice: any = [];
 
   listPaymentChannel: any;
   paymentData: any;
@@ -102,6 +106,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.loadingPage = true;
     this.isLinear = true;
     this.baggageDataSSRCode = '';
+    this.mealDataSSRCode = '';
 
     this.initBookingForm();
     this.paymentChannelForm();
@@ -174,7 +179,24 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               this.baggageDataSSR = [];
             }
 
+            if (AirPricePort.data[0].mealSSRData != undefined) {
+              this.mealDataSSR = AirPricePort.data[0].mealSSRData;
+
+              this.mealDataSSR.forEach((data: any, index: number) => {
+                this.mealDataSSRPrice[index] = {
+                  SegmentIndex: index,
+                  price: 0,
+                };
+              });
+            } else {
+              this.mealDataSSR = [];
+            }
+
             this.baggageDataSSRPrice = Object.assign(this.baggageDataSSRPrice, {
+              totalPrice: 0
+            });
+
+            this.mealDataSSRPrice = Object.assign(this.mealDataSSRPrice, {
               totalPrice: 0
             });
 
@@ -297,6 +319,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                   ])
                   ],
                   passenger_baggageSSR: [''],
+                  passenger_mealSSR: ['', Validators.compose([
+                    Validators.required,
+                  ])
+                  ],
                   passengerType: AirPricePort.data[0].passengerType[passengerTypeLength].code,
                   passengerIndex: passengerIndex
                 }));
@@ -313,6 +339,15 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                   this.bookingForm[awal].controls[awal2].get('passenger_passport').updateValueAndValidity();
                   this.bookingForm[awal].controls[awal2].get('passenger_passportexpiry').setValidators([]);
                   this.bookingForm[awal].controls[awal2].get('passenger_passportexpiry').updateValueAndValidity();
+                }
+              }
+            }
+
+            if (this.mealDataSSR.length == 0) {
+              for (var awal = 0; awal < this.passengerLength; awal++) {
+                for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+                  this.bookingForm[awal].controls[awal2].get('passenger_mealSSR').setValidators([]);
+                  this.bookingForm[awal].controls[awal2].get('passenger_mealSSR').updateValueAndValidity();
                 }
               }
             }
@@ -606,6 +641,76 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.snackBar.open('Copied', '', {
       duration: 1000,
     });
+  }
+
+  updateMealSSRData(index, segmentIndex, passengerIndex) {
+    var keepGoing = true;
+    this.mealDataSSRChoosen.forEach((data: any, i: number) => {
+      if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index != '') {
+        this.mealDataSSRCode = this.mealDataSSR[segmentIndex].ssrData[index].SSRCode;
+        this.mealDataSSRChoosen[i] = {
+          departure: this.mealDataSSR[segmentIndex].departure,
+          arrival: this.mealDataSSR[segmentIndex].arrival,
+          SSRCode: this.baggageDataSSRCode,
+          PassengerNumber: passengerIndex,
+          SegmentIndex: segmentIndex,
+          price: this.mealDataSSR[segmentIndex].ssrData[index].Amount,
+          data: this.mealDataSSR[segmentIndex].ssrData[index].subSSRData
+        };
+        keepGoing = false;
+      } else if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index == '') {
+        this.mealDataSSRCode = '';
+        this.mealDataSSRChoosen.splice(i, 1);
+        keepGoing = false;
+      }
+    });
+
+    if (keepGoing == true) {
+      this.mealDataSSRCode = this.mealDataSSR[segmentIndex].ssrData[index].SSRCode;
+      this.mealDataSSRChoosen.push({
+        departure: this.mealDataSSR[segmentIndex].departure,
+        arrival: this.mealDataSSR[segmentIndex].arrival,
+        SSRCode: this.baggageDataSSRCode,
+        PassengerNumber: passengerIndex,
+        SegmentIndex: segmentIndex,
+        price: this.mealDataSSR[segmentIndex].ssrData[index].Amount,
+        data: this.mealDataSSR[segmentIndex].ssrData[index]
+      });
+    }
+
+    // var temp = {};
+    // var obj = null;
+    // if (this.baggageDataSSRChoosen.length == 0) {
+    //   temp[segmentIndex] = {
+    //     SegmentIndex: segmentIndex,
+    //     price: 0,
+    //   };
+    //
+    //   this.baggageDataSSRPrice[segmentIndex] = temp[segmentIndex];
+    // } else {
+    //   for (var i = 0; i < this.baggageDataSSRChoosen.length; i++) {
+    //     obj = this.baggageDataSSRChoosen[i];
+    //     if (!temp[obj.SegmentIndex]) {
+    //       temp[obj.SegmentIndex] = {
+    //         SegmentIndex: obj.SegmentIndex,
+    //         price: obj.price,
+    //       };
+    //     } else {
+    //       temp[obj.SegmentIndex].price += obj.price;
+    //     }
+    //
+    //     this.baggageDataSSRPrice[obj.SegmentIndex] = temp[obj.SegmentIndex];
+    //   }
+    // }
+    //
+    // var totalPrice = this.baggageDataSSRPrice.reduce((a, b) => a + (parseInt(b['price']) || 0), 0);
+    //
+    // this.baggageDataSSRPrice = Object.assign(this.baggageDataSSRPrice, {
+    //   totalPrice: totalPrice
+    // });
+
+    console.log(this.mealDataSSRChoosen);
+    // console.log(this.baggageDataSSRPrice);
   }
 
   updateBaggageSSRData(index, segmentIndex, passengerIndex) {
