@@ -318,14 +318,19 @@ export class PrebookingComponent implements OnInit, OnDestroy {
                     Validators.required,
                   ])
                   ],
-                  passenger_baggageSSR: [''],
-                  passenger_mealSSR: ['', Validators.compose([
-                    Validators.required,
-                  ])
-                  ],
+                  mealSSRForPassenger: this.fb.array([]),
                   passengerType: AirPricePort.data[0].passengerType[passengerTypeLength].code,
                   passengerIndex: passengerIndex
                 }));
+
+                this.mealDataSSR.forEach((data: any, index: number) => {
+                  this.bookingForm[passengerTypeLength].controls[passengerNumLength].get('mealSSRForPassenger').push(this.fb.group({
+                    passenger_mealSSR: ['', Validators.compose([
+                      Validators.required,
+                    ])
+                    ],
+                  }));
+                });
 
                 passengerIndex += 1;
               }
@@ -343,11 +348,13 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               }
             }
 
-            if (this.mealDataSSR.length == 0) {
-              for (var awal = 0; awal < this.passengerLength; awal++) {
-                for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
-                  this.bookingForm[awal].controls[awal2].get('passenger_mealSSR').setValidators([]);
-                  this.bookingForm[awal].controls[awal2].get('passenger_mealSSR').updateValueAndValidity();
+            for (var awal = 0; awal < this.passengerLength; awal++) {
+              for (var awal2 = 0; awal2 < this.airPricePort.passengerType[awal].numPassenger; awal2++) {
+                if (AirPricePort.data[0].passengerType[awal].code == 'INF') {
+                  this.mealDataSSR.forEach((data: any, index: number) => {
+                    this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[index].get('passenger_mealSSR').setValidators([]);
+                    this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[index].get('passenger_mealSSR').updateValueAndValidity();
+                  });
                 }
               }
             }
@@ -386,6 +393,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             Object.keys(this.bookingForm[awal].controls[awal2].controls).forEach(controlName =>
               this.bookingForm[awal].controls[awal2].controls[controlName].markAsTouched()
             );
+
+            this.mealDataSSR.forEach((data: any, index: number) => {
+              Object.keys(this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[index].controls).forEach(controlName =>
+                this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[index].controls[controlName].markAsTouched()
+              );
+            });
           }
         }
 
@@ -405,6 +418,12 @@ export class PrebookingComponent implements OnInit, OnDestroy {
               Object.keys(this.bookingForm[awal].controls[awal2].controls).forEach(controlName =>
                 this.bookingForm[awal].controls[awal2].controls[controlName].markAsTouched()
               );
+
+              this.mealDataSSR.forEach((data: any, index: number) => {
+                Object.keys(this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[index].controls).forEach(controlName =>
+                  this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[index].controls[controlName].markAsTouched()
+                );
+              });
             }
           }
 
@@ -502,8 +521,10 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     this.validateBookingLoader = true;
     var departureTimeModified = moment(this.departureTime, 'YYYY-MM-DDhh:mm:ss').format('YYYY-MM-DD hh:mm:ss');
 
-    if (this.baggageDataSSRChoosen.length > 0) {
-      this.api.AirCreateSSR(this.bookingID, this.baggageDataSSRChoosen, this.supplier).pipe(
+    const result = this.baggageDataSSRChoosen.concat(this.mealDataSSRChoosen);
+
+    if (result.length > 0) {
+      this.api.AirCreateSSR(this.bookingID, result, this.supplier).pipe(
         tap((data: any) => {
           if (data.status == 1) {
             this.api.insertPaymentChannelEspayForFlight(this.bookingID, dataBooking.bankCode, this.origin, this.destination, departureTimeModified, this.airPlane, this.roundType).pipe(
@@ -615,6 +636,16 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     return result;
   }
 
+  isControlHasErrorDynamicMeal(controlName: string, validationType: string, awal: number, awal2: number, segmentMealIndex: number): boolean {
+    const control = this.bookingForm[awal].controls[awal2].controls['mealSSRForPassenger'].controls[segmentMealIndex].controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
+  }
+
   isControlHasErrorPayment(controlName: string, validationType: string): boolean {
     const control = this.paymentChannel.controls[controlName];
     if (!control) {
@@ -655,7 +686,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           PassengerNumber: passengerIndex,
           SegmentIndex: segmentIndex,
           price: this.mealDataSSR[segmentIndex].ssrData[index].Amount,
-          data: this.mealDataSSR[segmentIndex].ssrData[index].subSSRData
+          data: this.mealDataSSR[segmentIndex].ssrData[index]
         };
         keepGoing = false;
       } else if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index == '') {
@@ -709,14 +740,15 @@ export class PrebookingComponent implements OnInit, OnDestroy {
     //   totalPrice: totalPrice
     // });
 
-    console.log(this.mealDataSSRChoosen);
+    // console.log(this.mealDataSSRChoosen);
     // console.log(this.baggageDataSSRPrice);
   }
 
   updateBaggageSSRData(index, segmentIndex, passengerIndex) {
     var keepGoing = true;
+    var price = this.baggageDataSSR[segmentIndex].ssrData[index].Amount;
     this.baggageDataSSRChoosen.forEach((data: any, i: number) => {
-      if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index != '') {
+      if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index != '' && price > 0) {
         this.baggageDataSSRCode = this.baggageDataSSR[segmentIndex].ssrData[index].SSRCode;
         this.baggageDataSSRChoosen[i] = {
           departure: this.baggageDataSSR[segmentIndex].departure,
@@ -728,7 +760,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
           data: this.baggageDataSSR[segmentIndex].ssrData[index].subSSRData
         };
         keepGoing = false;
-      } else if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index == '') {
+      } else if (passengerIndex == data.PassengerNumber && segmentIndex == data.SegmentIndex && index == '' || price == 0) {
         this.baggageDataSSRCode = '';
         this.baggageDataSSRChoosen.splice(i, 1);
         keepGoing = false;
@@ -779,7 +811,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       totalPrice: totalPrice
     });
 
-    // console.log(this.baggageDataSSRChoosen);
+    console.log(this.baggageDataSSRChoosen);
     // console.log(this.baggageDataSSRPrice);
   }
 

@@ -554,40 +554,44 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="mealDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'" class="form-group row">
-                    <ng-container *ngFor="let mds of mealDataSSR; let segmentMealIndex = index">
-                      <label class="col-sm-4 col-form-label">Meal {{mds.departure}} - {{mds.arrival}}</label>
-                      <div class="col-sm-8">
-                        <select
-                          (change)="updateMealSSRData($event.target.value, segmentMealIndex, bookingForm[i].value[j].passengerIndex)"
-                          class="form-control-custom"
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_mealSSR','required', i, j)}"
-                          formControlName="passenger_mealSSR">
-                          <option value="">Select your meal</option>
-                          <option *ngFor="let mdssr of mds.ssrData; let mealIndex = index" value="{{mealIndex}}">
-                            {{mdssr.Description}}
-                          </option>
-                        </select>
-                        <div *ngIf="isControlHasErrorDynamic('passenger_mealSSR','required', i, j)"
-                             class="invalid-feedback"
-                             style="display: block">
-                          Please select your meal
+                  <ng-container *ngIf="mealDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'">
+                    <ng-container *ngFor="let mds of mealDataSSR; let segmentMealIndex = index" formArrayName="mealSSRForPassenger">
+                      <div [formGroupName]="segmentMealIndex" class="form-group row">
+                        <label class="col-sm-4 col-form-label">Meal {{mds.departure}} - {{mds.arrival}}</label>
+                        <div class="col-sm-8">
+                          <select
+                            (change)="updateMealSSRData($event.target.value, segmentMealIndex, bookingForm[i].value[j].passengerIndex)"
+                            [ngClass]="{'is-invalid': isControlHasErrorDynamicMeal('passenger_mealSSR','required', i, j, segmentMealIndex)}"
+                            class="form-control-custom"
+                            formControlName="passenger_mealSSR">
+                            <option value="">Select your meal</option>
+                            <option *ngFor="let mdssr of mds.ssrData; let mealIndex = index" value="{{mealIndex}}">
+                              {{mdssr.Description}}
+                            </option>
+                          </select>
+                          <div *ngIf="isControlHasErrorDynamicMeal('passenger_mealSSR','required', i, j, segmentMealIndex)"
+                               class="invalid-feedback"
+                               style="display: block">
+                            Please select your meal
+                          </div>
                         </div>
                       </div>
                     </ng-container>
-                  </div>
+                  </ng-container>
                   <div *ngIf="baggageDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'" class="form-group row">
                     <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
                       <label class="col-sm-4 col-form-label">Baggage {{bds.departure}} - {{bds.arrival}}</label>
                       <div class="col-sm-8">
                         <select
                           (change)="updateBaggageSSRData($event.target.value, segmentBaggageIndex, bookingForm[i].value[j].passengerIndex)"
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_baggageSSR','required', i, j)}"
-                          class="form-control-custom"
-                          formControlName="passenger_baggageSSR">
-                          <option value="">0 Kilograms - {{0.00 | currency:'IDR ':'symbol':'1.0'}}</option>
+                          class="form-control-custom">
+                          <option *ngIf="bds.ssrData[0].Amount > 0" selected value="">0 Kilograms
+                            - {{0.00 | currency:'IDR ':'symbol':'1.0'}}</option>
                           <option *ngFor="let bdssr of bds.ssrData; let baggageIndex = index" value="{{baggageIndex}}">{{bdssr.Value}}
-                            Kilograms - {{bdssr.Amount | currency:'IDR ':'symbol':'3.0'}}</option>
+                            Kilograms -
+                            <span *ngIf="bdssr.Amount == 0">{{0 | currency:'IDR ':'symbol':'1.0'}}</span>
+                            <span *ngIf="bdssr.Amount > 0">{{bdssr.Amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                          </option>
                         </select>
                       </div>
                     </ng-container>
