@@ -247,26 +247,26 @@
                   <ng-container *ngIf="passengerDetails.code == 'ADT'">
                     <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
                     <div class="float-right">
-                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
+                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                   <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
                     <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
                     <div class="float-right">
-                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
+                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                   <ng-container *ngIf="passengerDetails.code == 'INF'">
                     <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
                     <div class="float-right">
-                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
+                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                 </div>
                 <div class="mt-1">
                   <div class="float-left">Tax And Fees</div>
                   <div class="float-right">
-                    <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>
+                    <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'3.2'}}</span>
                   </div>
                   <div class="clearfix"></div>
                 </div>
@@ -277,7 +277,7 @@
                       <ng-container *ngIf="baggageDataSSRPrice.length > 0">
                         <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
                           <ng-container *ngIf="segmentBaggageIndex == bdsp.SegmentIndex">
-                            <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.0'}}</span>
+                            <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.2'}}</span>
                             <span *ngIf="bdsp.price == 0">{{bdsp.price | currency:'IDR ':'symbol':'1.0'}}</span>
                           </ng-container>
                         </ng-container>
@@ -290,7 +290,7 @@
               <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                 <div class="float-left">Total</div>
                 <div class="float-right text-info h4">
-                  <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                  <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.2'}}</span>
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -590,7 +590,7 @@
                           <option *ngFor="let bdssr of bds.ssrData; let baggageIndex = index" value="{{baggageIndex}}">{{bdssr.Value}}
                             Kilograms -
                             <span *ngIf="bdssr.Amount == 0">{{0 | currency:'IDR ':'symbol':'1.0'}}</span>
-                            <span *ngIf="bdssr.Amount > 0">{{bdssr.Amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                            <span *ngIf="bdssr.Amount > 0">{{bdssr.Amount | currency:'IDR ':'symbol':'3.2'}}</span>
                           </option>
                         </select>
                       </div>
@@ -683,21 +683,21 @@
                     <ng-container *ngIf="passengerDetails.code == 'ADT'">
                       <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
                     <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
                       <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
                     <ng-container *ngIf="passengerDetails.code == 'INF'">
                       <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
@@ -705,7 +705,7 @@
                   <div class="mt-1">
                     <div class="float-left">Tax And Fees</div>
                     <div class="float-right">
-                      <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>
+                      <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'3.2'}}</span>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -716,7 +716,7 @@
                         <ng-container *ngIf="baggageDataSSRPrice.length > 0">
                           <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
                             <ng-container *ngIf="segmentBaggageIndex == bdsp.SegmentIndex">
-                              <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.0'}}</span>
+                              <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.2'}}</span>
                               <span *ngIf="bdsp.price == 0">{{bdsp.price | currency:'IDR ':'symbol':'1.0'}}</span>
                             </ng-container>
                           </ng-container>
@@ -729,7 +729,7 @@
                 <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                   <div class="float-left">Total</div>
                   <div class="float-right text-info h4">
-                    <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                    <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.2'}}</span>
                   </div>
                   <div class="clearfix"></div>
                 </div>
@@ -1078,10 +1078,10 @@
           Harga pesawat yang Anda ingin pesan telah berubah.
           <br>
           <br>
-          Harga pesawat di waktu sebelumnya : <b>{{nonUpdatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
+          Harga pesawat di waktu sebelumnya : <b>{{nonUpdatedPrice | currency:'IDR ':'symbol':'3.2'}}</b>
           <br>
           <br>
-          Harga pesawat di waktu sekarang : <b>{{updatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
+          Harga pesawat di waktu sekarang : <b>{{updatedPrice | currency:'IDR ':'symbol':'3.2'}}</b>
         </div>
       </div>
       <div class="swal2-actions">

@@ -338,7 +338,7 @@
               </div>
               <div class="col-md-2 text-center">
                 <p class="text-price"><strong>{{dataflight.totalPrice |
-                  currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                    currency:'IDR ':'symbol':'3.2'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
                 <button (click)="navigateToBooking(sessionID, dataflight)"
                         class="btn-warning font-weight-bold btn-block rounded button-search-flight-ticket">Select <i
                   class="fas fa-arrow-right"></i></button>
@@ -508,18 +508,18 @@
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                   {{dataflightTrans.numPassenger}}X Adult Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                   {{dataflightTrans.numPassenger}}X Child Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                   {{dataflightTrans.numPassenger}}X Infant Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                               </div>
                             </ng-container>
@@ -529,18 +529,18 @@
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                   {{dataflightTrans.numPassenger}}X Adult Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                   {{dataflightTrans.numPassenger}}X Child Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                   {{dataflightTrans.numPassenger}}X Infant Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                               </div>
                             </ng-container>
@@ -548,7 +548,7 @@
                             <div>
                               Tax
                               <span
-                                style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.0'}}</span>
+                                style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.2'}}</span>
                             </div>
 
                             <div style="height: 1px; background: #dedede; margin: 8px 0;"></div>
@@ -556,7 +556,7 @@
                             <div>
                               Total price
                               <span
-                                style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                                style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.2'}}</span>
                             </div>
                           </div>
                         </div>
@@ -919,7 +919,7 @@
             </div>
             <div class="col-md-2 text-center">
               <p class="text-price"><strong>{{dataflight.totalPrice |
-                currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                  currency:'IDR ':'symbol':'3.2'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
               <button (click)="returnShow(dataflight)"
                       class="btn-warning font-weight-bold btn-block rounded button-search-flight-ticket"
                       title="Select Departure">Select Departure <i
@@ -1087,18 +1087,18 @@
                               <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                 {{dataflightTrans.numPassenger}}X Adult Basic Price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                               </ng-container>
                               <ng-container
                                 *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                 {{dataflightTrans.numPassenger}}X Child Basic Price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                               </ng-container>
                               <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                 {{dataflightTrans.numPassenger}}X Infant Basic Price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                               </ng-container>
                             </div>
                           </ng-container>
@@ -1108,18 +1108,18 @@
                               <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                 {{dataflightTrans.numPassenger}}X Adult Basic Price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                               </ng-container>
                               <ng-container
                                 *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                 {{dataflightTrans.numPassenger}}X Child Basic Price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                               </ng-container>
                               <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                 {{dataflightTrans.numPassenger}}X Infant Basic Price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                               </ng-container>
                             </div>
                           </ng-container>
@@ -1127,7 +1127,7 @@
                           <div>
                             Tax
                             <span
-                              style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.0'}}</span>
+                              style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.2'}}</span>
                           </div>
 
                           <div style="height: 1px; background: #dedede; margin: 8px 0;"></div>
@@ -1135,7 +1135,7 @@
                           <div>
                             Total price
                             <span
-                              style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                              style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.2'}}</span>
                           </div>
                         </div>
                       </div>
@@ -1722,7 +1722,7 @@
               </div>
               <div class="col-md-2 text-center">
                 <p class="text-price"><strong>{{dataflight.totalPrice |
-                    currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                    currency:'IDR ':'symbol':'3.2'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
                 <button (click)="navigateToBooking(sessionID, dataflight)"
                         class="btn-warning font-weight-bold btn-block rounded button-search-flight-ticket"
                         title="Select Return">Select Return <i
@@ -1890,18 +1890,18 @@
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                   {{dataflightTrans.numPassenger}}X Adult Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                   {{dataflightTrans.numPassenger}}X Child Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                   {{dataflightTrans.numPassenger}}X Infant Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                               </div>
                             </ng-container>
@@ -1911,18 +1911,18 @@
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                   {{dataflightTrans.numPassenger}}X Adult Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container
                                   *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                   {{dataflightTrans.numPassenger}}X Child Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                                 <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                   {{dataflightTrans.numPassenger}}X Infant Basic Price
                                   <span
-                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                    style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                 </ng-container>
                               </div>
                             </ng-container>
@@ -1930,7 +1930,7 @@
                             <div>
                               Tax
                               <span
-                                style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.0'}}</span>
+                                style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.2'}}</span>
                             </div>
 
                             <div style="height: 1px; background: #dedede; margin: 8px 0;"></div>
@@ -1938,7 +1938,7 @@
                             <div>
                               Total price
                               <span
-                                style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                                style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.2'}}</span>
                             </div>
                           </div>
                         </div>
@@ -2505,7 +2505,7 @@
                 </div>
                 <div class="col-md-2 text-center">
                   <p class="text-price"><strong>{{dataflight.totalPrice |
-                    currency:'IDR ':'symbol':'3.0'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
+                      currency:'IDR ':'symbol':'3.2'}}</strong><!--<small class="d-block mb-3">per person</small>--></p>
                   <button (click)="returnShowMultiple(dataflight, dataflight.index)"
                           class="btn-warning font-weight-bold btn-block rounded button-search-flight-ticket">Select <i
                     class="fas fa-arrow-right"></i></button>
@@ -2664,18 +2664,18 @@
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                     {{dataflightTrans.numPassenger}}X Adult Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                     {{dataflightTrans.numPassenger}}X Child Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                     {{dataflightTrans.numPassenger}}X Infant Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                 </div>
                               </ng-container>
@@ -2685,18 +2685,18 @@
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                     {{dataflightTrans.numPassenger}}X Adult Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                     {{dataflightTrans.numPassenger}}X Child Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                     {{dataflightTrans.numPassenger}}X Infant Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                 </div>
                               </ng-container>
@@ -2704,7 +2704,7 @@
                               <div>
                                 Tax
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.2'}}</span>
                               </div>
 
                               <div style="height: 1px; background: #dedede; margin: 8px 0;"></div>
@@ -2712,7 +2712,7 @@
                               <div>
                                 Total price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.2'}}</span>
                               </div>
                             </div>
                           </div>
@@ -3109,18 +3109,18 @@
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                     {{dataflightTrans.numPassenger}}X Adult Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                     {{dataflightTrans.numPassenger}}X Child Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                     {{dataflightTrans.numPassenger}}X Infant Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                 </div>
                               </ng-container>
@@ -3130,18 +3130,18 @@
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                     {{dataflightTrans.numPassenger}}X Adult Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                     {{dataflightTrans.numPassenger}}X Child Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                     {{dataflightTrans.numPassenger}}X Infant Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                 </div>
                               </ng-container>
@@ -3149,7 +3149,7 @@
                               <div>
                                 Tax
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.2'}}</span>
                               </div>
 
                               <div style="height: 1px; background: #dedede; margin: 8px 0;"></div>
@@ -3157,7 +3157,7 @@
                               <div>
                                 Total price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.2'}}</span>
                               </div>
                             </div>
                           </div>
@@ -3549,18 +3549,18 @@
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                     {{dataflightTrans.numPassenger}}X Adult Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                     {{dataflightTrans.numPassenger}}X Child Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                     {{dataflightTrans.numPassenger}}X Infant Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                 </div>
                               </ng-container>
@@ -3570,18 +3570,18 @@
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'ADT'">
                                     {{dataflightTrans.numPassenger}}X Adult Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container
                                     *ngIf="dataflightTrans.passengerCode == 'CHD' || dataflightTrans.passengerCode == 'CNN'">
                                     {{dataflightTrans.numPassenger}}X Child Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                   <ng-container *ngIf="dataflightTrans.passengerCode == 'INF'">
                                     {{dataflightTrans.numPassenger}}X Infant Basic Price
                                     <span
-                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.0'}}</span>
+                                      style="float: right; font-weight: bold">{{dataflightTrans.amount | currency:'IDR ':'symbol':'3.2'}}</span>
                                   </ng-container>
                                 </div>
                               </ng-container>
@@ -3589,7 +3589,7 @@
                               <div>
                                 Tax
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflight.taxes | currency:'IDR ':'symbol':'3.2'}}</span>
                               </div>
 
                               <div style="height: 1px; background: #dedede; margin: 8px 0;"></div>
@@ -3597,7 +3597,7 @@
                               <div>
                                 Total price
                                 <span
-                                  style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.0'}}</span>
+                                  style="float: right; font-weight: bold">{{dataflight.totalPrice | currency:'IDR ':'symbol':'3.2'}}</span>
                               </div>
                             </div>
                           </div>

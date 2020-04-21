@@ -805,7 +805,7 @@ export class PrebookingComponent implements OnInit, OnDestroy {
       }
     }
 
-    var totalPrice = this.baggageDataSSRPrice.reduce((a, b) => a + (parseInt(b['price']) || 0), 0);
+    var totalPrice = this.baggageDataSSRPrice.reduce((a, b) => a + (parseFloat(b['price']) || 0), 0);
 
     this.baggageDataSSRPrice = Object.assign(this.baggageDataSSRPrice, {
       totalPrice: totalPrice
