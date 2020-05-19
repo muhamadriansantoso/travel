@@ -31,9 +31,11 @@ export class LandingpageComponent implements OnInit {
   searchClicked: boolean = false;
   isCollapsed: boolean;
   slider: any;
+  currentRoute: string;
   flightClicked: boolean;
   hotelClicked: boolean;
   eSIMsClicked: boolean;
+  fixmarketClicked: boolean;
 
   message: string;
   client: Client;
@@ -46,18 +48,27 @@ export class LandingpageComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.router.url == '/flight' || this.router.url == '/') {
+    this.currentRoute = this.router.url;
+    if (this.router.url == '/flight') {
       this.flightClicked = true;
       this.hotelClicked = false;
       this.eSIMsClicked = false;
+      this.fixmarketClicked = false;
     } else if (this.router.url == '/hotel') {
       this.flightClicked = false;
       this.eSIMsClicked = false;
+      this.fixmarketClicked = false;
       this.hotelClicked = true;
     } else if (this.router.url == '/eSIMs') {
       this.flightClicked = false;
       this.hotelClicked = false;
+      this.fixmarketClicked = false;
       this.eSIMsClicked = true;
+    } else if (this.router.url == '/fixmarket' || this.router.url == '/') {
+      this.flightClicked = false;
+      this.hotelClicked = false;
+      this.eSIMsClicked = false;
+      this.fixmarketClicked = true;
     }
 
     this.isCollapsed = true;
@@ -76,18 +87,27 @@ export class LandingpageComponent implements OnInit {
   }
 
   activeClass(value) {
+    this.currentRoute = this.router.url;
     if (value == 'flight') {
       this.flightClicked = true;
       this.hotelClicked = false;
       this.eSIMsClicked = false;
+      this.fixmarketClicked = false;
     } else if (value == 'hotel') {
       this.flightClicked = false;
       this.eSIMsClicked = false;
+      this.fixmarketClicked = false;
       this.hotelClicked = true;
     } else if (value == 'eSIMs') {
       this.flightClicked = false;
       this.hotelClicked = false;
+      this.fixmarketClicked = false;
       this.eSIMsClicked = true;
+    } else if (value == 'fixmarket') {
+      this.flightClicked = false;
+      this.hotelClicked = false;
+      this.eSIMsClicked = false;
+      this.fixmarketClicked = true;
     }
   }
 
