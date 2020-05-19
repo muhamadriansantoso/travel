@@ -266,3 +266,80 @@
 .mh-300 {
   max-height: 300px;
 }
+
+.countires-list {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  margin-top: -16px;
+  //padding-top: 14px;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.countires-list li {
+  padding: 8px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+:host {
+  ::ng-deep {
+    .resultWrapper {
+      background-color: #fff;
+      position: absolute;
+      top: 10px;
+      width: 500px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.32);
+      border: solid 1px #ecf0f1;
+    }
+
+    .autoCompleteSubTitle {
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #7f8c8d;
+      border-bottom: 1px solid #ecf0f1;
+    }
+
+    .autoCompleteWrapper {
+      cursor: pointer;
+      background-color: #fff;
+      position: relative;
+    }
+
+    .iconContainer {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+    }
+
+    .autoCompleteResultText {
+      margin-left: 56px;
+      border-bottom: solid 1px #ecf0f1;
+      padding: 4px 0 0px;
+
+      h4 {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        color: #161616;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      h5 {
+        font-size: 12px;
+        font-weight: 300;
+        color: #7f8c8d;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+

@@ -247,37 +247,37 @@
                   <ng-container *ngIf="passengerDetails.code == 'ADT'">
                     <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
                     <div class="float-right">
-                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
+                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                   <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
                     <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
                     <div class="float-right">
-                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
+                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                   <ng-container *ngIf="passengerDetails.code == 'INF'">
                     <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
                     <div class="float-right">
-                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span></div>
+                      <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span></div>
                     <div class="clearfix"></div>
                   </ng-container>
                 </div>
                 <div class="mt-1">
                   <div class="float-left">Tax And Fees</div>
                   <div class="float-right">
-                    <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>
+                    <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'3.2'}}</span>
                   </div>
                   <div class="clearfix"></div>
                 </div>
                 <div *ngIf="baggageDataSSR.length > 0" class="mt-1">
                   <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
-                    <div class="float-left">Extra Baggage {{bds.departure}} - {{bds.arrival}}</div>
+                    <div class="float-left">Baggage {{bds.departure}} - {{bds.arrival}}</div>
                     <div class="float-right">
                       <ng-container *ngIf="baggageDataSSRPrice.length > 0">
                         <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
                           <ng-container *ngIf="segmentBaggageIndex == bdsp.SegmentIndex">
-                            <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.0'}}</span>
+                            <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.2'}}</span>
                             <span *ngIf="bdsp.price == 0">{{bdsp.price | currency:'IDR ':'symbol':'1.0'}}</span>
                           </ng-container>
                         </ng-container>
@@ -290,7 +290,7 @@
               <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                 <div class="float-left">Total</div>
                 <div class="float-right text-info h4">
-                  <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                  <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.2'}}</span>
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -554,18 +554,44 @@
                       </div>
                     </div>
                   </div>
+                  <ng-container *ngIf="mealDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'">
+                    <ng-container *ngFor="let mds of mealDataSSR; let segmentMealIndex = index" formArrayName="mealSSRForPassenger">
+                      <div [formGroupName]="segmentMealIndex" class="form-group row">
+                        <label class="col-sm-4 col-form-label">Meal {{mds.departure}} - {{mds.arrival}}</label>
+                        <div class="col-sm-8">
+                          <select
+                            (change)="updateMealSSRData($event.target.value, segmentMealIndex, bookingForm[i].value[j].passengerIndex)"
+                            [ngClass]="{'is-invalid': isControlHasErrorDynamicMeal('passenger_mealSSR','required', i, j, segmentMealIndex)}"
+                            class="form-control-custom"
+                            formControlName="passenger_mealSSR">
+                            <option value="">Select your meal</option>
+                            <option *ngFor="let mdssr of mds.ssrData; let mealIndex = index" value="{{mealIndex}}">
+                              {{mdssr.Description}}
+                            </option>
+                          </select>
+                          <div *ngIf="isControlHasErrorDynamicMeal('passenger_mealSSR','required', i, j, segmentMealIndex)"
+                               class="invalid-feedback"
+                               style="display: block">
+                            Please select your meal
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
                   <div *ngIf="baggageDataSSR.length > 0 && bookingForm[i].value[j].passengerType != 'INF'" class="form-group row">
                     <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
-                      <label class="col-sm-4 col-form-label">Extra Baggage {{bds.departure}} - {{bds.arrival}}</label>
+                      <label class="col-sm-4 col-form-label">Baggage {{bds.departure}} - {{bds.arrival}}</label>
                       <div class="col-sm-8">
                         <select
-                          [ngClass]="{'is-invalid': isControlHasErrorDynamic('passenger_baggageSSR','required', i, j)}"
-                          class="form-control-custom"
                           (change)="updateBaggageSSRData($event.target.value, segmentBaggageIndex, bookingForm[i].value[j].passengerIndex)"
-                          formControlName="passenger_baggageSSR">
-                          <option value="">0 Kilograms - {{0.00 | currency:'IDR ':'symbol':'1.0'}}</option>
+                          class="form-control-custom">
+                          <option *ngIf="bds.ssrData[0].Amount > 0" selected value="">0 Kilograms
+                            - {{0.00 | currency:'IDR ':'symbol':'1.0'}}</option>
                           <option *ngFor="let bdssr of bds.ssrData; let baggageIndex = index" value="{{baggageIndex}}">{{bdssr.Value}}
-                            Kilograms - {{bdssr.Amount | currency:'IDR ':'symbol':'3.0'}}</option>
+                            Kilograms -
+                            <span *ngIf="bdssr.Amount == 0">{{0 | currency:'IDR ':'symbol':'1.0'}}</span>
+                            <span *ngIf="bdssr.Amount > 0">{{bdssr.Amount | currency:'IDR ':'symbol':'3.2'}}</span>
+                          </option>
                         </select>
                       </div>
                     </ng-container>
@@ -657,21 +683,21 @@
                     <ng-container *ngIf="passengerDetails.code == 'ADT'">
                       <div class="float-left">Adult X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
                     <ng-container *ngIf="passengerDetails.code == 'CHD' || passengerDetails.code == 'CNN'">
                       <div class="float-left">Child X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
                     <ng-container *ngIf="passengerDetails.code == 'INF'">
                       <div class="float-left">Infant X{{passengerDetails.numPassenger}}</div>
                       <div class="float-right">
-                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'2.0'}}</span>
+                        <span>{{passengerDetails.passengerBasePrice | currency:'IDR ':'symbol':'3.2'}}</span>
                       </div>
                       <div class="clearfix"></div>
                     </ng-container>
@@ -679,18 +705,18 @@
                   <div class="mt-1">
                     <div class="float-left">Tax And Fees</div>
                     <div class="float-right">
-                      <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'2.0'}}</span>
+                      <span>{{(app.taxes + app.fees) | currency:'IDR ':'symbol':'3.2'}}</span>
                     </div>
                     <div class="clearfix"></div>
                   </div>
                   <div *ngIf="baggageDataSSR.length > 0" class="mt-1">
                     <ng-container *ngFor="let bds of baggageDataSSR; let segmentBaggageIndex = index">
-                      <div class="float-left">Extra Baggage {{bds.departure}} - {{bds.arrival}}</div>
+                      <div class="float-left">Baggage {{bds.departure}} - {{bds.arrival}}</div>
                       <div class="float-right">
                         <ng-container *ngIf="baggageDataSSRPrice.length > 0">
                           <ng-container *ngFor="let bdsp of baggageDataSSRPrice">
                             <ng-container *ngIf="segmentBaggageIndex == bdsp.SegmentIndex">
-                              <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.0'}}</span>
+                              <span *ngIf="bdsp.price > 0">{{bdsp.price | currency:'IDR ':'symbol':'3.2'}}</span>
                               <span *ngIf="bdsp.price == 0">{{bdsp.price | currency:'IDR ':'symbol':'1.0'}}</span>
                             </ng-container>
                           </ng-container>
@@ -703,7 +729,7 @@
                 <div class="border-fix-left card-footer bg-white" style="border-top: 1px dashed rgba(0, 0, 0, 0.125);">
                   <div class="float-left">Total</div>
                   <div class="float-right text-info h4">
-                    <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.0'}}</span>
+                    <span>{{totalPrice + baggageDataSSRPrice.totalPrice |currency:'IDR ':'symbol':'3.2'}}</span>
                   </div>
                   <div class="clearfix"></div>
                 </div>
@@ -1036,7 +1062,7 @@
   </div>
 </div>
 
-<div *ngIf="priceUpdatedInformation" style="z-index: 999999;">
+<div *ngIf="priceUpdatedInformation && supplier != '4'" style="z-index: 999999;">
   <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
     <div aria-busy="true" aria-describedby="swal2-content"
          aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
@@ -1052,10 +1078,10 @@
           Harga pesawat yang Anda ingin pesan telah berubah.
           <br>
           <br>
-          Harga pesawat di waktu sebelumnya : <b>{{nonUpdatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
+          Harga pesawat di waktu sebelumnya : <b>{{nonUpdatedPrice | currency:'IDR ':'symbol':'3.2'}}</b>
           <br>
           <br>
-          Harga pesawat di waktu sekarang : <b>{{updatedPrice | currency:'IDR ':'symbol':'2.0'}}</b>
+          Harga pesawat di waktu sekarang : <b>{{updatedPrice | currency:'IDR ':'symbol':'3.2'}}</b>
         </div>
       </div>
       <div class="swal2-actions">
