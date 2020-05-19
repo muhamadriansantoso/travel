@@ -204,9 +204,9 @@ export class PrebookingComponent implements OnInit, OnDestroy {
             var bookingminDateAdult = moment(bookingDate).subtract(100, 'years').toDate();
             var bookingmaxDateAdult = moment(bookingDate).subtract(12, 'years').toDate();
             var bookingminDateChild = moment(bookingDate).subtract(12, 'years').add(1, 'days').toDate();
-            var bookingmaxDateChild = moment(bookingDate).subtract(2, 'years').toDate();
+            var bookingmaxDateChild = moment(bookingDate).subtract(2, 'years').subtract(1, 'days').toDate();
             var bookingminDateInfant = moment(bookingDate).subtract(2, 'years').toDate();
-            var bookingmaxDateInfant = moment(bookingDate).subtract(1, 'months').toDate();
+            var bookingmaxDateInfant = moment(bookingDate).subtract(1, 'months').subtract(1, 'days').toDate();
             var bookingpassportExpiredMinDate = moment(bookingDate).add(6, 'months').add(1, 'days').toDate();
             var bookingpassportExpiredMaxDate = moment(bookingDate).add(24, 'years').add(1, 'days').toDate();
 

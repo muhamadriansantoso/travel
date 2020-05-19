@@ -17,6 +17,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {ModalModule} from "ngx-bootstrap";
 import {HttpClientModule} from "@angular/common/http";
 import {NguiAutoCompleteModule} from "@ngui/auto-complete";
+import {FixmarketComponent} from './fixmarket/fixmarket.component';
 
 const routes: Routes = [
   {
@@ -25,7 +26,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: FlightComponent,
+        component: FixmarketComponent,
+      },
+      {
+        path: 'fixmarket',
+        component: FixmarketComponent,
       },
       {
         path: 'flight',
@@ -56,7 +61,8 @@ const routes: Routes = [
     PriceNumber,
     HeaderComponent,
     FooterComponent,
-    EsimsComponent
+    EsimsComponent,
+    FixmarketComponent
   ],
   imports: [
     CommonModule,
