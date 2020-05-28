@@ -12,8 +12,8 @@ export class FixmarketComponent implements OnInit {
   customOptions: OwlOptions = {
     items: 8,
     mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
+    touchDrag: false,
+    pullDrag: false,
     dots: false,
     loop: true,
     navSpeed: 500,
@@ -23,6 +23,7 @@ export class FixmarketComponent implements OnInit {
   };
 
   kategoripilihan: any;
+  produk: any;
 
   constructor(
     private api: APIService,
@@ -34,6 +35,7 @@ export class FixmarketComponent implements OnInit {
   ngOnInit(): void {
     this.api.getLandingPageFixMart().subscribe((data: any) => {
       this.kategoripilihan = data.kategori_pilihan;
+      this.produk = data.produk;
       this.cdr.detectChanges();
     });
   }
