@@ -37,6 +37,9 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
+  getLandingPageFixMart() {
+    return this.http.get('https://mart.fixtrips.com/api/landingpage');
+  }
 
   getCountry(value) {
     return this.http.get('https://www.airalo.com/api/package/autocomplete?type=local&search=' + value);

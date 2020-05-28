@@ -1,1 +1,155 @@
-<p>fixmarket works!</p>
+<div class="container text-center my-3">
+  <h2 class="font-weight-light mb-4">Kategori</h2>
+  <div class="mx-auto my-auto">
+    <owl-carousel-o [options]="customOptions">
+      <ng-container *ngFor="let kp of kategoripilihan; let i = index">
+        <ng-template [id]="i" carouselSlide>
+          <div class="cat-box">
+            <div class="img-box1">
+              <img class="img-fluid custom-img" src="{{kp.gambar}}">
+            </div>
+            <div class="thumb-content">
+              <p>{{kp.nama_kategori}}</p>
+            </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+    <!--    <div id="myCarousel" class="carousel slide w-100" data-ride="carousel">-->
+    <!--      <div class="carousel-inner w-100" role="listbox">-->
+    <!--        <div class="carousel-item active">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/aksesori-fashion.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Aksesoris & Fashion</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/barang-bekas.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Barang Bekas</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/buku-alat-tulis.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Buku & Alat Tulis</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/e-voucher-dan-tiket-baru.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>E-Voucher & Tiket Baru</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/elektronik.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Elektronik</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img"-->
+    <!--                                         src="icon/fashion-muslim.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Fashion Muslim</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1">-->
+    <!--                <div class="img-box1"><img class="img-fluid custom-img" src="icon/fashion-anak-dan-bayi.png">-->
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Fashion Anak & Bayi</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/fashion-wanita.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Fashion Wanita</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/fashion-pria.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Fashion Pria</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/film&#45;&#45;musik.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Film & Musik</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/foto&#45;&#45;kamera.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Foto & Kamera</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div class="carousel-item">-->
+    <!--          <div class="col-lg-2">-->
+    <!--            <div class="cat-box">-->
+    <!--              <div class="img-box1"><img class="img-fluid custom-img" src="icon/game-permainan.png"></div>-->
+    <!--              <div class="thumb-content">-->
+    <!--                <p>Gaming</p>-->
+    <!--              </div>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <a class="carousel-control-prev bg-dark w-auto" href="#myCarousel" role="button" data-slide="prev">-->
+    <!--        <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+    <!--        <span class="sr-only">Previous</span>-->
+    <!--      </a>-->
+    <!--      <a class="carousel-control-next bg-dark w-auto" href="#myCarousel" role="button" data-slide="next">-->
+    <!--        <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+    <!--        <span class="sr-only">Next</span>-->
+    <!--      </a>-->
+    <!--    </div>-->
+  </div>
+</div>
