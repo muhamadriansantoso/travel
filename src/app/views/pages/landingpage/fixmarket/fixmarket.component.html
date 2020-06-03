@@ -1,24 +1,389 @@
-<div class="container text-center my-3">
-  <h2 class="font-weight-light mb-4">Kategori</h2>
-  <div class="mx-auto my-auto">
-    <owl-carousel-o [options]="customOptions">
-      <ng-container *ngFor="let kp of kategoripilihan; let i = index">
-        <ng-template [id]="i" carouselSlide>
-          <div class="cat-box">
-            <div class="img-box1">
-              <img class="img-fluid custom-img" src="{{kp.gambar}}">
+<div class="row justify-content-center pt-4 pb-3">
+  <div class="col-md-12">
+    <form class="card card-sm rounded-pill">
+      <div class="input-group">
+        <input aria-label="Search" autocomplete="off" class="form-control search-home" name="kata"
+               placeholder="Cari produk apa?" required="" type="text">
+        <div class="input-group-append">
+          <button class="btn rounded-pill" style="background-color: #ff6501;color: white;" type="submit">
+            <i class="fa fa-search fa-lg"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!--end of col-->
+</div>
+
+<div class="row pb-4">
+  <div class="col-md-12 float-left">
+    <div class="kat-title">Kategori Pilihan</div>
+    <div class="bor-bot"></div>
+    <div class="mx-auto my-auto text-center">
+      <owl-carousel-o [options]="customOptions">
+        <ng-container *ngFor="let kp of kategoripilihan; let i = index">
+          <ng-template [id]="i" carouselSlide>
+            <div class="cat-box">
+              <div class="img-box1">
+                <img class="img-fluid custom-img" src="{{kp.gambar}}">
+              </div>
+              <div class="thumb-content">
+                <p>{{kp.nama_kategori}}</p>
+              </div>
             </div>
-            <div class="thumb-content">
-              <p>{{kp.nama_kategori}}</p>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+</div>
+<div class="row pb-4">
+  <div class="col-md-12 p-0">
+    <div class="col-md-6 float-left">
+      <div class="kat-title">Paling Populer</div>
+      <div class="bor-bot mb-0"></div>
+      <div class="col-md-12 text-right"><a class="" href="#"><small>Tampilkan semua <i
+        class="fa fa-arrow-right"></i></small></a></div>
+        <div class="row">
+          <div class="col-md-3 col-sm-6 p-2">
+            <div class="white-box">
+              <div class="product-img">
+                <img
+                  src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg">
+              </div>
+              <div class="product-bottom">
+                <div class="product-name">Asus X552CL-SX019D Laptop</div>
+                <div class="price">
+                  <span class="rupiah-txt">Rp</span> 32,000
+                </div>
+              </div>
             </div>
           </div>
-        </ng-template>
-      </ng-container>
-    </owl-carousel-o>
+          <div class="col-md-3 col-sm-6 p-2">
+            <div class="white-box">
+              <div class="product-img">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/81nreGN5qQL._SL1500_.jpg">
+              </div>
+              <div class="product-bottom">
+                <div class="product-name">ASUS X507 Core i5 - 8th Gen 15.6"</div>
+                <div class="price">
+                  <span class="rupiah-txt">Rp</span> 30,000
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 p-2">
+            <div class="white-box">
+              <div class="product-img">
+                <img src="https://images-na.ssl-images-amazon.com/images/I/81RrcHvDGbL._SY355_.jpg">
+              </div>
+              <div class="product-bottom">
+                <div class="product-name">ASUS VivoBook S400CA</div>
+                <div class="price">
+                  <span class="rupiah-txt">Rp</span> 45,000
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6 p-2">
+            <div class="white-box">
+              <div class="product-img">
+                <img src="https://cdn.mos.cms.futurecdn.net/kwP2nL8FAVboognXmW6nvP-320-80.jpg">
+              </div>
+              <div class="product-bottom">
+                <div class="product-name">Asus laptops</div>
+                <div class="price">
+                  <span class="rupiah-txt">Rp</span> 50,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-6 float-left">
+      <div class="kat-title">Produk Terlaris</div>
+      <div class="bor-bot mb-0"></div>
+      <div class="col-md-12 text-right"><a class="" href="#"><small>Tampilkan semua <i
+        class="fa fa-arrow-right"></i></small></a></div>
+      <div class="mt-2 row">
+        <div class="col-md-6 pb-4">
+          <section id="card" style="
+    display: block;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+    flex-basis: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0px 4px;
+"><a href="https://www.tokopedia.com/find/samsung-note-9" title="" style="
+    display: inline-block;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+"><div style="
+    position: relative;
+    height: 100%;
+    width: 100%;
+"><div style="
+    background-color: transparent;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 64px;
+    width: 64px;
+    margin: 0px auto;
+"><img src="https://ecs7-p.tokopedia.net/img/cache/200-square/product-1/2018/8/23/316949607/316949607_474c9ae5-91ad-4b92-a5aa-0deba2c2a1a7_1036_1280.jpg.webp" alt="Samsung Note 9" title="" style="
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+"></div><div style="
+    margin-left: 80px;
+    position: relative;
+    height: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+"><h2 style="
+    font-size: 14px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.96);
+    max-height: 36px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    overflow: hidden;
+    margin: 0px 0px 4px;
+">Samsung Note 9</h2><span style="
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.44);
+">128rb produk</span></div></div></a></section>
+        </div>
+        <div class="col-md-6 pb-4">
+          <section id="card" style="
+    display: block;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+    flex-basis: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0px 4px;
+"><a href="https://www.tokopedia.com/find/samsung-note-9" title="" style="
+    display: inline-block;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+"><div style="
+    position: relative;
+    height: 100%;
+    width: 100%;
+"><div style="
+    background-color: transparent;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 64px;
+    width: 64px;
+    margin: 0px auto;
+"><img src="https://ecs7-p.tokopedia.net/img/cache/200-square/product-1/2018/8/23/316949607/316949607_474c9ae5-91ad-4b92-a5aa-0deba2c2a1a7_1036_1280.jpg.webp" alt="Samsung Note 9" title="" style="
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+"></div><div style="
+    margin-left: 80px;
+    position: relative;
+    height: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+"><h2 style="
+    font-size: 14px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.96);
+    max-height: 36px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    overflow: hidden;
+    margin: 0px 0px 4px;
+">Samsung Note 9</h2><span style="
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.44);
+">128rb produk</span></div></div></a></section>
+        </div>
+        <div class="col-md-6 pb-4">
+          <section id="card" style="
+    display: block;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+    flex-basis: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0px 4px;
+"><a href="https://www.tokopedia.com/find/samsung-note-9" title="" style="
+    display: inline-block;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+"><div style="
+    position: relative;
+    height: 100%;
+    width: 100%;
+"><div style="
+    background-color: transparent;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 64px;
+    width: 64px;
+    margin: 0px auto;
+"><img src="https://ecs7-p.tokopedia.net/img/cache/200-square/product-1/2018/8/23/316949607/316949607_474c9ae5-91ad-4b92-a5aa-0deba2c2a1a7_1036_1280.jpg.webp" alt="Samsung Note 9" title="" style="
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+"></div><div style="
+    margin-left: 80px;
+    position: relative;
+    height: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+"><h2 style="
+    font-size: 14px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.96);
+    max-height: 36px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    overflow: hidden;
+    margin: 0px 0px 4px;
+">Samsung Note 9</h2><span style="
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.44);
+">128rb produk</span></div></div></a></section>
+        </div>
+        <div class="col-md-6 pb-4">
+          <section id="card" style="
+    display: block;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(49, 53, 59, 0.12) 0px 1px 6px 0px;
+    flex-basis: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 0px 4px;
+"><a href="https://www.tokopedia.com/find/samsung-note-9" title="" style="
+    display: inline-block;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+"><div style="
+    position: relative;
+    height: 100%;
+    width: 100%;
+"><div style="
+    background-color: transparent;
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 64px;
+    width: 64px;
+    margin: 0px auto;
+"><img src="https://ecs7-p.tokopedia.net/img/cache/200-square/product-1/2018/8/23/316949607/316949607_474c9ae5-91ad-4b92-a5aa-0deba2c2a1a7_1036_1280.jpg.webp" alt="Samsung Note 9" title="" style="
+    width: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+"></div><div style="
+    margin-left: 80px;
+    position: relative;
+    height: 100%;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+"><h2 style="
+    font-size: 14px;
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.29;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.96);
+    max-height: 36px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-transform: capitalize;
+    overflow: hidden;
+    margin: 0px 0px 4px;
+">Samsung Note 9</h2><span style="
+    font-size: 12px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: rgba(49, 53, 59, 0.44);
+">128rb produk</span></div></div></a></section>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div *ngFor="let p of produk" class="row" style="margin-bottom: 25px">
+<div *ngFor="let p of produk" class="row pb-4">
   <div class="col-md-12 float-left">
     <div class="kat-title">{{p.nama_kategori}}</div>
     <div class="bor-bot"></div>
