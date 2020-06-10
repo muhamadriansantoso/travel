@@ -6079,7 +6079,7 @@ footer hr {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 6px 0px;
   border-radius: 8px;
   float: left;
-  margin: 0 8px 0 8px;
+  /*margin: 0 8px 0 8px;*/
   background: #fff;
 }
 
@@ -6089,7 +6089,6 @@ footer hr {
 
 .box-prod-home .ch {
   min-height: 174px;
-  min-width: 174px;
   max-height: 174px;
   height: auto;
   overflow: hidden
@@ -6128,4 +6127,26 @@ footer hr {
 .harga {
   color: #fc6700;
   font-weight: bold;
+}
+
+.parent_time {
+  margin: 0px 5px;
+}
+
+.child_time0 {
+  background: #f39a3f;
+
+  border-radius: 5px 0px 0px 5px;
+}
+
+.child_time1 {
+  background: #ff7c0c;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.child_time {
+  float: left;
+  color: #FFF;
+  padding: 3px;
+  margin: 0px;
 }
