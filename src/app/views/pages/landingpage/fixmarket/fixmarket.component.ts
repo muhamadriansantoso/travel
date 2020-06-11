@@ -24,6 +24,19 @@ export class FixmarketComponent implements OnInit {
     navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
   };
 
+  produkPromo: OwlOptions = {
+    items: 3,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    loop: true,
+    navSpeed: 500,
+    autoplay: true,
+    nav: true,
+    navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+  };
+
   pleaseWaitLoader: boolean;
   kategoripilihan: any;
   produk: any;
