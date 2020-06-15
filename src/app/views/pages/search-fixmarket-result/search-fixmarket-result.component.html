@@ -1,28 +1,51 @@
 <app-header></app-header>
 <section class="ftco-section pd-t97">
-  <div class="content">
-    <div class="row px-3">
-      <div *ngFor="let pd of productData" class="col-md-2 pt-2">
-        <a href="{{pd.link}}" target="_blank" title="{{pd.nama_produk_full}}">
-          <div class="box-prod-home">
-            <div class="ch">
-              <img src="{{pd.gambar[0]}}">
-            </div>
-            <div class="txt-box">
-              <h4 class="produk-title pt-2">
-                <span>{{pd.nama_produk}}</span>
-              </h4>
-              <span class="d-block harga">
-              {{pd.harga}}
-            </span>
-              <small class="d-block text-muted">
-                <i class="fa fa-map-marker-alt fa-lg" style="color: #4CAF50;"></i>
-                {{pd.nama_kota  }}
-              </small>
-            </div>
+  <div class="col-md-12 float-left">
+    <div class="kat-title">{{searchTitle}}</div>
+    <div class="bor-bot"></div>
+  </div>
+  <div class="row px-3">
+    <div *ngFor="let pd of productData" class="col-md-2 pt-2">
+      <a href="{{pd.link}}" target="_blank" title="{{pd.nama_produk_full}}">
+        <div class="box-prod-home">
+          <div class="ch">
+            <img src="{{pd.gambar[0]}}">
           </div>
-        </a>
-      </div>
+          <div class="txt-box">
+            <h4 class="produk-title pt-2">
+              <span>{{pd.nama_produk}}</span>
+            </h4>
+            <span class="d-block harga">
+            {{pd.harga}}
+          </span>
+            <small class="d-block text-muted">
+              <i class="fa fa-map-marker-alt fa-lg" style="color: #4CAF50;"></i>
+              {{pd.nama_kota  }}
+            </small>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
+
+<div *ngIf="pleaseWaitLoader" style="z-index: 999999;">
+  <div class="swal2-container swal2-center swal2-backdrop-show" style="overflow-y: auto;">
+    <div aria-busy="true" aria-describedby="swal2-content"
+         aria-labelledby="swal2-title" aria-live="assertive" aria-modal="true"
+         class="swal2-popup swal2-modal swal2-show swal2-loading"
+         data-loading="true" role="dialog" style="display: flex;" tabindex="-1">
+      <div class="swal2-content">
+        <div class="swal2-html-container" id="swal2-content" style="display: block;">
+          Please wait...
+        </div>
+      </div>
+      <div class="swal2-actions swal2-loading" style="display: flex;">
+        <button aria-label="" class="swal2-confirm swal2-styled" disabled=""
+                style="display: inline-block; border-left-color: #ed1942; border-right-color: #ed1942;"
+                type="button">OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
