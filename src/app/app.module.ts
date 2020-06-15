@@ -31,6 +31,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {SearchFixmarketResultComponent} from './views/pages/search-fixmarket-result/search-fixmarket-result.component';
 
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.arrows,
@@ -55,6 +56,7 @@ const ngWizardConfig: NgWizardConfig = {
     HotelDetailComponent,
     HotelBookingComponent,
     ESIMsBookingComponent,
+    SearchFixmarketResultComponent,
   ],
   imports: [
     CommonModule,

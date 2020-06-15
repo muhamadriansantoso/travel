@@ -37,6 +37,18 @@ export class APIService {
     return this.http.get(APIURL + 'api/internal/getSlider');
   }
 
+  getProductFixMart(keyword: string) {
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      params: {
+        'keyword': keyword,
+      }
+    };
+    return this.http.get('https://mart.fixtrips.com/api/produk', httpOptions);
+  }
+
   getLandingPageFixMart() {
     return this.http.get('https://mart.fixtrips.com/api/landingpage');
   }

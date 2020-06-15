@@ -8,6 +8,7 @@ import {SeachHotelResultComponent} from './views/pages/seach-hotel-result/seach-
 import {HotelDetailComponent} from './views/pages/hotel-detail/hotel-detail.component';
 import {HotelBookingComponent} from './views/pages/hotel-booking/hotel-booking.component';
 import {ESIMsBookingComponent} from "./views/pages/e-sims-booking/e-sims-booking.component";
+import {SearchFixmarketResultComponent} from "./views/pages/search-fixmarket-result/search-fixmarket-result.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'search-flight',
     component: SearchFlightResultComponent
+  },
+  {
+    path: 'search-fixmarket',
+    component: SearchFixmarketResultComponent
   },
   {
     path: 'search-hotel',

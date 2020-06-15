@@ -4,6 +4,7 @@ import {APIService} from "../../../../core/API";
 import {Router} from "@angular/router";
 import {finalize, takeUntil, tap} from "rxjs/operators";
 import {Subject} from "rxjs";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-fixmarket',
@@ -40,6 +41,8 @@ export class FixmarketComponent implements OnInit {
   pleaseWaitLoader: boolean;
   kategoripilihan: any;
   produk: any;
+  searchProductForm: FormGroup;
+  searchProductFormInvalid: boolean;
 
   private unsubscribe: Subject<any>;
 
@@ -47,12 +50,14 @@ export class FixmarketComponent implements OnInit {
     private api: APIService,
     private cdr: ChangeDetectorRef,
     private router: Router,
+    private fb: FormBuilder,
   ) {
     this.unsubscribe = new Subject();
   }
 
   ngOnInit(): void {
     this.pleaseWaitLoader = true;
+    this.initSearchProductForm();
     this.api.getLandingPageFixMart().pipe(
       tap((data: any) => {
         this.kategoripilihan = data.kategori_pilihan;
@@ -64,5 +69,47 @@ export class FixmarketComponent implements OnInit {
         this.cdr.markForCheck();
       })
     ).subscribe();
+  }
+
+  initSearchProductForm() {
+    this.searchProductForm = this.fb.group({
+      keyword_search: ['', Validators.compose([
+        Validators.required,
+      ])
+      ]
+    });
+  }
+
+  searchProduct() {
+    const controls = this.searchProductForm.controls;
+    if (this.searchProductForm.invalid) {
+      Object.keys(controls).forEach(controlName =>
+        controls[controlName].markAsTouched()
+      );
+
+      this.searchProductFormInvalid = true;
+      return;
+    }
+
+    const authData = {
+      keyword_search: controls['keyword_search'].value,
+    };
+
+    this.router.navigate(['/search-fixmarket'], {
+      queryParams:
+        {
+          product: authData.keyword_search
+        },
+    });
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.searchProductForm.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 }

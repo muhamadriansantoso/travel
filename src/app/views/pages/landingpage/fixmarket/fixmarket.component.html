@@ -1,16 +1,19 @@
 <div class="row justify-content-center pt-4 pb-3">
   <div class="col-md-12">
-    <form class="card card-sm rounded-pill">
+    <form [formGroup]="searchProductForm" class="card card-sm rounded-pill">
       <div class="input-group">
-        <input aria-label="Search" autocomplete="off" class="form-control search-home" name="kata"
-               placeholder="Cari produk apa?" required="" type="text">
+        <input autocomplete="off" class="form-control search-home" formControlName="keyword_search" placeholder="Cari produk apa?" type="text">
         <div class="input-group-append">
-          <button class="btn rounded-pill" style="background-color: #ff6501;color: white;" type="submit">
+          <button (click)="searchProduct()" class="btn rounded-pill" style="background-color: #ff6501;color: white;" type="submit">
             <i class="fa fa-search fa-lg"></i>
           </button>
         </div>
       </div>
     </form>
+    <div *ngIf="isControlHasError('keyword_search','required')" class="invalid-feedback"
+         style="display: block">
+      Silahkan isi nama produk yang ingin dicari
+    </div>
   </div>
   <!--end of col-->
 </div>

@@ -1,0 +1,28 @@
+<app-header></app-header>
+<section class="ftco-section pd-t97">
+  <div class="content">
+    <div class="row px-3">
+      <div *ngFor="let pd of productData" class="col-md-2 pt-2">
+        <a href="{{pd.link}}" target="_blank" title="{{pd.nama_produk_full}}">
+          <div class="box-prod-home">
+            <div class="ch">
+              <img src="{{pd.gambar[0]}}">
+            </div>
+            <div class="txt-box">
+              <h4 class="produk-title pt-2">
+                <span>{{pd.nama_produk}}</span>
+              </h4>
+              <span class="d-block harga">
+              {{pd.harga}}
+            </span>
+              <small class="d-block text-muted">
+                <i class="fa fa-map-marker-alt fa-lg" style="color: #4CAF50;"></i>
+                {{pd.nama_kota  }}
+              </small>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
