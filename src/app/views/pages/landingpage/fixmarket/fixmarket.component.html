@@ -333,13 +333,14 @@
       <owl-carousel-o [options]="produkPromo">
         <ng-container *ngFor="let kp of kategoripilihan; let i = index">
           <ng-template carouselSlide id="1">
-            <div class="cat-box">
-              <div class="img-box1">
-                <img class="img-fluid custom-img"
-                     src="https://www.fixtrips.com/official/assets/media/slider/20200404221841.jpeg">
-              </div>
-              <div class="thumb-content">
-                <p>Test</p>
+            <div class="items">
+              <div class="slider-item" style="width: 100%;">
+                <div class="carousel-container__slide">
+                  <a href="#" target="_blank">
+                    <img alt="Car 3 Dekstop - ian-new-normal-essentials" class="carousel-container__slide__content"
+                         src="https://www.fixtrips.com/official/assets/media/slider/20200404221841.jpeg">
+                  </a>
+                </div>
               </div>
             </div>
           </ng-template>
