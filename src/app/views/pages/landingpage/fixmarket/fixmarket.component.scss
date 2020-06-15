@@ -240,36 +240,13 @@
   cursor: pointer
 }
 
-.items {
-  margin: 10px auto;
-  width: 51%;
-  height: 100%;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  white-space: nowrap;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.slider-item {
-  display: inline-block;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
-}
-
 .carousel-container__slide {
   padding: 0 10px;
 }
 
 .carousel-container__slide__content {
   width: 100%;
-  border-radius: 10px;
-  -webkit-box-shadow: 0 0 12px 0 rgba(0, 0, 0, .3);
-  box-shadow: 0 0 12px 0 rgba(0, 0, 0, .3);
+  border-radius: 7px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

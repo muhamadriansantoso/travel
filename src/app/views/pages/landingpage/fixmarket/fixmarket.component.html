@@ -2,7 +2,8 @@
   <div class="col-md-12">
     <form [formGroup]="searchProductForm" class="card card-sm rounded-pill">
       <div class="input-group">
-        <input autocomplete="off" class="form-control search-home" formControlName="keyword_search" placeholder="Cari produk apa?" type="text">
+        <input autocomplete="off" class="form-control search-home rounded-pill border-0"
+               formControlName="keyword_search" placeholder="Cari produk apa?" type="text">
         <div class="input-group-append">
           <button (click)="searchProduct()" class="btn rounded-pill" style="background-color: #ff6501;color: white;" type="submit">
             <i class="fa fa-search fa-lg"></i>
@@ -64,7 +65,7 @@
     min-height: 66px;
 "><img alt="Gratis Ongkir" src="https://mart.fixtrips.com/asset/foto_kategori/barang-bekas.png"
        style="margin-right: 8px;width: 21px;height: 21px;"><span
-        style="line-height: normal;font-size: 14px;color: #ff6500;"> So look me in the eyes</span></div>
+        style="line-height: normal;font-size: 14px;color: #ff6500;"> Gratis Ongkir</span></div>
       <div style="
     position: relative;
     display: -webkit-box;
@@ -84,7 +85,7 @@
     min-height: 66px;
 "><img alt="Gratis Ongkir" src="https://mart.fixtrips.com/asset/foto_kategori/barang-bekas.png"
        style="margin-right: 8px;width: 21px;height: 21px;"><span
-        style="line-height: normal;font-size: 14px;color: #ff6500;">Tell me what you see</span></div>
+        style="line-height: normal;font-size: 14px;color: #ff6500;">Produk Terjamin</span></div>
       <div style="
     position: relative;
     display: -webkit-box;
@@ -104,7 +105,7 @@
     min-height: 66px;
 "><img alt="Gratis Ongkir" src="https://mart.fixtrips.com/asset/foto_kategori/barang-bekas.png"
        style="margin-right: 8px;width: 21px;height: 21px;"><span
-        style="line-height: normal;font-size: 14px;color: #ff6500;">Perfect paradise</span></div>
+        style="line-height: normal;font-size: 14px;color: #ff6500;">Pengembalian Barang</span></div>
       <div style="
     position: relative;
     display: -webkit-box;
@@ -124,7 +125,7 @@
     min-height: 66px;
 "><img alt="Gratis Ongkir" src="https://mart.fixtrips.com/asset/foto_kategori/barang-bekas.png"
        style="margin-right: 8px;width: 21px;height: 21px;"><span
-        style="line-height: normal;font-size: 14px;color: #ff6500;">Tearing at the seams</span></div>
+        style="line-height: normal;font-size: 14px;color: #ff6500;">Pengiriman Cepat</span></div>
       <div style="
     position: relative;
     display: -webkit-box;
@@ -144,7 +145,7 @@
     min-height: 66px;
 "><img alt="Gratis Ongkir" src="https://mart.fixtrips.com/asset/foto_kategori/barang-bekas.png"
        style="margin-right: 8px;width: 21px;height: 21px;"><span
-        style="line-height: normal;font-size: 14px;color: #ff6500;">I wish I could escape</span></div>
+        style="line-height: normal;font-size: 14px;color: #ff6500;">Pembayaran Aman</span></div>
       <div style="
     position: relative;
     display: -webkit-box;
@@ -164,7 +165,7 @@
     min-height: 66px;
 "><img alt="Gratis Ongkir" src="https://mart.fixtrips.com/asset/foto_kategori/barang-bekas.png"
        style="margin-right: 8px;width: 21px;height: 21px;"><span
-        style="line-height: normal;font-size: 14px;color: #ff6500;">I'am bad liar</span></div>
+        style="line-height: normal;font-size: 14px;color: #ff6500;">24/7 Customer Service</span></div>
     </div>
   </div>
 </div>
@@ -332,24 +333,18 @@
   <div class="col-md-12 float-left">
     <div class="kat-title">Produk Promo</div>
     <div class="bor-bot"></div>
-    <div class="mx-auto my-auto text-center">
       <owl-carousel-o [options]="produkPromo">
         <ng-container *ngFor="let kp of kategoripilihan; let i = index">
           <ng-template carouselSlide id="1">
-            <div class="items">
-              <div class="slider-item" style="width: 100%;">
                 <div class="carousel-container__slide">
                   <a href="#" target="_blank">
                     <img alt="Car 3 Dekstop - ian-new-normal-essentials" class="carousel-container__slide__content"
                          src="https://www.fixtrips.com/official/assets/media/slider/20200404221841.jpeg">
                   </a>
                 </div>
-              </div>
-            </div>
           </ng-template>
         </ng-container>
       </owl-carousel-o>
-    </div>
   </div>
 </div>
 
