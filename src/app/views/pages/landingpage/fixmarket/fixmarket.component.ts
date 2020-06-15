@@ -42,6 +42,7 @@ export class FixmarketComponent implements OnInit {
   kategoripilihan: any;
   palingPopuler: any;
   produk: any;
+  palingTerlaris: any;
   searchProductForm: FormGroup;
   searchProductFormInvalid: boolean;
 
@@ -63,6 +64,7 @@ export class FixmarketComponent implements OnInit {
       tap((data: any) => {
         this.kategoripilihan = data.kategori_pilihan;
         this.palingPopuler = data.paling_populer;
+        this.palingTerlaris = data.paling_banyak_dicari;
         this.produk = data.produk;
 
         console.log(this.palingPopuler);

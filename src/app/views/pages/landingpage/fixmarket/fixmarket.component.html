@@ -207,19 +207,18 @@
     <div class="col-md-6 float-left">
       <div class="kat-title">Produk Terlaris</div>
       <div class="bor-bot mb-0"></div>
-      <div class="col-md-12 text-right"><a class="" href="#"><small>Tampilkan semua <i
-        class="fa fa-arrow-right"></i></small></a></div>
+      <!--      <div class="col-md-12 text-right"><a class="" href="#"><small>Tampilkan semua <i-->
+      <!--        class="fa fa-arrow-right"></i></small></a></div>-->
       <div class="mt-2 row">
         <div class="col-md-6 pb-4">
-          <section class="AIODWjw" id="card"><a class="fioaWNiwa" href="https://www.tokopedia.com/find/samsung-note-9"
-                                                title="">
+          <section *ngFor="let pt of palingTerlaris; let i = index" class="AIODWjw" id="card">
+            <a class="fioaWNiwa" href="https://www.tokopedia.com/find/samsung-note-9" title="{{pt.nama_produk_full}}">
             <div class="Kwijdfia">
               <div class="img-KAWDj">
-                <img alt="Nama Produk" class="AIWOHdj"
-                     src="https://ecs7-p.tokopedia.net/img/cache/200-square/product-1/2018/8/23/316949607/316949607_474c9ae5-91ad-4b92-a5aa-0deba2c2a1a7_1036_1280.jpg.webp"
+                <img alt="{{pt.nama_produk_full}}" class="AIWOHdj" src="{{pt.gambar[0]}}"
                      title="Nama Produk"></div>
-              <div class="kJa8dyuha"><h2 class="KJfnweiuh">Samsung Note 9</h2><span
-                class="OPwjdkmdA">128rb produk</span></div>
+              <div class="kJa8dyuha"><h2 class="KJfnweiuh">{{pt.nama_produk}}</h2><span
+                class="OPwjdkmdA">{{pt.stok}} produk</span></div>
             </div>
           </a></section>
         </div>

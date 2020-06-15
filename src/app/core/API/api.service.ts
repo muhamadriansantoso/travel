@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-const APIURL = 'https://www.fixtrips.com/dev/';
+// const APIURL = 'https://www.fixtrips.com/dev/';
 // const APIURL = 'http://localhost/apitravel/';
 
-// const APIURL = 'https://www.fixtrips.com/prod/';
+const APIURL = 'https://www.fixtrips.com/prod/';
 
 @Injectable({
   providedIn: 'root'
