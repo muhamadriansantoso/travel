@@ -27,14 +27,16 @@
       <owl-carousel-o [options]="customOptions">
         <ng-container *ngFor="let kp of kategoripilihan; let i = index">
           <ng-template [id]="i" carouselSlide>
-            <div class="cat-box">
-              <div class="img-box1">
-                <img class="img-fluid custom-img" src="{{kp.gambar}}">
+            <a href="{{kp.link}}" style="color: #ff6500;" target="_blank" title="{{kp.nama_kategori}}">
+              <div class="cat-box">
+                <div class="img-box1">
+                  <img class="img-fluid custom-img" src="{{kp.gambar}}">
+                </div>
+                <div class="thumb-content">
+                  <p>{{kp.nama_kategori}}</p>
+                </div>
               </div>
-              <div class="thumb-content">
-                <p>{{kp.nama_kategori}}</p>
-              </div>
-            </div>
+            </a>
           </ng-template>
         </ng-container>
       </owl-carousel-o>
@@ -175,22 +177,30 @@
     <div class="col-md-6 float-left">
       <div class="kat-title">Paling Populer</div>
       <div class="bor-bot mb-0"></div>
-      <div class="col-md-12 text-right"><a class="" href="#"><small>Tampilkan semua <i
-        class="fa fa-arrow-right"></i></small></a></div>
+      <div class="col-md-12 text-right">
+        <a class="" href="#">
+          <!--          <small>-->
+          <!--            Tampilkan semua-->
+          <!--            <i class="fa fa-arrow-right"></i>-->
+          <!--          </small>-->
+        </a>
+      </div>
       <div class="row">
-        <div class="col-md-3 col-sm-6 p-2">
-          <div class="white-box">
-            <div class="product-img">
-              <img
-                src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg">
-            </div>
-            <div class="product-bottom">
-              <div class="product-name">Asus X552CL-SX019D Laptop</div>
-              <div class="price">
-                <span class="rupiah-txt">Rp</span> 32,000
+        <div *ngFor="let pp of palingPopuler; let i = index" class="col-md-3 col-sm-6 p-2">
+          <a href="{{pp.link}}" target="_blank" title="{{pp.nama_produk_full}}">
+            <div class="white-box">
+              <div class="product-img">
+                <img
+                  src="{{pp.gambar[0]}}">
+              </div>
+              <div class="product-bottom">
+                <div class="product-name">{{pp.nama_produk}}</div>
+                <div class="price">
+                  <span class="rupiah-txt">{{pp.harga}}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>

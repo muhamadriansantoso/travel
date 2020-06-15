@@ -40,6 +40,7 @@ export class FixmarketComponent implements OnInit {
 
   pleaseWaitLoader: boolean;
   kategoripilihan: any;
+  palingPopuler: any;
   produk: any;
   searchProductForm: FormGroup;
   searchProductFormInvalid: boolean;
@@ -61,7 +62,10 @@ export class FixmarketComponent implements OnInit {
     this.api.getLandingPageFixMart().pipe(
       tap((data: any) => {
         this.kategoripilihan = data.kategori_pilihan;
+        this.palingPopuler = data.paling_populer;
         this.produk = data.produk;
+
+        console.log(this.palingPopuler);
       }),
       takeUntil(this.unsubscribe),
       finalize(() => {
