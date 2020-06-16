@@ -18,6 +18,7 @@ import {ModalModule} from "ngx-bootstrap";
 import {HttpClientModule} from "@angular/common/http";
 import {NguiAutoCompleteModule} from "@ngui/auto-complete";
 import {FixmarketComponent} from './fixmarket/fixmarket.component';
+import {CountdownModule} from "ngx-countdown";
 
 const routes: Routes = [
   {
@@ -78,6 +79,7 @@ const routes: Routes = [
     NguiAutoCompleteModule,
     ModalModule.forChild(),
     RouterModule.forChild(routes),
+    CountdownModule
   ],
   exports: [
     HeaderComponent,

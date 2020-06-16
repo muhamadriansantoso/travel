@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {finalize, takeUntil, tap} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-fixmarket',
@@ -45,6 +46,20 @@ export class FixmarketComponent implements OnInit {
   palingTerlaris: any;
   searchProductForm: FormGroup;
   searchProductFormInvalid: boolean;
+  currentDate: any;
+  tomorrowDate: any;
+  hours_0: any;
+  hours_0_temp: any;
+  hours_1: any;
+  hours_1_temp: any;
+  minute_0: any;
+  minute_0_temp: any;
+  minute_1: any;
+  minute_1_temp: any;
+  second_0: any;
+  second_0_temp: any;
+  second_1: any;
+  second_1_temp: any;
 
   private unsubscribe: Subject<any>;
 
@@ -66,8 +81,6 @@ export class FixmarketComponent implements OnInit {
         this.palingPopuler = data.paling_populer;
         this.palingTerlaris = data.paling_banyak_dicari;
         this.produk = data.produk;
-
-        console.log(this.palingPopuler);
       }),
       takeUntil(this.unsubscribe),
       finalize(() => {
@@ -75,6 +88,48 @@ export class FixmarketComponent implements OnInit {
         this.cdr.markForCheck();
       })
     ).subscribe();
+
+    setInterval(() => {
+      const currentDate = moment(new Date());
+      var tomorrowDateMoment = moment(new Date()).add(1, 'days').format('YYYY-MM-DD 00:00:00');
+      const tomorrowDate = moment(tomorrowDateMoment);
+
+      const diff = tomorrowDate.diff(currentDate);
+
+      const diffDuration = moment.duration(diff);
+
+      if (diffDuration.hours() < 10) {
+        this.hours_0_temp = 0;
+        this.hours_1_temp = diffDuration.hours();
+      } else {
+        this.hours_0_temp = diffDuration.hours().toString()[0];
+        this.hours_1_temp = diffDuration.hours().toString()[1];
+      }
+
+      if (diffDuration.minutes() < 10) {
+        this.minute_0_temp = 0;
+        this.minute_1_temp = diffDuration.minutes();
+      } else {
+        this.minute_0_temp = diffDuration.minutes().toString()[0];
+        this.minute_1_temp = diffDuration.minutes().toString()[1];
+      }
+
+      if (diffDuration.seconds() < 10) {
+        this.second_0_temp = 0;
+        this.second_1_temp = diffDuration.seconds();
+      } else {
+        this.second_0_temp = diffDuration.seconds().toString()[0];
+        this.second_1_temp = diffDuration.seconds().toString()[1];
+      }
+
+      this.hours_0 = this.hours_0_temp;
+      this.hours_1 = this.hours_1_temp;
+      this.minute_0 = this.minute_0_temp;
+      this.minute_1 = this.minute_1_temp;
+      this.second_0 = this.second_0_temp;
+      this.second_1 = this.second_1_temp;
+    }, 1000);
+
   }
 
   initSearchProductForm() {
