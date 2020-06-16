@@ -27,7 +27,7 @@
       <owl-carousel-o [options]="customOptions">
         <ng-container *ngFor="let kp of kategoripilihan; let i = index">
           <ng-template [id]="i" carouselSlide>
-            <a href="{{kp.link}}" style="color: #ff6500;" target="_blank" title="{{kp.nama_kategori}}">
+            <a href="{{kp.link}}" style="color: #474747;" target="_blank" title="{{kp.nama_kategori}}">
               <div class="cat-box">
                 <div class="img-box1">
                   <img class="img-fluid custom-img" src="{{kp.gambar}}">
@@ -334,7 +334,9 @@
 
 <div class="row pb-4">
   <div class="img-fullwidth">
-    <img class="rounded-lg" src="/assets/images/sample-bl.png">
+    <a href="https://mart.fixtrips.com/auth/register" target="_blank">
+      <img class="rounded-lg" src="/assets/images/promo-section.jpg">
+    </a>
   </div>
 </div>
 
