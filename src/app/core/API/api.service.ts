@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 // const APIURL = 'http://localhost/apitravel/';
 
 const APIURL = 'https://www.fixtrips.com/prod/';
+const APIFIXMART = 'https://www.fixtrips.com/mart/api/';
 
 @Injectable({
   providedIn: 'root'
@@ -46,11 +47,11 @@ export class APIService {
         'keyword': keyword,
       }
     };
-    return this.http.get('https://mart.fixtrips.com/api/produk', httpOptions);
+    return this.http.get(APIFIXMART + 'produk', httpOptions);
   }
 
   getLandingPageFixMart() {
-    return this.http.get('https://mart.fixtrips.com/api/landingpage');
+    return this.http.get(APIFIXMART + 'landingpage');
   }
 
   getCountry(value) {
