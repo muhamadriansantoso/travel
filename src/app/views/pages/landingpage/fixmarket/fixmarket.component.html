@@ -176,8 +176,8 @@
       <!--      <div class="col-md-12 text-right"><a class="" href="#"><small>Tampilkan semua <i-->
       <!--        class="fa fa-arrow-right"></i></small></a></div>-->
       <div class="mt-2 row">
-        <div class="col-md-6 pb-4">
-          <section *ngFor="let pt of palingTerlaris; let i = index" class="AIODWjw" id="card">
+        <div *ngFor="let pt of palingTerlaris; let i = index" class="col-md-6 pb-4">
+          <section class="AIODWjw" id="card">
             <a class="fioaWNiwa" href="{{pt.link}}" target="_blank" title="{{pt.nama_produk_full}}">
             <div class="Kwijdfia">
               <div class="img-KAWDj">
